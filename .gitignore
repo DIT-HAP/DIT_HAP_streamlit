@@ -4,4 +4,7 @@ CLAUDE.md
 .pytest_cache
 .vscode
 .spec-workflow
+.github
 */__pycache__/
+AGENTS.md
+openspec
