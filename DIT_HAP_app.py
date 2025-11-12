@@ -3,7 +3,7 @@ import streamlit as st
 # Configure page settings
 st.set_page_config(
     page_title="DIT-HAP Analysis Tool",
-    page_icon=":material/DNA:",
+    page_icon="🧬",
     layout="wide",
     initial_sidebar_state="auto"
 )
