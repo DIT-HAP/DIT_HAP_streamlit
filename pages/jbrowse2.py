@@ -21,8 +21,7 @@ def main():
     )
     
     # Embed JBrowse 2 using an iframe
-    # st.components.v1.iframe(
-    st.iframe(
+    st.components.v1.iframe(
         src=JBROWSE_IFRAME_URL,
         height=4000,
         scrolling=True
