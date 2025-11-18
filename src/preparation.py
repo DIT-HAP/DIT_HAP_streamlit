@@ -5,14 +5,13 @@ This script prepares the data for the gene page.
 # ================================= Imports =================================
 import pandas as pd
 import streamlit as st
-from typing import List
 from pathlib import Path
 from goatools.obo_parser import GODag
 from datetime import date
 
 # ================================= Functions =================================
 
-def get_gene_list_from_query(text: str) -> List[str]:
+def get_gene_list_from_query(text: str) -> list[str]:
     """Parse gene list from text input."""
     if not text.strip():
         return []
@@ -26,7 +25,7 @@ def get_gene_list_from_query(text: str) -> List[str]:
     
     return genes
 
-def validate_gene_ids(genes: List[str], gene_info: pd.DataFrame, gene_level_LFCs: pd.DataFrame) -> tuple[List[str], List[str], List[str], List[str], List[str]]:
+def validate_gene_ids(genes: list[str], gene_info: pd.DataFrame, gene_level_LFCs: pd.DataFrame) -> tuple[list[str], list[str], list[str], list[str], list[str]]:
     """Validate gene list against available data."""
 
     name2sysID = dict(zip(gene_info["gene_name"], gene_info["gene_systematic_id"]))
@@ -59,7 +58,7 @@ def validate_gene_ids(genes: List[str], gene_info: pd.DataFrame, gene_level_LFCs
             invalid_genes.append(gene)
     return valid_genes, invalid_genes, covered_genes, covered_gene_sysIDs, uncovered_genes
 
-def sidebar_gene_input(gene_info_with_essentiality: pd.DataFrame, gene_level_LFCs: pd.DataFrame) -> tuple[List[str] | None, bool]:
+def sidebar_gene_input(gene_info_with_essentiality: pd.DataFrame, gene_level_LFCs: pd.DataFrame) -> tuple[list[str] | None, bool]:
     """Set the sidebar for the plot page."""
     input_form = st.sidebar.form("gene_input", clear_on_submit=False, border=True)
     input_form.subheader("Enter query genes:")

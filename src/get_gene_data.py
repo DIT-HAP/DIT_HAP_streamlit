@@ -3,13 +3,8 @@ Extract DIT-HAP data for a given gene.
 """
 
 # ================================= Imports =================================
-from pathlib import Path
-from typing import List
-from dataclasses import dataclass
-import numpy as np
 import pandas as pd
-import streamlit as st
-from .data_manager import GeneMetadataData, InsertionLevelData, GeneLevelData
+from .data_manager import InsertionLevelData, GeneLevelData
 
 
 # ================================= Functions =================================
@@ -33,7 +28,7 @@ def get_insertion_level_data(
     gene: str, 
     insertion_level_data: InsertionLevelData,
     timepoints: dict
-) -> pd.DataFrame:
+) -> tuple[pd.DataFrame, pd.DataFrame]:
     """Get the insertions in a given gene."""
 
     tps = list(timepoints.keys())
@@ -71,7 +66,7 @@ def get_gene_level_data(
     gene: str, 
     gene_level_data: GeneLevelData,
     timepoints: dict
-) -> pd.DataFrame:
+) -> tuple[pd.DataFrame, pd.DataFrame]:
     """Get the gene level data for a given gene."""
 
     tps = list(timepoints.keys())

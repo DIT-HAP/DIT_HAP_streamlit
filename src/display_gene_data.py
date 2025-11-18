@@ -7,6 +7,7 @@ import numpy as np
 import pandas as pd
 import altair as alt
 import streamlit as st
+from streamlit import Container
 
 # ================================= Constants =================================
 GENE_BODY_Y = -0.5
@@ -59,7 +60,7 @@ def display_basic_information(gene: str, gene_info: pd.DataFrame) -> None:
     st.html(html_table)
     st.divider()
 
-def display_gene_body(gene_body: pd.DataFrame) -> tuple[int, alt.Chart]:
+def display_gene_body(gene_body: pd.DataFrame) -> tuple[int, alt.LayerChart]:
     gene_body_copy = gene_body.copy()
     gene_body_copy["um"] = GENE_BODY_Y
     gene_length =  gene_body_copy["ParentalRegion_length"].values[0]
@@ -80,7 +81,7 @@ def display_gene_body(gene_body: pd.DataFrame) -> tuple[int, alt.Chart]:
 
     return gene_length, gene_body_plot
 
-def display_insertion_level_data(gene_length: int, insertion_level_anno_and_results: pd.DataFrame, insertion_level_data: pd.DataFrame, timepoints: dict) -> alt.Chart:
+def display_insertion_level_data(gene_length: int, insertion_level_anno_and_results: pd.DataFrame, insertion_level_data: pd.DataFrame, timepoints: dict) -> tuple[alt.Chart, alt.Chart]:
 
     point_selector = alt.selection_point(fields=["Chr", "Coordinate", "Strand", "Target"], empty=True)
 
@@ -102,7 +103,7 @@ def display_insertion_level_data(gene_length: int, insertion_level_anno_and_resu
     return insertion_level_data_plot1, insertion_level_data_plot2
 
 @st.cache_data
-def display_gene_level_data(gene_level_fitting_results_in_current_gene: pd.DataFrame, gene_level_data: pd.DataFrame, timepoints: dict) -> alt.Chart:
+def display_gene_level_data(gene_level_fitting_results_in_current_gene: pd.DataFrame, gene_level_data: pd.DataFrame, timepoints: dict) -> tuple[alt.Chart, alt.Chart, alt.Chart, alt.Chart, alt.Chart]:
 
     fitting_result = gene_level_fitting_results_in_current_gene.copy()
     fitting_result["x"] = 0
@@ -178,7 +179,7 @@ def combine_plots(
     DL_line_plot: alt.Chart,
     DR_line_plot: alt.Chart,
     fitting_curve_plot: alt.Chart,
-) -> alt.Chart:
+) -> alt.VConcatChart:
 
     plot1 = alt.layer(
         alt.layer(
@@ -203,7 +204,7 @@ def combine_plots(
 
     return combined_plot
 
-def display_gene_level_metrics(container: st.container, gene_level_fitting_results_in_current_gene: pd.DataFrame):
+def display_gene_level_metrics(container: Container, gene_level_fitting_results_in_current_gene: pd.DataFrame):
 
     with container:
         st.metric(label="DR", value=round(gene_level_fitting_results_in_current_gene["um"].values[0], 3))
