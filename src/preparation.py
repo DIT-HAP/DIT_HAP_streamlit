@@ -25,15 +25,17 @@ def get_gene_list_from_query(text: str) -> list[str]:
     
     return genes
 
-def validate_gene_ids(genes: list[str], gene_info: pd.DataFrame, gene_level_LFCs: pd.DataFrame) -> tuple[list[str], list[str], list[str], list[str], list[str]]:
+def validate_gene_ids(genes: list[str], gene_info: pd.DataFrame, bg_genes: set[str]) -> tuple[list[str], list[str], list[str], list[str], list[str]]:
     """Validate gene list against available data."""
 
     name2sysID = dict(zip(gene_info["gene_name"], gene_info["gene_systematic_id"]))
-    covered_names = gene_level_LFCs["Name"].tolist()
-    covered_sysIDs = gene_level_LFCs.index.tolist()
-
+    sysID2name = dict(zip(gene_info["gene_systematic_id"], gene_info["gene_name"]))
+ 
     valid_genes = []
     invalid_genes = []
+
+    covered_sysIDs = bg_genes
+    covered_names = set([sysID2name[sysID] if sysID in sysID2name else sysID for sysID in covered_sysIDs]) 
     covered_genes = []
     covered_gene_sysIDs = []
     uncovered_genes = []
@@ -56,17 +58,58 @@ def validate_gene_ids(genes: list[str], gene_info: pd.DataFrame, gene_level_LFCs
                 uncovered_genes.append(gene)
         else:
             invalid_genes.append(gene)
+
     return valid_genes, invalid_genes, covered_genes, covered_gene_sysIDs, uncovered_genes
 
-def sidebar_gene_input(gene_info_with_essentiality: pd.DataFrame, gene_level_LFCs: pd.DataFrame) -> tuple[list[str] | None, bool]:
+def gene_input_form(
+    input_form: st.container,
+    gene_info_with_essentiality: pd.DataFrame,
+    form_header: str,
+    bg_genes: set[str] | None = None,
+    height: int = 300,
+    column_layout: bool = True
+) -> list[str]:
+    if bg_genes is None:
+        default_bg_genes = set(gene_info_with_essentiality["gene_systematic_id"].tolist())
+    input_form.subheader(form_header)
+
+    if column_layout:
+        col1, col2 = input_form.columns(2)
+        form_container = col1
+        badge_container = col2
+    else:
+        form_container = input_form
+        badge_container = input_form
+
+    gene_input = form_container.text_area("(comma or newline separated)", value="SPAC1002.09c\nSPAC3G9.12", height=height)
+    gene_ids = get_gene_list_from_query(gene_input)
+    valid_genes, invalid_genes, covered_genes, covered_gene_sysIDs, uncovered_genes = validate_gene_ids(gene_ids, gene_info_with_essentiality, default_bg_genes)
+    badge_container.badge(f"{len(gene_ids)} genes submitted", icon=":material/arrow_right_alt:", color="gray")
+    badge_container.badge(f"{len(valid_genes)} valid genes", icon=":material/check:", color="green")
+    badge_container.badge(f"{len(invalid_genes)} invalid genes", icon=":material/close:", color="red")
+    if bg_genes:
+        badge_container.badge(f"{len(covered_genes)} covered genes", icon=":material/check_circle:", color="blue")
+        badge_container.badge(f"{len(uncovered_genes)} uncovered genes", icon=":material/error:", color="orange")
+
+    if invalid_genes:
+        with badge_container.expander("Invalid genes", expanded=False):
+            st.text("\n".join(invalid_genes))
+
+    return covered_gene_sysIDs
+
+def sidebar_gene_input(gene_info_with_essentiality: pd.DataFrame, gene_level_LFCs: pd.DataFrame, bg_genes: set[str] | None = None) -> tuple[list[str] | None, bool]:
     """Set the sidebar for the plot page."""
+
+    if bg_genes is None:
+        bg_genes = set(gene_level_LFCs.index.tolist())
+
     input_form = st.sidebar.form("gene_input", clear_on_submit=False, border=True)
     input_form.subheader("Enter query genes:")
     gene_input = input_form.text_area("(comma or newline separated)", value="SPAC1002.09c\nSPAC3G9.12", height=300)
     submit_button = input_form.form_submit_button("Submit")
     if submit_button:
         gene_ids = get_gene_list_from_query(gene_input)
-        valid_genes, invalid_genes, covered_genes, covered_gene_sysIDs, uncovered_genes = validate_gene_ids(gene_ids, gene_info_with_essentiality, gene_level_LFCs)
+        valid_genes, invalid_genes, covered_genes, covered_gene_sysIDs, uncovered_genes = validate_gene_ids(gene_ids, gene_info_with_essentiality, bg_genes)
         input_form.badge(f"{len(gene_ids)} genes submitted", icon=":material/arrow_right_alt:", color="gray")
         input_form.badge(f"{len(valid_genes)} valid genes", icon=":material/check:", color="green")
         input_form.badge(f"{len(invalid_genes)} invalid genes", icon=":material/close:", color="red")

@@ -8,11 +8,12 @@ This page provides gene ontology and phenotype enrichment analysis functionality
 import streamlit as st
 import sys
 import pandas as pd
+
 sys.path.append("../src")
 from src.preparation import sidebar_gene_input
 from src.data_config import get_default_config
 from src.data_manager import load_gene_metadata, load_gene_level_stats, load_gene_ontology_data, load_gene_phenotype_data, load_disease_ontology_data
-from src.enrichment_functions import ontology_enrichment_pipeline, stringdb_enrichment, display_enrichment_results
+from src.enrichment_functions import background_configuration, ontology_enrichment_pipeline, stringdb_enrichment, display_enrichment_results
 
 # ================================= Constants =================================
 P_VALUE_THRESHOLD = 0.05
@@ -46,22 +47,43 @@ def load_enrichment_data():
     
     return gene_metadata, gene_level, gene_ontology_data, gene_phenotype_data, disease_ontology_data
 
-def display_results(res: pd.DataFrame, res_slim: pd.DataFrame = None):
+def display_results(res: pd.DataFrame, res_slim: pd.DataFrame = None, ontology_name: str = "GO"):
     """Display enrichment results."""
-
     
     if res.empty:
         st.warning("No enrichment results found")
     else:
-        st.success("Enrichment results found")
-        st.altair_chart(display_enrichment_results(res), use_container_width=True)
+        col1, col2 = st.columns([3,1])
+        col1.success("Enrichment results found")
+        col2.download_button(
+            label=f"Download {ontology_name} enrichment results (full)",
+            data=res.to_csv(index=False),
+            file_name=f"{ontology_name.lower()}_enrichment_results_full.csv",
+            mime="text/csv",
+            on_click="ignore"
+        )
+        charts = display_enrichment_results(res)
+        for chart in charts:
+            st.altair_chart(chart, use_container_width=True)
+
 
     if res_slim is not None:
         if res_slim.empty:
             st.warning("No enrichment results found (slim)")
         else:
-            st.success("Enrichment results found (slim)")
-            st.altair_chart(display_enrichment_results(res_slim), use_container_width=True)
+            col1, col2 = st.columns([3,1])
+            col1.success("Enrichment results found (slim)")
+            col2.download_button(
+                label=f"Download {ontology_name} enrichment results (slim)",
+                data=res_slim.to_csv(index=False),
+                file_name=f"{ontology_name.lower()}_enrichment_results_slim.csv",
+                mime="text/csv",
+                on_click="ignore"
+            )
+            charts_slim = display_enrichment_results(res_slim)
+            for chart in charts_slim:
+                st.altair_chart(chart, use_container_width=True)
+
 
 def main():
     """Main entry point for the enrichment analysis page."""
@@ -69,87 +91,115 @@ def main():
     # Load required data
     gene_metadata, gene_level, gene_ontology_data, gene_phenotype_data, disease_ontology_data = load_enrichment_data()
     
+    # Enrichment configuration
+    with st.container(border=True):
+        st.title("⚙️ Enrichment Configuration")
+
+        # Configure background genes
+        bg_genes = background_configuration(
+            gene_level,
+            gene_metadata
+        )
+
+        # FDR threshold
+        with st.expander("Advanced settings", expanded=False):
+            with st.container(border=True):
+                fdr_threshold = st.number_input(
+                    "FDR threshold for significance:",
+                    min_value=0.0,
+                    max_value=1.0,
+                    value=P_VALUE_THRESHOLD,
+                    step=0.01,
+                    help="False Discovery Rate (FDR) threshold for determining significant enrichment results."
+                )
+
     # Get gene input from sidebar
     covered_gene_sysIDs, submit_button = sidebar_gene_input(
         gene_metadata.gene_info_with_essentiality, 
-        gene_level.gene_level_LFCs
+        gene_level.gene_level_LFCs,
+        bg_genes
     )
-    
-    if submit_button and covered_gene_sysIDs:
 
-        bg_genes = gene_level.gene_level_LFCs.index.tolist()
-        
-        ontology_tab = st.tabs(["GO enrichment", "FYPO enrichment", "Mondo enrichment", "STRING enrichment"])
-        with ontology_tab[0]:
-            with st.spinner("Performing GO enrichment analysis..."):
+    # Perform enrichment analysis if genes are submitted
+    with st.container(border=True):
+        st.title("🔍 Enrichment Analysis Results")
 
-                load_kwargs = {
-                    "relationships": {"is_a", "part_of"},
-                    "propagate_counts": True,
-                    "load_obsolete": False
-                }
-                
-                enrichment_kwargs = {
-                    "alpha": P_VALUE_THRESHOLD,
-                    "methods": ["fdr_bh"],
-                    "propagate_counts": True,
-                    "relationships": {"is_a", "part_of"},
-                    "prt": None,
-                }
+        if submit_button and covered_gene_sysIDs:
 
-                format_kwargs = {
-                    "itemid2name": gene_metadata.id2name
-                }
+            # display the enrichment input and parameters
+            st.caption(f"Enrichment analysis performed on :green[__{len(covered_gene_sysIDs)}__] query genes against a background of :blue[__{len(bg_genes)}__] genes.")
+            st.caption(f"FDR threshold set to :red[__{fdr_threshold}__].")
 
-                res, res_slim = ontology_enrichment_pipeline(gene_ontology_data, covered_gene_sysIDs, bg_genes, load_kwargs=load_kwargs, enrichment_kwargs=enrichment_kwargs, format_kwargs=format_kwargs)
-                display_results(res, res_slim)
-        with ontology_tab[1]:
-            with st.spinner("Performing FYPO enrichment analysis..."):
+            ontology_tab = st.tabs(["GO enrichment", "FYPO enrichment", "Mondo enrichment", "STRING enrichment"])
+            with ontology_tab[0]:
+                with st.spinner("Performing GO enrichment analysis..."):
 
-                load_kwargs = {
-                    "propagate_counts": True,
-                    "load_obsolete": False
-                }
+                    load_kwargs = {
+                        "relationships": {"is_a", "part_of"},
+                        "propagate_counts": True,
+                        "load_obsolete": False
+                    }
+                    enrichment_kwargs = {
+                        "alpha": fdr_threshold,
+                        "methods": ["fdr_bh"],
+                        "propagate_counts": True,
+                        "relationships": {"is_a", "part_of"},
+                        "prt": None,
+                    }
 
-                enrichment_kwargs = {
-                    "alpha": P_VALUE_THRESHOLD,
-                    "methods": ["fdr_bh"],
-                    "propagate_counts": True,
-                    "prt": None,
-                }
+                    format_kwargs = {
+                        "itemid2name": gene_metadata.id2name
+                    }
 
-                format_kwargs = {
-                    "itemid2name": gene_metadata.id2name
-                }
+                    res, res_slim = ontology_enrichment_pipeline(gene_ontology_data, covered_gene_sysIDs, bg_genes, load_kwargs=load_kwargs, enrichment_kwargs=enrichment_kwargs, format_kwargs=format_kwargs)
+                    display_results(res, res_slim, ontology_name="GO")
+            with ontology_tab[1]:
+                with st.spinner("Performing FYPO enrichment analysis..."):
 
-                res, res_slim = ontology_enrichment_pipeline(gene_phenotype_data, covered_gene_sysIDs, bg_genes, load_kwargs=load_kwargs, enrichment_kwargs=enrichment_kwargs, format_kwargs=format_kwargs)
-                display_results(res, res_slim)
-        with ontology_tab[2]:
-            with st.spinner("Performing Mondo enrichment analysis..."):
+                    load_kwargs = {
+                        "propagate_counts": True,
+                        "load_obsolete": False
+                    }
 
-                load_kwargs = {
-                    "propagate_counts": True,
-                    "load_obsolete": False
-                }
+                    enrichment_kwargs = {
+                        "alpha": fdr_threshold,
+                        "methods": ["fdr_bh"],
+                        "propagate_counts": True,
+                        "prt": None,
+                    }
 
-                enrichment_kwargs = {
-                    "alpha": P_VALUE_THRESHOLD,
-                    "methods": ["fdr_bh"],
-                    "propagate_counts": True,
-                    "prt": None,
-                }
+                    format_kwargs = {
+                        "itemid2name": gene_metadata.id2name
+                    }
 
-                format_kwargs = {
-                    "itemid2name": gene_metadata.id2name
-                }
-                res, res_slim = ontology_enrichment_pipeline(disease_ontology_data, covered_gene_sysIDs, bg_genes, load_kwargs=load_kwargs, enrichment_kwargs=enrichment_kwargs, format_kwargs=format_kwargs)
-                display_results(res, res_slim)
-        with ontology_tab[3]:
-            with st.spinner("Performing STRING enrichment analysis..."):
-                res = stringdb_enrichment(covered_gene_sysIDs, bg_genes)
-                display_results(res)
-    else:
-        st.warning("Please select genes for enrichment analysis")
+                    res, res_slim = ontology_enrichment_pipeline(gene_phenotype_data, covered_gene_sysIDs, bg_genes, load_kwargs=load_kwargs, enrichment_kwargs=enrichment_kwargs, format_kwargs=format_kwargs)
+                    display_results(res, res_slim, ontology_name="FYPO")
+            with ontology_tab[2]:
+                with st.spinner("Performing Mondo enrichment analysis..."):
+
+                    load_kwargs = {
+                        "propagate_counts": True,
+                        "load_obsolete": False
+                    }
+
+                    enrichment_kwargs = {
+                        "alpha": fdr_threshold,
+                        "methods": ["fdr_bh"],
+                        "propagate_counts": True,
+                        "prt": None,
+                    }
+
+                    format_kwargs = {
+                        "itemid2name": gene_metadata.id2name
+                    }
+                    res, res_slim = ontology_enrichment_pipeline(disease_ontology_data, covered_gene_sysIDs, bg_genes, load_kwargs=load_kwargs, enrichment_kwargs=enrichment_kwargs, format_kwargs=format_kwargs)
+                    display_results(res, res_slim, ontology_name="Mondo")
+            with ontology_tab[3]:
+                with st.spinner("Performing STRING enrichment analysis..."):
+                    res = stringdb_enrichment(covered_gene_sysIDs, bg_genes)
+                    display_results(res, ontology_name="STRING")
+        else:
+            st.warning("Please input query genes for enrichment analysis")
 
 
 if __name__ == "__main__":

@@ -5,13 +5,11 @@ Enrichment functions.
 # ================================= Imports =================================
 
 import pandas as pd
-from .data_manager import GeneOntologyData, FYPOData, MONDOData
 import streamlit as st
-from pathlib import Path
-from typing import Optional, Literal
+from typing import Literal
 import time
 import requests
-from requests.exceptions import ConnectionError, RequestException
+from requests.exceptions import RequestException
 from io import StringIO
 import altair as alt
 
@@ -22,6 +20,9 @@ from goatools.goea.go_enrichment_ns import GOEnrichmentStudyNS
 from goatools.go_enrichment import GOEnrichmentRecord
 from goatools.rpt.goea_nt_xfrm import get_goea_nts_prt
 
+# custom imports
+from .data_manager import GeneLevelData, GeneMetadataData, GeneOntologyData, FYPOData, MONDOData
+from .preparation import gene_input_form
 # ================================= Constants =================================
 STRING_API_URL = "https://string-db.org/api"
 STRING_OUTPUT_FORMAT = Literal["tsv", "tsv-no-header", "json", "xml"]
@@ -34,6 +35,60 @@ RETRY_DELAY = 10
 
 
 # ================================= Helper Functions =================================
+def background_configuration(
+    gene_level: GeneLevelData,
+    gene_metadata: GeneMetadataData
+) -> set[str]:
+    """Get background genes based on user selection."""
+    with st.expander("Background Gene Set Configuration", expanded=True):
+        bg_selection, bg_input = st.columns(2, gap="large")
+        with bg_selection:
+            bg_option = st.radio("Select background gene set:",
+                                    (
+                                        "Coding genes covered in this study",
+                                        "All coding genes in the genome", 
+                                        "Custom gene list"
+                                    ),
+                                    captions=(
+                                        "Use all coding genes that were covered in the current study as the background set.",
+                                        "Use all coding genes present in the genome as the background set.",
+                                        "Upload a custom list of gene systematic IDs to use as the background set."
+                                    )
+                                )
+        with bg_input:
+            match bg_option:
+                case "Coding genes covered in this study":
+                    bg_genes = set(gene_level.gene_level_LFCs.index)
+                    st.markdown(f"**Background gene set size:** `{len(bg_genes)}` genes")
+                    st.write("Example genes in background set: ")
+                    st.text("\n".join(list(bg_genes)[:5] + ["..."]))
+                case "All coding genes in the genome":
+                    bg_genes = set(gene_metadata.gene_info_with_essentiality.query("gene_type == 'protein coding gene'")["gene_systematic_id"])
+                    st.markdown(f"**Background gene set size:** `{len(bg_genes)}` genes")
+                    st.write("Example genes in background set: ")
+                    st.text("\n".join(list(bg_genes)[:5] + ["..."]))
+                case "Custom gene list":
+                    on = st.toggle("Upload File (On) or Paste Genes (Off)", value=True)
+                    if on:
+                        with st.expander("Upload Custom Background Gene List", expanded=True):
+                            uploaded_file = st.file_uploader("Upload a text file with one gene per line:")
+                            if uploaded_file is not None:
+                                custom_bg_genes = pd.read_csv(uploaded_file, header=None)[0].astype(str).str.strip().tolist()
+                                bg_genes = set(custom_bg_genes)
+                            else:
+                                bg_genes = set()
+                    else:
+                        with st.expander("Paste Custom Background Gene List", expanded=False):
+                            bg_input_form = st.container()
+                            bg_genes = gene_input_form(bg_input_form, gene_metadata.gene_info_with_essentiality, form_header = "Paste Custom Background Gene List", height=150)
+                            if bg_genes is None:
+                                bg_genes = set()
+                            else:
+                                bg_genes = set(bg_genes)
+
+    return bg_genes
+
+
 def mapslim(term: str, dag: GODag, slim_dag: dict) -> tuple[set[str], set[str]]:
     """Maps a term (accession) to it's slim terms."""
 
@@ -48,11 +103,11 @@ def mapslim(term: str, dag: GODag, slim_dag: dict) -> tuple[set[str], set[str]]:
         path.reverse()
 
         got_leaf = False
-        for term in path:
-            if term.id in slim_dag:
-                all_ancestors.add(term.id)
+        for iterm in path:
+            if iterm.id in slim_dag:
+                all_ancestors.add(iterm.id)
                 if got_leaf:
-                    covered_ancestors.add(term.id)
+                    covered_ancestors.add(iterm.id)
                 got_leaf = True
 
     # get the direct ancestors, i.e. those that are not covered by a earlier
@@ -140,20 +195,20 @@ def create_enrichment_dataframe(
 
 
 # ================================= Main Functions =================================
-# @st.cache_resource
+@st.cache_resource
 def load_ontology_data(
     ontology_data: GeneOntologyData | FYPOData | MONDOData, **kwargs
-) -> tuple[GODag, GafReader, dict]:
+) -> tuple[GODag, GafReader, dict, dict, dict, dict, dict]:
     """Load ontology data from obo file and association file."""
     try:
         dag = GODag(
             str(ontology_data.ontology_obo),
-            optional_attrs=["def", "relationship"],
+            optional_attrs={"def", "relationship"},
             load_obsolete=False,
         )
     except KeyError:
         dag = GODag(
-            str(ontology_data.ontology_obo), optional_attrs=["def"], load_obsolete=False
+            str(ontology_data.ontology_obo), optional_attrs={"def"}, load_obsolete=False
         )
 
     objanno = GafReader(str(ontology_data.ontology_association_gaf), godag=dag)
@@ -435,7 +490,7 @@ def stringdb_enrichment(query_genes, bg_genes):
 
 
 # @st.cache_data
-def display_enrichment_results(enrichment_results: pd.DataFrame) -> alt.Chart:
+def display_enrichment_results(enrichment_results: pd.DataFrame) -> list[alt.Chart]:
     """Display enrichment results."""
     charts = []
     for ns, ns_results in enrichment_results.groupby("namespace", sort=False):
@@ -462,4 +517,4 @@ def display_enrichment_results(enrichment_results: pd.DataFrame) -> alt.Chart:
         )
         charts.append(chart)
 
-    return alt.vconcat(*charts)
+    return charts
