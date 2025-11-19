@@ -1,0 +1,252 @@
+id: gomodel:67c10cc400000238
+title: '''de novo'' cotranslational protein folding (GO:0051083)'
+taxon: NCBITaxon:4896
+status: production
+activities:
+- id: gomodel:67c10cc400000238/67c10cc400000239
+  enabled_by:
+    type: EnabledByProteinComplexAssociation
+    evidence:
+    - term: ECO:0000269
+      reference: '
+
+        PMID:34686329'
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2025-03-03'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-03-03'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0110078
+    members:
+    - PomBase:SPBC1604.17c
+    - PomBase:SPAC458.03
+    - PomBase:SPAC1006.02
+    - PomBase:SPCC622.13c
+  molecular_function:
+    type: MolecularFunctionAssociation
+    term: GO:0030674
+  part_of:
+    type: BiologicalProcessAssociation
+    evidence:
+    - term: ECO:0000269
+      reference: '
+
+        PMID:34686329'
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2025-03-03'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-03-03'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0051083
+  has_input:
+  - type: MoleculeAssociation
+    evidence:
+    - term: ECO:0000269
+      reference: '
+
+        PMID:34686329'
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2025-03-03'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-03-03'
+      provided_by:
+      - http://www.pombase.org
+    term: PomBase:SPAC926.04c
+  - type: MoleculeAssociation
+    evidence:
+    - term: ECO:0000269
+      reference: '
+
+        PMID:34686329'
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2025-03-03'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-03-03'
+      provided_by:
+      - http://www.pombase.org
+    term: PomBase:SPBP16F5.03c
+  causal_associations:
+  - type: CausalAssociation
+    evidence:
+    - term: ECO:0000269
+      reference: '
+
+        PMID:34686329'
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2025-03-03'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-03-03'
+      provided_by:
+      - http://www.pombase.org
+    predicate: RO:0012009
+    downstream_activity: gomodel:67c10cc400000238/67c10cc400000254
+  - type: CausalAssociation
+    evidence:
+    - term: ECO:0000269
+      reference: '
+
+        PMID:34686329'
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2025-03-03'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-03-03'
+      provided_by:
+      - http://www.pombase.org
+    predicate: RO:0012009
+    downstream_activity: gomodel:67c10cc400000238/67c10cc400000254
+- id: gomodel:67c10cc400000238/67c10cc400000254
+  enabled_by:
+    type: EnabledByGeneProductAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-03-03'
+      provided_by:
+      - http://www.pombase.org
+    term: PomBase:SPAC926.04c
+  molecular_function:
+    type: MolecularFunctionAssociation
+    term: GO:0140662
+  occurs_in:
+    type: CellularAnatomicalEntityAssociation
+    evidence:
+    - term: ECO:0007005
+      reference: PMID:16823372
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2025-03-03'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000318
+      reference: GO_REF:0000033
+      with_objects:
+      - PANTHER:PTN000163629
+      - dictyBase:DDB_G0267400
+      - UniProtKB:P11501
+      - UniProtKB:P08238
+      - UniProtKB:P07900
+      - UniProtKB:P40292
+      - MGI:MGI:96250
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2025-03-03'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-03-03'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0005829
+  part_of:
+    type: BiologicalProcessAssociation
+    evidence:
+    - term: ECO:0000304
+      reference: PMID:34686329
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2025-03-03'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-03-03'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0051083
+objects:
+- id: GO:0030674
+  label: protein-macromolecule adaptor activity
+  type: gocam:Object
+- id: GO:0110078
+  label: TTT Hsp90 cochaperone complex
+  type: gocam:Object
+- id: GO:0051083
+  label: '''de novo'' cotranslational protein folding'
+  type: gocam:Object
+- id: ECO:0000269
+  label: experimental evidence used in manual assertion
+  type: gocam:Object
+- id: PomBase:SPAC1006.02
+  label: asa1 Spom
+  type: gocam:Object
+- id: PomBase:SPAC458.03
+  label: tel2 Spom
+  type: gocam:Object
+- id: PomBase:SPCC622.13c
+  label: tti1 Spom
+  type: gocam:Object
+- id: PomBase:SPBC1604.17c
+  label: tti2 Spom
+  type: gocam:Object
+- id: PomBase:SPAC926.04c
+  label: hsp90 Spom
+  type: gocam:Object
+- id: GO:0140662
+  label: ATP-dependent protein folding chaperone
+  type: gocam:Object
+- id: GO:0005829
+  label: cytosol
+  type: gocam:Object
+- id: ECO:0000304
+  label: author statement supported by traceable reference used in manual assertion
+  type: gocam:Object
+- id: ECO:0007005
+  label: high throughput direct assay evidence used in manual assertion
+  type: gocam:Object
+- id: ECO:0000318
+  label: biological aspect of ancestor evidence used in manual assertion
+  type: gocam:Object
+- id: PomBase:SPBP16F5.03c
+  label: tra1 Spom
+  type: gocam:Object
+provenances:
+- contributor:
+  - https://orcid.org/0000-0001-6330-7526
+  date: '2025-06-15'
+  provided_by:
+  - http://www.pombase.org
