@@ -19,7 +19,9 @@ NODE_STYLES = [
         "style": {
             "shape": "ellipse",
             "background-color": "#C8E6C9",
-            "label": "data(label)"
+            "label": "data(label)",
+            "text-valign": "center",
+            "text-halign": "left"
         }
     },
     {
@@ -27,7 +29,9 @@ NODE_STYLES = [
         "style": {
             "shape": "rectangle",
             "background-color": "#E2BDE7",
-            "label": "data(label)"
+            "label": "data(label)",
+            "text-valign": "center",
+            "text-halign": "left"
         }
     },
     {
@@ -35,7 +39,9 @@ NODE_STYLES = [
         "style": {
             "shape": "rectangle",
             "background-color": "#B2DFDB",
-            "label": "data(label)"
+            "label": "data(label)",
+            "text-valign": "center",
+            "text-halign": "left"
         }
     }
 ]
