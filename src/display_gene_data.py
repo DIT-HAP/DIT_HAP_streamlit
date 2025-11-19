@@ -7,7 +7,6 @@ import numpy as np
 import pandas as pd
 import altair as alt
 import streamlit as st
-from streamlit import Container
 
 # ================================= Constants =================================
 GENE_BODY_Y = -0.5
@@ -204,7 +203,7 @@ def combine_plots(
 
     return combined_plot
 
-def display_gene_level_metrics(container: Container, gene_level_fitting_results_in_current_gene: pd.DataFrame):
+def display_gene_level_metrics(container: st.container, gene_level_fitting_results_in_current_gene: pd.DataFrame):
 
     with container:
         st.metric(label="DR", value=round(gene_level_fitting_results_in_current_gene["um"].values[0], 3))
