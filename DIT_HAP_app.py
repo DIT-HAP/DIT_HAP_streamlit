@@ -15,13 +15,14 @@ plot_page = st.Page("pages/depletion_data.py", title="Curve plot", icon=":materi
 feature_space_page = st.Page("pages/feature_space.py", title="Feature space", icon=":material/scatter_plot:")
 jbrowse2_page = st.Page("pages/jbrowse2.py", title="Genome Browser", icon=":material/align_center:")
 enrichment_page = st.Page("pages/enrichment_analysis.py", title="Enrichment analysis", icon=":material/search_insights:")
+go_cam_page = st.Page("pages/go_cam.py", title="GO CAM", icon=":material/account_tree:")
 
 # ========================================== Set up navigation ==========================================
 pg = st.navigation(
         {
             "Home": [main_page],
             "Visualization": [plot_page, feature_space_page, jbrowse2_page],
-            "Analysis": [enrichment_page],
+            "Analysis": [enrichment_page, go_cam_page],
         }
     )
 
