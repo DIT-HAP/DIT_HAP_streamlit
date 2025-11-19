@@ -12,20 +12,23 @@ JBROWSE_IFRAME_URL = "https://dit-hap.github.io/"
 def main():
     """Main entry point for the JBrowse 2 page."""
     
-    st.title("JBrowse 2 Genome Browser")
+    st.title("🧬 JBrowse 2 Genome Browser for Visualizing DIT-HAP Data")
     st.markdown(
         """
-        This page integrates the JBrowse 2 genome browser to visualize genomic data.
+        This page integrates the JBrowse 2 genome browser to visualize DIT-HAP data.
         You can explore various genomic features and annotations using the interactive interface below.
+
+        You can also visit the JBrowse 2 instance directly at DIT-HAP JBrowse 2 (https://dit-hap.github.io/) which is hosted on GitHub Pages.
         """
     )
     
     # Embed JBrowse 2 using an iframe
-    st.components.v1.iframe(
-        src=JBROWSE_IFRAME_URL,
-        height=4000,
-        scrolling=True
-    )
+    with st.container(border=True):
+        st.components.v1.iframe(
+            src=JBROWSE_IFRAME_URL,
+            height=2000,
+            scrolling=True
+        )
 
 if __name__ == "__main__":
     main()
