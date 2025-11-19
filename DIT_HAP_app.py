@@ -1,6 +1,7 @@
+# ========================================== Import necessary libraries ==========================================
 import streamlit as st
 
-# Configure page settings
+# ================================= Streamlit page configuration =================================
 st.set_page_config(
     page_title="DIT-HAP Analysis Tool",
     page_icon="🧬",
@@ -8,14 +9,14 @@ st.set_page_config(
     initial_sidebar_state="auto"
 )
 
-# Define pages
+# ========================================== Define pages ==========================================
 main_page = st.Page("pages/main.py", title="Home", icon=":material/home:")
 plot_page = st.Page("pages/depletion_data.py", title="Curve plot", icon=":material/timeline:")
 feature_space_page = st.Page("pages/feature_space.py", title="Feature space", icon=":material/scatter_plot:")
 jbrowse2_page = st.Page("pages/jbrowse2.py", title="Genome Browser", icon=":material/align_center:")
 enrichment_page = st.Page("pages/enrichment_analysis.py", title="Enrichment analysis", icon=":material/search_insights:")
 
-# Create navigation
+# ========================================== Set up navigation ==========================================
 pg = st.navigation(
         {
             "Home": [main_page],
