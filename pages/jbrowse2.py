@@ -13,7 +13,7 @@ def main():
     """Main entry point for the JBrowse 2 page."""
     
     st.title("🧬 JBrowse 2 Genome Browser for Visualizing DIT-HAP Data")
-    st.markdown(
+    st.info(
         """
         This page integrates the JBrowse 2 genome browser to visualize DIT-HAP data.
         You can explore various genomic features and annotations using the interactive interface below.
