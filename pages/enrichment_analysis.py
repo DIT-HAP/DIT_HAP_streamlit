@@ -89,13 +89,15 @@ def display_results(res: pd.DataFrame, res_slim: pd.DataFrame = None, ontology_n
 
 def main():
     """Main entry point for the enrichment analysis page."""
+
+    st.title(":bar_chart: *S. pombe* Enrichment Analysis")
     
     # Load required data
     gene_metadata, gene_level, gene_ontology_data, gene_phenotype_data, disease_ontology_data = load_enrichment_data()
     
     # Enrichment configuration
     with st.container(border=True):
-        st.title(":gear: Enrichment Configuration")
+        st.header(":gear: Enrichment Configuration")
 
         # Configure background genes
         bg_genes = background_configuration(
@@ -124,7 +126,7 @@ def main():
 
     # Perform enrichment analysis if genes are submitted
     with st.container(border=True):
-        st.title(":mag: Enrichment Analysis Results")
+        st.header(":mag: Enrichment Analysis Results", divider="gray")
 
         if submit_button and covered_gene_sysIDs:
 
