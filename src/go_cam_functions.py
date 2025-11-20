@@ -8,6 +8,7 @@ import yaml
 from pathlib import Path
 
 import pandas as pd
+import numpy as np
 from bs4 import BeautifulSoup
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
@@ -70,33 +71,23 @@ GENE_LEVEL_DATA_FILE = Path(__file__).parent.parent / "data" / "raw" / "HD_DIT_H
 
 # ================================ Color Mapping =================================
 def get_color_for_value(feature: str, value) -> str:
-    """Get color for a specific value of a feature using ADDTIONAL_METRICS_VISUALIZATION."""
+    """Get color for a specific value of a feature."""
     if value is None or (isinstance(value, float) and pd.isna(value)):
         return '#CCCCCC'
     
-    if feature not in ADDTIONAL_METRICS_VISUALIZATION:
+    config = ADDTIONAL_METRICS_VISUALIZATION.get(feature)
+    if not config:
         return '#CCCCCC'
-    
-    config = ADDTIONAL_METRICS_VISUALIZATION[feature]
     
     if config["type"] == "categorical":
         color_map = config.get("color_map", {})
         return color_map.get(str(value), color_map.get("default", "#CCCCCC"))
     
-    elif config["type"] == "numerical":
-        cmap, norm = config["colormap"]
-        value_range = config["range"]
-        vmin, vmax = value_range
-        
-        # Clamp value to range
-        clamped_val = max(vmin, min(vmax, float(value)))
-        return mcolors.rgb2hex(cmap(norm(clamped_val))[:3])
-    
-    return '#CCCCCC'
-
-def generate_color_map_for_feature(feature: str, values: list) -> dict:
-    """Generate complete color map for a feature given its values."""
-    return {val: get_color_for_value(feature, val) for val in values}
+    # numerical type
+    cmap, norm = config["colormap"]
+    vmin, vmax = config["range"]
+    clamped_val = max(vmin, min(vmax, float(value)))
+    return mcolors.rgb2hex(cmap(norm(clamped_val))[:3])
 
 def apply_color_mapping_to_styles(
     base_styles: list,
@@ -108,50 +99,28 @@ def apply_color_mapping_to_styles(
     """Apply color mapping to node styles based on selected features."""
     new_styles = base_styles.copy()
     
-    # Helper function to get color map for a feature
-    def get_color_map(feature: str | None):
-        if not feature or feature == "None":
-            return None
-        
-        node_values = [elem['data'].get(feature) for elem in elements 
-                      if 'data' in elem and 'type' in elem['data']]
-        node_values = [v for v in node_values if v is not None]
-        
-        if not node_values:
-            return None
-        
-        return generate_color_map_for_feature(feature, node_values)
-    
-    # Generate color maps for each feature
-    color_maps = {
-        'fill': get_color_map(fill_feature),
-        'border': get_color_map(border_feature),
-        'label': get_color_map(label_feature)
-    }
-    
     for elem in elements:
         if 'data' not in elem or 'type' not in elem['data']:
             continue
             
         node_id = elem['data']['id']
-        style_dict = {"selector": f"node[id='{node_id}']", "style": {}}
+        style = {}
         
-        if color_maps['fill']:
+        if fill_feature and fill_feature != "None":
             val = elem['data'].get(fill_feature)
-            style_dict["style"]["background-color"] = color_maps['fill'].get(val, '#CCCCCC')
+            style["background-color"] = get_color_for_value(fill_feature, val)
         
-        if color_maps['border']:
+        if border_feature and border_feature != "None":
             val = elem['data'].get(border_feature)
-            style_dict["style"]["border-color"] = color_maps['border'].get(val, '#CCCCCC')
-            style_dict["style"]["border-width"] = 2
+            style["border-color"] = get_color_for_value(border_feature, val)
+            style["border-width"] = 2
         
-        if color_maps['label']:
+        if label_feature and label_feature != "None":
             val = elem['data'].get(label_feature)
-            style_dict["style"]["color"] = color_maps['label'].get(val, '#CCCCCC')
-            style_dict["style"]["text-opacity"] = 1
+            style["color"] = get_color_for_value(label_feature, val)
         
-        if style_dict["style"]:
-            new_styles.append(style_dict)
+        if style:
+            new_styles.append({"selector": f"node[id='{node_id}']", "style": style})
     
     return new_styles
 
@@ -718,37 +687,69 @@ def plot_interaction_type_legend():
     )
 
 
-def plot_gradient_colorbar(feature: str, cmap, norm, width: int = 200):
+def plot_gradient_colorbar(feature: str, width: int = 200):
     """Plot a horizontal gradient colorbar for numerical features."""
-    import numpy as np
-    
-    # Get vmin and vmax from the config
-    if feature in ADDTIONAL_METRICS_VISUALIZATION:
-        vmin, vmax = ADDTIONAL_METRICS_VISUALIZATION[feature]["range"]
+    feature_config = ADDTIONAL_METRICS_VISUALIZATION.get(feature)
+    if not feature_config or feature_config["type"] != "numerical":
+        raise ValueError("Feature must be numerical and defined in ADDTIONAL_METRICS_VISUALIZATION.")
     else:
-        # Fallback if feature not in config
-        vmin, vmax = 0, 1
+        vmin, vmax = feature_config["range"]
+        cmap, norm = feature_config["colormap"]
+        # Create horizontal gradient array
+        gradient = np.linspace(vmin, vmax, width).reshape(1, -1)
+        
+        # Create figure
+        with plt.rc_context(
+            {
+                'font.family': 'Arial',
+                'font.size': 14,
+                'axes.spines.top': False,
+                'axes.spines.right': False,
+                'axes.spines.left': False,
+                'axes.spines.bottom': False,
+                'xtick.bottom': False,
+                'ytick.left': False,
+                'ytick.labelleft': False
+            }
+        ):
+            fig, ax = plt.subplots(figsize=(5, 1), dpi=300)
+            # Plot gradient
+            ax.imshow(gradient, aspect='auto', cmap=cmap, norm=norm)
+            # Configure axis
+            n_ticks = 5
+            tick_positions = np.linspace(0, width-1, n_ticks)
+            tick_values = np.linspace(vmin, vmax, n_ticks)
+            ax.set_xticks(tick_positions)
+            ax.set_xticklabels([f'{v:.2f}' for v in tick_values])
+            plt.tight_layout()
+        return fig
+
+def plot_feature_color_legend(feature: str):
+    """Plot color legend for a feature."""
+    feature_type = ADDTIONAL_METRICS_VISUALIZATION.get(feature, {}).get("type")
+    if feature_type == "numerical":
+        # st.markdown(f"**Color Legend: {feature}**")
+        fig = plot_gradient_colorbar(feature)
+        st.pyplot(fig, use_container_width=True)
+        plt.close(fig)
+    elif feature_type == "categorical":
+        st.markdown(f"**Color Legend: {feature}**")
+        color_map = ADDTIONAL_METRICS_VISUALIZATION[feature].get("color_map", {})
+        # Create a horizontal layout with flex wrap
+        items_html = []
+        for val, color in list(color_map.items())[:8]:  # Limit to 8 items
+            items_html.append(
+            f"<div style='display: flex; align-items: center; margin-right: 12px; margin-bottom: 4px;'>"
+            f"<div style='width: 16px; height: 16px; background-color: {color}; border: 1px solid #666; margin-right: 6px;'></div>"
+            f"<span style='font-size: 12px;'>{val}</span></div>"
+            )
+        
+        st.markdown(f"<div style='display: flex; flex-wrap: wrap; align-items: center;'>{''.join(items_html)}</div>", 
+               unsafe_allow_html=True)
+        
+        if len(color_map) > 8:
+            st.markdown(f"<small style='font-size: 10px;'>... and {len(color_map) - 8} more</small>", unsafe_allow_html=True)
     
-    # Create horizontal gradient array
-    gradient = np.linspace(vmin, vmax, width).reshape(1, -1)
-    
-    # Create figure
-    fig, ax = plt.subplots(figsize=(4, 0.8), dpi=100)
-    
-    # Plot gradient
-    ax.imshow(gradient, aspect='auto', cmap=cmap, vmin=vmin, vmax=vmax)
-    
-    # Configure axis
-    ax.set_yticks([])
-    n_ticks = 5
-    tick_positions = np.linspace(0, width-1, n_ticks)
-    tick_values = np.linspace(vmin, vmax, n_ticks)
-    ax.set_xticks(tick_positions)
-    ax.set_xticklabels([f'{v:.2f}' for v in tick_values])
-    ax.xaxis.tick_bottom()
-    
-    plt.tight_layout()
-    return fig
 
 def node_color_mapping_panel(elements: list) -> tuple:
     """Create UI panel for node color mapping settings."""
@@ -757,62 +758,23 @@ def node_color_mapping_panel(elements: list) -> tuple:
     feature_options = ["None"] + list(ADDTIONAL_METRICS_VISUALIZATION.keys())
     
     col1, col2 = st.columns([1, 2])
+    col1.markdown(":blue-badge[**:material/highlight_mouse_cursor: Feature Selection**]")
+    col2.markdown(":green-badge[**:material/gradient: Color Legend**]")
     
-    # Column 1: Feature Selection
-    with col1:
-        st.markdown(":blue-badge[**:material/highlight_mouse_cursor: Feature Selection**]")
-        fill_feature = st.selectbox("Fill color feature", feature_options, key="fill_feature")
-        border_feature = st.selectbox("Border color feature", feature_options, key="border_feature")
-        label_feature = st.selectbox("Label color feature", feature_options, key="label_feature")
+    col1_fill, col2_fill = st.columns([1, 2])
+    fill_feature = col1_fill.selectbox("Fill color feature", feature_options, key="fill_feature")
+    with col2_fill:
+        plot_feature_color_legend(fill_feature)
+
+    col1_border, col2_border = st.columns([1, 2])
+    border_feature = col1_border.selectbox("Border color feature", feature_options, key="border_feature")
+    with col2_border:
+        plot_feature_color_legend(border_feature)
     
-    # Column 2: Color Legend
-    with col2:
-        st.markdown(":green-badge[**:material/gradient: Color Legend**]")
-        
-        # Collect all active features
-        active_mappings = []
-        for color_type, feature in [("Fill", fill_feature), ("Border", border_feature), ("Label", label_feature)]:
-            if feature and feature != "None":
-                active_mappings.append((color_type, feature))
-        
-        if active_mappings:
-            for color_type, feature in active_mappings:
-                st.markdown(f"**{color_type}: {feature}**")
-                
-                # Collect feature values
-                feature_values = [elem['data'].get(feature) for elem in elements 
-                                if 'data' in elem and 'type' in elem['data']]
-                feature_values = [v for v in feature_values if v is not None]
-                
-                if feature_values and feature in ADDTIONAL_METRICS_VISUALIZATION:
-                    config = ADDTIONAL_METRICS_VISUALIZATION[feature]
-                    
-                    if config["type"] == "numerical":
-                        # Show gradient colorbar
-                        cmap, norm = config["colormap"]
-                        fig = plot_gradient_colorbar(feature, cmap, norm)
-                        st.pyplot(fig, use_container_width=True)
-                        plt.close(fig)
-                    else:
-                        # Show categorical legend
-                        unique_values = sorted(set(str(v) for v in feature_values))
-                        color_map = generate_color_map_for_feature(feature, unique_values)
-                        
-                        for val in unique_values[:8]:  # Limit to 8 items per feature
-                            color = color_map.get(val, '#CCCCCC')
-                            st.markdown(f"<div style='display: flex; align-items: center;'>"
-                                      f"<div style='width: 16px; height: 16px; background-color: {color}; border: 1px solid #666; margin-right: 6px;'></div>"
-                                      f"<span style='font-size: 12px;'>{val}</span></div>", unsafe_allow_html=True)
-                        
-                        if len(unique_values) > 8:
-                            st.markdown(f"<small style='font-size: 10px;'>... and {len(unique_values) - 8} more</small>", unsafe_allow_html=True)
-                elif feature_values:
-                    # Feature not in ADDTIONAL_METRICS_VISUALIZATION, show generic gray color
-                    st.info(f"No color mapping defined for '{feature}'")
-                
-                st.markdown("---")
-        else:
-            st.info("Select features to see color legends")
+    col1_label, col2_label = st.columns([1, 2])
+    label_feature = col1_label.selectbox("Label color feature", feature_options, key="label_feature")
+    with col2_label:
+        plot_feature_color_legend(label_feature)
     
     return fill_feature, border_feature, label_feature
 
