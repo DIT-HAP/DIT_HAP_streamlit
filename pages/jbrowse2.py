@@ -21,6 +21,11 @@ def main():
         You can also visit the JBrowse 2 instance directly at DIT-HAP JBrowse 2 (https://dit-hap.github.io/) which is hosted on GitHub Pages.
         """
     )
+    st.warning(
+        """
+        Forward insertion and reverse insertion
+        """
+    )
     
     # Embed JBrowse 2 using an iframe
     with st.container(border=True):
