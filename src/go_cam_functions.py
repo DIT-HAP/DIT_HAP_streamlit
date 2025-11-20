@@ -479,14 +479,14 @@ def deduplicate_cx2_edges(cx2_data: list) -> list:
                 # Parse and combine evidence HTML
                 combined_li_items = []
                 for evidence in combined_evidence:
-                    soup = BeautifulSoup(evidence, 'lxml')
+                    soup = BeautifulSoup(evidence, 'html.parser')
                     # Extract all <li> items from this evidence
                     li_items = soup.find_all('li')
                     combined_li_items.extend(li_items)
 
                 # Create a new combined HTML with all <li> items
                 if combined_li_items:
-                    combined_ul = BeautifulSoup('<ul style="padding-inline-start: 1rem"></ul>', 'lxml').ul
+                    combined_ul = BeautifulSoup('<ul style="padding-inline-start: 1rem"></ul>', 'html.parser').ul
                     for li in combined_li_items:
                         combined_ul.append(li)
                     base_edge["v"]["Evidence"] = str(combined_ul)
@@ -515,45 +515,52 @@ def add_additional_attributes(
             additional_data_dict[metric] = additional_data[metric].to_dict()
     return additional_data_dict
 
-@st.cache_data
 def calculate_additional_attributes(
     node: dict,
     additional_attributes: dict
 ) -> dict:
     """Calculate and add additional attributes to nodes in elements_dict."""
-    match node['type']:
-        case "gene":
-            gene_id = node['label']
-            for metric in ADDITIONAL_METRICS:
-                node[metric] = additional_attributes.get(metric, {}).get(gene_id)
-        case "complex":
-            if "member" in node:
-                genes = node['member']
-                for metric in ADDITIONAL_METRICS:
-                    gene_features = []
-                    member_metric = []
-                    for gene_name in genes:
-                        feature = additional_attributes.get(metric, {}).get(gene_name)
-                        if feature is not None:
-                            gene_features.append(feature)
-                            member_metric.append(feature)
-                        else:
-                            member_metric.append(None)
-                    if len(gene_features) > 0:
-                        if isinstance(gene_features[0], (int, float)):
-                            node[metric] = round(sum(gene_features) / len(gene_features), 3)
-                        elif isinstance(gene_features[0], str):
-                            node[metric] = ";".join(set(gene_features))
-                        else:
-                            node[metric] = gene_features
-                    node["member_" + metric] = member_metric
-        case "molecule":
-            molecule_name = node['label']
-            for metric in ADDITIONAL_METRICS:
-                node[metric] = additional_attributes.get(metric, {}).get(molecule_name)
-        
-        case _:
-            pass
+    node_type = node['type']
+    
+    if node_type == "gene":
+        gene_id = node['label']
+        for metric in ADDITIONAL_METRICS:
+            metric_dict = additional_attributes.get(metric)
+            if metric_dict:
+                node[metric] = metric_dict.get(gene_id)
+    
+    elif node_type == "complex" and "member" in node:
+        genes = node['member']
+        for metric in ADDITIONAL_METRICS:
+            metric_dict = additional_attributes.get(metric)
+            if not metric_dict:
+                continue
+            
+            gene_features = []
+            member_metric = []
+            for gene_name in genes:
+                feature = metric_dict.get(gene_name)
+                if feature is not None:
+                    gene_features.append(feature)
+                    member_metric.append(feature)
+                else:
+                    member_metric.append(None)
+            
+            if gene_features:
+                if isinstance(gene_features[0], (int, float)):
+                    node[metric] = round(sum(gene_features) / len(gene_features), 3)
+                elif isinstance(gene_features[0], str):
+                    node[metric] = ";".join(set(gene_features))
+                else:
+                    node[metric] = gene_features
+            node["member_" + metric] = member_metric
+    
+    elif node_type == "molecule":
+        molecule_name = node['label']
+        for metric in ADDITIONAL_METRICS:
+            metric_dict = additional_attributes.get(metric)
+            if metric_dict:
+                node[metric] = metric_dict.get(molecule_name)
 
     return node
 
@@ -567,45 +574,61 @@ def convert_model_to_cytoscape_elements(model: Model) -> tuple[list, dict]:
 
     additional_attributes = add_additional_attributes(GENE_LEVEL_DATA_FILE)
 
-    elements_dict = {}
     elements = []
+    elements_dict = {}
+    
+    # Pre-define keys to exclude for efficiency
+    node_exclude_keys = {'name', 'type', 'represents', 'member'}
+    edge_exclude_keys = {'name'}
+    
     for fragment in cx2_network:
         if 'nodes' in fragment:
             for node in fragment['nodes']:
+                node_id = str(node['id'])
                 node_attrs = node.get('v', {})
-                new_node_attrs = {}
+                
                 new_node_attrs = {
-                    "id": str(node['id']),
-                    "label": node_attrs.get('name', str(node['id'])),
+                    "id": node_id,
+                    "label": node_attrs.get('name', node_id),
                     "type": node_attrs.get('type', 'gene'),
                     "represents": node_attrs.get('represents', '').removeprefix("PomBase:"),
                 }
+                
                 if 'member' in node_attrs:
                     new_node_attrs['member'] = node_attrs['member']
-                new_node_attrs = calculate_additional_attributes(new_node_attrs, additional_attributes)
-                new_node_attrs.update(
-                    {k: v for k, v in node_attrs.items() if k not in ['name', 'type', 'represents', 'member']}
-                )
-                elements.append({
-                    "data": new_node_attrs
-                })
-                elements_dict[str(node['id'])] = elements[-1]
-        if 'edges' in fragment:
+                
+                calculate_additional_attributes(new_node_attrs, additional_attributes)
+                
+                # Add remaining attributes
+                for k, v in node_attrs.items():
+                    if k not in node_exclude_keys:
+                        new_node_attrs[k] = v
+                
+                elem = {"data": new_node_attrs}
+                elements.append(elem)
+                elements_dict[node_id] = elem
+        
+        elif 'edges' in fragment:
             for edge in fragment['edges']:
+                edge_id = f"e{edge['id']}"
                 edge_attrs = edge.get('v', {})
+                
                 new_edge_attrs = {
-                    "id": f"e{edge['id']}",
+                    "id": edge_id,
                     "source": str(edge['s']),
                     "target": str(edge['t']),
                     "interaction": edge_attrs.get('name', '')
                 }
-                new_edge_attrs.update(
-                    {k: v for k, v in edge_attrs.items() if k not in ['name']}
-                )
-                elements.append({
-                    "data": new_edge_attrs
-                })
-                elements_dict[f"e{edge['id']}"] = elements[-1]
+                
+                # Add remaining attributes
+                for k, v in edge_attrs.items():
+                    if k not in edge_exclude_keys:
+                        new_edge_attrs[k] = v
+                
+                elem = {"data": new_edge_attrs}
+                elements.append(elem)
+                elements_dict[edge_id] = elem
+    
     return elements, elements_dict
 
 # @st.cache_data
@@ -817,7 +840,7 @@ def display_selected_object(selected_elements: dict, elements_dict: dict):
                         st.markdown(f"**{key}:** {value}")
                 else:
                     st.markdown(f"**{key}:** ")
-                    soup = BeautifulSoup(value, 'lxml')
+                    soup = BeautifulSoup(value, 'html.parser')
                     pretty_html = soup.prettify()
                     st.html(pretty_html)
     else:
