@@ -50,6 +50,7 @@ def load_enrichment_data():
 def display_results(res: pd.DataFrame, res_slim: pd.DataFrame = None, ontology_name: str = "GO"):
     """Display enrichment results."""
     
+    st.header(f":blue-background[{ontology_name} Enrichment Results (full)]", divider="blue")
     if res.empty:
         st.warning("No enrichment results found")
     else:
@@ -68,6 +69,7 @@ def display_results(res: pd.DataFrame, res_slim: pd.DataFrame = None, ontology_n
 
 
     if res_slim is not None:
+        st.header(f":green-background[{ontology_name} Enrichment Results (slim)]", divider="green")
         if res_slim.empty:
             st.warning("No enrichment results found (slim)")
         else:
@@ -93,7 +95,7 @@ def main():
     
     # Enrichment configuration
     with st.container(border=True):
-        st.title("⚙️ Enrichment Configuration")
+        st.title(":gear: Enrichment Configuration")
 
         # Configure background genes
         bg_genes = background_configuration(
@@ -122,7 +124,7 @@ def main():
 
     # Perform enrichment analysis if genes are submitted
     with st.container(border=True):
-        st.title("🔍 Enrichment Analysis Results")
+        st.title(":mag: Enrichment Analysis Results")
 
         if submit_button and covered_gene_sysIDs:
 
