@@ -22,35 +22,54 @@ st.set_page_config(
 # ================================ Configs =================================
 GO_CAM_DATA_DIR = Path(__file__).parent.parent / "data" / "resource" / "pombe_gocam"
 
+# =============================== Constants ================================
+MODEL_STATES = {
+    "Production": ":green-badge[:material/check: Production] Ready for public use",
+    "Development": ":blue-badge[:material/build_circle: Development] Work in progress",
+    "Review": ":yellow-badge[:material/grading: Review] Marked for curator review",
+    "Delete": ":red-badge[:material/scan_delete: Delete] Marked for deletion"
+}
+
+# =============================== Functions ================================
+def display_model_information(
+    gocam_models: dict,
+) -> tuple[str, dict]:
+    st.header("Model Information", divider="gray")
+    selected_model_title = str(st.selectbox("Select a GO-CAM Model", list(gocam_models.keys())))
+    selected_model = gocam_models[selected_model_title]["model"]
+    col1, col2, col3 = st.columns(3)
+    col1.markdown(f":material/barcode_scanner: **Model ID:** {gocam_models[selected_model_title]['id']}")
+    col2.markdown(f":material/fact_check: **Status:** {MODEL_STATES.get(gocam_models[selected_model_title]['status'], gocam_models[selected_model_title]['status'])}")
+    col3.markdown(f":material/calendar_month: **Date:**  {gocam_models[selected_model_title]['date']}")
+
+    return selected_model_title, selected_model
+
 # ================================ Page Code ================================
-st.title("GO-CAM Model Visualization")
+st.title(":material/account_tree: GO-CAM Model Visualization")
 
 with st.spinner("Loading GO-CAM models..."):
     gocam_models = load_all_gocam_models(GO_CAM_DATA_DIR)
 
-with st.container(border=True):
-    st.header("Model Information")
-    selected_model_title = st.selectbox("Select a GO-CAM Model", list(gocam_models.keys()))
-    selected_model = gocam_models[selected_model_title]["model"]
-    st.markdown(f"**Model ID:** {gocam_models[selected_model_title]['id']}")
-    st.markdown(f"**Title:** {gocam_models[selected_model_title]['title']}")
-    st.markdown(f"**Status:** {gocam_models[selected_model_title]['status']}")
-    st.markdown(f"**Date:** {gocam_models[selected_model_title]['date']}")
-
-
-
 network_col, detail_col = st.columns([3, 1], border=True)
 with network_col:
+    with st.container(border=True):
+        selected_model_title, selected_model = display_model_information(gocam_models)
+    
     if selected_model:
         cytoscape_elements, elements_dict = convert_model_to_cytoscape_elements(selected_model)
     else:
         st.warning("No model selected.")
         cytoscape_elements = []
     
-    selected_objects = display_gocam_network(cytoscape_elements)
+    with st.expander(":material/brush: Node style settings", expanded=False):
+        pass
+    
+    with st.container(border=True):
+        st.markdown(f"<h2 style='text-align: center;'>{gocam_models[selected_model_title]['title']}</h2>", unsafe_allow_html=True)
+        selected_objects = display_gocam_network(cytoscape_elements)
 
 with detail_col:
-    with st.expander("Selected Object", expanded=True):
+    with st.expander(":material/left_click: Selected Object", expanded=True):
         display_selected_object(selected_objects, elements_dict)
-    with st.expander("Interaction Type Legend", expanded=True):
+    with st.expander(":material/legend_toggle: Interaction Type Legend", expanded=True):
         plot_interaction_type_legend()
