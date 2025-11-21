@@ -113,6 +113,7 @@ def get_gene_result(
 
 def main():
     """Main entry point for the depletion data page."""
+    st.title(":chart_with_upwards_trend: Depletion Data Visualization")
 
     # Get default configuration
     config = get_default_config()
@@ -134,72 +135,73 @@ def main():
 
     if submit_button and covered_gene_sysIDs:
         for gene in covered_gene_sysIDs:
-            gene_info = get_gene_info(gene, gene_metadata.gene_info_with_essentiality)
-            display_basic_information(gene, gene_info)
-            
-            gene_body = get_gene_body(gene, gene_metadata.genome_intervals)
-            gene_length, gene_body_plot = display_gene_body(gene_body) 
+            with st.container(border=True):
+                gene_info = get_gene_info(gene, gene_metadata.gene_info_with_essentiality)
+                display_basic_information(gene, gene_info)
+                
+                gene_body = get_gene_body(gene, gene_metadata.genome_intervals)
+                gene_length, gene_body_plot = display_gene_body(gene_body) 
 
-            gene_level_fitting_results_in_current_gene, combined_plot, has_data = get_gene_result(
-                gene, 
-                gene_length, 
-                TIME_POINTS,
-                insertion_level, 
-                gene_level, 
-                gene_body_plot
-            )
+                gene_level_fitting_results_in_current_gene, combined_plot, has_data = get_gene_result(
+                    gene, 
+                    gene_length, 
+                    TIME_POINTS,
+                    insertion_level, 
+                    gene_level, 
+                    gene_body_plot
+                )
 
-            gene_level_fitting_results_in_current_gene_long_timecourse, combined_plot_long_timecourse, has_data_long_timecourse = get_gene_result(
-                gene, 
-                gene_length, 
-                TIME_POINTS_LONG_TIMECOURSE,
-                insertion_level_long_timecourse, 
-                gene_level_long_timecourse, 
-                gene_body_plot
-            )
+                gene_level_fitting_results_in_current_gene_long_timecourse, combined_plot_long_timecourse, has_data_long_timecourse = get_gene_result(
+                    gene, 
+                    gene_length, 
+                    TIME_POINTS_LONG_TIMECOURSE,
+                    insertion_level_long_timecourse, 
+                    gene_level_long_timecourse, 
+                    gene_body_plot
+                )
 
-            gene_level_fitting_results_in_current_gene_haploid, combined_plot_haploid, has_data_haploid = get_gene_result(
-                gene, 
-                gene_length, 
-                TIME_POINTS_HAPLOID,
-                insertion_level_haploid, 
-                gene_level_haploid, 
-                gene_body_plot
-            )
-            
-            col1, col2, col3, col4, col5, col6 = st.columns([2, 8, 2, 8, 2, 8], border=True)
-            if has_data:
-                with col1:
-                    display_gene_level_metrics(col1, gene_level_fitting_results_in_current_gene)
-                with col2:
-                    st.altair_chart(combined_plot, use_container_width=True, theme=None)
-            else:
-                with col1:
-                    st.warning("⚠️")
-                with col2:
-                    st.warning("No data found")
-            if has_data_long_timecourse:
-                with col3:
-                    display_gene_level_metrics(col3, gene_level_fitting_results_in_current_gene_long_timecourse)
-                with col4:
-                    st.altair_chart(combined_plot_long_timecourse, use_container_width=True, theme=None)
-            else:
-                with col3:
-                    st.warning("⚠️")
-                with col4:
-                    st.warning("No data found")
-            if has_data_haploid:
-                with col5:
-                    display_gene_level_metrics(col5, gene_level_fitting_results_in_current_gene_haploid)
-                with col6:
-                    st.altair_chart(combined_plot_haploid, use_container_width=True, theme=None)
-            else:
-                with col5:
-                    st.warning("⚠️")
-                with col6:
-                    st.warning("No data found")
+                gene_level_fitting_results_in_current_gene_haploid, combined_plot_haploid, has_data_haploid = get_gene_result(
+                    gene, 
+                    gene_length, 
+                    TIME_POINTS_HAPLOID,
+                    insertion_level_haploid, 
+                    gene_level_haploid, 
+                    gene_body_plot
+                )
+                
+                col1, col2, col3, col4, col5, col6 = st.columns([2, 8, 2, 8, 2, 8], border=True)
+                if has_data:
+                    with col1:
+                        display_gene_level_metrics(col1, gene_level_fitting_results_in_current_gene)
+                    with col2:
+                        st.altair_chart(combined_plot, use_container_width=True, theme=None)
+                else:
+                    with col1:
+                        st.warning("⚠️")
+                    with col2:
+                        st.warning("No data found")
+                if has_data_long_timecourse:
+                    with col3:
+                        display_gene_level_metrics(col3, gene_level_fitting_results_in_current_gene_long_timecourse)
+                    with col4:
+                        st.altair_chart(combined_plot_long_timecourse, use_container_width=True, theme=None)
+                else:
+                    with col3:
+                        st.warning("⚠️")
+                    with col4:
+                        st.warning("No data found")
+                if has_data_haploid:
+                    with col5:
+                        display_gene_level_metrics(col5, gene_level_fitting_results_in_current_gene_haploid)
+                    with col6:
+                        st.altair_chart(combined_plot_haploid, use_container_width=True, theme=None)
+                else:
+                    with col5:
+                        st.warning("⚠️")
+                    with col6:
+                        st.warning("No data found")
 
-            st.success("Plot generated successfully")
+                st.success("Plot generated successfully")
     else:
         st.warning("No genes submitted or no valid genes")
 
