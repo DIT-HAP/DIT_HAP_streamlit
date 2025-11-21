@@ -633,7 +633,7 @@ def convert_model_to_cytoscape_elements(model: Model) -> tuple[list, dict]:
 
 # @st.cache_data
 def plot_interaction_type_legend():
-    """Plot a legend for interaction types."""
+    """Plot a legend for interaction types with alternating edge lines and labels."""
     legend_elements = []
     
     # First, add all the nodes (one pair per interaction type)
@@ -648,61 +648,95 @@ def plot_interaction_type_legend():
         else:
             continue  # Skip if selector doesn't match expected format
         
-        # Create source and target nodes for this interaction type
+        # Create source and target nodes for the edge line
         source_id = f"legend_source_{i}"
         target_id = f"legend_target_{i}"
-        node_pairs.append((source_id, target_id, interaction_type))
+        # Create nodes for the label on the next row
+        label_source_id = f"legend_label_source_{i}"
+        label_target_id = f"legend_label_target_{i}"
         
+        node_pairs.append((source_id, target_id, label_source_id, label_target_id, interaction_type))
+        
+        # Add nodes for edge line
         legend_elements.append({
             "data": {"id": source_id, "label": ""}
         })
         legend_elements.append({
             "data": {"id": target_id, "label": ""}
         })
+        # Add nodes for label line
+        legend_elements.append({
+            "data": {"id": label_source_id, "label": ""}
+        })
+        legend_elements.append({
+            "data": {"id": label_target_id, "label": EDGE_NAMES[interaction_type]['description']}
+        })
     
-    # Then add all the edges
-    for i, (source_id, target_id, interaction_type) in enumerate(node_pairs):
+    # Then add all the edges (interaction lines only)
+    for i, (source_id, target_id, _, _, interaction_type) in enumerate(node_pairs):
         legend_elements.append({
             "data": {
                 "id": f"legend_edge_{i}",
                 "source": source_id,
                 "target": target_id,
                 "interaction": interaction_type,
-                "label": EDGE_NAMES[interaction_type]['description']
             }
         })
     
-    # Create legend-specific stylesheet with hidden nodes and edge labels
+    # Create legend-specific stylesheet
     legend_stylesheet = [
         {
             "selector": "node",
             "style": {
-                "opacity": 0
+                "opacity": 0,
+                "width": 1,
+                "height": 1
+            }
+        },
+        {
+            "selector": "node[label]",
+            "style": {
+                "opacity": 1,
+                "label": "data(label)",
+                "text-halign": "left",
+                "text-valign": "center",
+                "color": "var(--text-color)",  # Adapts to Streamlit theme
+                "font-size": "14px",
+                "background-opacity": 0,
+                "width": 1,
+                "height": 1
             }
         },
         {
             "selector": "edge",
             "style": {
-                "label": "data(label)",
-                "text-margin-x": "180vw",
-                "text-halign": "left",
-                "text-valign": "left",
-                # "font-size": "14px",
+                "width": 4,
             }
         }
     ] + EDGE_STYLES
+    
+    # Calculate positions: alternating rows for edges and labels
+    positions = {}
+    row_spacing = 35
+    for i, (source_id, target_id, label_source_id, label_target_id, _) in enumerate(node_pairs):
+        row_index = i * 2  # Each interaction takes 2 rows
+        # Edge line on even rows (left-aligned)
+        positions[source_id] = {"x": 2, "y": row_index * row_spacing + 20}
+        positions[target_id] = {"x": 150, "y": row_index * row_spacing + 20}
+        # Label on odd rows (left-aligned)
+        positions[label_source_id] = {"x": 2, "y": (row_index + 1) * row_spacing + 20}
+        positions[label_target_id] = {"x": 160, "y": (row_index + 1) * row_spacing + 20}
     
     cytoscape(
         elements=legend_elements,
         stylesheet=legend_stylesheet,
         layout={
             "name": "preset",
-            "positions": {node_pairs[i][0]: {"x": 20, "y": i * 40 + 20} for i in range(len(node_pairs))} |
-                        {node_pairs[i][1]: {"x": 120, "y": i * 40 + 20} for i in range(len(node_pairs))},
+            "positions": positions,
             "fit": True,
-            "padding": 2
+            "padding": 4
         },
-        height=f"{len(node_pairs) * 40 + 40}px",
+        height=f"{len(node_pairs) * 2 * row_spacing + 40}px",
         key="legend",
         user_panning_enabled=False,
         user_zooming_enabled=False,
@@ -735,7 +769,7 @@ def plot_gradient_colorbar(feature: str, width: int = 200):
                 'ytick.labelleft': False
             }
         ):
-            fig, ax = plt.subplots(figsize=(5, 1), dpi=300)
+            fig, ax = plt.subplots(figsize=(7, 1), dpi=300)
             # Plot gradient
             ax.imshow(gradient, aspect='auto', cmap=cmap, norm=norm)
             # Configure axis
@@ -753,7 +787,7 @@ def plot_feature_color_legend(feature: str):
     if feature_type == "numerical":
         # st.markdown(f"**Color Legend: {feature}**")
         fig = plot_gradient_colorbar(feature)
-        st.pyplot(fig, use_container_width=True)
+        st.pyplot(fig, width="content")
         plt.close(fig)
     elif feature_type == "categorical":
         st.markdown(f"**Color Legend: {feature}**")
