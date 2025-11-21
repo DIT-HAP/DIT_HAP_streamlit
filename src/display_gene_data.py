@@ -36,10 +36,9 @@ def display_basic_information(gene: str, gene_info: pd.DataFrame) -> None:
     pombase_link = f"https://www.pombase.org/gene/{gene}"
 
     if gene == name:
-        st.header(f"Gene: [{gene}]({pombase_link})")
+        st.header(f"Gene: [{gene}]({pombase_link})", divider="gray")
     else:
-        st.header(f"Gene: [{name} / {gene}]({pombase_link})")
-    st.divider()
+        st.header(f"Gene: [{name} / {gene}]({pombase_link})", divider="gray")
     info_dict = {
         "Chromosome": chromosome,
         "Feature type": gene_type,
