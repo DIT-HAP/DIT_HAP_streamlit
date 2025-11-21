@@ -315,7 +315,7 @@ def format_ontology_enrichment_results(
 def ontology_enrichment_pipeline(
     ontology_data: GeneOntologyData | FYPOData | MONDOData,
     query_genes: list[str],
-    bg_genes: list[str],
+    bg_genes: list[str] | set[str],
     load_kwargs: dict = {},
     enrichment_kwargs: dict = {},
     format_kwargs: dict = {},

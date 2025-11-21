@@ -47,7 +47,7 @@ def load_enrichment_data():
     
     return gene_metadata, gene_level, gene_ontology_data, gene_phenotype_data, disease_ontology_data
 
-def display_results(res: pd.DataFrame, res_slim: pd.DataFrame = None, ontology_name: str = "GO"):
+def display_results(res: pd.DataFrame, res_slim: pd.DataFrame | None = None, ontology_name: str = "GO"):
     """Display enrichment results."""
     
     st.header(f":blue-background[{ontology_name} Enrichment Results (full)]", divider="blue")
@@ -65,7 +65,7 @@ def display_results(res: pd.DataFrame, res_slim: pd.DataFrame = None, ontology_n
         )
         charts = display_enrichment_results(res)
         for chart in charts:
-            st.altair_chart(chart, use_container_width=True)
+            st.altair_chart(chart, width="content")
 
 
     if res_slim is not None:
@@ -84,7 +84,7 @@ def display_results(res: pd.DataFrame, res_slim: pd.DataFrame = None, ontology_n
             )
             charts_slim = display_enrichment_results(res_slim)
             for chart in charts_slim:
-                st.altair_chart(chart, use_container_width=True)
+                st.altair_chart(chart, width="content")
 
 
 def main():

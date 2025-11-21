@@ -169,7 +169,7 @@ def display_gene_level_data(gene_level_fitting_results_in_current_gene: pd.DataF
 
 
 def combine_plots(
-    gene_body_plot: alt.Chart,
+    gene_body_plot: alt.LayerChart,
     insertion_level_data_plot1: alt.Chart,
     insertion_level_data_plot2: alt.Chart,
     gene_level_DR_line: alt.Chart,
@@ -202,7 +202,7 @@ def combine_plots(
 
     return combined_plot
 
-def display_gene_level_metrics(container: st.container, gene_level_fitting_results_in_current_gene: pd.DataFrame):
+def display_gene_level_metrics(container: st.container, gene_level_fitting_results_in_current_gene: pd.DataFrame | None):
 
     with container:
         st.metric(label="DR", value=round(gene_level_fitting_results_in_current_gene["um"].values[0], 3))

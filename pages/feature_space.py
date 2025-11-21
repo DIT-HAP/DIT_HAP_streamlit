@@ -34,7 +34,7 @@ def load_data():
     
     return gene_metadata, gene_level
 
-def display_feature_space(query_genes: list[str], gene_level: GeneLevelData) -> alt.Chart:
+def display_feature_space(query_genes: list[str], gene_level: GeneLevelData) -> alt.LayerChart:
     """Display the feature space for the query genes."""
 
     all_gene_feature_space = alt.Chart(gene_level.gene_level_fitting_results).mark_circle(opacity=0.6).encode(
@@ -70,7 +70,7 @@ def main():
         bg_genes = gene_level.gene_level_LFCs.index.tolist()
 
         alt_chart = display_feature_space(covered_gene_sysIDs, gene_level)
-        st.altair_chart(alt_chart, use_container_width=True)
+        st.altair_chart(alt_chart, width="content")
 
 if __name__ == "__main__":
     main()

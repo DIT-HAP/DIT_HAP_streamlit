@@ -75,8 +75,8 @@ def get_gene_result(
     timepoints: dict,
     insertion_level: InsertionLevelData,
     gene_level: GeneLevelData,
-    gene_body_plot: alt.Chart
-) -> tuple[pd.DataFrame, alt.Chart, bool]:
+    gene_body_plot: alt.LayerChart
+) -> tuple[pd.DataFrame | None, alt.VConcatChart | None, bool]:
     """Get the gene result for a given gene."""
     try:
         insertion_level_anno_and_results, insertion_level_data = get_insertion_level_data(gene, insertion_level, timepoints)
@@ -174,7 +174,7 @@ def main():
                     with col1:
                         display_gene_level_metrics(col1, gene_level_fitting_results_in_current_gene)
                     with col2:
-                        st.altair_chart(combined_plot, use_container_width=True, theme=None)
+                        st.altair_chart(combined_plot, width="content", theme=None)
                 else:
                     with col1:
                         st.warning("⚠️")
@@ -184,7 +184,7 @@ def main():
                     with col3:
                         display_gene_level_metrics(col3, gene_level_fitting_results_in_current_gene_long_timecourse)
                     with col4:
-                        st.altair_chart(combined_plot_long_timecourse, use_container_width=True, theme=None)
+                        st.altair_chart(combined_plot_long_timecourse, width="content", theme=None)
                 else:
                     with col3:
                         st.warning("⚠️")
@@ -194,7 +194,7 @@ def main():
                     with col5:
                         display_gene_level_metrics(col5, gene_level_fitting_results_in_current_gene_haploid)
                     with col6:
-                        st.altair_chart(combined_plot_haploid, use_container_width=True, theme=None)
+                        st.altair_chart(combined_plot_haploid, width="content", theme=None)
                 else:
                     with col5:
                         st.warning("⚠️")
