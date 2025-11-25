@@ -84,10 +84,10 @@ def main():
             selected_objects = display_gocam_network(cytoscape_elements, stylesheet=custom_stylesheet)
 
     with detail_col:
-        with st.expander(":material/left_click: Selected Object", expanded=True):
-            display_selected_object(selected_objects, elements_dict)
         with st.expander(":material/legend_toggle: Interaction Type Legend", expanded=True):
             plot_interaction_type_legend()
+        with st.expander(":material/left_click: Selected Object", expanded=True):
+            display_selected_object(selected_objects, elements_dict)
 
 if __name__ == "__main__":
     main()

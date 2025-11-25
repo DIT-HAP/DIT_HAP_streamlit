@@ -163,7 +163,11 @@ NODE_STYLES = [
             "color": "#000000",
             "text-valign": "center",
             "text-halign": "left",
-            "width": 60
+            "width": 60,
+            "text-wrap": "wrap",
+            "text-max-width": "50px",
+            "text-overflow-wrap": "anywhere",
+            # "text-justification": "center"
         }
     }
 ]
@@ -415,15 +419,28 @@ LAYOUT_CONFIG = {
     "fit": True,
     "padding": 10,
     "nodeDimensionsIncludeLabels": True,
-    "spacingFactor": 1,
+    # "spacingFactor": 1,
     "klay": {
         "direction": "DOWN",
-        "edgeSpacingFactor": 1,
-        "inLayerSpacingFactor": 1.2
-        # "borderSpacing": 30,
-        # "spacing": 30
+        "edgeSpacingFactor": 1.5,
+        "inLayerSpacingFactor": 1,
+        "aspectRatio": 0.1,
+        "borderSpacing": 30,
+        "spacing": 30
     }
 }
+
+# LAYOUT_CONFIG = {
+#     "name": "breadthfirst",
+#     "fit": True,
+#     "padding": 10,
+#     "nodeDimensionsIncludeLabels": True,
+#     "spacingFactor": 0.6,
+#     "roots": "#0",
+#     'maximalAdjustments': 0,
+#     "directed": False
+
+# }
 # ================================ Functions =================================
 @st.cache_data
 def parse_gocam_model(yaml_file_path: Path) -> Model:
