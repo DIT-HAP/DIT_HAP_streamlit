@@ -163,7 +163,7 @@ def format_phaf_file(fypo_obo_file: Path, phaf_file: Path) -> Path:
              "DB_Object_Name", "Synonym", "DB_Object_Type", "Taxon", "Date", "Assigned_By", "Annotation_Extension", "Gene_Product_Form_ID"]].copy()
 
     with open(phaf_file.parent / "phaf_go_style.tsv", "w") as f:
-        f.write(f"!gaf-version: 2.2\n!generated-by: Yusheng Yang\n!date-generated: {date.today().strftime('%Y-%m-%d')}\n!URL: https://www.pombase.org/monthly_releases/2025/pombase-2025-09-01/phenotypes_and_genotypes/pombase_phenotype_annotation.phaf.tsv\n!contact: yangyusheng@nibs.ac.cn\n")
+        f.write(f"!gaf-version: 2.2\n!generated-by: Yusheng Yang\n!URL: https://www.pombase.org/monthly_releases/2025/pombase-2025-09-01/phenotypes_and_genotypes/pombase_phenotype_annotation.phaf.tsv\n!contact: yangyusheng@nibs.ac.cn\n")
     
     reformat_phaf.to_csv(phaf_file.parent / "phaf_go_style.tsv", sep="\t", index=False, header=False, mode="a")
 
@@ -194,7 +194,7 @@ def format_mondo_gaf_file(mondo_obo_file: Path, mondo_gaf_file: Path) -> Path:
              "DB_Object_Name", "Synonym", "DB_Object_Type", "Taxon", "Date", "Assigned_By", "Annotation_Extension", "Gene_Product_Form_ID"]].copy()
 
     with open(mondo_gaf_file.parent / "mondo_go_style.tsv", "w") as f:
-        f.write(f"!gaf-version: 2.2\n!generated-by: Yusheng Yang\n!date-generated: {date.today().strftime('%Y-%m-%d')}\n!URL: https://www.pombase.org/monthly_releases/2025/pombase-2025-08-01/ontologies_and_associations/human_disease_association.tsv\n!contact: yangyusheng@nibs.ac.cn\n")
+        f.write(f"!gaf-version: 2.2\n!generated-by: Yusheng Yang\n!URL: https://www.pombase.org/monthly_releases/2025/pombase-2025-08-01/ontologies_and_associations/human_disease_association.tsv\n!contact: yangyusheng@nibs.ac.cn\n")
     
     reformat_mondo.to_csv(mondo_gaf_file.parent / "mondo_go_style.tsv", sep="\t", index=False, header=False, mode="a")
 
