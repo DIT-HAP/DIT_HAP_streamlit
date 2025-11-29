@@ -47,44 +47,61 @@ def load_enrichment_data():
     
     return gene_metadata, gene_level, gene_ontology_data, gene_phenotype_data, disease_ontology_data
 
+def display_full_or_slim(res: pd.DataFrame, label: str, file_name: str, facet_layout: bool = False):
+    """Streamlit layout for displaying full or slim results."""
+    col1, col2 = st.columns([1,1])
+    col1.success("Enrichment results found")
+    col2.download_button(
+        label=label,
+        data=res.to_csv(index=False),
+        file_name=file_name,
+        mime="text/csv",
+        on_click="ignore"
+    )
+    charts = display_enrichment_results(res)
+    if facet_layout:
+        chart_cols = st.columns(3)
+        for i, chart in enumerate(charts):
+            with chart_cols[i % 3]:
+                with st.container(border=True):
+                    st.altair_chart(chart, width="content")
+    else:
+        for chart in charts:
+            with st.container(border=True):
+                st.altair_chart(chart, width="content")
+
 def display_results(res: pd.DataFrame, res_slim: pd.DataFrame | None = None, ontology_name: str = "GO"):
     """Display enrichment results."""
-    
-    st.header(f":blue-background[{ontology_name} Enrichment Results (full)]", divider="blue")
-    if res.empty:
-        st.warning("No enrichment results found")
-    else:
-        col1, col2 = st.columns([3,1])
-        col1.success("Enrichment results found")
-        col2.download_button(
-            label=f"Download {ontology_name} enrichment results (full)",
-            data=res.to_csv(index=False),
-            file_name=f"{ontology_name.lower()}_enrichment_results_full.csv",
-            mime="text/csv",
-            on_click="ignore"
-        )
-        charts = display_enrichment_results(res)
-        for chart in charts:
-            st.altair_chart(chart, width="content")
-
-
     if res_slim is not None:
-        st.header(f":green-background[{ontology_name} Enrichment Results (slim)]", divider="green")
-        if res_slim.empty:
-            st.warning("No enrichment results found (slim)")
+        full_col, slim_col = st.columns([1,1], border=True)
+        with full_col:
+            st.header(f":blue-background[{ontology_name} Enrichment Results (full)]", divider="blue")
+            if res.empty:
+                st.warning("No enrichment results found")
+            else:
+                display_full_or_slim(res, 
+                                    f"Download {ontology_name} enrichment results (full)", 
+                                    f"{ontology_name.lower()}_enrichment_results_full.csv"
+                )
+        with slim_col:
+            st.header(f":green-background[{ontology_name} Enrichment Results (slim)]", divider="green")
+            if res_slim.empty:
+                st.warning("No enrichment results found (slim)")
+            else:
+                display_full_or_slim(res_slim,
+                                    f"Download {ontology_name} enrichment results (slim)",
+                                    f"{ontology_name.lower()}_enrichment_results_slim.csv"
+                )
+    else:
+        st.header(f":blue-background[{ontology_name} Enrichment Results]", divider="blue")
+        if res.empty:
+            st.warning("No enrichment results found")
         else:
-            col1, col2 = st.columns([3,1])
-            col1.success("Enrichment results found (slim)")
-            col2.download_button(
-                label=f"Download {ontology_name} enrichment results (slim)",
-                data=res_slim.to_csv(index=False),
-                file_name=f"{ontology_name.lower()}_enrichment_results_slim.csv",
-                mime="text/csv",
-                on_click="ignore"
+            display_full_or_slim(res, 
+                                f"Download {ontology_name} enrichment results", 
+                                f"{ontology_name.lower()}_enrichment_results.csv",
+                                facet_layout=True
             )
-            charts_slim = display_enrichment_results(res_slim)
-            for chart in charts_slim:
-                st.altair_chart(chart, width="content")
 
 
 def main():
