@@ -1,8 +1,8 @@
 """
 Main page for DIT-HAP Streamlit application.
 
-This page provides a comprehensive introduction to the DIT-HAP analysis tool,
-including scientific background, features overview, and user guidance.
+This page provides a comprehensive introduction to the DIT-HAP visualization tool,
+including scientific background, pipeline integration, and user guidance.
 """
 
 import streamlit as st
@@ -10,239 +10,406 @@ import streamlit as st
 # Main page content
 def show_main_page():
     # Application Header
-    st.title("🧬 DIT-HAP Analysis Tool")
-    st.markdown("### Diploid for Insertional Mutagenesis by Transposon and Haploid for Analysis of Phenotype")
-    st.markdown("_A comprehensive web application for analyzing transposon insertion sequencing data and gene essentiality in *Schizosaccharomyces pombe*_")
+    st.title("🧬 DIT-HAP Streamlit Visualization")
+    st.markdown("### Interactive Visualization and Analysis for DIT-HAP Pipeline Results")
+    st.markdown("_A comprehensive web application for visualizing transposon insertion sequencing data and analyzing gene essentiality from the DIT-HAP pipeline_")
 
     st.markdown("---")
 
     # About Section
-    st.header("🔬 About DIT-HAP")
+    st.header("🔬 About DIT-HAP Visualization")
 
     col1, col2 = st.columns([2, 1])
 
     with col1:
         st.markdown("""
-        **DIT-HAP** is a powerful genetic screening methodology that combines:
+        **DIT-HAP Streamlit** is the visualization and analysis component for the **[DIT-HAP pipeline](https://github.com/DIT-HAP/DIT_HAP_pipeline)** - a comprehensive bioinformatics workflow for diploid transposon mutagenesis and haploid fitness analysis.
 
-        - **Diploid insertional mutagenesis**: Random transposon insertions in diploid cells
-        - **Haploid analysis**: Selection and analysis of haploid derivatives
+        **Key Features:**
+        - **Interactive gene visualization**: Explore gene depletion curves and insertion patterns from DIT-HAP pipeline outputs
+        - **Feature space analysis**: Visualize genes in multidimensional feature space using pipeline-generated statistics
+        - **Enrichment analysis**: Gene Ontology, FYPO, and disease ontology enrichment for pipeline results
+        - **Real-time data exploration**: Dynamic filtering and selection of genes from pipeline datasets
 
-        This approach enables systematic identification of essential genes by measuring how gene disruptions affect cellular fitness over time.
+        This application reads structured outputs from the DIT-HAP Snakemake pipeline and provides interactive tools for biological interpretation and hypothesis generation.
         """)
 
         st.markdown("""
-        **Applications:**
-        - Gene essentiality profiling
-        - Drug target validation
+        **DIT-HAP Pipeline Applications:**
+        - Gene essentiality profiling in *S. pombe*
         - Functional genomics research
+        - Drug target validation
         - Systems biology studies
+        - Transposon insertion sequencing analysis
         """)
 
     with col2:
         st.info("""
-        **🧫 Model Organism**
+        **🧫 Model System**
 
         *Schizosaccharomyces pombe* (fission yeast)
 
-        A well-established model for studying fundamental cellular processes, cell cycle regulation, and chromosome dynamics.
+        A premier model organism for studying:
+        - Fundamental cellular processes
+        - Cell cycle regulation
+        - Chromosome dynamics
+        - Gene essentiality
+
+        Perfect for high-throughput genetic screening approaches.
         """)
 
     st.markdown("---")
 
-    # Features Overview
-    st.header("📊 Available Analysis Tools")
+    # Pipeline Integration
+    st.header("🔗 DIT-HAP Pipeline Integration")
+
+    col1, col2 = st.columns([2, 1])
+
+    with col1:
+        st.markdown("""
+        **Pipeline Data Processing**
+
+        The DIT-HAP pipeline processes raw sequencing data through multiple analysis stages:
+
+        **Insertion-level Analysis:**
+        - Base mean expression statistics
+        - Log fold change calculations
+        - Statistical modeling of fitness effects
+        - Quality control and imputation metrics
+
+        **Gene-level Analysis:**
+        - Aggregated depletion statistics
+        - Model fitting quality assessments
+        - Essentiality classifications
+        - Statistical confidence intervals
+        """)
+
+    with col2:
+        st.success("""
+        **📊 Data Integration**
+
+        This visualization application directly reads:
+
+        - Standard DIT-HAP output formats
+        - Multiple pipeline configurations
+        - Automatic file validation
+        - Error handling for missing data
+        - PomBase reference integration
+        """)
+
+    st.markdown("---")
+
+    # Available Analysis Tools
+    st.header("📊 Available Visualization & Analysis Tools")
 
     col1, col2, col3 = st.columns(3)
 
     with col1:
         st.markdown("""
-        ### 📈 Curve Plot
+        ### 📈 Depletion Curve Plot
 
-        **Gene Depletion Visualization**
+        **Pipeline Gene Visualization**
 
-        - Interactive depletion curve plotting
-        - Time-series analysis of gene fitness
-        - Individual gene interrogation
-        - Statistical confidence intervals
-        - Multiple time course support
+        - Gene depletion curve plotting from pipeline output files
+        - Insertion-level statistical analysis and quality control
+        - Combined visualizations using Altair charts
+        - Interactive gene structure visualization with genomic context
+        - Support for multiple pipeline configurations (default, long timecourse, haploid)
         """)
 
     with col2:
         st.markdown("""
-        ### 🎯 Feature Space
+        ### 🎯 Feature Space Analysis
 
-        **Multi-dimensional Analysis**
+        **Multi-dimensional Pipeline Statistics**
 
-        - 2D and 3D feature space visualization
-        - Gene clustering and patterns
-        - Interactive scatter plots
-        - Comparative analysis tools
-        - Custom parameter selection
+        - Multi-dimensional gene feature visualization from pipeline statistics
+        - Interactive scatter plots with gene selection and clustering
+        - Comparative analysis across different experimental conditions
+        - Pattern identification in pipeline-generated feature matrices
+        - Gene filtering and selection based on pipeline metrics
         """)
 
     with col3:
         st.markdown("""
         ### 🔍 Enrichment Analysis
 
-        **Functional Annotation**
+        **Functional Annotation of Pipeline Results**
 
-        - Gene Ontology (GO) enrichment
-        - FYPO phenotype enrichment
-        - MONDO disease ontology
-        - Statistical significance testing
-        - Pathway analysis
+        - Gene Ontology (GO) enrichment for pipeline-identified gene sets
+        - FYPO (Fission Yeast Phenotype Ontology) analysis for phenotypic interpretations
+        - MONDO disease ontology associations for translational insights
+        - Statistical significance testing with multiple hypothesis correction
+        - Results visualization and export for downstream analysis
         """)
 
     st.markdown("---")
 
     # Quick Start Guide
-    st.header("🚀 Quick Start Guide")
+    st.header("🚀 Getting Started with Pipeline Data")
 
-    st.markdown("#### Getting Started with Your Analysis")
+    st.markdown("#### Prerequisites & Setup")
 
-    step1, step2, step3, step4 = st.columns(4)
+    step1, step2, step3 = st.columns(3)
 
     with step1:
         st.markdown("""
-        **1️⃣ Select Genes**
+        **1️⃣ DIT-HAP Pipeline**
 
-        Enter gene names or upload a gene list
-        - Individual genes: `cdc2`, `wee1`
-        - Multiple genes: `cdc2, wee1, rum1`
-        - File upload: CSV/TSV format
+        Ensure you have completed the DIT-HAP pipeline:
+        - [Install pipeline](https://github.com/DIT-HAP/DIT_HAP_pipeline)
+        - Run complete analysis workflow
+        - Generate all required output files
+        - Verify pipeline completion status
         """)
 
     with step2:
         st.markdown("""
-        **2️⃣ Choose Analysis**
+        **2️⃣ Data Organization**
 
-        Navigate to your desired tool:
-        - **Curve Plot**: For depletion analysis
-        - **Feature Space**: For comparative visualization
-        - **Enrichment**: For functional insights
+        Organize your pipeline outputs:
+        - Follow expected directory structure
+        - Verify all required files are present
+        - Check file naming conventions
+        - Validate data integrity
         """)
 
     with step3:
         st.markdown("""
-        **3️⃣ Analyze Results**
+        **3️⃣ Launch Visualization**
 
-        Explore interactive visualizations:
-        - Zoom and pan on plots
-        - Hover for detailed information
-        - Filter and select data points
-        - Export high-quality figures
+        Start the web application:
+        ```bash
+        # Clone and setup
+        git clone https://github.com/DIT-HAP/DIT_HAP_streamlit.git
+        cd DIT_HAP_streamlit
+        pip install -r requirements.txt
+
+        # Run application
+        streamlit run DIT_HAP_app.py
+        ```
         """)
 
-    with step4:
-        st.markdown("""
-        **4️⃣ Export Findings**
+    st.markdown("#### Analysis Workflow")
 
-        Save your analysis results:
-        - Download plots as PNG/SVG
-        - Export data tables
+    workflow1, workflow2, workflow3, workflow4 = st.columns(4)
+
+    with workflow1:
+        st.markdown("""
+        **🔍 Data Validation**
+
+        - Automatic pipeline output detection
+        - File structure verification
+        - Configuration validation
+        - Reference data checking
+        """)
+
+    with workflow2:
+        st.markdown("""
+        **🧬 Gene Selection**
+
+        - Search by gene name or systematic ID
+        - Upload gene lists from pipeline results
+        - Filter by essentiality or statistics
+        - Query specific gene sets of interest
+        """)
+
+    with workflow3:
+        st.markdown("""
+        **📊 Visualization**
+
+        - Interactive plots with zoom/pan
+        - Multiple analysis perspectives
+        - Real-time data filtering
+        - Comprehensive statistical views
+        """)
+
+    with workflow4:
+        st.markdown("""
+        **💾 Export Results**
+
+        - Download publication-quality figures
+        - Export processed data tables
         - Generate analysis reports
-        - Cite properly in publications
+        - Prepare for downstream analysis
         """)
 
     st.markdown("---")
 
-    # Data Information
-    st.header("📚 Data Sources & Versions")
+    # Technical Specifications
+    st.header("⚙️ Technical Specifications")
 
     col1, col2 = st.columns(2)
 
     with col1:
         st.markdown("""
-        **🧬 Reference Data**
+        **🔧 Pipeline Data Requirements**
 
-        - **Primary Source**: [PomBase](https://www.pombase.org/)
-        - **Gene Annotations**: Latest PomBase release
-        - **Genome Assembly**: *S. pombe* reference genome
-        - **Ontology Terms**: GO, FYPO, and MONDO
+        **Required Pipeline Output Files:**
 
-        **🔬 Experimental Data**
+        **Insertion-level Analysis:**
+        - `annotations.tsv.gz` - Insertion annotations
+        - `baseMean.tsv` - Base mean statistics
+        - `LFC.tsv` - Log fold change values
+        - `fitting_LFCs.tsv` - Statistical modeling
+        - `fitting_results.tsv` - Model quality metrics
+        - `transformed_weights.tsv` - Statistical weights
 
-        - **Method**: Transposon insertion sequencing
-        - **Organism**: *S. pombe* (fission yeast)
-        - **Time Courses**: Multiple experimental conditions
-        - **Replicates**: Biological replicates included
+        **Gene-level Analysis:**
+        - `LFC.tsv` - Aggregated log fold changes
+        - `fitting_LFCs.tsv` - Gene-level statistical modeling
+        - `fitting_results.tsv` - Model quality assessments
+
+        **Reference Data:**
+        - PomBase gene annotations
+        - Genome intervals and features
+        - Ontology files (GO, FYPO, MONDO)
+        """)
+
+        st.markdown("""
+        **🗂️ Data Organization**
+
+        ```
+        data/
+        ├── raw/                           # DIT-HAP pipeline outputs
+        │   ├── HD_DIT_HAP/               # Standard pipeline results
+        │   ├── Long_timecourse_data/     # Extended timecourse
+        │   └── haploid_data/             # Haploid-specific analysis
+        └── resource/                     # Reference data
+            └── pombase_data/            # PomBase annotations
+        ```
         """)
 
     with col2:
         st.markdown("""
-        **📖 Citation Information**
+        **💻 Application Architecture**
 
-        If you use this tool in your research, please cite:
+        **Core Framework:**
+        - **Streamlit** (≥1.51.0) - Web application framework
+        - **Pandas** (≥2.3.0) - Data manipulation and analysis
+        - **NumPy** (≥2.3.0) - Numerical computing foundation
+        - **Pydantic** (≥2.11.7) - Data validation and configuration
 
-        > DIT-HAP: A comprehensive approach for gene essentiality profiling in *Schizosaccharomyces pombe*
+        **Visualization Stack:**
+        - **Altair** (≥5.5.0) - Interactive statistical visualizations
+        - **Matplotlib** (≥3.10.0) - Static plotting capabilities
 
-        **🔧 Technical Details**
+        **Bioinformatics Tools:**
+        - **goatools** (≥1.5.2) - Gene Ontology enrichment analysis
+        - **BeautifulSoup4** + **lxml** - XML/HTML parsing
+        - **NetworkX** - Network analysis and graph algorithms
 
-        - **Framework**: Streamlit web application
-        - **Data Processing**: Pydantic validation
-        - **Visualization**: Altair interactive charts
-        - **Analysis**: Statistical enrichment methods
-        - **Compatibility**: Modern web browsers
+        **Network Analysis:**
+        - **NDEx2** - Network data exchange integration
+        - **st-cytoscape** - Interactive network visualization
+        - **GO-CAM** - Causal activity model support
         """)
 
     st.markdown("---")
 
-    # Navigation Guide
-    st.header("🧭 How to Use Each Page")
+    # Supported Pipeline Configurations
+    st.header("🔬 Supported Pipeline Configurations")
 
-    st.markdown("""
-    **📊 Visualization Pages**
+    col1, col2, col3 = st.columns(3)
 
-    - **Curve Plot**: Start here for individual gene analysis. Ideal for detailed examination of gene depletion kinetics and fitness effects over time.
-    - **Feature Space**: Use for comparative analysis. Perfect for identifying gene clusters and patterns in multi-dimensional parameter space.
+    with col1:
+        st.markdown("""
+        **🧬 Standard Pipeline**
 
-    **🔍 Analysis Pages**
+        `HD_DIT_HAP/` dataset
 
-    - **Enrichment Analysis**: Apply after identifying gene sets. Provides functional insights through statistical enrichment testing of biological annotations.
-    """)
+        - Complete diploid analysis
+        - Multiple time course experiments
+        - Biological replicates
+        - Standard statistical models
+        - Comprehensive quality metrics
+        """)
+
+    with col2:
+        st.markdown("""
+        **⏰ Extended Timecourse**
+
+        `Long_timecourse_data/` dataset
+
+        - Extended experimental duration
+        - Additional sampling points
+        - Enhanced temporal resolution
+        - Long-term fitness tracking
+        """)
+
+    with col3:
+        st.markdown("""
+        **🔬 Haploid Analysis**
+
+        `haploid_data/` dataset
+
+        - Haploid-specific workflows
+        - Essentiality profiling
+        - Phenotype characterization
+        - Single-chromosome analysis
+        """)
 
     st.markdown("---")
 
-    # Footer
-    st.markdown("---")
+    # Resources and Support
+    st.header("📚 Resources & Support")
 
-    # Contact and Support section
-    st.markdown("### 💡 Need Help?")
     col1, col2, col3 = st.columns(3)
 
     with col1:
         st.markdown("""
         **📖 Documentation**
 
-        - User guides and tutorials
-        - API documentation
-        - Methodology details
+        - [Pipeline Documentation](https://github.com/DIT-HAP/DIT_HAP_pipeline) - Complete workflow guide
+        - [PomBase](https://www.pombase.org/) - Gene database for *S. pombe*
+        - [GO Consortium](http://geneontology.org/) - Gene Ontology terms
+        - Methodology and API documentation
         """)
 
     with col2:
         st.markdown("""
-        **🔗 Resources**
+        **🔗 External Resources**
 
-        - [PomBase](https://www.pombase.org/) - Gene database
-        - [GO Consortium](http://geneontology.org/) - Gene Ontology
-        - [FYPO Ontology](https://github.com/pombase/fypo) - Phenotype terms
+        - [DIT-HAP Pipeline Repository](https://github.com/DIT-HAP/DIT_HAP_pipeline)
+        - [FYPO Ontology](https://github.com/pombase/fypo) - Fission yeast phenotypes
+        - [MONDO Disease Ontology](https://github.com/mondo-initiative/mondo)
+        - [Streamlit Documentation](https://docs.streamlit.io/)
         """)
 
     with col3:
         st.markdown("""
-        **📧 Support**
+        **🧪 Pipeline Support**
 
-        - Technical assistance
-        - Data format questions
-        - Analysis guidance
+        **For pipeline-specific questions:**
+        - [Pipeline Issues](https://github.com/DIT-HAP/DIT_HAP_pipeline/issues)
+        - Installation and setup guidance
+        - Analysis methodology support
+        - Computational requirements
         """)
+
+    st.markdown("---")
+
+    # Citation
+    st.header("📄 Citation Information")
+
+    st.markdown("""
+    If you use the DIT-HAP pipeline and this visualization tool in your research, please cite both:
+
+    **DIT-HAP Pipeline:**
+    > DIT-HAP: Diploid Insertional Mutagenesis by Transposon and Haploid Analysis of Phenotype - A comprehensive pipeline for transposon mutagenesis analysis in *Schizosaccharomyces pombe*
+
+    **DIT-HAP Streamlit Visualization:**
+    > DIT-HAP Streamlit Visualization - Interactive web application for exploring and analyzing DIT-HAP pipeline results
+    """)
+
+    # Footer
+    st.markdown("---")
 
     st.markdown("""
     <div style='text-align: center; color: #666; margin-top: 2rem; padding: 1rem; border-top: 1px solid #ddd;'>
-        <strong>DIT-HAP Analysis Tool</strong> •
-        Advanced genetic screening analysis platform •
-        <a href='https://www.pombase.org/' target='_blank'>PomBase</a> integration •
+        <strong>DIT-HAP Streamlit Visualization</strong> •
+        Interactive Analysis Component for <a href='https://github.com/DIT-HAP/DIT_HAP_pipeline' target='_blank'>DIT-HAP Pipeline</a> •
+        Powered by <a href='https://www.pombase.org/' target='_blank'>PomBase</a> •
         Version 1.0
     </div>
     """, unsafe_allow_html=True)
