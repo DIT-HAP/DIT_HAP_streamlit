@@ -502,7 +502,7 @@ def display_enrichment_results(enrichment_results: pd.DataFrame) -> list[alt.Cha
                 alt.Y(
                     "term:N",
                     axis=alt.Axis(
-                        grid=True, labelLimit=500, title="", orient="right"
+                        grid=True, labelLimit=0, title="", orient="right"
                     ),
                     sort=alt.EncodingSortField(field="gene_ratio", order="descending"),
                 ),
@@ -513,7 +513,7 @@ def display_enrichment_results(enrichment_results: pd.DataFrame) -> list[alt.Cha
                 tooltip=ns_results.columns.tolist(),
             )
         ).properties(
-            title=f"Enrichment results for {ns}",
+            title=alt.TitleParams(text=f"Enrichment results for {ns}", limit=0),
         )
         charts.append(chart)
 
