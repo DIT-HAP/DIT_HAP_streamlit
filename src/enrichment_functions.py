@@ -6,7 +6,7 @@ Enrichment functions.
 
 import pandas as pd
 import streamlit as st
-from typing import Literal
+from typing import Literal, Any
 import time
 import requests
 from requests.exceptions import RequestException
@@ -490,9 +490,9 @@ def stringdb_enrichment(query_genes, bg_genes):
 
 
 # @st.cache_data
-def display_enrichment_results(enrichment_results: pd.DataFrame) -> list[alt.Chart]:
+def display_enrichment_results(enrichment_results: pd.DataFrame) -> dict[str, dict[str, Any]]:
     """Display enrichment results."""
-    charts = []
+    charts = {}
     for ns, ns_results in enrichment_results.groupby("namespace", sort=False):
         chart = (
             alt.Chart(ns_results)
@@ -515,6 +515,9 @@ def display_enrichment_results(enrichment_results: pd.DataFrame) -> list[alt.Cha
         ).properties(
             title=alt.TitleParams(text=f"Enrichment results for {ns}", limit=0),
         )
-        charts.append(chart)
+        charts[ns] = {
+            "chart": chart,
+            "n_terms": ns_results.shape[0],
+        }
 
     return charts

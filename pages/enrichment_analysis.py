@@ -61,15 +61,30 @@ def display_full_or_slim(res: pd.DataFrame, label: str, file_name: str, facet_la
     charts = display_enrichment_results(res)
     if facet_layout:
         chart_cols = st.columns(2)
-        for i, chart in enumerate(charts):
-            with chart_cols[i % 2]:
+        # Balance charts between columns based on number of terms
+        # Assign each chart to the column with fewer total terms
+        left_terms = 0
+        right_terms = 0
+        chart_assignments = []  # List of (column_index, chart_ns, chart_info)
+        
+        for chart_ns, chart_info in charts.items():
+            n_terms = int(chart_info["n_terms"])
+            if left_terms <= right_terms:
+                chart_assignments.append((0, chart_ns, chart_info))
+                left_terms += n_terms
+            else:
+                chart_assignments.append((1, chart_ns, chart_info))
+                right_terms += n_terms
+        
+        # Display charts in their assigned columns
+        for col_idx, chart_ns, chart_info in chart_assignments:
+            with chart_cols[col_idx]:
                 with st.container(border=True):
-                    st.altair_chart(chart, width="content")
+                    st.altair_chart(chart_info["chart"], width="stretch")  # type: ignore
     else:
-        for chart in charts:
+        for chart_ns, chart_info in charts.items():
             with st.container(border=True):
-                st.altair_chart(chart, width="content")
-
+                st.altair_chart(chart_info["chart"], width="stretch")  # type: ignore
 def display_results(res: pd.DataFrame, res_slim: pd.DataFrame | None = None, ontology_name: str = "GO"):
     """Display enrichment results."""
     if res_slim is not None:
