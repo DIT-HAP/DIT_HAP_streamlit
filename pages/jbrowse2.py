@@ -31,7 +31,7 @@ def main():
     with st.container(border=True):
         st.components.v1.iframe(
             src=JBROWSE_IFRAME_URL,
-            height=2000,
+            height=1000,
             scrolling=True
         )
 
