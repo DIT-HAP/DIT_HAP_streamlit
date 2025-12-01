@@ -359,6 +359,7 @@ def stringdb_api_functions(
 ):
     """Perform STRING API functions."""
     request_url = "/".join([STRING_API_URL, output_format, method])
+    response = None
     for attempt in range(MAX_RETRIES):
         try:
             response = requests.post(request_url, data=params)
@@ -376,15 +377,29 @@ def stringdb_api_functions(
                     f"Error performing STRING API functions: {e} after {MAX_RETRIES} retries"
                 )
 
+    # Check for empty response
+    if response is None:
+        return pd.DataFrame()
+    
+    response_text = response.text.strip()
+    if not response_text:
+        return pd.DataFrame()
+
     match output_format:
         case "xml":
-            return pd.read_xml(StringIO(response.text))
+            try:
+                return pd.read_xml(StringIO(response_text))
+            except ValueError as e:
+                # Handle empty XML or invalid XML structure
+                if "No objects to concatenate" in str(e) or "No results" in str(e) or "xpath" in str(e).lower():
+                    return pd.DataFrame()
+                raise
         case "tsv":
-            return pd.read_csv(StringIO(response.text), sep="\t")
+            return pd.read_csv(StringIO(response_text), sep="\t")
         case "tsv-no-header":
-            return pd.read_csv(StringIO(response.text), sep="\t", header=None)
+            return pd.read_csv(StringIO(response_text), sep="\t", header=None)
         case "json":
-            return pd.read_json(StringIO(response.text))
+            return pd.read_json(StringIO(response_text))
         case _:
             raise ValueError(f"Invalid output format: {output_format}")
 
@@ -468,6 +483,11 @@ def stringdb_enrichment(query_genes, bg_genes):
     get_string_id_response = stringdb_api_functions(
         output_format="xml", method="get_string_ids", params=get_string_id_params
     )
+    
+    # Handle empty response from get_string_ids
+    if get_string_id_response.empty or "stringId" not in get_string_id_response.columns:
+        return pd.DataFrame()
+    
     get_string_id_response = get_string_id_response["stringId"].tolist()
 
     enrichment_params = {
@@ -480,6 +500,10 @@ def stringdb_enrichment(query_genes, bg_genes):
     enrichment_df = stringdb_api_functions(
         output_format="xml", method="enrichment", params=enrichment_params
     )
+
+    # Handle empty enrichment results
+    if enrichment_df.empty:
+        return pd.DataFrame()
 
     # format the results
     enrichment_df = format_string_enrichment_results(
