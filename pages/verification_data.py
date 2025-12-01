@@ -28,14 +28,14 @@ def main():
     """Main entry point for the Verification Data page."""
     
     st.title("🧬 Verification Data for DIT-HAP")
-    st.info(
-        """
-        This page provides access to verification data used in the DIT-HAP project.
-        You can explore various datasets and images that validate the findings of our research.
+    # st.info(
+    #     """
+    #     This page provides access to verification data used in the DIT-HAP project.
+    #     You can explore various datasets and images that validate the findings of our research.
 
-        The verification data is hosted on GitHub and can be accessed directly via the link below.
-        """
-    )
+    #     The verification data is hosted on GitHub and can be accessed directly via the link below.
+    #     """
+    # )
     
     df = pd.read_excel(
         "./data/resource/all_rounds_combined_verification_summary_manually_annotated.xlsx"
@@ -66,16 +66,16 @@ def main():
         df_18round,
         column_config={
             "3d_image_path": st.column_config.ImageColumn(
-                "3d", help="Cropped image at 3 days.",
+                "3d  image", help="Cropped image at 3 days.",
             ),
             "4d_image_path": st.column_config.ImageColumn(
-                "4d", help="Cropped image at 4 days.",
+                "4d  image", help="Cropped image at 4 days.",
             ),
             "5d_image_path": st.column_config.ImageColumn(
-                "5d", help="Cropped image at 5 days.",
+                "5d  image", help="Cropped image at 5 days.",
             ),
             "6d_image_path": st.column_config.ImageColumn(
-                "6d", help="Cropped image at 6 days.",
+                "6d  image", help="Cropped image at 6 days.",
             ),
             "YES_image_path": st.column_config.ImageColumn(
                 "Color YES image", help="Cropped image of color YES plate.",
