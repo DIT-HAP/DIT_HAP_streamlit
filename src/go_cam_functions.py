@@ -23,6 +23,30 @@ _FILE_READERS = {
 }
 
 # ================================ Constants =================================
+# -------------------------------- Data File Paths --------------------------------
+GENE_LEVEL_DATA_FILE = Path(__file__).parent.parent / "data" / "raw" / "HD_DIT_HAP" / "gene_level" / "kmeans_cluster_result.tsv"
+
+# -------------------------------- Default Colors --------------------------------
+# Default color for missing/null values
+_DEFAULT_COLOR = '#CCCCCC'
+
+# -------------------------------- Layout Configuration --------------------------------
+LAYOUT_CONFIG = {
+    "name": "dagre",
+    "description": "Directed acyclic graph layout",
+    "config": {
+        "name": "dagre",
+        "fit": True,
+        "padding": 10,
+        "nodeDimensionsIncludeLabels": True,
+        "rankDir": "TB",
+        "ranker": "longest-path",
+        "nodeSep": 50,
+        "rankSep": 50
+    }
+}
+
+# -------------------------------- Additional Metrics Configuration --------------------------------
 ADDTIONAL_METRICS_VISUALIZATION = {
     "FYPOviability": {
         "range": ["inviable", "condition-dependent", "viable", "unknown"],
@@ -68,126 +92,8 @@ ADDTIONAL_METRICS_VISUALIZATION = {
     }
 }
 
-
 ADDITIONAL_METRICS = list(ADDTIONAL_METRICS_VISUALIZATION.keys())
 MEMBER_METRICS = ["member_" + metric for metric in ADDITIONAL_METRICS]
-
-GENE_LEVEL_DATA_FILE = Path(__file__).parent.parent / "data" / "raw" / "HD_DIT_HAP" / "gene_level" / "kmeans_cluster_result.tsv"
-
-# Default color for missing/null values
-_DEFAULT_COLOR = '#CCCCCC'
-
-# ================================ Style Configuration =================================
-
-EDGE_NAMES = {
-    'directly positively regulates': {
-        'description': 'direct positive regulation/activation',
-        'color': '#008800',
-        'style': 'solid',
-        'arrowhead': 'normal',
-        'dir': 'forward',
-        'arrowtail': 'none'
-    },
-    'directly negatively regulates': {
-        'description': 'direct negative regulation/inhibition',
-        'color': '#FF0000',
-        'style': 'solid',
-        'arrowhead': 'tee',
-        'dir': 'forward',
-        'arrowtail': 'none'
-    },
-    'indirectly positively regulates': {
-        'description': 'indirect positive regulation',
-        'color': '#008800',
-        'style': 'dashed',
-        'arrowhead': 'normal',
-        'dir': 'forward',
-        'arrowtail': 'none'
-    },
-    'indirectly negatively regulates': {
-        'description': 'indirect negative regulation',
-        'color': '#FF0000',
-        'style': 'dashed',
-        'arrowhead': 'tee',
-        'dir': 'forward',
-        'arrowtail': 'none'
-    },
-    'provides input for': {
-        'description': 'provides input for',
-        'color': '#800080',
-        'style': 'solid',
-        'arrowhead': 'diamond',
-        'dir': 'forward',
-        'arrowtail': 'none'
-    },
-    'removes input for': {
-        'description': 'removes input for',
-        'color': '#FF9999',
-        'style': 'solid',
-        'arrowhead': 'box',
-        'dir': 'forward',
-        'arrowtail': 'none'
-    },
-    'has input': {
-        'description': 'input of',
-        'color': '#6495ED',
-        'style': 'solid',
-        'arrowhead': 'none',
-        'arrowtail': 'dot',
-        'dir': 'back'
-    },
-    'has output': {
-        'description': 'has output',
-        'color': '#ED6495',
-        'style': 'solid',
-        'arrowhead': 'dot',
-        'dir': 'forward',
-        'arrowtail': 'none'
-    },
-    'constitutively upstream of': {
-        'description': 'constitutively upstream',
-        'color': '#95E095',
-        'style': 'dashed',
-        'arrowhead': 'dot',
-        'dir': 'forward',
-        'arrowtail': 'none'
-    },
-    'causally upstream of, negative effect': {
-        'description': 'upstream positive effect',
-        'color': '#95E095',
-        'style': 'dashed',
-        'arrowhead': 'normal',
-        'dir': 'forward',
-        'arrowtail': 'none'
-    },
-    'causally upstream of, positive effect': {
-        'description': 'upstream negative effect',
-        'color': '#FF9999',
-        'style': 'dashed',
-        'arrowhead': 'tee',
-        'dir': 'forward',
-        'arrowtail': 'none'
-    },
-    
-}
-
-
-
-# ================================= Layout Configuration =================================
-LAYOUT_CONFIG = {
-    "name": "dagre",
-    "description": "Directed acyclic graph layout",
-    "config": {
-        "name": "dagre",
-        "fit": True,
-        "padding": 10,
-        "nodeDimensionsIncludeLabels": True,
-        "rankDir": "TB",
-        "ranker": "longest-path",
-        "nodeSep": 50,
-        "rankSep": 50
-    }
-}
 
 # ================================ GO-CAM Related Functions =================================
 @st.cache_data
@@ -407,8 +313,6 @@ def _parse_cx2_network(cx2_network: list, additional_attributes: dict) -> tuple[
     
     return elements, elements_dict
 
-
-@st.cache_data
 def convert_model_to_cytoscape_elements(model: Model) -> tuple[list, dict]:
     """Convert a GO-CAM model to Cytoscape elements."""
     # Step 1: Convert model to CX2 format
@@ -455,6 +359,7 @@ def get_theme_aware_label_color() -> str:
     except Exception:
         return "#000000"
 
+THEME_COLOR = get_theme_aware_label_color()
 
 # -------------------------------- Node Style Configuration --------------------------------
 # Node type configurations: maps type -> visual properties
@@ -505,7 +410,7 @@ def get_node_styles(
     label_feature: str | None = None,
 ) -> list:
     """Generate node styles, optionally with feature-based color mappings."""
-    label_color = get_theme_aware_label_color()
+    label_color = THEME_COLOR
     styles = []
     
     # 1. Generate base styles for each node type
@@ -558,6 +463,22 @@ def get_node_styles(
     return styles
 
 # -------------------------------- Edge Style Configuration --------------------------------
+EDGE_NAMES = {
+    'directly positively regulates': 'direct positive regulation/activation',
+    'directly negatively regulates': 'direct negative regulation/inhibition',
+    'indirectly positively regulates': 'indirect positive regulation',
+    'indirectly negatively regulates': 'indirect negative regulation',
+    'provides input for': 'provides input for',
+    'removes input for': 'removes input for',
+    'has input': 'input of',
+    'has output': 'has output',
+    'constitutively upstream of': 'constitutively upstream',
+    'causally upstream of, negative effect': 'upstream positive effect',
+    'causally upstream of, positive effect': 'upstream negative effect',
+}
+
+
+
 EDGE_STYLES = [
     {
         "selector": 'edge[interaction="directly positively regulates"]',
@@ -569,7 +490,6 @@ EDGE_STYLES = [
             "target-arrow-shape": "triangle",
             "target-arrow-color": "#008800",
             "text-halign": "left",
-            "color": "#000000"
         }
     },
     {
@@ -582,7 +502,6 @@ EDGE_STYLES = [
             "target-arrow-shape": "tee",
             "target-arrow-color": "#FF0000",
             "text-halign": "left",
-            "color": "#000000"
         }
     },
     {
@@ -595,7 +514,6 @@ EDGE_STYLES = [
             "target-arrow-shape": "triangle",
             "target-arrow-color": "#008800",
             "text-halign": "left",
-            "color": "#000000"
         }
     },
     {
@@ -608,7 +526,6 @@ EDGE_STYLES = [
             "target-arrow-shape": "tee",
             "target-arrow-color": "#FF0000",
             "text-halign": "left",
-            "color": "#000000"
         }
     },
     {
@@ -621,7 +538,6 @@ EDGE_STYLES = [
             "target-arrow-shape": "diamond",
             "target-arrow-color": "#800080",
             "text-halign": "left",
-            "color": "#000000"
         }
     },
     {
@@ -634,7 +550,6 @@ EDGE_STYLES = [
             "target-arrow-shape": "square",
             "target-arrow-color": "#FF9999",
             "text-halign": "left",
-            "color": "#000000"
         }
     },
     {
@@ -648,7 +563,6 @@ EDGE_STYLES = [
             "source-arrow-shape": "circle",
             "source-arrow-color": "#6495ED",
             "text-halign": "left",
-            "color": "#000000"
         }
     },
     {
@@ -661,7 +575,6 @@ EDGE_STYLES = [
             "target-arrow-shape": "circle",
             "target-arrow-color": "#ED6495",
             "text-halign": "left",
-            "color": "#000000"
         }
     },
     {
@@ -674,7 +587,6 @@ EDGE_STYLES = [
             "target-arrow-shape": "circle",
             "target-arrow-color": "#95E095",
             "text-halign": "left",
-            "color": "#000000"
         }
     },
     {
@@ -687,7 +599,6 @@ EDGE_STYLES = [
             "target-arrow-shape": "triangle",
             "target-arrow-color": "#95E095",
             "text-halign": "left",
-            "color": "#000000"
         }
     },
     {
@@ -700,7 +611,6 @@ EDGE_STYLES = [
             "target-arrow-shape": "tee",
             "target-arrow-color": "#FF9999",
             "text-halign": "left",
-            "color": "#000000"
         }
     }
 ]
@@ -782,9 +692,10 @@ def plot_feature_color_legend(feature: str):
     elif feature_type == "categorical":
         _plot_categorical_color_legend(feature)
     else:
-        st.warning("No color legend available.")
+        pass
 
 # ================================ Plot Interaction Type Legend =================================
+@st.cache_data
 def plot_interaction_type_legend():
     """Plot a legend for interaction types with alternating edge lines and labels."""
     legend_elements = []
@@ -822,7 +733,7 @@ def plot_interaction_type_legend():
             "data": {"id": label_source_id, "label": ""}
         })
         legend_elements.append({
-            "data": {"id": label_target_id, "label": EDGE_NAMES[interaction_type]['description']}
+            "data": {"id": label_target_id, "label": EDGE_NAMES[interaction_type]}
         })
     
     # Then add all the edges (interaction lines only)
@@ -853,7 +764,7 @@ def plot_interaction_type_legend():
                 "label": "data(label)",
                 "text-halign": "left",
                 "text-valign": "center",
-                "color": "var(--text-color)",  # Adapts to Streamlit theme
+                "color": THEME_COLOR,  # Adapts to Streamlit theme
                 "font-size": "14px",
                 "background-opacity": 0,
                 "width": 1,
@@ -896,14 +807,7 @@ def plot_interaction_type_legend():
         selection_type="none",
     )
 
-
-
-    
-
-
-
-
-
+# ================================ Display GO-CAM Network =================================
 def display_gocam_network(
     elements: list,
     stylesheet: list,
@@ -916,7 +820,6 @@ def display_gocam_network(
         stylesheet,
         key=key,
         layout=layout_config,
-        height="900px",
         min_zoom=0.5,
         max_zoom=3,
         user_panning_enabled=True,
@@ -924,6 +827,7 @@ def display_gocam_network(
     )
     return selected
 
+# =============================== Display Selected Object Details =================================
 def display_selected_object(selected_elements: dict, elements_dict: dict):
     """Display details of the selected object in the network."""
     selected_nodes = selected_elements.get('nodes', [])

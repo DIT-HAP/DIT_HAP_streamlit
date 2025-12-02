@@ -3,18 +3,17 @@ import streamlit as st
 import sys
 from pathlib import Path
 
+from src.go_cam_functions import get_stylesheet
+
 sys.path.append(str(Path(__file__).parent.parent / "src"))
 from go_cam_functions import (
-    parse_gocam_model,
-    convert_model_to_cytoscape_elements,
     load_all_gocam_models,
+    convert_model_to_cytoscape_elements,
+    node_color_mapping_panel,
+    get_stylesheet,
     plot_interaction_type_legend,
     display_gocam_network,
     display_selected_object,
-    node_color_mapping_panel,
-    apply_color_mapping_to_styles,
-    layout_selection_panel,
-    STYLE_SHEET
 )
 # ================================= Page Config ====================================
 st.set_page_config(
@@ -268,24 +267,22 @@ def main():
         with st.sidebar.expander(":material/brush: Node style settings", expanded=False):
             if cytoscape_elements:
                 fill_feature, border_feature, label_feature = node_color_mapping_panel(cytoscape_elements)
-                custom_stylesheet = apply_color_mapping_to_styles(
-                    STYLE_SHEET,
+                custom_stylesheet = get_stylesheet(
                     cytoscape_elements,
                     fill_feature,
                     border_feature,
                     label_feature
                 )
             else:
-                custom_stylesheet = STYLE_SHEET
+                custom_stylesheet = get_stylesheet()
         
-        with st.sidebar.expander(":material/dashboard: Layout settings", expanded=False):
-            selected_layout_config = layout_selection_panel()
+        # with st.sidebar.expander(":material/dashboard: Layout settings", expanded=False):
+        #     selected_layout_config = layout_selection_panel()
         
         with st.container(border=True):
             st.markdown(f"<h2 style='text-align: center;'>{gocam_models[selected_model_title]['title']}</h2>", unsafe_allow_html=True)
             selected_objects = display_gocam_network(
                 cytoscape_elements, 
-                layout_config=selected_layout_config,
                 stylesheet=custom_stylesheet
             )
 
