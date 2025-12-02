@@ -166,8 +166,8 @@ NODE_STYLES = [
             "width": 60,
             "text-wrap": "wrap",
             "text-max-width": "50px",
-            "text-overflow-wrap": "anywhere",
-            # "text-justification": "center"
+            "text-overflow-wrap": "-",
+            "text-justification": "center"
         }
     }
 ]
@@ -415,18 +415,17 @@ STYLE_SHEET = NODE_STYLES + EDGE_STYLES
 
 # ================================= Layout Configuration =================================
 LAYOUT_CONFIG = {
-    "name": "klay",
-    "fit": True,
-    "padding": 10,
-    "nodeDimensionsIncludeLabels": True,
-    # "spacingFactor": 1,
-    "klay": {
-        "direction": "DOWN",
-        "edgeSpacingFactor": 1.5,
-        "inLayerSpacingFactor": 1,
-        "aspectRatio": 0.1,
-        "borderSpacing": 30,
-        "spacing": 30
+    "name": "dagre",
+    "description": "Directed acyclic graph layout",
+    "config": {
+        "name": "dagre",
+        "fit": True,
+        "padding": 10,
+        "nodeDimensionsIncludeLabels": True,
+        "rankDir": "TB",
+        "ranker": "longest-path",
+        "nodeSep": 50,
+        "rankSep": 50
     }
 }
 
@@ -459,9 +458,9 @@ AVAILABLE_LAYOUTS = {
             "padding": 10,
             "nodeDimensionsIncludeLabels": True,
             "rankDir": "TB",
-            "ranker": "network-simplex",
+            "ranker": "longest-path",
             "nodeSep": 50,
-            "rankSep": 50
+            "rankSep": 30
         }
     },
     "cose": {
@@ -724,7 +723,7 @@ def calculate_additional_attributes(
 
     return node
 
-@st.cache_data
+# @st.cache_data
 def convert_model_to_cytoscape_elements(model: Model) -> tuple[list, dict]:
     """Convert a GO-CAM model to Cytoscape elements."""
     cx2_network = model_to_cx2(model, 
@@ -974,40 +973,33 @@ def node_color_mapping_panel(elements: list) -> tuple:
     
     feature_options = ["None"] + list(ADDTIONAL_METRICS_VISUALIZATION.keys())
     
-    col1, col2 = st.columns([1, 2])
-    col1.markdown(":blue-badge[**:material/highlight_mouse_cursor: Feature Selection**]")
-    col2.markdown(":green-badge[**:material/gradient: Color Legend**]")
+    st.markdown(":blue-badge[**:material/highlight_mouse_cursor: Feature Selection**]")
+    st.markdown(":green-badge[**:material/gradient: Color Legend**]")
     
-    col1_fill, col2_fill = st.columns([1, 2])
-    fill_feature = col1_fill.selectbox("Fill color feature", feature_options, key="fill_feature")
-    with col2_fill:
-        plot_feature_color_legend(fill_feature)
+    fill_feature = st.selectbox("Fill color feature", feature_options, key="fill_feature")
+    plot_feature_color_legend(fill_feature)
 
-    col1_border, col2_border = st.columns([1, 2])
-    border_feature = col1_border.selectbox("Border color feature", feature_options, key="border_feature")
-    with col2_border:
-        plot_feature_color_legend(border_feature)
+    border_feature = st.selectbox("Border color feature", feature_options, key="border_feature")
+    plot_feature_color_legend(border_feature)
     
-    col1_label, col2_label = st.columns([1, 2])
-    label_feature = col1_label.selectbox("Label color feature", feature_options, key="label_feature")
-    with col2_label:
-        plot_feature_color_legend(label_feature)
+    label_feature = st.selectbox("Label color feature", feature_options, key="label_feature")
+    plot_feature_color_legend(label_feature)
     
     return fill_feature, border_feature, label_feature
 
 def layout_selection_panel() -> dict:
-    """Create UI panel for network layout selection."""
-    st.subheader("Network Layout")
+    """Create sidebar UI panel for network layout selection with comprehensive parameters."""
+    st.sidebar.markdown("#### Layout Algorithm")
     
     # Layout selection
     layout_names = list(AVAILABLE_LAYOUTS.keys())
     layout_descriptions = {name: AVAILABLE_LAYOUTS[name]["description"] for name in layout_names}
     
     # Create display names with descriptions for selectbox
-    selected_layout = st.selectbox(
-        "Select layout algorithm",
+    selected_layout = st.sidebar.selectbox(
+        "Select layout",
         layout_names,
-        index=0,  # Default to klay
+        index=1,  # Default to dagre
         key="layout_selection",
         format_func=lambda x: f"{x} - {layout_descriptions[x]}"
     )
@@ -1016,87 +1008,569 @@ def layout_selection_panel() -> dict:
     layout_config = AVAILABLE_LAYOUTS[selected_layout]["config"].copy()
     
     # Layout-specific options
-    with st.expander("Layout Options", expanded=False):
-        if selected_layout == "klay":
-            direction = st.selectbox(
-                "Direction",
-                ["DOWN", "UP", "LEFT", "RIGHT"],
-                key="klay_direction"
-            )
-            spacing = st.slider("Spacing", 10, 100, 30, key="klay_spacing")
-            layout_config["klay"] = layout_config.get("klay", {})
-            layout_config["klay"]["direction"] = direction
-            layout_config["klay"]["spacing"] = spacing
-            layout_config["klay"]["borderSpacing"] = spacing
-            
-        elif selected_layout == "dagre":
-            rank_dir = st.selectbox(
-                "Rank Direction",
-                ["TB", "BT", "LR", "RL"],
-                format_func=lambda x: {"TB": "Top to Bottom", "BT": "Bottom to Top", 
-                                       "LR": "Left to Right", "RL": "Right to Left"}[x],
-                key="dagre_rankdir"
-            )
-            node_sep = st.slider("Node Separation", 10, 100, 50, key="dagre_nodesep")
-            rank_sep = st.slider("Rank Separation", 10, 100, 50, key="dagre_ranksep")
-            layout_config["rankDir"] = rank_dir
-            layout_config["nodeSep"] = node_sep
-            layout_config["rankSep"] = rank_sep
-            
-        elif selected_layout == "cose":
-            node_repulsion = st.slider("Node Repulsion", 1000, 10000, 4500, step=500, key="cose_repulsion")
-            ideal_edge_length = st.slider("Ideal Edge Length", 20, 150, 50, key="cose_edge_length")
-            gravity = st.slider("Gravity", 10, 200, 80, key="cose_gravity")
-            layout_config["nodeRepulsion"] = node_repulsion
-            layout_config["idealEdgeLength"] = ideal_edge_length
-            layout_config["gravity"] = gravity
-            
-        elif selected_layout == "fcose":
-            quality = st.selectbox(
-                "Quality",
-                ["draft", "default", "proof"],
-                index=1,
-                key="fcose_quality"
-            )
-            node_repulsion = st.slider("Node Repulsion", 1000, 10000, 4500, step=500, key="fcose_repulsion")
-            ideal_edge_length = st.slider("Ideal Edge Length", 20, 150, 50, key="fcose_edge_length")
-            layout_config["quality"] = quality
-            layout_config["nodeRepulsion"] = node_repulsion
-            layout_config["idealEdgeLength"] = ideal_edge_length
-            
-        elif selected_layout == "cola":
-            node_spacing = st.slider("Node Spacing", 5, 50, 20, key="cola_spacing")
-            edge_length = st.slider("Edge Length", 50, 200, 100, key="cola_edge_length")
-            layout_config["nodeSpacing"] = node_spacing
-            layout_config["edgeLength"] = edge_length
-            
-        elif selected_layout == "breadthfirst":
-            directed = st.checkbox("Directed", value=True, key="bf_directed")
-            spacing_factor = st.slider("Spacing Factor", 0.5, 2.0, 1.0, step=0.1, key="bf_spacing")
-            layout_config["directed"] = directed
-            layout_config["spacingFactor"] = spacing_factor
-            
-        elif selected_layout == "circle":
-            clockwise = st.checkbox("Clockwise", value=True, key="circle_clockwise")
-            layout_config["clockwise"] = clockwise
-            
-        elif selected_layout == "concentric":
-            min_spacing = st.slider("Minimum Node Spacing", 5, 50, 10, key="concentric_spacing")
-            equidistant = st.checkbox("Equidistant", value=False, key="concentric_equidistant")
-            layout_config["minNodeSpacing"] = min_spacing
-            layout_config["equidistant"] = equidistant
-            
-        elif selected_layout == "grid":
-            condense = st.checkbox("Condense", value=False, key="grid_condense")
-            layout_config["condense"] = condense
+    st.sidebar.markdown("##### Layout Parameters")
+    
+    if selected_layout == "klay":
+        # Klay layout - all available parameters
+        direction = st.sidebar.selectbox(
+            "Direction",
+            ["DOWN", "UP", "LEFT", "RIGHT"],
+            index=0,
+            key="klay_direction",
+            help="Overall direction of edges: vertical (DOWN/UP) or horizontal (LEFT/RIGHT)"
+        )
+        spacing = st.sidebar.slider(
+            "Node Spacing", 10, 100, 30, key="klay_spacing",
+            help="Spacing between nodes in the same layer"
+        )
+        border_spacing = st.sidebar.slider(
+            "Border Spacing", 10, 100, 30, key="klay_border_spacing",
+            help="Spacing to the border of the layout"
+        )
+        in_layer_spacing = st.sidebar.slider(
+            "In-Layer Spacing Factor", 0.5, 3.0, 1.0, step=0.1, key="klay_in_layer",
+            help="Factor for spacing between nodes in the same layer"
+        )
+        edge_spacing = st.sidebar.slider(
+            "Edge Spacing Factor", 0.5, 3.0, 1.5, step=0.1, key="klay_edge_spacing",
+            help="Factor for spacing between edges"
+        )
+        aspect_ratio = st.sidebar.slider(
+            "Aspect Ratio", 0.1, 2.0, 0.1, step=0.1, key="klay_aspect",
+            help="Desired aspect ratio of the drawing"
+        )
+        thoroughness = st.sidebar.slider(
+            "Thoroughness", 1, 100, 7, key="klay_thoroughness",
+            help="How much effort should be spent to produce nice layouts (higher = slower but better)"
+        )
+        crossing_min = st.sidebar.selectbox(
+            "Crossing Minimization",
+            ["LAYER_SWEEP", "INTERACTIVE"],
+            index=0,
+            key="klay_crossing",
+            help="Strategy for minimizing edge crossings"
+        )
+        node_layering = st.sidebar.selectbox(
+            "Node Layering",
+            ["NETWORK_SIMPLEX", "LONGEST_PATH", "INTERACTIVE"],
+            index=0,
+            key="klay_layering",
+            help="Strategy for node layer assignment"
+        )
+        node_placement = st.sidebar.selectbox(
+            "Node Placement",
+            ["BRANDES_KOEPF", "LINEAR_SEGMENTS", "INTERACTIVE", "SIMPLE"],
+            index=0,
+            key="klay_placement",
+            help="Strategy for node placement within layers"
+        )
+        edge_routing = st.sidebar.selectbox(
+            "Edge Routing",
+            ["POLYLINE", "ORTHOGONAL", "SPLINES"],
+            index=0,
+            key="klay_routing",
+            help="Edge routing style"
+        )
+        compact_components = st.sidebar.checkbox(
+            "Compact Components", value=False, key="klay_compact",
+            help="Whether to compact the layout by reducing whitespace"
+        )
+        merge_edges = st.sidebar.checkbox(
+            "Merge Edges", value=False, key="klay_merge_edges",
+            help="Whether to merge edges"
+        )
+        layout_hierarchy = st.sidebar.checkbox(
+            "Layout Hierarchy", value=False, key="klay_hierarchy",
+            help="Whether to layout nested graphs hierarchically"
+        )
+        separate_components = st.sidebar.checkbox(
+            "Separate Components", value=True, key="klay_separate",
+            help="Whether to handle disconnected components separately"
+        )
         
-        # Common options for all layouts
-        st.divider()
-        st.markdown("**Common Options**")
-        padding = st.slider("Padding", 5, 50, 10, key="layout_padding")
-        fit = st.checkbox("Fit to viewport", value=True, key="layout_fit")
-        layout_config["padding"] = padding
-        layout_config["fit"] = fit
+        layout_config["klay"] = layout_config.get("klay", {})
+        layout_config["klay"]["direction"] = direction
+        layout_config["klay"]["spacing"] = spacing
+        layout_config["klay"]["borderSpacing"] = border_spacing
+        layout_config["klay"]["inLayerSpacingFactor"] = in_layer_spacing
+        layout_config["klay"]["edgeSpacingFactor"] = edge_spacing
+        layout_config["klay"]["aspectRatio"] = aspect_ratio
+        layout_config["klay"]["thoroughness"] = thoroughness
+        layout_config["klay"]["crossingMinimization"] = crossing_min
+        layout_config["klay"]["nodeLayering"] = node_layering
+        layout_config["klay"]["nodePlacement"] = node_placement
+        layout_config["klay"]["edgeRouting"] = edge_routing
+        layout_config["klay"]["compactComponents"] = compact_components
+        layout_config["klay"]["mergeEdges"] = merge_edges
+        layout_config["klay"]["layoutHierarchy"] = layout_hierarchy
+        layout_config["klay"]["separateConnectedComponents"] = separate_components
+        
+    elif selected_layout == "dagre":
+        # Dagre layout - all available parameters
+        rank_dir = st.sidebar.selectbox(
+            "Rank Direction",
+            ["TB", "BT", "LR", "RL"],
+            format_func=lambda x: {"TB": "Top to Bottom", "BT": "Bottom to Top", 
+                                   "LR": "Left to Right", "RL": "Right to Left"}[x],
+            key="dagre_rankdir",
+            help="Direction for rank nodes"
+        )
+        align = st.sidebar.selectbox(
+            "Alignment",
+            ["UL", "UR", "DL", "DR", None],
+            index=4,
+            format_func=lambda x: {
+                "UL": "Up-Left", "UR": "Up-Right",
+                "DL": "Down-Left", "DR": "Down-Right",
+                None: "None (default)"
+            }.get(x, str(x)),
+            key="dagre_align",
+            help="Alignment for rank nodes"
+        )
+        ranker = st.sidebar.selectbox(
+            "Ranker Algorithm",
+            ["network-simplex", "tight-tree", "longest-path"],
+            index=0,
+            key="dagre_ranker",
+            help="Type of algorithm to assign ranks to nodes"
+        )
+        node_sep = st.sidebar.slider(
+            "Node Separation", 10, 200, 50, key="dagre_nodesep",
+            help="Separation between adjacent nodes in the same rank"
+        )
+        rank_sep = st.sidebar.slider(
+            "Rank Separation", 10, 200, 50, key="dagre_ranksep",
+            help="Separation between adjacent ranks"
+        )
+        edge_sep = st.sidebar.slider(
+            "Edge Separation", 5, 50, 10, key="dagre_edgesep",
+            help="Separation between adjacent edges in the same rank"
+        )
+        spacing_factor = st.sidebar.slider(
+            "Spacing Factor", 0.5, 3.0, 1.0, step=0.1, key="dagre_spacing_factor",
+            help="Positive number to adjust spacing"
+        )
+        acyclicer = st.sidebar.selectbox(
+            "Acyclicer",
+            ["greedy", None],
+            index=0,
+            format_func=lambda x: x if x else "None",
+            key="dagre_acyclicer",
+            help="How to handle cycles in the graph"
+        )
+        
+        layout_config["rankDir"] = rank_dir
+        if align:
+            layout_config["align"] = align
+        layout_config["ranker"] = ranker
+        layout_config["nodeSep"] = node_sep
+        layout_config["rankSep"] = rank_sep
+        layout_config["edgeSep"] = edge_sep
+        layout_config["spacingFactor"] = spacing_factor
+        if acyclicer:
+            layout_config["acyclicer"] = acyclicer
+        
+    elif selected_layout == "cose":
+        # CoSE layout - all available parameters
+        node_repulsion = st.sidebar.slider(
+            "Node Repulsion", 100, 20000, 4500, step=100, key="cose_repulsion",
+            help="Node repulsion (non-overlapping) multiplier"
+        )
+        ideal_edge_length = st.sidebar.slider(
+            "Ideal Edge Length", 10, 200, 50, key="cose_edge_length",
+            help="Ideal edge length"
+        )
+        edge_elasticity = st.sidebar.slider(
+            "Edge Elasticity", 10, 500, 100, key="cose_elasticity",
+            help="Divisor to compute edge forces"
+        )
+        nesting_factor = st.sidebar.slider(
+            "Nesting Factor", 1.0, 20.0, 5.0, step=0.5, key="cose_nesting",
+            help="Factor for nested graphs"
+        )
+        gravity = st.sidebar.slider(
+            "Gravity", 0, 500, 80, key="cose_gravity",
+            help="Gravity force (constant)"
+        )
+        num_iter = st.sidebar.slider(
+            "Iterations", 100, 5000, 1000, step=100, key="cose_iterations",
+            help="Maximum number of iterations"
+        )
+        node_overlap = st.sidebar.slider(
+            "Node Overlap", 1, 50, 10, key="cose_overlap",
+            help="Higher values = more overlap prevention"
+        )
+        component_spacing = st.sidebar.slider(
+            "Component Spacing", 20, 200, 100, key="cose_comp_spacing",
+            help="Extra spacing between components"
+        )
+        initial_temp = st.sidebar.slider(
+            "Initial Temperature", 100, 2000, 1000, key="cose_init_temp",
+            help="Initial temperature for cooling"
+        )
+        cooling_factor = st.sidebar.slider(
+            "Cooling Factor", 0.9, 0.999, 0.99, step=0.001, key="cose_cooling",
+            help="Cooling factor for simulated annealing"
+        )
+        min_temp = st.sidebar.slider(
+            "Minimum Temperature", 0.1, 10.0, 1.0, step=0.1, key="cose_min_temp",
+            help="Lower temperature threshold"
+        )
+        refresh = st.sidebar.slider(
+            "Refresh", 1, 50, 20, key="cose_refresh",
+            help="Number of iterations per frame for animate"
+        )
+        randomize = st.sidebar.checkbox(
+            "Randomize", value=False, key="cose_randomize",
+            help="Randomize the initial positions"
+        )
+        
+        layout_config["nodeRepulsion"] = node_repulsion
+        layout_config["idealEdgeLength"] = ideal_edge_length
+        layout_config["edgeElasticity"] = edge_elasticity
+        layout_config["nestingFactor"] = nesting_factor
+        layout_config["gravity"] = gravity
+        layout_config["numIter"] = num_iter
+        layout_config["nodeOverlap"] = node_overlap
+        layout_config["componentSpacing"] = component_spacing
+        layout_config["initialTemp"] = initial_temp
+        layout_config["coolingFactor"] = cooling_factor
+        layout_config["minTemp"] = min_temp
+        layout_config["refresh"] = refresh
+        layout_config["randomize"] = randomize
+        
+    elif selected_layout == "fcose":
+        # fCoSE layout - all available parameters
+        quality = st.sidebar.selectbox(
+            "Quality",
+            ["draft", "default", "proof"],
+            index=1,
+            key="fcose_quality",
+            help="Quality level: draft (fast), default, proof (slow but best)"
+        )
+        node_repulsion = st.sidebar.slider(
+            "Node Repulsion", 1000, 20000, 4500, step=500, key="fcose_repulsion",
+            help="Node repulsion force"
+        )
+        ideal_edge_length = st.sidebar.slider(
+            "Ideal Edge Length", 20, 200, 50, key="fcose_edge_length",
+            help="Ideal edge length"
+        )
+        edge_elasticity = st.sidebar.slider(
+            "Edge Elasticity", 0.1, 1.0, 0.45, step=0.05, key="fcose_elasticity",
+            help="Edge elasticity for springs"
+        )
+        nesting_factor = st.sidebar.slider(
+            "Nesting Factor", 0.1, 1.0, 0.1, step=0.1, key="fcose_nesting",
+            help="Nesting factor for compound nodes"
+        )
+        gravity = st.sidebar.slider(
+            "Gravity", 0.0, 1.0, 0.25, step=0.05, key="fcose_gravity",
+            help="Gravity force (constant)"
+        )
+        gravity_range_compound = st.sidebar.slider(
+            "Gravity Range (Compound)", 0.5, 3.0, 1.5, step=0.1, key="fcose_gravity_range",
+            help="Gravity range for compound nodes"
+        )
+        gravity_compound = st.sidebar.slider(
+            "Gravity (Compound)", 0.5, 3.0, 1.0, step=0.1, key="fcose_gravity_compound",
+            help="Gravity for compound nodes"
+        )
+        num_iter = st.sidebar.slider(
+            "Iterations", 500, 5000, 2500, step=100, key="fcose_iterations",
+            help="Maximum number of iterations"
+        )
+        node_separation = st.sidebar.slider(
+            "Node Separation", 50, 200, 75, key="fcose_node_sep",
+            help="Minimum separation between nodes"
+        )
+        sample_size = st.sidebar.slider(
+            "Sample Size", 10, 100, 25, key="fcose_sample_size",
+            help="Sample size for node repulsion calculations"
+        )
+        tiling_padding_vertical = st.sidebar.slider(
+            "Tiling Padding (Vertical)", 0, 50, 10, key="fcose_tile_v",
+            help="Vertical padding for tiling"
+        )
+        tiling_padding_horizontal = st.sidebar.slider(
+            "Tiling Padding (Horizontal)", 0, 50, 10, key="fcose_tile_h",
+            help="Horizontal padding for tiling"
+        )
+        randomize = st.sidebar.checkbox(
+            "Randomize", value=True, key="fcose_randomize",
+            help="Randomize initial positions"
+        )
+        tile = st.sidebar.checkbox(
+            "Tile Disconnected", value=True, key="fcose_tile",
+            help="Tile disconnected nodes"
+        )
+        pack_components = st.sidebar.checkbox(
+            "Pack Components", value=True, key="fcose_pack",
+            help="Pack components together"
+        )
+        uniform_node_dimensions = st.sidebar.checkbox(
+            "Uniform Node Dimensions", value=False, key="fcose_uniform",
+            help="Use uniform node dimensions"
+        )
+        
+        layout_config["quality"] = quality
+        layout_config["nodeRepulsion"] = node_repulsion
+        layout_config["idealEdgeLength"] = ideal_edge_length
+        layout_config["edgeElasticity"] = edge_elasticity
+        layout_config["nestingFactor"] = nesting_factor
+        layout_config["gravity"] = gravity
+        layout_config["gravityRangeCompound"] = gravity_range_compound
+        layout_config["gravityCompound"] = gravity_compound
+        layout_config["numIter"] = num_iter
+        layout_config["nodeSeparation"] = node_separation
+        layout_config["sampleSize"] = sample_size
+        layout_config["tilingPaddingVertical"] = tiling_padding_vertical
+        layout_config["tilingPaddingHorizontal"] = tiling_padding_horizontal
+        layout_config["randomize"] = randomize
+        layout_config["tile"] = tile
+        layout_config["packComponents"] = pack_components
+        layout_config["uniformNodeDimensions"] = uniform_node_dimensions
+        
+    elif selected_layout == "cola":
+        # Cola layout - all available parameters
+        max_sim_time = st.sidebar.slider(
+            "Max Simulation Time (ms)", 1000, 10000, 4000, step=500, key="cola_max_time",
+            help="Maximum simulation time in milliseconds"
+        )
+        convergence_threshold = st.sidebar.slider(
+            "Convergence Threshold", 0.001, 0.1, 0.01, step=0.001, key="cola_convergence",
+            help="Threshold for layout convergence"
+        )
+        node_spacing = st.sidebar.slider(
+            "Node Spacing", 5, 100, 20, key="cola_spacing",
+            help="Minimum spacing between nodes"
+        )
+        edge_length = st.sidebar.slider(
+            "Edge Length", 20, 300, 100, key="cola_edge_length",
+            help="Default edge length"
+        )
+        refresh = st.sidebar.slider(
+            "Refresh", 1, 50, 1, key="cola_refresh",
+            help="Refresh rate for animation"
+        )
+        avoid_overlap = st.sidebar.checkbox(
+            "Avoid Overlap", value=True, key="cola_overlap",
+            help="Prevent node overlap"
+        )
+        handle_disconnected = st.sidebar.checkbox(
+            "Handle Disconnected", value=True, key="cola_disconnected",
+            help="Handle disconnected components"
+        )
+        center_graph = st.sidebar.checkbox(
+            "Center Graph", value=True, key="cola_center",
+            help="Center the graph in the viewport"
+        )
+        randomize = st.sidebar.checkbox(
+            "Randomize", value=False, key="cola_randomize",
+            help="Randomize initial node positions"
+        )
+        flow_direction = st.sidebar.selectbox(
+            "Flow Direction (optional)",
+            [None, "LR", "RL", "TB", "BT"],
+            index=0,
+            format_func=lambda x: {
+                None: "None (no flow)", "LR": "Left to Right",
+                "RL": "Right to Left", "TB": "Top to Bottom", "BT": "Bottom to Top"
+            }.get(x, str(x)),
+            key="cola_flow",
+            help="Use DAG/Tree flow layout"
+        )
+        
+        layout_config["maxSimulationTime"] = max_sim_time
+        layout_config["convergenceThreshold"] = convergence_threshold
+        layout_config["nodeSpacing"] = node_spacing
+        layout_config["edgeLength"] = edge_length
+        layout_config["refresh"] = refresh
+        layout_config["avoidOverlap"] = avoid_overlap
+        layout_config["handleDisconnected"] = handle_disconnected
+        layout_config["centerGraph"] = center_graph
+        layout_config["randomize"] = randomize
+        if flow_direction:
+            layout_config["flow"] = {"axis": "x" if flow_direction in ["LR", "RL"] else "y",
+                                     "minSeparation": 30}
+        
+    elif selected_layout == "breadthfirst":
+        # Breadthfirst layout - all available parameters
+        directed = st.sidebar.checkbox(
+            "Directed", value=True, key="bf_directed",
+            help="Whether the tree is directed downwards"
+        )
+        circle = st.sidebar.checkbox(
+            "Circle Mode", value=False, key="bf_circle",
+            help="Put depths in concentric circles"
+        )
+        grid = st.sidebar.checkbox(
+            "Grid Mode", value=False, key="bf_grid",
+            help="Use a grid layout"
+        )
+        maximal = st.sidebar.checkbox(
+            "Maximal", value=False, key="bf_maximal",
+            help="Whether to shift nodes down their natural BFS depths"
+        )
+        avoid_overlap = st.sidebar.checkbox(
+            "Avoid Overlap", value=True, key="bf_overlap",
+            help="Prevent node overlap"
+        )
+        spacing_factor = st.sidebar.slider(
+            "Spacing Factor", 0.5, 3.0, 1.0, step=0.1, key="bf_spacing",
+            help="Positive number to adjust spacing"
+        )
+        
+        layout_config["directed"] = directed
+        layout_config["circle"] = circle
+        layout_config["grid"] = grid
+        layout_config["maximal"] = maximal
+        layout_config["avoidOverlap"] = avoid_overlap
+        layout_config["spacingFactor"] = spacing_factor
+        
+    elif selected_layout == "circle":
+        # Circle layout - all available parameters
+        clockwise = st.sidebar.checkbox(
+            "Clockwise", value=True, key="circle_clockwise",
+            help="Whether nodes are placed clockwise"
+        )
+        avoid_overlap = st.sidebar.checkbox(
+            "Avoid Overlap", value=True, key="circle_overlap",
+            help="Prevent node overlap"
+        )
+        start_angle = st.sidebar.slider(
+            "Start Angle", 0.0, 6.28, 4.712, step=0.1, key="circle_start_angle",
+            help="Start angle in radians (3π/2 ≈ 4.712 = top)"
+        )
+        sweep = st.sidebar.slider(
+            "Sweep Angle", 0.1, 6.28, 6.28, step=0.1, key="circle_sweep",
+            help="Angle swept (2π = full circle)"
+        )
+        radius = st.sidebar.slider(
+            "Radius", 0, 500, 0, key="circle_radius",
+            help="Radius in pixels (0 = auto)"
+        )
+        spacing_factor = st.sidebar.slider(
+            "Spacing Factor", 0.5, 3.0, 1.0, step=0.1, key="circle_spacing_factor",
+            help="Positive number to adjust spacing"
+        )
+        
+        layout_config["clockwise"] = clockwise
+        layout_config["avoidOverlap"] = avoid_overlap
+        layout_config["startAngle"] = start_angle
+        layout_config["sweep"] = sweep
+        if radius > 0:
+            layout_config["radius"] = radius
+        layout_config["spacingFactor"] = spacing_factor
+        
+    elif selected_layout == "concentric":
+        # Concentric layout - all available parameters
+        min_spacing = st.sidebar.slider(
+            "Min Node Spacing", 5, 100, 10, key="concentric_min_spacing",
+            help="Minimum spacing between nodes"
+        )
+        start_angle = st.sidebar.slider(
+            "Start Angle", 0.0, 6.28, 4.712, step=0.1, key="concentric_start_angle",
+            help="Start angle in radians (3π/2 ≈ 4.712 = top)"
+        )
+        sweep = st.sidebar.slider(
+            "Sweep Angle", 0.1, 6.28, 6.28, step=0.1, key="concentric_sweep",
+            help="Angle swept (2π = full circle)"
+        )
+        equidistant = st.sidebar.checkbox(
+            "Equidistant", value=False, key="concentric_equidistant",
+            help="Make concentric circles equidistant"
+        )
+        clockwise = st.sidebar.checkbox(
+            "Clockwise", value=True, key="concentric_clockwise",
+            help="Whether nodes are placed clockwise"
+        )
+        avoid_overlap = st.sidebar.checkbox(
+            "Avoid Overlap", value=True, key="concentric_overlap",
+            help="Prevent node overlap"
+        )
+        spacing_factor = st.sidebar.slider(
+            "Spacing Factor", 0.5, 3.0, 1.0, step=0.1, key="concentric_spacing_factor",
+            help="Positive number to adjust spacing"
+        )
+        
+        layout_config["minNodeSpacing"] = min_spacing
+        layout_config["startAngle"] = start_angle
+        layout_config["sweep"] = sweep
+        layout_config["equidistant"] = equidistant
+        layout_config["clockwise"] = clockwise
+        layout_config["avoidOverlap"] = avoid_overlap
+        layout_config["spacingFactor"] = spacing_factor
+        
+    elif selected_layout == "grid":
+        # Grid layout - all available parameters
+        rows = st.sidebar.number_input(
+            "Rows", min_value=0, max_value=50, value=0, key="grid_rows",
+            help="Number of rows (0 = auto)"
+        )
+        cols = st.sidebar.number_input(
+            "Columns", min_value=0, max_value=50, value=0, key="grid_cols",
+            help="Number of columns (0 = auto)"
+        )
+        condense = st.sidebar.checkbox(
+            "Condense", value=False, key="grid_condense",
+            help="Compress the layout"
+        )
+        avoid_overlap = st.sidebar.checkbox(
+            "Avoid Overlap", value=True, key="grid_overlap",
+            help="Prevent node overlap"
+        )
+        avoid_overlap_padding = st.sidebar.slider(
+            "Overlap Padding", 0, 50, 10, key="grid_overlap_padding",
+            help="Extra padding to avoid overlap"
+        )
+        spacing_factor = st.sidebar.slider(
+            "Spacing Factor", 0.5, 3.0, 1.0, step=0.1, key="grid_spacing_factor",
+            help="Positive number to adjust spacing"
+        )
+        
+        if rows > 0:
+            layout_config["rows"] = rows
+        if cols > 0:
+            layout_config["cols"] = cols
+        layout_config["condense"] = condense
+        layout_config["avoidOverlap"] = avoid_overlap
+        layout_config["avoidOverlapPadding"] = avoid_overlap_padding
+        layout_config["spacingFactor"] = spacing_factor
+        
+    elif selected_layout == "random":
+        # Random layout - minimal parameters
+        st.sidebar.info("Random layout has no specific parameters.")
+    
+    # Common options for all layouts
+    st.sidebar.markdown("##### Common Options")
+    padding = st.sidebar.slider(
+        "Padding", 5, 100, 10, key="layout_padding",
+        help="Padding around the layout"
+    )
+    fit = st.sidebar.checkbox(
+        "Fit to Viewport", value=True, key="layout_fit",
+        help="Whether to fit the network to the viewport"
+    )
+    include_labels = st.sidebar.checkbox(
+        "Include Labels in Dimensions", value=True, key="layout_labels",
+        help="Whether node dimensions include labels"
+    )
+    animate = st.sidebar.checkbox(
+        "Animate", value=False, key="layout_animate",
+        help="Whether to animate layout changes"
+    )
+    if animate:
+        animation_duration = st.sidebar.slider(
+            "Animation Duration (ms)", 100, 2000, 500, step=100, key="layout_anim_duration",
+            help="Duration of animation in milliseconds"
+        )
+        layout_config["animationDuration"] = animation_duration
+    
+    layout_config["padding"] = padding
+    layout_config["fit"] = fit
+    layout_config["nodeDimensionsIncludeLabels"] = include_labels
+    layout_config["animate"] = animate
     
     return layout_config
 

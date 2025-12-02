@@ -265,7 +265,7 @@ def main():
             cytoscape_elements = []
             elements_dict = {}
         
-        with st.expander(":material/brush: Node style settings", expanded=False):
+        with st.sidebar.expander(":material/brush: Node style settings", expanded=False):
             if cytoscape_elements:
                 fill_feature, border_feature, label_feature = node_color_mapping_panel(cytoscape_elements)
                 custom_stylesheet = apply_color_mapping_to_styles(
@@ -278,7 +278,7 @@ def main():
             else:
                 custom_stylesheet = STYLE_SHEET
         
-        with st.expander(":material/dashboard: Layout settings", expanded=False):
+        with st.sidebar.expander(":material/dashboard: Layout settings", expanded=False):
             selected_layout_config = layout_selection_panel()
         
         with st.container(border=True):
