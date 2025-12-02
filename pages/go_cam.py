@@ -13,6 +13,7 @@ from go_cam_functions import (
     display_selected_object,
     node_color_mapping_panel,
     apply_color_mapping_to_styles,
+    layout_selection_panel,
     STYLE_SHEET
 )
 # ================================= Page Config ====================================
@@ -277,9 +278,16 @@ def main():
             else:
                 custom_stylesheet = STYLE_SHEET
         
+        with st.expander(":material/dashboard: Layout settings", expanded=False):
+            selected_layout_config = layout_selection_panel()
+        
         with st.container(border=True):
             st.markdown(f"<h2 style='text-align: center;'>{gocam_models[selected_model_title]['title']}</h2>", unsafe_allow_html=True)
-            selected_objects = display_gocam_network(cytoscape_elements, stylesheet=custom_stylesheet)
+            selected_objects = display_gocam_network(
+                cytoscape_elements, 
+                layout_config=selected_layout_config,
+                stylesheet=custom_stylesheet
+            )
 
     with detail_col:
         with st.expander(":material/legend_toggle: Interaction Type Legend", expanded=True):

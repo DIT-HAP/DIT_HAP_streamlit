@@ -430,17 +430,160 @@ LAYOUT_CONFIG = {
     }
 }
 
-# LAYOUT_CONFIG = {
-#     "name": "breadthfirst",
-#     "fit": True,
-#     "padding": 10,
-#     "nodeDimensionsIncludeLabels": True,
-#     "spacingFactor": 0.6,
-#     "roots": "#0",
-#     'maximalAdjustments': 0,
-#     "directed": False
+# All available layout configurations
+AVAILABLE_LAYOUTS = {
+    "klay": {
+        "name": "klay",
+        "description": "Layered graph drawing algorithm (hierarchical)",
+        "config": {
+            "name": "klay",
+            "fit": True,
+            "padding": 10,
+            "nodeDimensionsIncludeLabels": True,
+            "klay": {
+                "direction": "DOWN",
+                "edgeSpacingFactor": 1.5,
+                "inLayerSpacingFactor": 1,
+                "aspectRatio": 0.1,
+                "borderSpacing": 30,
+                "spacing": 30
+            }
+        }
+    },
+    "dagre": {
+        "name": "dagre",
+        "description": "Directed acyclic graph layout",
+        "config": {
+            "name": "dagre",
+            "fit": True,
+            "padding": 10,
+            "nodeDimensionsIncludeLabels": True,
+            "rankDir": "TB",
+            "ranker": "network-simplex",
+            "nodeSep": 50,
+            "rankSep": 50
+        }
+    },
+    "cose": {
+        "name": "cose",
+        "description": "Compound Spring Embedder (force-directed)",
+        "config": {
+            "name": "cose",
+            "fit": True,
+            "padding": 10,
+            "nodeDimensionsIncludeLabels": True,
+            "nodeRepulsion": 4500,
+            "nodeOverlap": 10,
+            "idealEdgeLength": 50,
+            "edgeElasticity": 100,
+            "nestingFactor": 5,
+            "gravity": 80,
+            "numIter": 1000,
+            "animate": False
+        }
+    },
+    "fcose": {
+        "name": "fcose",
+        "description": "Fast Compound Spring Embedder",
+        "config": {
+            "name": "fcose",
+            "fit": True,
+            "padding": 10,
+            "nodeDimensionsIncludeLabels": True,
+            "animate": False,
+            "animationDuration": 0,
+            "quality": "default",
+            "nodeRepulsion": 4500,
+            "idealEdgeLength": 50,
+            "edgeElasticity": 0.45,
+            "nestingFactor": 0.1,
+            "gravity": 0.25,
+            "gravityRangeCompound": 1.5,
+            "gravityCompound": 1.0
+        }
+    },
+    "cola": {
+        "name": "cola",
+        "description": "Constraint-based layout using WebCola",
+        "config": {
+            "name": "cola",
+            "fit": True,
+            "padding": 10,
+            "nodeDimensionsIncludeLabels": True,
+            "animate": False,
+            "maxSimulationTime": 4000,
+            "nodeSpacing": 20,
+            "edgeLength": 100,
+            "avoidOverlap": True,
+            "convergenceThreshold": 0.01
+        }
+    },
+    "breadthfirst": {
+        "name": "breadthfirst",
+        "description": "Hierarchical tree layout (BFS-based)",
+        "config": {
+            "name": "breadthfirst",
+            "fit": True,
+            "padding": 10,
+            "nodeDimensionsIncludeLabels": True,
+            "directed": True,
+            "spacingFactor": 1.0,
+            "avoidOverlap": True,
+            "maximal": False
+        }
+    },
+    "circle": {
+        "name": "circle",
+        "description": "Nodes arranged in a circle",
+        "config": {
+            "name": "circle",
+            "fit": True,
+            "padding": 10,
+            "nodeDimensionsIncludeLabels": True,
+            "avoidOverlap": True,
+            "startAngle": 4.712,
+            "clockwise": True
+        }
+    },
+    "concentric": {
+        "name": "concentric",
+        "description": "Nodes in concentric circles by centrality",
+        "config": {
+            "name": "concentric",
+            "fit": True,
+            "padding": 10,
+            "nodeDimensionsIncludeLabels": True,
+            "avoidOverlap": True,
+            "minNodeSpacing": 10,
+            "startAngle": 4.712,
+            "clockwise": True,
+            "equidistant": False
+        }
+    },
+    "grid": {
+        "name": "grid",
+        "description": "Nodes arranged in a grid pattern",
+        "config": {
+            "name": "grid",
+            "fit": True,
+            "padding": 10,
+            "nodeDimensionsIncludeLabels": True,
+            "avoidOverlap": True,
+            "condense": False
+        }
+    },
+    "random": {
+        "name": "random",
+        "description": "Randomly placed nodes",
+        "config": {
+            "name": "random",
+            "fit": True,
+            "padding": 10,
+            "nodeDimensionsIncludeLabels": True
+        }
+    }
+}
 
-# }
 # ================================ Functions =================================
 @st.cache_data
 def parse_gocam_model(yaml_file_path: Path) -> Model:
@@ -851,6 +994,112 @@ def node_color_mapping_panel(elements: list) -> tuple:
         plot_feature_color_legend(label_feature)
     
     return fill_feature, border_feature, label_feature
+
+def layout_selection_panel() -> dict:
+    """Create UI panel for network layout selection."""
+    st.subheader("Network Layout")
+    
+    # Layout selection
+    layout_names = list(AVAILABLE_LAYOUTS.keys())
+    layout_descriptions = {name: AVAILABLE_LAYOUTS[name]["description"] for name in layout_names}
+    
+    # Create display names with descriptions for selectbox
+    selected_layout = st.selectbox(
+        "Select layout algorithm",
+        layout_names,
+        index=0,  # Default to klay
+        key="layout_selection",
+        format_func=lambda x: f"{x} - {layout_descriptions[x]}"
+    )
+    
+    # Get base config for selected layout
+    layout_config = AVAILABLE_LAYOUTS[selected_layout]["config"].copy()
+    
+    # Layout-specific options
+    with st.expander("Layout Options", expanded=False):
+        if selected_layout == "klay":
+            direction = st.selectbox(
+                "Direction",
+                ["DOWN", "UP", "LEFT", "RIGHT"],
+                key="klay_direction"
+            )
+            spacing = st.slider("Spacing", 10, 100, 30, key="klay_spacing")
+            layout_config["klay"] = layout_config.get("klay", {})
+            layout_config["klay"]["direction"] = direction
+            layout_config["klay"]["spacing"] = spacing
+            layout_config["klay"]["borderSpacing"] = spacing
+            
+        elif selected_layout == "dagre":
+            rank_dir = st.selectbox(
+                "Rank Direction",
+                ["TB", "BT", "LR", "RL"],
+                format_func=lambda x: {"TB": "Top to Bottom", "BT": "Bottom to Top", 
+                                       "LR": "Left to Right", "RL": "Right to Left"}[x],
+                key="dagre_rankdir"
+            )
+            node_sep = st.slider("Node Separation", 10, 100, 50, key="dagre_nodesep")
+            rank_sep = st.slider("Rank Separation", 10, 100, 50, key="dagre_ranksep")
+            layout_config["rankDir"] = rank_dir
+            layout_config["nodeSep"] = node_sep
+            layout_config["rankSep"] = rank_sep
+            
+        elif selected_layout == "cose":
+            node_repulsion = st.slider("Node Repulsion", 1000, 10000, 4500, step=500, key="cose_repulsion")
+            ideal_edge_length = st.slider("Ideal Edge Length", 20, 150, 50, key="cose_edge_length")
+            gravity = st.slider("Gravity", 10, 200, 80, key="cose_gravity")
+            layout_config["nodeRepulsion"] = node_repulsion
+            layout_config["idealEdgeLength"] = ideal_edge_length
+            layout_config["gravity"] = gravity
+            
+        elif selected_layout == "fcose":
+            quality = st.selectbox(
+                "Quality",
+                ["draft", "default", "proof"],
+                index=1,
+                key="fcose_quality"
+            )
+            node_repulsion = st.slider("Node Repulsion", 1000, 10000, 4500, step=500, key="fcose_repulsion")
+            ideal_edge_length = st.slider("Ideal Edge Length", 20, 150, 50, key="fcose_edge_length")
+            layout_config["quality"] = quality
+            layout_config["nodeRepulsion"] = node_repulsion
+            layout_config["idealEdgeLength"] = ideal_edge_length
+            
+        elif selected_layout == "cola":
+            node_spacing = st.slider("Node Spacing", 5, 50, 20, key="cola_spacing")
+            edge_length = st.slider("Edge Length", 50, 200, 100, key="cola_edge_length")
+            layout_config["nodeSpacing"] = node_spacing
+            layout_config["edgeLength"] = edge_length
+            
+        elif selected_layout == "breadthfirst":
+            directed = st.checkbox("Directed", value=True, key="bf_directed")
+            spacing_factor = st.slider("Spacing Factor", 0.5, 2.0, 1.0, step=0.1, key="bf_spacing")
+            layout_config["directed"] = directed
+            layout_config["spacingFactor"] = spacing_factor
+            
+        elif selected_layout == "circle":
+            clockwise = st.checkbox("Clockwise", value=True, key="circle_clockwise")
+            layout_config["clockwise"] = clockwise
+            
+        elif selected_layout == "concentric":
+            min_spacing = st.slider("Minimum Node Spacing", 5, 50, 10, key="concentric_spacing")
+            equidistant = st.checkbox("Equidistant", value=False, key="concentric_equidistant")
+            layout_config["minNodeSpacing"] = min_spacing
+            layout_config["equidistant"] = equidistant
+            
+        elif selected_layout == "grid":
+            condense = st.checkbox("Condense", value=False, key="grid_condense")
+            layout_config["condense"] = condense
+        
+        # Common options for all layouts
+        st.divider()
+        st.markdown("**Common Options**")
+        padding = st.slider("Padding", 5, 50, 10, key="layout_padding")
+        fit = st.checkbox("Fit to viewport", value=True, key="layout_fit")
+        layout_config["padding"] = padding
+        layout_config["fit"] = fit
+    
+    return layout_config
+
 
 def display_gocam_network(
     elements: list,
