@@ -251,22 +251,24 @@ def main():
 
     with st.spinner("Loading GO-CAM models..."):
         gocam_models = load_all_gocam_models(GO_CAM_DATA_DIR)
+    
+    with st.sidebar.expander(":material/brush: Node style settings", expanded=False):
+        fill_feature, border_feature, label_feature = node_color_mapping_panel()
 
     network_col, detail_col = st.columns([2, 1], border=True)
+    with detail_col:
+        with st.expander(":material/legend_toggle: Interaction Type Legend", expanded=True):
+            plot_interaction_type_legend()
+
+
     with network_col:
         with st.container(border=True):
             selected_model_title, selected_model = display_model_information(gocam_models)
         
         if selected_model:
-            cytoscape_elements, elements_dict = convert_model_to_cytoscape_elements(selected_model)
-        else:
-            st.warning("No model selected.")
-            cytoscape_elements = []
-            elements_dict = {}
-        
-        with st.sidebar.expander(":material/brush: Node style settings", expanded=False):
+            with st.spinner("Converting model to network elements..."):
+                cytoscape_elements, elements_dict = convert_model_to_cytoscape_elements(selected_model)
             if cytoscape_elements:
-                fill_feature, border_feature, label_feature = node_color_mapping_panel(cytoscape_elements)
                 custom_stylesheet = get_stylesheet(
                     cytoscape_elements,
                     fill_feature,
@@ -275,22 +277,28 @@ def main():
                 )
             else:
                 custom_stylesheet = get_stylesheet()
+            with st.container(border=True):
+                st.markdown(f"<h2 style='text-align: center;'>{gocam_models[selected_model_title]['title']}</h2>", unsafe_allow_html=True)
+                selected_objects = display_gocam_network(
+                    cytoscape_elements, 
+                    stylesheet=custom_stylesheet
+                )
+            with detail_col:
+                with st.expander(":material/left_click: Selected Object", expanded=True):
+                    display_selected_object(selected_objects, elements_dict)
+        else:
+            st.warning("No model selected.")
+            cytoscape_elements = []
+            elements_dict = {}
+        
+ 
         
         # with st.sidebar.expander(":material/dashboard: Layout settings", expanded=False):
         #     selected_layout_config = layout_selection_panel()
         
-        with st.container(border=True):
-            st.markdown(f"<h2 style='text-align: center;'>{gocam_models[selected_model_title]['title']}</h2>", unsafe_allow_html=True)
-            selected_objects = display_gocam_network(
-                cytoscape_elements, 
-                stylesheet=custom_stylesheet
-            )
 
-    with detail_col:
-        with st.expander(":material/legend_toggle: Interaction Type Legend", expanded=True):
-            plot_interaction_type_legend()
-        with st.expander(":material/left_click: Selected Object", expanded=True):
-            display_selected_object(selected_objects, elements_dict)
+
+
 
 if __name__ == "__main__":
     main()
