@@ -46,13 +46,17 @@ LAYOUT_CONFIG = {
     "description": "Directed acyclic graph layout",
     "config": {
         "name": "dagre",
-        "fit": True,
-        "padding": 10,
-        "nodeDimensionsIncludeLabels": True,
         "rankDir": "TB",
-        "ranker": "longest-path",
+        "align": "UL",
+        "fit": True,
+        "nodeDimensionsIncludeLabels": True,
+        "ranker": "network-simplex",
+        "acyclicer": "greedy",
+        "padding": 10,
         "nodeSep": 50,
-        "rankSep": 50
+        "edgeSep": 50,
+        "rankSep": 150,
+        "spaceingFactor": 1
     }
 }
 
@@ -133,6 +137,12 @@ _NODE_TYPE_CONFIG = {
 
 # Extra styles for specific node types
 _NODE_TYPE_EXTRAS = {
+    "complex": {
+        "text-wrap": "wrap",
+        "text-max-width": "50px",
+        "text-overflow-wrap": "whitespace",
+        "text-justification": "center",
+    },
     "molecule": {
         "text-wrap": "wrap",
         "text-max-width": "50px",
@@ -843,10 +853,10 @@ def display_gocam_network(
         stylesheet,
         key=key,
         layout=layout_config,
-        min_zoom=0.5,
+        min_zoom=0.2,
         max_zoom=3,
         user_panning_enabled=True,
-        height="600px",
+        height="1500px",
         selection_type="single",
     )
     return selected
