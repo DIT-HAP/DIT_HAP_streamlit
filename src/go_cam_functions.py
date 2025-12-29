@@ -50,13 +50,13 @@ LAYOUT_CONFIG = {
         "align": "UL",
         "fit": True,
         "nodeDimensionsIncludeLabels": True,
-        "ranker": "network-simplex",
-        "acyclicer": "greedy",
+        # "ranker": "network-simplex",
+        # "acyclicer": "greedy",
         "padding": 10,
         "nodeSep": 50,
         "edgeSep": 50,
-        "rankSep": 150,
-        "spaceingFactor": 1
+        "rankSep": 200,
+        "spacingFactor": 1
     }
 }
 
@@ -543,6 +543,26 @@ def convert_model_to_cytoscape_elements(model: Model) -> tuple[list, dict]:
     return elements
 
 # =============================== Visualization Parameter Panel =================================
+def layout_ranker_panel() -> str:
+    """Create UI panel for layout ranker method selection."""
+    ranker_options = {
+        "Network Simplex": "network-simplex",
+        "Longest Path": "longest-path",
+        "Tight Tree": "tight-tree"
+    }
+    
+    selected_display = st.selectbox(
+        ":material/account_tree: **Layout Ranker Algorithm**",
+        options=list(ranker_options.keys()),
+        index=0,
+        help="Select the algorithm for node ranking:\n\n"
+             "• **Network Simplex**: Balanced edge lengths (default)\n\n"
+             "• **Longest Path**: Nodes pushed to earliest possible layer (more compact vertically)\n\n"
+             "• **Tight Tree**: Compact tree structure"
+    )
+    
+    return ranker_options[selected_display]
+
 def node_color_mapping_panel() -> tuple:
     """Create UI panel for node color mapping settings."""
     st.subheader("Node Color Mapping")
@@ -841,6 +861,13 @@ def plot_interaction_type_legend():
     )
 
 # ================================ Display GO-CAM Network =================================
+def get_layout_config(ranker: str = "network-simplex") -> dict:
+    """Generate layout configuration with specified ranker method."""
+    config = LAYOUT_CONFIG.copy()
+    config["config"] = config["config"].copy()
+    config["config"]["ranker"] = ranker
+    return config
+
 def display_gocam_network(
     elements: list,
     stylesheet: list,

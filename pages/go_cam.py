@@ -10,6 +10,8 @@ from go_cam_functions import (
     load_all_gocam_models,
     convert_model_to_cytoscape_elements,
     node_color_mapping_panel,
+    layout_ranker_panel,
+    get_layout_config,
     get_stylesheet,
     plot_interaction_type_legend,
     display_gocam_network,
@@ -254,6 +256,10 @@ def main():
     
     with st.sidebar.expander(":material/brush: Node style settings", expanded=False):
         fill_feature, border_feature, label_feature = node_color_mapping_panel()
+    
+    with st.sidebar.expander(":material/dashboard: Layout settings", expanded=False):
+        selected_ranker = layout_ranker_panel()
+        layout_config = get_layout_config(ranker=selected_ranker)
 
     network_col, detail_col = st.columns([2, 1], border=True)
     with detail_col:
@@ -281,7 +287,8 @@ def main():
                 st.markdown(f"<h2 style='text-align: center;'>{gocam_models[selected_model_title]['title']}</h2>", unsafe_allow_html=True)
                 selected_objects = display_gocam_network(
                     cytoscape_elements, 
-                    stylesheet=custom_stylesheet
+                    stylesheet=custom_stylesheet,
+                    layout_config=layout_config
                 )
             with detail_col:
                 with st.expander(":material/left_click: Selected Object", expanded=True):
