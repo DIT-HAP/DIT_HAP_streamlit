@@ -10,7 +10,7 @@ from go_cam_functions import (
     load_all_gocam_models,
     convert_model_to_cytoscape_elements,
     node_color_mapping_panel,
-    layout_ranker_panel,
+    layout_algorithm_panel,
     get_layout_config,
     get_stylesheet,
     plot_interaction_type_legend,
@@ -258,8 +258,8 @@ def main():
         fill_feature, border_feature, label_feature = node_color_mapping_panel()
     
     with st.sidebar.expander(":material/dashboard: Layout settings", expanded=False):
-        selected_ranker = layout_ranker_panel()
-        layout_config = get_layout_config(ranker=selected_ranker)
+        layout_type, ranker = layout_algorithm_panel()
+        layout_config = get_layout_config(layout_type=layout_type, ranker=ranker)
 
     network_col, detail_col = st.columns([2, 1], border=True)
     with detail_col:
