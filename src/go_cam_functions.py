@@ -530,7 +530,6 @@ def convert_model_to_cytoscape_elements(model: Model) -> tuple[list, dict]:
         validate_iquery_gene_symbol_pattern=True,
         apply_dot_layout=False
     )
-    st.write(cx2_network)
     
     # Step 2: Merge duplicate edges
     cx2_network = deduplicate_cx2_edges(cx2_network)
