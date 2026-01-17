@@ -10,10 +10,11 @@ import json
 from typing import Any
 
 from st_cytoscape import cytoscape
+from bioservices import KEGG
 
 # for development in Jupyter Notebook
-from streamlit_jupyter import StreamlitPatcher, tqdm
-StreamlitPatcher().jupyter()
+# from streamlit_jupyter import StreamlitPatcher, tqdm
+# StreamlitPatcher().jupyter()
 
 # %% ============================ Functions ============================
 # ================================ Simple Functions =================================
@@ -32,14 +33,14 @@ GENE_LEVEL_DATA_FILE = Path(__file__).parent.parent / "data" / "raw" / "HD_DIT_H
 # Default color for missing/null values
 _DEFAULT_COLOR = '#CCCCCC'
 
-def get_theme_aware_label_color() -> str:
+def get_theme_aware_label_color() -> tuple[str, str]:
     """Get appropriate label color based on Streamlit theme."""
     try:
-        return "#FFFFFF" if st.context.theme.type == "dark" else "#000000"
+        return ("#FFFFFF", "#000000") if st.context.theme.type == "dark" else ("#000000", "#FFFFFF")
     except Exception:
-        return "#000000"
+        return ("#000000", "#FFFFFF")
 
-THEME_COLOR = get_theme_aware_label_color()
+THEME_COLOR, THEME_BACKGROUND = get_theme_aware_label_color()
 
 
 # -------------------------------- Layout Configuration --------------------------------
@@ -171,9 +172,19 @@ def _parse_kegg_cx2_node(node: dict, additional_attributes: dict) -> dict:
     # 'KEGG_DEFINITION'
 
     # Build core attributes
+    label = attrs.get(
+            'KEGG_NODE_LABEL_LIST_FIRST',
+            attrs.get(
+                'KEGG_NODE_LABEL',
+                attrs.get(
+                    'name',
+                    attrs.get('KEGG_ID', node_id)
+                )))
+    if isinstance(label, list):
+        st.write(node)
     data = {
         "id": node_id,
-        "label": attrs.get('KEGG_NODE_LABEL_LIST_FIRST', node_id).removeprefix("SPOM_"),
+        "label": label.removeprefix("SPOM_"),
         "type": attrs.get('KEGG_NODE_TYPE', 'unknown'),
     }
     
@@ -219,6 +230,8 @@ def _parse_kegg_cx2_network(cx2_network: list, additional_attributes: dict) -> t
     for fragment in cx2_network:
         if 'nodes' in fragment:
             for node in fragment['nodes']:
+                if node['v'].get('KEGG_NODE_LABEL_LIST_FIRST', '').startswith("TITLE:"):
+                    continue  # Skip title nodes
                 elem = _parse_kegg_cx2_node(node, additional_attributes)
                 elements.append(elem)
                 elements_dict[elem['data']['id']] = elem
@@ -232,22 +245,21 @@ def _parse_kegg_cx2_network(cx2_network: list, additional_attributes: dict) -> t
     return elements, elements_dict
 
 @st.cache_data
-def load_kegg_cx2_file(cx2_file_path: Path) -> list:
-    """Load a KEGG CX2 file from disk."""
-    with open(cx2_file_path, 'r') as f:
-        return json.load(f)
-
-@st.cache_data
-def load_all_kegg_pathways(directory_path: Path) -> dict[str, dict]:
+def load_all_kegg_pathways(directory_path: Path) -> dict[str, list]:
     """Load all KEGG CX2 pathway files from a specified directory."""
-    pathways = {}
-    for file_path in directory_path.glob('*.cx2'):
-        file_name = file_path.stem  # Get filename without extension
-        pathways[file_name] = {
-            "file_path": file_path,
-            "title": file_name.replace('_', ' ').title(),
-        }
-    return pathways
+    pathways = list(directory_path.glob('*.cx2'))
+    cx2_networks = {}
+    for file in pathways:
+        with open(file, 'r') as f:
+            cx2_json = json.load(f)
+            pathway_name = cx2_json[3]["networkAttributes"][0]["name"].removesuffix("_1")
+            cx2_networks[pathway_name] = cx2_json[3]["networkAttributes"][0]
+            cx2_networks[pathway_name]["name"] = pathway_name
+            cx2_networks[pathway_name]["json"] = cx2_json
+    
+    # sort by keys
+    cx2_networks = dict(sorted(cx2_networks.items()))
+    return cx2_networks
 
 # @st.cache_resource
 def convert_cx2_file_to_cytoscape_elements(cx2_json: list) -> tuple[list, dict]:
@@ -259,7 +271,6 @@ def convert_cx2_file_to_cytoscape_elements(cx2_json: list) -> tuple[list, dict]:
     # Step 4: Parse into Cytoscape elements
     elements, elements_dict = _parse_kegg_cx2_network(cx2_json, additional_attributes)
     return elements, elements_dict
-
 
 # %% =========================== Node Styles ============================
 def _get_color_for_value(feature: str, value) -> str:
@@ -300,15 +311,27 @@ def get_node_styles(
     for element in elements:
         element_data = element.get("data", {})
         node_id = element_data.get("id")
+        fill_color = element_data.get("KEGG_NODE_FILL_COLOR", THEME_BACKGROUND)
+        if fill_color == THEME_COLOR:
+            fill_color = THEME_BACKGROUND  # Avoid same color as text
+        label_color = element_data.get("KEGG_NODE_LABEL_COLOR", THEME_COLOR)
+        if fill_color == THEME_BACKGROUND or fill_color == THEME_COLOR:
+            label_color = THEME_COLOR
+
+        width = int(element_data.get("KEGG_NODE_WIDTH", 10))
+        height = int(element_data.get("KEGG_NODE_HEIGHT", 10))
+
         style = {
             "label": "data(label)",
             "text-valign": "center",
-            "text-halign": "left",
+            "text-halign": "center",
             "shape": element_data.get("KEGG_NODE_SHAPE", "ellipse").lower(),
-            "background-color": element_data.get("KEGG_NODE_FILL_COLOR", "#FFFFFF"),
-            "color": element_data.get("KEGG_NODE_LABEL_COLOR", label_color),
-            "width": element_data.get("KEGG_NODE_WIDTH", 40),
-            "height": element_data.get("KEGG_NODE_HEIGHT", 40),
+            "background-color": fill_color,
+            "color": label_color,
+            "border-color": THEME_COLOR,
+            "border-width": 1,
+            "width": width,
+            "height": height,
         }
         styles.append({"selector": f"node[id='{node_id}']", "style": style})
 
@@ -316,6 +339,8 @@ def get_node_styles(
             "x": int(element_data.get("KEGG_NODE_X", 0)),
             "y": int(element_data.get("KEGG_NODE_Y", 0)),
         }
+    
+    styles = NODE_STYLES + styles
     
     # 2. Apply feature-based colors if elements provided
     if not elements:
@@ -352,20 +377,64 @@ def get_node_styles(
     
     return styles, positions
 
+NODE_STYLES = [  
+    {  
+        "selector": "node:selected",  
+        "style": {  
+            "background-color": "#FFFF00"  
+        }  
+    },  
+    {  
+        "selector": "node[KEGG_NODE_TYPE = 'ortholog']",  
+        "style": {  
+            "label-font-size": 9,  
+        }  
+    },  
+    {  
+        "selector": "node[KEGG_NODE_TYPE = 'gene']",  
+        "style": {  
+            "label-font-size": 9  
+        }  
+    },  
+    {  
+        "selector": "node[KEGG_NODE_TYPE = 'map']",  
+        "style": {  
+            "label-font-size": 9  
+        }  
+    },  
+    {  
+        "selector": "node[KEGG_NODE_TYPE = 'compound']",  
+        "style": {  
+            "label-font-size": 6,  
+            "border-width": 2.0,  
+            "text-valign": "top",  
+            "text-margin-y": 2.0  
+        }  
+    },  
+    {  
+        "selector": "node[KEGG_NODE_TYPE = 'group']",  
+        "style": {  
+            "label-font-size": 9,  
+            "border-width": 1.0,  
+            "background-opacity": 0.0  
+        }  
+    }  
+]
+
 EDGE_STYLES = [
     {
         "selector": "edge",
         "style": {
-            "width": 1.0,
-            "line-color": "#404040",
+            "width": 2,
+            "line-color": THEME_COLOR,
             "line-style": "solid",
             "opacity": 0.7058823529411765,
             "curve-style": "bezier",
             "target-arrow-shape": "none",
-            "target-arrow-color": "#404040",
+            "target-arrow-color": THEME_COLOR,
             "target-arrow-size": 6.0,
             "source-arrow-shape": "none",
-            "source-arrow-color": "#404040",
+            "source-arrow-color": THEME_COLOR,
             "source-arrow-size": 6.0,
             "label": "data(KEGG_EDGE_LABEL)",
             "label-color": "#DC143C",

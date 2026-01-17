@@ -6,7 +6,6 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent / "src"))
 from kegg_pathway_functions import (
     load_all_kegg_pathways,
-    load_kegg_cx2_file,
     convert_cx2_file_to_cytoscape_elements,
     node_color_mapping_panel,
     layout_algorithm_panel,
@@ -28,15 +27,23 @@ KEGG_DATA_DIR = Path(__file__).parent.parent / "data" / "resource" / "kegg_pathw
 # =============================== Functions ================================
 def display_pathway_information(
     kegg_pathways: dict,
-) -> tuple[str, Path]:
+) -> dict:
     st.header("Pathway Information", divider="gray")
     selected_pathway_title = str(st.selectbox("Select a KEGG Pathway", list(kegg_pathways.keys())))
-    selected_pathway_file = kegg_pathways[selected_pathway_title]["file_path"]
-    col1, col2 = st.columns(2)
-    col1.markdown(f":material/barcode_scanner: **Pathway Name**\n\n{kegg_pathways[selected_pathway_title]['title']}")
-    col2.markdown(f":material/folder: **File**\n\n{selected_pathway_file.name}")
+    selected_pathway = kegg_pathways[selected_pathway_title]
 
-    return selected_pathway_title, selected_pathway_file
+    pathway_id = selected_pathway.get("KEGG_PATHWAY_ID", "N/A")
+    classes = "\n\n".join(selected_pathway.get("classes", []))
+    pathway_link = selected_pathway.get("KEGG_PATHWAY_LINK", "#")
+
+
+    # Display pathway information
+    col1, col2, col3 = st.columns(3)
+    col1.markdown(f":material/barcode_scanner: **Pathway ID**\n\n{pathway_id}")
+    col2.markdown(f":material/category: **Class**\n\n{classes if classes else 'N/A'}")
+    col3.markdown(f":material/link: **KEGG Link**\n\n[View on KEGG]({pathway_link})")
+
+    return selected_pathway
 
 # ================================ Page Code ================================
 def main():
@@ -257,11 +264,11 @@ def main():
 
     with network_col:
         with st.container(border=True):
-            selected_pathway_title, selected_pathway_file = display_pathway_information(kegg_pathways)
+            selected_pathway = display_pathway_information(kegg_pathways)
 
-        if selected_pathway_file:
+        if selected_pathway:
             with st.spinner("Loading pathway network..."):
-                cx2_data = load_kegg_cx2_file(selected_pathway_file)
+                cx2_data = selected_pathway.get("json", None)
                 cytoscape_elements, elements_dict = convert_cx2_file_to_cytoscape_elements(cx2_data)
 
             if cytoscape_elements:
@@ -275,13 +282,19 @@ def main():
                 custom_stylesheet, positions = get_stylesheet()
 
             with st.container(border=True):
-                st.markdown(f"<h2 style='text-align: center;'>{kegg_pathways[selected_pathway_title]['title']}</h2>", unsafe_allow_html=True)
-                selected_objects = display_kegg_network(
-                    cytoscape_elements,
-                    stylesheet=custom_stylesheet,
-                    positions=positions,
-                    layout_type=layout_type
-                )
+                network_tab, image_tab = st.tabs([":material/device_hub: KEGG Pathway Network", ":material/image: Pathway Image"])
+
+                with network_tab:
+                    st.markdown(f"<h2 style='text-align: center;'>{selected_pathway.get('name', 'Unknown Pathway')}</h2>", unsafe_allow_html=True)
+                    selected_objects = display_kegg_network(
+                        cytoscape_elements,
+                        stylesheet=custom_stylesheet,
+                        positions=positions,
+                        layout_type=layout_type
+                    )
+                with image_tab:
+                    st.markdown(f"<h2 style='text-align: center;'>{selected_pathway.get('name', 'Unknown Pathway')}</h2>", unsafe_allow_html=True)
+                    st.image(selected_pathway["KEGG_PATHWAY_IMAGE"], caption="KEGG Pathway Image", width="stretch")
 
             with detail_col:
                 with st.expander(":material/left_click: Selected Object", expanded=True):
