@@ -47,34 +47,33 @@ LAYOUT_CONFIG = {
     "config": {
         "name": "dagre",
         "rankDir": "TB",
-        "align": "UL",
+        "align": "DR",
         "fit": True,
         "nodeDimensionsIncludeLabels": True,
         # "ranker": "network-simplex",
-        # "acyclicer": "greedy",
+        "acyclicer": "greedy",
         "padding": 10,
         "nodeSep": 50,
-        "edgeSep": 50,
+        "edgeSep": 70,
         "rankSep": 200,
-        "spacingFactor": 1
+        "spacingFactor": 1.2
     }
 }
 
-# LAYOUT_CONFIG = {
-#     "name": "klay",
-#     "fit": True,
-#     "padding": 10,
-#     "nodeDimensionsIncludeLabels": True,
-#     # "spacingFactor": 1,
-#     "klay": {
-#         "direction": "DOWN",
-#         "edgeSpacingFactor": 1.5,
-#         "inLayerSpacingFactor": 1,
-#         "aspectRatio": 0.1,
-#         "borderSpacing": 30,
-#         "spacing": 30
-#     }
-# }
+KLAY_LAYOUT_CONFIG = {
+    "name": "klay",
+    "fit": True,
+    "padding": 10,
+    "nodeDimensionsIncludeLabels": True,
+    "klay": {
+        "direction": "DOWN",
+        "edgeSpacingFactor": 1.5,
+        "inLayerSpacingFactor": 1,
+        "aspectRatio": 0.1,
+        "borderSpacing": 30,
+        "spacing": 30
+    }
+}
 
 # -------------------------------- Additional Metrics Configuration --------------------------------
 ADDTIONAL_METRICS_VISUALIZATION = {
@@ -531,6 +530,7 @@ def convert_model_to_cytoscape_elements(model: Model) -> tuple[list, dict]:
         validate_iquery_gene_symbol_pattern=True,
         apply_dot_layout=False
     )
+    st.write(cx2_network)
     
     # Step 2: Merge duplicate edges
     cx2_network = deduplicate_cx2_edges(cx2_network)
@@ -543,25 +543,42 @@ def convert_model_to_cytoscape_elements(model: Model) -> tuple[list, dict]:
     return elements
 
 # =============================== Visualization Parameter Panel =================================
-def layout_ranker_panel() -> str:
-    """Create UI panel for layout ranker method selection."""
-    ranker_options = {
-        "Network Simplex": "network-simplex",
-        "Longest Path": "longest-path",
-        "Tight Tree": "tight-tree"
-    }
+def layout_algorithm_panel() -> tuple[str, str | None]:
+    """Create UI panel for layout algorithm selection.
     
-    selected_display = st.selectbox(
-        ":material/account_tree: **Layout Ranker Algorithm**",
-        options=list(ranker_options.keys()),
+    Returns:
+        tuple: (layout_type, ranker) where layout_type is 'dagre' or 'klay',
+               and ranker is the dagre ranker method (or None for klay)
+    """
+    layout_type = st.selectbox(
+        ":material/grid_view: **Layout Algorithm**",
+        options=["Dagre", "Klay"],
         index=0,
-        help="Select the algorithm for node ranking:\n\n"
-             "• **Network Simplex**: Balanced edge lengths (default)\n\n"
-             "• **Longest Path**: Nodes pushed to earliest possible layer (more compact vertically)\n\n"
-             "• **Tight Tree**: Compact tree structure"
+        help="Select the graph layout algorithm:\n\n"
+             "• **Dagre**: Directed acyclic graph layout with customizable ranking\n\n"
+             "• **Klay**: Layer-based layout optimized for reducing edge crossings"
     )
     
-    return ranker_options[selected_display]
+    ranker = None
+    if layout_type == "Dagre":
+        ranker_options = {
+            "Network Simplex": "network-simplex",
+            "Longest Path": "longest-path",
+            "Tight Tree": "tight-tree"
+        }
+        
+        selected_display = st.selectbox(
+            ":material/account_tree: **Ranker Algorithm** (Dagre only)",
+            options=list(ranker_options.keys()),
+            index=0,
+            help="Select the algorithm for node ranking:\n\n"
+                 "• **Network Simplex**: Balanced edge lengths (default)\n\n"
+                 "• **Longest Path**: Nodes pushed to earliest possible layer (more compact vertically)\n\n"
+                 "• **Tight Tree**: Compact tree structure"
+        )
+        ranker = ranker_options[selected_display]
+    
+    return layout_type.lower(), ranker
 
 def node_color_mapping_panel() -> tuple:
     """Create UI panel for node color mapping settings."""
@@ -861,12 +878,24 @@ def plot_interaction_type_legend():
     )
 
 # ================================ Display GO-CAM Network =================================
-def get_layout_config(ranker: str = "network-simplex") -> dict:
-    """Generate layout configuration with specified ranker method."""
-    config = LAYOUT_CONFIG.copy()
-    config["config"] = config["config"].copy()
-    config["config"]["ranker"] = ranker
-    return config
+def get_layout_config(layout_type: str = "dagre", ranker: str | None = "network-simplex") -> dict:
+    """Generate layout configuration with specified layout type and ranker method.
+    
+    Args:
+        layout_type: Either 'dagre' or 'klay'
+        ranker: Ranker method for dagre (ignored for klay)
+    
+    Returns:
+        Layout configuration dict
+    """
+    if layout_type == "klay":
+        return KLAY_LAYOUT_CONFIG.copy()
+    else:  # dagre
+        config = LAYOUT_CONFIG.copy()
+        config["config"] = config["config"].copy()
+        if ranker:
+            config["config"]["ranker"] = ranker
+        return config
 
 def display_gocam_network(
     elements: list,
