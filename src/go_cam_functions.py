@@ -53,7 +53,10 @@ NODE_STYLES = [
       "width": 110,  
       "shape": "rectangle",  
       "font-size": 15,  
-      "text-max-width": 100  
+      "text-max-width": 100,
+      "text-wrap": "wrap",
+      "text-overflow-wrap": "whitespace",
+      "text-justification": "center"
     }  
   },  
   {  
@@ -64,7 +67,10 @@ NODE_STYLES = [
       "width": 70,  
       "shape": "ellipse",  
       "font-size": 10,  
-      "text-max-width": 70  
+      "text-max-width": 70,
+      "text-wrap": "wrap",
+      "text-overflow-wrap": "anywhere",
+      "text-justification": "center"
     }  
   },
 ]
@@ -308,22 +314,6 @@ def get_stylesheet(
 #     "gene":     {"shape": "ellipse",   "color": "#C8E6C9", "width": 50},
 #     "complex":  {"shape": "rectangle", "color": "#E2BDE7", "width": 70},
 #     "molecule": {"shape": "rectangle", "color": "#B2DFDB", "width": 60},
-# }
-
-# # Extra styles for specific node types
-# _NODE_TYPE_EXTRAS = {
-#     "complex": {
-#         "text-wrap": "wrap",
-#         "text-max-width": "50px",
-#         "text-overflow-wrap": "whitespace",
-#         "text-justification": "center",
-#     },
-#     "molecule": {
-#         "text-wrap": "wrap",
-#         "text-max-width": "50px",
-#         "text-overflow-wrap": "whitespace",
-#         "text-justification": "center",
-#     },
 # }
 
 # # -------------------------------- Edge Style Configuration --------------------------------

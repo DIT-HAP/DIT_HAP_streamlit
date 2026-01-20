@@ -38,7 +38,11 @@ NODE_STYLES = [
             "label-font-size": 6,  
             "border-width": 2.0,  
             "text-valign": "top",  
-            "text-margin-y": 2.0  
+            "text-margin-y": 2.0,
+            "text-wrap": "wrap",
+            "text-max-width": 60,
+            "text-justification": "center",
+            "text-overflow-wrap": "whitespace"
         }  
     },  
     {  
