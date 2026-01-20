@@ -262,37 +262,37 @@ def main():
                     gene_body_plot
                 )
                 
-                col1, col2, col3, col4, col5, col6 = st.columns([2, 8, 2, 8, 2, 8], border=True)
+                col1, col2, col3 = st.columns([1,1,1], border=True)
                 if has_data:
                     with col1:
-                        display_gene_level_metrics(col1, gene_level_fitting_results_in_current_gene)
-                    with col2:
-                        st.altair_chart(combined_plot, width="stretch", theme=None)
+                        metrics = st.container(border=True)
+                        display_gene_level_metrics(metrics, gene_level_fitting_results_in_current_gene)
+                        chart = st.container(border=True)
+                        with chart:
+                            st.altair_chart(combined_plot, width="stretch", theme=None)
                 else:
                     with col1:
-                        st.warning("⚠️")
-                    with col2:
-                        st.warning("No data found")
+                        st.warning("⚠️ No data found")
                 if has_data_long_timecourse:
-                    with col3:
-                        display_gene_level_metrics(col3, gene_level_fitting_results_in_current_gene_long_timecourse)
-                    with col4:
-                        st.altair_chart(combined_plot_long_timecourse, width="stretch", theme=None)
+                    with col2:
+                        metrics = st.container(border=True)
+                        display_gene_level_metrics(metrics, gene_level_fitting_results_in_current_gene_long_timecourse)
+                        chart = st.container(border=True)
+                        with chart:
+                            st.altair_chart(combined_plot_long_timecourse, width="stretch", theme=None)
                 else:
-                    with col3:
-                        st.warning("⚠️")
-                    with col4:
-                        st.warning("No data found")
+                    with col2:
+                        st.warning("⚠️ No data found")
                 if has_data_haploid:
-                    with col5:
-                        display_gene_level_metrics(col5, gene_level_fitting_results_in_current_gene_haploid)
-                    with col6:
-                        st.altair_chart(combined_plot_haploid, width="stretch", theme=None)
+                    with col3:
+                        metrics = st.container(border=True)
+                        display_gene_level_metrics(metrics, gene_level_fitting_results_in_current_gene_haploid)
+                        chart = st.container(border=True)
+                        with chart:
+                            st.altair_chart(combined_plot_haploid, width="stretch", theme=None)
                 else:
-                    with col5:
-                        st.warning("⚠️")
-                    with col6:
-                        st.warning("No data found")
+                    with col3:
+                        st.warning("⚠️ No data found")
 
                 st.success("Plot generated successfully")
     else:

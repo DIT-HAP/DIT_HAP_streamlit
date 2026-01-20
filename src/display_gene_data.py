@@ -205,8 +205,8 @@ def combine_plots(
 def display_gene_level_metrics(container: st.container, gene_level_fitting_results_in_current_gene: pd.DataFrame | None):
 
     with container:
-        st.metric(label="DR", value=round(gene_level_fitting_results_in_current_gene["um"].values[0], 3))
-        st.metric(label="DL", value=round(gene_level_fitting_results_in_current_gene["lam"].values[0], 3))
-        st.metric(label="R^2", value=round(gene_level_fitting_results_in_current_gene["R2"].values[0], 3))
-        st.metric(label="RMSE", value=round(gene_level_fitting_results_in_current_gene["RMSE"].values[0], 3))
-        st.metric(label="Normalized RMSE", value=round(gene_level_fitting_results_in_current_gene["normalized_RMSE"].values[0], 3))
+        col1, col2, col3, col4 = container.columns(4)
+        col1.metric(label="$DR$", value=round(gene_level_fitting_results_in_current_gene["um"].values[0], 3))
+        col2.metric(label="$DL$", value=round(gene_level_fitting_results_in_current_gene["lam"].values[0], 3))
+        col3.metric(label="$R^2$", value=round(gene_level_fitting_results_in_current_gene["R2"].values[0], 3))
+        col4.metric(label="$RMSE$", value=round(gene_level_fitting_results_in_current_gene["RMSE"].values[0], 3))
