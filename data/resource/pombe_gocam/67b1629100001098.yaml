@@ -2,6 +2,7 @@ id: gomodel:67b1629100001098
 title: pantothenate biosynthetic process (GO:0015940)
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-07-21'
 comments:
 - Changed ppc1 to ptk1, and localised (R)-pantothenate to the cytosol, for joining
   with CoA biosynthesis model

@@ -4,6 +4,7 @@ title: protein insertion into ER membrane (GO:0045048), post-translational targe
   and target  proteins
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-06-11'
 activities:
 - id: gomodel:67f85f2b00000199/67f85f2b00000286
   enabled_by:

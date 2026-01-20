@@ -2,6 +2,7 @@ id: gomodel:662af8fa00000499
 title: 'isoprenoid biosynthetic process (GO:0008299) '
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-08-26'
 comments:
 - 'Automated change 2025-06-12: GO:0019408 replaced by GO:0043048'
 - 'I got a bit confused around the dpo9/fps1 part. These 2 appear to be mutifunctional
@@ -308,21 +309,91 @@ activities:
   causal_associations:
   - type: CausalAssociation
     evidence:
-    - term: ECO:0000315
-      reference: PMID:21680738
+    - term: ECO:0000318
+      reference: GO_REF:0000033
+      with_objects:
+      - PANTHER:PTN002268602
+      - CGD:CAL0000187173
+      - FB:FBgn0004177
+      - RGD:3380
+      - UniProtKB:P67775
+      - CGD:CAL0000190355
+      - RGD:708460
+      - UniProtKB:P60510
+      - TAIR:locus:2011907
+      - MGI:MGI:1321159
+      - CGD:CAL0000200555
+      - SGD:S000005315
+      - SGD:S000002292
+      - MGI:MGI:1915107
+      - PomBase:SPBC16H5.07c
+      - RGD:3381
+      - SGD:S000002205
+      - dictyBase:DDB_G0290263
+      - TAIR:locus:2116402
+      - SGD:S000002347
+      - UniProtKB:O00743
+      - dictyBase:DDB_G0272116
+      - PomBase:SPBC26H8.05c
+      - SGD:S000002482
+      - TAIR:locus:2095380
       provenances:
       - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-01-22'
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2025-08-26'
         provided_by:
         - http://www.pombase.org
     provenances:
     - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-01-22'
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-08-26'
       provided_by:
       - http://www.pombase.org
-    predicate: RO:0002304
+    predicate: RO:0002305
+    downstream_activity: gomodel:662af8fa00000499/662af8fa00000903
+  - type: CausalAssociation
+    evidence:
+    - term: ECO:0000318
+      reference: GO_REF:0000033
+      with_objects:
+      - PANTHER:PTN002268602
+      - CGD:CAL0000187173
+      - FB:FBgn0004177
+      - RGD:3380
+      - UniProtKB:P67775
+      - CGD:CAL0000190355
+      - RGD:708460
+      - UniProtKB:P60510
+      - TAIR:locus:2011907
+      - MGI:MGI:1321159
+      - CGD:CAL0000200555
+      - SGD:S000005315
+      - SGD:S000002292
+      - MGI:MGI:1915107
+      - PomBase:SPBC16H5.07c
+      - RGD:3381
+      - SGD:S000002205
+      - dictyBase:DDB_G0290263
+      - TAIR:locus:2116402
+      - SGD:S000002347
+      - UniProtKB:O00743
+      - dictyBase:DDB_G0272116
+      - PomBase:SPBC26H8.05c
+      - SGD:S000002482
+      - TAIR:locus:2095380
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2025-08-26'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-08-26'
+      provided_by:
+      - http://www.pombase.org
+    predicate: RO:0002305
     downstream_activity: gomodel:662af8fa00000499/662af8fa00000903
 - id: gomodel:662af8fa00000499/662af8fa00000903
   enabled_by:
@@ -793,7 +864,7 @@ activities:
       date: '2025-01-22'
       provided_by:
       - http://www.pombase.org
-    term: GO:2001211
+    term: GO:1900486
   causal_associations:
   - type: CausalAssociation
     evidence:
@@ -1782,6 +1853,10 @@ objects:
 - id: PomBase:SPBC646.13
   label: sds23 Spom
   type: gocam:Object
+- id: GO:1900486
+  label: positive regulation of isopentenyl diphosphate biosynthetic process, mevalonate
+    pathway
+  type: gocam:Object
 - id: CHEBI:175763
   label: 2-trans,6-trans-farnesyl diphosphate(3-)
   type: gocam:Object
@@ -1794,10 +1869,13 @@ objects:
 - id: GO:0006744
   label: ubiquinone biosynthetic process
   type: gocam:Object
+- id: GO:0042149
+  label: cellular response to glucose starvation
+  type: gocam:Object
 provenances:
 - contributor:
   - https://orcid.org/0000-0001-6330-7526
   - https://orcid.org/0009-0003-9059-1333
-  date: '2025-06-12'
+  date: '2025-08-26'
   provided_by:
   - http://www.pombase.org

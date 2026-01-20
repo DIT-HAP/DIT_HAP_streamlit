@@ -1,8 +1,9 @@
 id: gomodel:67c10cc400001835
-title: FAD biosynthetic prcoess (GO:0006747:) and protein matuation (specifically
-  FMNylation of mitochondrial proteins)
+title: FAD biosynthetic process (GO:0006747) and protein maturation (GO:0051604),
+  (specifically FMNylation of mitochondrial proteins)
 taxon: NCBITaxon:4896
-status: production
+status: development
+date_modified: '2025-08-27'
 comments:
 - Also need to check cir2, ndi1, nde1, trr1, erv1, aif1, obr1?, opst2, phr1? cyc2,
   fas1(mitochondrial?)
@@ -1067,6 +1068,6 @@ objects:
 provenances:
 - contributor:
   - https://orcid.org/0000-0001-6330-7526
-  date: '2025-07-23'
+  date: '2025-08-27'
   provided_by:
   - http://www.pombase.org

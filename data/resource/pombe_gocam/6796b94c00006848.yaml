@@ -2,6 +2,7 @@ id: gomodel:6796b94c00006848
 title: TORC1 signaling (GO:0038202)
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-06-11'
 activities:
 - id: gomodel:6796b94c00006848/67b1629100000349
   enabled_by:

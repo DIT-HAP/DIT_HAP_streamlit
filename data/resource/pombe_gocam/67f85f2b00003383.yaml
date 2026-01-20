@@ -2,6 +2,7 @@ id: gomodel:67f85f2b00003383
 title: mitochondrial respiratory chain complex II assembly (GO:0034553)
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-07-23'
 activities:
 - id: gomodel:67f85f2b00003383/67f85f2b00003413
   enabled_by:

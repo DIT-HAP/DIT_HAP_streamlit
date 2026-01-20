@@ -2,6 +2,7 @@ id: gomodel:67e5e74400003073
 title: mitochondrial cytochrome c oxidase assembly  (GO:0033617)
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-12-01'
 activities:
 - id: gomodel:67e5e74400003073/67f85f2b00002741
   enabled_by:
@@ -538,23 +539,21 @@ activities:
   occurs_in:
     type: CellularAnatomicalEntityAssociation
     evidence:
-    - term: ECO:0000501
-      reference: GO_REF:0000044
-      with_objects:
-      - UniProtKB-SubCell:SL-0168
+    - term: ECO:0000304
+      reference: PMID:19858289
       provenances:
       - contributor:
         - https://orcid.org/0000-0001-6330-7526
-        date: '2025-04-29'
+        date: '2025-11-29'
         provided_by:
         - http://www.pombase.org
     provenances:
     - contributor:
       - https://orcid.org/0000-0001-6330-7526
-      date: '2025-04-29'
+      date: '2025-11-29'
       provided_by:
       - http://www.pombase.org
-    term: GO:0005743
+    term: GO:0099617
   part_of:
     type: BiologicalProcessAssociation
     evidence:
@@ -1255,11 +1254,11 @@ activities:
     - term: ECO:0000318
       reference: GO_REF:0000033
       with_objects:
-      - PTN000254759
+      - PANTHER:PTN000254759
       provenances:
       - contributor:
         - https://orcid.org/0000-0001-6330-7526
-        date: '2025-04-06'
+        date: '2025-12-01'
         provided_by:
         - http://www.pombase.org
     provenances:
@@ -1273,13 +1272,13 @@ activities:
     type: BiologicalProcessAssociation
     evidence:
     - term: ECO:0000318
-      reference: PTN000254759
+      reference: GO_REF:0000033
       with_objects:
-      - PTN000254759
+      - PANTHER:PTN000254759
       provenances:
       - contributor:
         - https://orcid.org/0000-0001-6330-7526
-        date: '2025-04-06'
+        date: '2025-12-01'
         provided_by:
         - http://www.pombase.org
     provenances:
@@ -2865,14 +2864,15 @@ activities:
   occurs_in:
     type: CellularAnatomicalEntityAssociation
     evidence:
-    - term: ECO:0000501
-      reference: GO_REF:0000044
+    - term: ECO:0000305
+      reference: GO_REF:0000111
       with_objects:
-      - UniProtKB-SubCell:SL-0168
+      - GO:0005743
+      - GO:0005759
       provenances:
       - contributor:
         - https://orcid.org/0000-0001-6330-7526
-        date: '2025-04-21'
+        date: '2025-11-29'
         provided_by:
         - http://www.pombase.org
     provenances:
@@ -2881,7 +2881,7 @@ activities:
       date: '2025-04-21'
       provided_by:
       - http://www.pombase.org
-    term: GO:0005743
+    term: GO:0099617
   part_of:
     type: BiologicalProcessAssociation
     evidence:
@@ -3222,7 +3222,7 @@ objects:
   label: biological aspect of ancestor evidence used in manual assertion
   type: gocam:Object
 - id: GO:0033617
-  label: mitochondrial cytochrome c oxidase assembly
+  label: mitochondrial respiratory chain complex IV assembly
   type: gocam:Object
 - id: PomBase:SPAC1420.04c
   label: cox1101 Spom
@@ -3356,8 +3356,8 @@ objects:
 - id: PomBase:SPAC15A10.17
   label: coa2 Spom
   type: gocam:Object
-- id: ECO:0000501
-  label: evidence used in automatic assertion
+- id: ECO:0000305
+  label: curator inference used in manual assertion
   type: gocam:Object
 - id: PomBase:SPCC757.15
   label: cox14 Spom
@@ -3377,18 +3377,18 @@ objects:
 - id: PomBase:SPAC1565.01
   label: rcf2 Spom
   type: gocam:Object
-- id: ECO:0000305
-  label: curator inference used in manual assertion
-  type: gocam:Object
 - id: PomBase:SPBP4H10.03
   label: oxa102 Spom
   type: gocam:Object
 - id: GO:0006119
   label: oxidative phosphorylation
   type: gocam:Object
+- id: ECO:0000304
+  label: author statement supported by traceable reference used in manual assertion
+  type: gocam:Object
 provenances:
 - contributor:
   - https://orcid.org/0000-0001-6330-7526
-  date: '2025-07-23'
+  date: '2025-12-01'
   provided_by:
   - http://www.pombase.org

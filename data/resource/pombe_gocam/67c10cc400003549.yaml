@@ -1,7 +1,8 @@
 id: gomodel:67c10cc400003549
-title: tRNA wobble guanine modification (GO:0002099)
+title: tRNA wobble guanine modification (GO:0002099) (nuclear/cytoplasmic)
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-11-29'
 activities:
 - id: gomodel:67c10cc400003549/67c10cc400003592
   enabled_by:
@@ -182,56 +183,62 @@ activities:
   enabled_by:
     type: EnabledByGeneProductAssociation
     evidence:
-    - term: ECO:0000255
-      reference: GO_REF:0000050
-      with_objects:
-      - Pfam:PF06027
+    - term: ECO:0000314
+      reference: PMID:40526720
       provenances:
       - contributor:
         - https://orcid.org/0000-0001-6330-7526
-        date: '2025-03-12'
+        date: '2025-11-29'
         provided_by:
         - http://www.pombase.org
     provenances:
     - contributor:
       - https://orcid.org/0000-0001-6330-7526
-      date: '2025-03-12'
+      date: '2025-11-29'
       provided_by:
       - http://www.pombase.org
     term: PomBase:SPCC320.08
   molecular_function:
     type: MolecularFunctionAssociation
-    term: GO:0022857
+    term: GO:0160283
   occurs_in:
     type: CellularAnatomicalEntityAssociation
-    evidence: []
+    evidence:
+    - term: ECO:0000305
+      reference: PMID:40526720
+      with_objects:
+      - GO:0160284
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2025-11-29'
+        provided_by:
+        - http://www.pombase.org
     provenances:
     - contributor:
       - https://orcid.org/0000-0001-6330-7526
-      date: '2025-03-12'
+      date: '2025-11-29'
       provided_by:
       - http://www.pombase.org
     term: GO:0005886
   part_of:
     type: BiologicalProcessAssociation
     evidence:
-    - term: ECO:0000255
-      reference: GO_REF:0000050
-      with_objects:
-      - Pfam:PF06027
+    - term: ECO:0000269
+      reference: PMID:40526720
       provenances:
       - contributor:
         - https://orcid.org/0000-0001-6330-7526
-        date: '2025-03-12'
+        date: '2025-11-29'
         provided_by:
         - http://www.pombase.org
     provenances:
     - contributor:
       - https://orcid.org/0000-0001-6330-7526
-      date: '2025-03-12'
+      date: '2025-11-29'
       provided_by:
       - http://www.pombase.org
-    term: GO:0055085
+    term: GO:0160284
   has_input:
   - type: MoleculeAssociation
     evidence: []
@@ -356,20 +363,17 @@ activities:
       - http://www.pombase.org
     term: CHEBI:17433
 objects:
-- id: GO:0022857
-  label: transmembrane transporter activity
+- id: GO:0160283
+  label: queuine transmembrane transporter activity
   type: gocam:Object
 - id: PomBase:SPCC320.08
   label: qtp1 Spom
   type: gocam:Object
-- id: GO:0055085
-  label: transmembrane transport
+- id: GO:0160284
+  label: queuine import across plasma membrane
   type: gocam:Object
 - id: GO:0005886
   label: plasma membrane
-  type: gocam:Object
-- id: ECO:0000255
-  label: match to sequence model evidence used in manual assertion
   type: gocam:Object
 - id: CHEBI:17433
   label: queuine
@@ -422,9 +426,12 @@ objects:
 - id: CHEBI:60193
   label: queuosine
   type: gocam:Object
+- id: ECO:0000305
+  label: curator inference used in manual assertion
+  type: gocam:Object
 provenances:
 - contributor:
   - https://orcid.org/0000-0001-6330-7526
-  date: '2025-04-18'
+  date: '2025-11-29'
   provided_by:
   - http://www.pombase.org

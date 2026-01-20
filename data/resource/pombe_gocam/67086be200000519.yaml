@@ -2,6 +2,7 @@ id: gomodel:67086be200000519
 title: mitochondrial translation (GO:0032543)
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-11-29'
 comments:
 - https://pubmed.ncbi.nlm.nih.gov/38117001/
 - mef2 might be termination, dis assembly
@@ -504,6 +505,82 @@ activities:
       - http://www.pombase.org
     predicate: RO:0012009
     downstream_activity: gomodel:67086be200000519/6796b94c00001311
+- id: gomodel:67086be200000519/67c10cc400002715
+  enabled_by:
+    type: EnabledByGeneProductAssociation
+    evidence:
+    - term: ECO:0000266
+      reference: GO_REF:0000024
+      with_objects:
+      - UniProtKB:P43897
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2025-08-15'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-08-15'
+      provided_by:
+      - http://www.pombase.org
+    term: PomBase:SPBC800.07c
+  molecular_function:
+    type: MolecularFunctionAssociation
+    term: GO:0005085
+  occurs_in:
+    type: CellularAnatomicalEntityAssociation
+    evidence:
+    - term: ECO:0000305
+      reference: GO_REF:0000036
+      with_objects:
+      - GO:0070125
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2025-03-10'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-03-10'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0005759
+  part_of:
+    type: BiologicalProcessAssociation
+    evidence:
+    - term: ECO:0000318
+      reference: GO_REF:0000033
+      with_objects:
+      - PANTHER:PTN000563009
+      - UniProtKB:Q96RP9
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2025-03-10'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-03-10'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0070125
+  causal_associations:
+  - type: CausalAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-03-10'
+      provided_by:
+      - http://www.pombase.org
+    predicate: RO:0002629
+    downstream_activity: gomodel:67086be200000519/67c10cc400002708
 - id: gomodel:67086be200000519/67f85f2b00001004
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -568,6 +645,7 @@ activities:
     - PomBase:SPBC21C3.04c
     - PomBase:SPCC24B10.04
     - PomBase:SPBC18H10.17c
+    - PomBase:SPRRNA.01
     - PomBase:SPAC31A2.08
     - PomBase:SPBC19C2.12
     - PomBase:SPAP19A11.05c
@@ -1188,14 +1266,14 @@ activities:
   enabled_by:
     type: EnabledByGeneProductAssociation
     evidence:
-    - term: ECO:0000255
-      reference: GO_REF:0000050
+    - term: ECO:0000250
+      reference: GO_REF:0000024
       with_objects:
-      - Pfam:PF00472
+      - SGD:S000004271
       provenances:
       - contributor:
         - https://orcid.org/0000-0001-6330-7526
-        date: '2025-04-15'
+        date: '2025-11-29'
         provided_by:
         - http://www.pombase.org
     provenances:
@@ -2928,6 +3006,7 @@ activities:
     term: GO:0005763
     members:
     - PomBase:SPCC736.10c
+    - PomBase:SPRRNA.02
     - PomBase:SPAC29A4.03c
     - PomBase:SPBC29A3.15c
     - PomBase:SPAC1782.04
@@ -3666,23 +3745,21 @@ activities:
   occurs_in:
     type: CellularAnatomicalEntityAssociation
     evidence:
-    - term: ECO:0000501
-      reference: GO_REF:0000044
-      with_objects:
-      - UniProtKB-SubCell:SL-0168
+    - term: ECO:0000304
+      reference: PMID:19858289
       provenances:
       - contributor:
         - https://orcid.org/0000-0001-6330-7526
-        date: '2025-04-27'
+        date: '2025-11-29'
         provided_by:
         - http://www.pombase.org
     provenances:
     - contributor:
       - https://orcid.org/0000-0001-6330-7526
-      date: '2025-04-27'
+      date: '2025-11-29'
       provided_by:
       - http://www.pombase.org
-    term: GO:0005743
+    term: GO:0099617
   part_of:
     type: BiologicalProcessAssociation
     evidence:
@@ -3711,51 +3788,6 @@ activities:
       provided_by:
       - http://www.pombase.org
     term: PomBase:SPMIT.01
-- id: gomodel:67086be200000519/684b6c8100000437
-  enabled_by:
-    type: EnabledByProteinComplexAssociation
-    evidence: []
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2025-06-15'
-      provided_by:
-      - http://www.pombase.org
-    term: GO:0061671
-    members: []
-  molecular_function:
-    type: MolecularFunctionAssociation
-    term: GO:0097177
-  occurs_in:
-    type: CellularAnatomicalEntityAssociation
-    evidence: []
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2025-06-15'
-      provided_by:
-      - http://www.pombase.org
-    term: GO:0005743
-  part_of:
-    type: BiologicalProcessAssociation
-    evidence: []
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2025-06-15'
-      provided_by:
-      - http://www.pombase.org
-    term: GO:0034551
-  has_input:
-  - type: MoleculeAssociation
-    evidence: []
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2025-06-15'
-      provided_by:
-      - http://www.pombase.org
-    term: PomBase:SPMIT.05
 - id: gomodel:67086be200000519/67086be200002869
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -3992,6 +4024,51 @@ activities:
       - http://www.pombase.org
     predicate: RO:0002413
     downstream_activity: gomodel:67086be200000519/67086be200001516
+- id: gomodel:67086be200000519/684b6c8100000437
+  enabled_by:
+    type: EnabledByProteinComplexAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-06-15'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0061671
+    members: []
+  molecular_function:
+    type: MolecularFunctionAssociation
+    term: GO:0097177
+  occurs_in:
+    type: CellularAnatomicalEntityAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-06-15'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0005743
+  part_of:
+    type: BiologicalProcessAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-06-15'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0034551
+  has_input:
+  - type: MoleculeAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-06-15'
+      provided_by:
+      - http://www.pombase.org
+    term: PomBase:SPMIT.05
 - id: gomodel:67086be200000519/685de18700005014
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -4228,72 +4305,6 @@ activities:
       provided_by:
       - http://www.pombase.org
     term: GO:0070125
-- id: gomodel:67086be200000519/67c10cc400002715
-  enabled_by:
-    type: EnabledByGeneProductAssociation
-    evidence: []
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2025-03-10'
-      provided_by:
-      - http://www.pombase.org
-    term: PomBase:SPBC800.07c
-  molecular_function:
-    type: MolecularFunctionAssociation
-    term: GO:0005085
-  occurs_in:
-    type: CellularAnatomicalEntityAssociation
-    evidence:
-    - term: ECO:0000305
-      reference: GO_REF:0000036
-      with_objects:
-      - GO:0070125
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2025-03-10'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2025-03-10'
-      provided_by:
-      - http://www.pombase.org
-    term: GO:0005759
-  part_of:
-    type: BiologicalProcessAssociation
-    evidence:
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN000563009
-      - UniProtKB:Q96RP9
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2025-03-10'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2025-03-10'
-      provided_by:
-      - http://www.pombase.org
-    term: GO:0070125
-  causal_associations:
-  - type: CausalAssociation
-    evidence: []
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2025-03-10'
-      provided_by:
-      - http://www.pombase.org
-    predicate: RO:0002629
-    downstream_activity: gomodel:67086be200000519/67c10cc400002708
 - id: gomodel:67086be200000519/67c10cc400002874
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -4698,9 +4709,6 @@ objects:
 - id: PomBase:SPBC1105.18c
   label: pth3 Spom
   type: gocam:Object
-- id: ECO:0000255
-  label: match to sequence model evidence used in manual assertion
-  type: gocam:Object
 - id: PomBase:SPBC1709.09
   label: rrf1 Spom
   type: gocam:Object
@@ -4894,10 +4902,7 @@ objects:
   label: mss51 Spom
   type: gocam:Object
 - id: GO:0033617
-  label: mitochondrial cytochrome c oxidase assembly
-  type: gocam:Object
-- id: GO:0005743
-  label: mitochondrial inner membrane
+  label: mitochondrial respiratory chain complex IV assembly
   type: gocam:Object
 - id: ECO:0000307
   label: no evidence data found used in manual assertion
@@ -4935,6 +4940,9 @@ objects:
 - id: GO:0034551
   label: mitochondrial respiratory chain complex III assembly
   type: gocam:Object
+- id: GO:0005743
+  label: mitochondrial inner membrane
+  type: gocam:Object
 - id: SO:0000185
   label: primary_transcript
   type: gocam:Object
@@ -4947,10 +4955,19 @@ objects:
 - id: GO:0180026
   label: mitochondrial small ribosomal subunit assembly
   type: gocam:Object
+- id: PomBase:SPRRNA.02
+  label: rns Spom
+  type: gocam:Object
+- id: PomBase:SPRRNA.01
+  label: rnl Spom
+  type: gocam:Object
+- id: ECO:0000304
+  label: author statement supported by traceable reference used in manual assertion
+  type: gocam:Object
 provenances:
 - contributor:
   - https://orcid.org/0000-0001-6330-7526
   - https://orcid.org/0009-0003-9059-1333
-  date: '2025-07-26'
+  date: '2025-11-29'
   provided_by:
   - http://www.pombase.org

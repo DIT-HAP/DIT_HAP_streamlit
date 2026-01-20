@@ -2,6 +2,7 @@ id: gomodel:66187e4700002284
 title: 'septation initiation signaling (GO:0031028) '
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-10-20'
 comments:
 - Add effect on MOR signalling
 - Review regulation by Hhp1/2
@@ -1787,7 +1788,7 @@ activities:
       provenances:
       - contributor:
         - https://orcid.org/0009-0003-9059-1333
-        date: '2024-04-24'
+        date: '2025-10-20'
         provided_by:
         - http://www.pombase.org
     provenances:
@@ -1796,7 +1797,7 @@ activities:
       date: '2024-04-24'
       provided_by:
       - http://www.pombase.org
-    term: GO:0031031
+    term: GO:0031028
   causal_associations:
   - type: CausalAssociation
     evidence:
@@ -1969,83 +1970,6 @@ activities:
       - http://www.pombase.org
     predicate: RO:0002304
     downstream_activity: gomodel:66187e4700002284/66187e4700002375
-- id: gomodel:66187e4700002284/66187e4700002375
-  enabled_by:
-    type: EnabledByGeneProductAssociation
-    evidence:
-    - term: ECO:0000314
-      reference: PMID:11384993
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2024-04-24'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2024-04-24'
-      provided_by:
-      - http://www.pombase.org
-    term: PomBase:SPBC24C6.07
-  molecular_function:
-    type: MolecularFunctionAssociation
-    term: GO:0030295
-  occurs_in:
-    type: CellularAnatomicalEntityAssociation
-    evidence:
-    - term: ECO:0000314
-      reference: PMID:10775265
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2024-04-24'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2024-04-24'
-      provided_by:
-      - http://www.pombase.org
-    term: GO:0071958
-  part_of:
-    type: BiologicalProcessAssociation
-    evidence:
-    - term: ECO:0000269
-      reference: PMID:10775265
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2024-04-24'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2024-04-24'
-      provided_by:
-      - http://www.pombase.org
-    term: GO:0031028
-  causal_associations:
-  - type: CausalAssociation
-    evidence:
-    - term: ECO:0000314
-      reference: PMID:11384993
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2024-05-01'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2024-05-01'
-      provided_by:
-      - http://www.pombase.org
-    predicate: RO:0002629
-    downstream_activity: gomodel:66187e4700002284/66187e4700002384
 - id: gomodel:66187e4700002284/662af8fa00001573
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -2131,6 +2055,83 @@ activities:
       - http://www.pombase.org
     predicate: RO:0002629
     downstream_activity: gomodel:66187e4700002284/66187e4700002349
+- id: gomodel:66187e4700002284/66187e4700002375
+  enabled_by:
+    type: EnabledByGeneProductAssociation
+    evidence:
+    - term: ECO:0000314
+      reference: PMID:11384993
+      provenances:
+      - contributor:
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2024-04-24'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2024-04-24'
+      provided_by:
+      - http://www.pombase.org
+    term: PomBase:SPBC24C6.07
+  molecular_function:
+    type: MolecularFunctionAssociation
+    term: GO:0030295
+  occurs_in:
+    type: CellularAnatomicalEntityAssociation
+    evidence:
+    - term: ECO:0000314
+      reference: PMID:10775265
+      provenances:
+      - contributor:
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2024-04-24'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2024-04-24'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0071958
+  part_of:
+    type: BiologicalProcessAssociation
+    evidence:
+    - term: ECO:0000269
+      reference: PMID:10775265
+      provenances:
+      - contributor:
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2024-04-24'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2024-04-24'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0031028
+  causal_associations:
+  - type: CausalAssociation
+    evidence:
+    - term: ECO:0000314
+      reference: PMID:11384993
+      provenances:
+      - contributor:
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2024-05-01'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2024-05-01'
+      provided_by:
+      - http://www.pombase.org
+    predicate: RO:0002629
+    downstream_activity: gomodel:66187e4700002284/66187e4700002384
 - id: gomodel:66187e4700002284/66187e4700002331
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -3022,6 +3023,6 @@ provenances:
 - contributor:
   - https://orcid.org/0000-0001-6330-7526
   - https://orcid.org/0009-0003-9059-1333
-  date: '2025-07-18'
+  date: '2025-10-20'
   provided_by:
   - http://www.pombase.org

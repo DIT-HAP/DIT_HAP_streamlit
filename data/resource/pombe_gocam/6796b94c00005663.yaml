@@ -3,6 +3,7 @@ title: phosphatidic acid biosynthetic process (GO:0006654) and triglyceride bios
   process (GO:0019432)
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-09-22'
 activities:
 - id: gomodel:6796b94c00005663/6796b94c00006472
   enabled_by:
@@ -363,16 +364,16 @@ activities:
       provenances:
       - contributor:
         - https://orcid.org/0009-0003-9059-1333
-        date: '2025-02-12'
+        date: '2025-09-22'
         provided_by:
         - http://www.pombase.org
     provenances:
     - contributor:
       - https://orcid.org/0009-0003-9059-1333
-      date: '2025-02-12'
+      date: '2025-09-22'
       provided_by:
       - http://www.pombase.org
-    term: CHEBI:57970
+    term: CHEBI:57287
   - type: MoleculeAssociation
     evidence:
     - term: ECO:0000318
@@ -393,7 +394,7 @@ activities:
       date: '2025-02-12'
       provided_by:
       - http://www.pombase.org
-    term: CHEBI:57287
+    term: CHEBI:57970
 - id: gomodel:6796b94c00005663/6796b94c00006561
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -1127,6 +1128,27 @@ activities:
     - term: ECO:0000318
       reference: GO_REF:0000033
       with_objects:
+      - PANTHER:PTN000787962
+      - SGD:S000001775
+      - SGD:S000000107
+      provenances:
+      - contributor:
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2025-09-22'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-09-22'
+      provided_by:
+      - http://www.pombase.org
+    term: CHEBI:58342
+  - type: MoleculeAssociation
+    evidence:
+    - term: ECO:0000318
+      reference: GO_REF:0000033
+      with_objects:
       - PANTHER:PTN000268127
       - UniProtKB:A1A442
       - UniProtKB:Q6ZPD8
@@ -1155,47 +1177,6 @@ activities:
       provided_by:
       - http://www.pombase.org
     term: CHEBI:17815
-  - type: MoleculeAssociation
-    evidence:
-    - term: ECO:0000315
-      reference: PMID:12963726
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-02-12'
-        provided_by:
-        - http://www.pombase.org
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN000268127
-      - UniProtKB:A1A442
-      - UniProtKB:Q6ZPD8
-      - UniProtKB:K7K424
-      - UniProtKB:Q70VZ8
-      - UniProtKB:Q57ZE1
-      - PomBase:SPCC1235.15
-      - MGI:MGI:1915050
-      - RGD:620329
-      - TAIR:locus:2081865
-      - dictyBase:DDB_G0290279
-      - UniProtKB:Q86VF5
-      - SGD:S000005771
-      - MGI:MGI:1915643
-      - UniProtKB:Q96PD7
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-02-12'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-02-12'
-      provided_by:
-      - http://www.pombase.org
-    term: CHEBI:58342
   has_output:
   - type: MoleculeAssociation
     evidence:
@@ -1204,7 +1185,7 @@ activities:
       provenances:
       - contributor:
         - https://orcid.org/0009-0003-9059-1333
-        date: '2025-02-12'
+        date: '2025-09-22'
         provided_by:
         - http://www.pombase.org
     - term: ECO:0000318
@@ -1228,13 +1209,13 @@ activities:
       provenances:
       - contributor:
         - https://orcid.org/0009-0003-9059-1333
-        date: '2025-02-12'
+        date: '2025-09-22'
         provided_by:
         - http://www.pombase.org
     provenances:
     - contributor:
       - https://orcid.org/0009-0003-9059-1333
-      date: '2025-02-12'
+      date: '2025-09-22'
       provided_by:
       - http://www.pombase.org
     term: CHEBI:57287
@@ -1279,47 +1260,6 @@ activities:
       provided_by:
       - http://www.pombase.org
     term: CHEBI:64615
-  - type: MoleculeAssociation
-    evidence:
-    - term: ECO:0000315
-      reference: PMID:12963726
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-02-12'
-        provided_by:
-        - http://www.pombase.org
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN000268127
-      - UniProtKB:A1A442
-      - UniProtKB:Q6ZPD8
-      - UniProtKB:K7K424
-      - UniProtKB:Q70VZ8
-      - UniProtKB:Q57ZE1
-      - PomBase:SPCC1235.15
-      - MGI:MGI:1915050
-      - RGD:620329
-      - TAIR:locus:2081865
-      - dictyBase:DDB_G0290279
-      - UniProtKB:Q86VF5
-      - SGD:S000005771
-      - MGI:MGI:1915643
-      - UniProtKB:Q96PD7
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-02-12'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-02-12'
-      provided_by:
-      - http://www.pombase.org
-    term: CHEBI:57287
 - id: gomodel:6796b94c00005663/6796b94c00006555
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -1698,27 +1638,6 @@ activities:
     term: GO:0006654
   has_input:
   - type: MoleculeAssociation
-    evidence:
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN000787962
-      - SGD:S000000107
-      - SGD:S000001775
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-02-12'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-02-12'
-      provided_by:
-      - http://www.pombase.org
-    term: CHEBI:58342
-  - type: MoleculeAssociation
     evidence: []
     provenances:
     - contributor:
@@ -1727,6 +1646,27 @@ activities:
       provided_by:
       - http://www.pombase.org
     term: CHEBI:57642
+  - type: MoleculeAssociation
+    evidence:
+    - term: ECO:0000318
+      reference: GO_REF:0000033
+      with_objects:
+      - PANTHER:PTN000787962
+      - SGD:S000001775
+      - SGD:S000000107
+      provenances:
+      - contributor:
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2025-09-22'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-09-22'
+      provided_by:
+      - http://www.pombase.org
+    term: CHEBI:58342
   has_output:
   - type: MoleculeAssociation
     evidence:
@@ -1739,34 +1679,13 @@ activities:
       provenances:
       - contributor:
         - https://orcid.org/0009-0003-9059-1333
-        date: '2025-02-12'
+        date: '2025-09-22'
         provided_by:
         - http://www.pombase.org
     provenances:
     - contributor:
       - https://orcid.org/0009-0003-9059-1333
-      date: '2025-02-12'
-      provided_by:
-      - http://www.pombase.org
-    term: CHEBI:57287
-  - type: MoleculeAssociation
-    evidence:
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN000787962
-      - SGD:S000000107
-      - SGD:S000001775
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-02-12'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-02-12'
+      date: '2025-09-22'
       provided_by:
       - http://www.pombase.org
     term: CHEBI:57287
@@ -2328,11 +2247,11 @@ objects:
 - id: ECO:0000318
   label: biological aspect of ancestor evidence used in manual assertion
   type: gocam:Object
-- id: GO:0005783
-  label: endoplasmic reticulum
-  type: gocam:Object
 - id: GO:0005829
   label: cytosol
+  type: gocam:Object
+- id: GO:0005783
+  label: endoplasmic reticulum
   type: gocam:Object
 - id: ECO:0007005
   label: high throughput direct assay evidence used in manual assertion
@@ -2382,9 +2301,6 @@ objects:
 - id: ECO:0000304
   label: author statement supported by traceable reference used in manual assertion
   type: gocam:Object
-- id: CHEBI:57287
-  label: coenzyme A(4-)
-  type: gocam:Object
 - id: GO:0000140
   label: acylglycerone-phosphate reductase (NADP+) activity
   type: gocam:Object
@@ -2415,6 +2331,9 @@ objects:
 - id: CHEBI:57970
   label: 1-acyl-sn-glycerol 3-phosphate(2-)
   type: gocam:Object
+- id: CHEBI:57287
+  label: coenzyme A(4-)
+  type: gocam:Object
 - id: GO:0042171
   label: lysophosphatidic acid acyltransferase activity
   type: gocam:Object
@@ -2428,7 +2347,7 @@ objects:
   label: triglyceride biosynthetic process
   type: gocam:Object
 - id: GO:0004630
-  label: phospholipase D activity
+  label: D-type glycerophospholipase activity
   type: gocam:Object
 - id: PomBase:SPAC2F7.16c
   label: pld1 Spom
@@ -2496,6 +2415,6 @@ objects:
 provenances:
 - contributor:
   - https://orcid.org/0009-0003-9059-1333
-  date: '2025-07-22'
+  date: '2025-09-22'
   provided_by:
   - http://www.pombase.org

@@ -2,6 +2,7 @@ id: gomodel:682fbcd000005519
 title: mitochondrial fission  (GO:0000266), mitochondrial fusion (GO:0008053)
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-06-09'
 activities:
 - id: gomodel:682fbcd000005519/682fbcd000005520
   enabled_by:

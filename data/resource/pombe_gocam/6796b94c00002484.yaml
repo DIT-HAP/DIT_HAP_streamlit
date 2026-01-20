@@ -3,6 +3,7 @@ title: galactose catabolic process via UDP-galactose (Leloir pathway) (GO:003349
   (usually silenced)
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-09-17'
 comments:
 - 'Automated change 2025-02-13: GO:0061612 replaced by GO:0033499'
 activities:
@@ -915,9 +916,13 @@ objects:
 - id: ECO:0007005
   label: high throughput direct assay evidence used in manual assertion
   type: gocam:Object
+- id: GO:0005576
+  label: extracellular region
+  type: gocam:Object
 provenances:
 - contributor:
   - https://orcid.org/0000-0001-6330-7526
-  date: '2025-08-12'
+  - https://orcid.org/0009-0003-9059-1333
+  date: '2025-09-17'
   provided_by:
   - http://www.pombase.org

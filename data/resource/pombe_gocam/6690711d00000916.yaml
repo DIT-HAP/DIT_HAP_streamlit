@@ -2,6 +2,7 @@ id: gomodel:6690711d00000916
 title: L-arginine biosynthetic process (GO:0006526)
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-08-27'
 comments:
 - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7645267/ shows that arg3 operates in
   mitochondira and cittruline is exported (unliek S. cerevisiae where ornithine is
@@ -946,7 +947,7 @@ activities:
       date: '2025-04-09'
       provided_by:
       - http://www.pombase.org
-    term: GO:0043038
+    term: GO:0006420
   has_input:
   - type: MoleculeAssociation
     evidence:
@@ -989,6 +990,24 @@ activities:
       provided_by:
       - http://www.pombase.org
     term: CHEBI:32682
+  - type: MoleculeAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-08-27'
+      provided_by:
+      - http://www.pombase.org
+    term: PomBase:SPMITTRNAARG.02
+  - type: MoleculeAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-08-27'
+      provided_by:
+      - http://www.pombase.org
+    term: PomBase:SPMITTRNAARG.01
   - type: MoleculeAssociation
     evidence: []
     provenances:
@@ -1845,8 +1864,8 @@ objects:
 - id: PomBase:SPBC25B2.09c
   label: msr1 Spom
   type: gocam:Object
-- id: GO:0043038
-  label: amino acid activation
+- id: GO:0006420
+  label: arginyl-tRNA aminoacylation
   type: gocam:Object
 - id: CHEBI:18366
   label: Arg-tRNA(Arg)
@@ -1854,9 +1873,15 @@ objects:
 - id: CHEBI:57288
   label: acetyl-CoA(4-)
   type: gocam:Object
+- id: PomBase:SPMITTRNAARG.02
+  label: SPMITTRNAARG.02 Spom
+  type: gocam:Object
+- id: PomBase:SPMITTRNAARG.01
+  label: SPMITTRNAARG.01 Spom
+  type: gocam:Object
 provenances:
 - contributor:
   - https://orcid.org/0000-0001-6330-7526
-  date: '2025-06-20'
+  date: '2025-08-27'
   provided_by:
   - http://www.pombase.org

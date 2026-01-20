@@ -2,6 +2,7 @@ id: gomodel:67086be200002266
 title: sphingolipid biosynthetic process (GO:0030148)
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-12-01'
 comments:
 - 'Automated change 2025-06-12: GO:0017050 replaced by GO:0008481'
 - 'Orm1, Sac11 and Sac12 are part of the Serine palmitoyltransferase complex, function
@@ -1975,21 +1976,11 @@ activities:
     term: GO:0005789
   part_of:
     type: BiologicalProcessAssociation
-    evidence:
-    - term: ECO:0000255
-      reference: GO_REF:0000050
-      with_objects:
-      - Pfam:PF03348
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2024-10-23'
-        provided_by:
-        - http://www.pombase.org
+    evidence: []
     provenances:
     - contributor:
       - https://orcid.org/0009-0003-9059-1333
-      date: '2024-10-23'
+      date: '2025-12-01'
       provided_by:
       - http://www.pombase.org
     term: GO:0030148
@@ -3540,12 +3531,9 @@ objects:
 - id: PomBase:SPAPB1A10.07c
   label: SPAPB1A10.07c Spom
   type: gocam:Object
-- id: ECO:0000255
-  label: match to sequence model evidence used in manual assertion
-  type: gocam:Object
 provenances:
 - contributor:
   - https://orcid.org/0009-0003-9059-1333
-  date: '2025-07-21'
+  date: '2025-12-01'
   provided_by:
   - http://www.pombase.org

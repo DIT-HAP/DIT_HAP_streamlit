@@ -1,0 +1,146 @@
+id: gomodel:6918f23700003984
+title: Golgi to endosome transport (partial)
+taxon: NCBITaxon:4896
+status: production
+date_modified: '2025-12-07'
+activities:
+- id: gomodel:6918f23700003984/6918f23700003985
+  enabled_by:
+    type: EnabledByProteinComplexAssociation
+    evidence:
+    - term: ECO:0000305
+      reference: GO_REF:0000111
+      with_objects:
+      - GO:0030121
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2025-12-07'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-12-07'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0030121
+    members:
+    - PomBase:SPBP16F5.07
+    - PomBase:SPAC31A2.09c
+    - PomBase:SPBC947.02
+    - PomBase:SPBC651.11c
+  molecular_function:
+    type: MolecularFunctionAssociation
+    term: GO:0035615
+  causal_associations:
+  - type: CausalAssociation
+    evidence:
+    - term: ECO:0000305
+      reference: GO_REF:0000111
+      with_objects:
+      - GO:0030121
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2025-12-07'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000305
+      reference: GO_REF:0000111
+      with_objects:
+      - GO:0030121
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2025-12-07'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-12-07'
+      provided_by:
+      - http://www.pombase.org
+    predicate: RO:0012009
+    downstream_activity: gomodel:6918f23700003984/6918f23700003994
+  - type: CausalAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-12-07'
+      provided_by:
+      - http://www.pombase.org
+    predicate: RO:0012009
+    downstream_activity: gomodel:6918f23700003984/6918f23700003994
+- id: gomodel:6918f23700003984/6918f23700003994
+  enabled_by:
+    type: EnabledByProteinComplexAssociation
+    evidence:
+    - term: ECO:0000266
+      reference: GO_REF:0000024
+      with_objects:
+      - SGD:S000003174
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2025-12-07'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-12-07'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0071439
+    members:
+    - PomBase:SPBC9B6.08
+    - PomBase:SPAC26A3.05
+  molecular_function:
+    type: MolecularFunctionAssociation
+    term: GO:0005198
+objects:
+- id: GO:0035615
+  label: clathrin-cargo adaptor activity
+  type: gocam:Object
+- id: GO:0030121
+  label: AP-1 adaptor complex
+  type: gocam:Object
+- id: ECO:0000305
+  label: curator inference used in manual assertion
+  type: gocam:Object
+- id: PomBase:SPBP16F5.07
+  label: apm1 Spom
+  type: gocam:Object
+- id: PomBase:SPBC947.02
+  label: apl2 Spom
+  type: gocam:Object
+- id: PomBase:SPBC651.11c
+  label: apm3 Spom
+  type: gocam:Object
+- id: PomBase:SPAC31A2.09c
+  label: apm4 Spom
+  type: gocam:Object
+- id: GO:0005198
+  label: structural molecule activity
+  type: gocam:Object
+- id: GO:0071439
+  label: clathrin complex
+  type: gocam:Object
+- id: ECO:0000266
+  label: sequence orthology evidence used in manual assertion
+  type: gocam:Object
+- id: PomBase:SPAC26A3.05
+  label: chc1 Spom
+  type: gocam:Object
+- id: PomBase:SPBC9B6.08
+  label: clc1 Spom
+  type: gocam:Object
+provenances:
+- contributor:
+  - https://orcid.org/0000-0001-6330-7526
+  date: '2025-12-07'
+  provided_by:
+  - http://www.pombase.org

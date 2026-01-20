@@ -2,6 +2,7 @@ id: gomodel:671ae02600003596
 title: dolichol phosphate mannose biosynthetic process (GO:0180047)
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-09-27'
 comments:
 - dpm2 is tiny wth 2 tm domainds, looks more like am anchor than a rgulatory subunit
 activities:
@@ -449,6 +450,6 @@ objects:
 provenances:
 - contributor:
   - https://orcid.org/0000-0001-6330-7526
-  date: '2025-06-13'
+  date: '2025-09-27'
   provided_by:
   - http://www.pombase.org

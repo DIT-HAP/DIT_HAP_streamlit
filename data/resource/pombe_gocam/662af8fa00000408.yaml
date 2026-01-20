@@ -4,6 +4,7 @@ title: 'ubiquinone metabolic process (GO:0006743)
   '
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-11-30'
 comments:
 - 'PMID: 38425362  COQ9 has been shown to facilitate COQ7 activity in vivo38,39. Consistently,
   addition of COQ9 increased catalytic efficiency by 1.5-fold, substantiating its
@@ -865,20 +866,20 @@ activities:
   occurs_in:
     type: CellularAnatomicalEntityAssociation
     evidence:
-    - term: ECO:0000501
-      reference: GO_REF:0000104
+    - term: ECO:0000305
+      reference: GO_REF:0000111
       with_objects:
-      - UniRule:UR000376533
+      - GO:0106364
       provenances:
       - contributor:
         - https://orcid.org/0000-0001-6330-7526
-        date: '2024-05-28'
+        date: '2025-11-30'
         provided_by:
         - http://www.pombase.org
     provenances:
     - contributor:
       - https://orcid.org/0000-0001-6330-7526
-      date: '2024-05-28'
+      date: '2025-11-30'
       provided_by:
       - http://www.pombase.org
     term: GO:0031314
@@ -1153,14 +1154,14 @@ activities:
   occurs_in:
     type: CellularAnatomicalEntityAssociation
     evidence:
-    - term: ECO:0000501
-      reference: GO_REF:0000104
+    - term: ECO:0000305
+      reference: GO_REF:0000111
       with_objects:
-      - UniRule:UR000375762
+      - GO:0120539
       provenances:
       - contributor:
         - https://orcid.org/0000-0001-6330-7526
-        date: '2024-11-26'
+        date: '2025-11-29'
         provided_by:
         - http://www.pombase.org
     provenances:
@@ -1611,20 +1612,20 @@ activities:
   occurs_in:
     type: CellularAnatomicalEntityAssociation
     evidence:
-    - term: ECO:0000501
-      reference: GO_REF:0000104
+    - term: ECO:0000305
+      reference: GO_REF:0000111
       with_objects:
-      - UniRule:UR000375836
+      - GO:0010420
       provenances:
       - contributor:
         - https://orcid.org/0000-0001-6330-7526
-        date: '2024-04-28'
+        date: '2025-11-30'
         provided_by:
         - http://www.pombase.org
     provenances:
     - contributor:
       - https://orcid.org/0000-0001-6330-7526
-      date: '2024-04-28'
+      date: '2025-11-30'
       provided_by:
       - http://www.pombase.org
     term: GO:0031314
@@ -2080,20 +2081,20 @@ activities:
   occurs_in:
     type: CellularAnatomicalEntityAssociation
     evidence:
-    - term: ECO:0000501
-      reference: GO_REF:0000104
+    - term: ECO:0000305
+      reference: GO_REF:0000111
       with_objects:
-      - UniRule:UR000376533
+      - GO:0120538
       provenances:
       - contributor:
         - https://orcid.org/0000-0001-6330-7526
-        date: '2025-01-16'
+        date: '2025-11-30'
         provided_by:
         - http://www.pombase.org
     provenances:
     - contributor:
       - https://orcid.org/0000-0001-6330-7526
-      date: '2025-01-16'
+      date: '2025-11-30'
       provided_by:
       - http://www.pombase.org
     term: GO:0031314
@@ -2210,20 +2211,20 @@ activities:
   occurs_in:
     type: CellularAnatomicalEntityAssociation
     evidence:
-    - term: ECO:0000501
-      reference: GO_REF:0000104
+    - term: ECO:0000305
+      reference: GO_REF:0000111
       with_objects:
-      - UniRule:UR000376192
+      - GO:0160224
       provenances:
       - contributor:
         - https://orcid.org/0000-0001-6330-7526
-        date: '2024-04-28'
+        date: '2025-11-30'
         provided_by:
         - http://www.pombase.org
     provenances:
     - contributor:
       - https://orcid.org/0000-0001-6330-7526
-      date: '2024-04-28'
+      date: '2025-11-30'
       provided_by:
       - http://www.pombase.org
     term: GO:0031314
@@ -2531,6 +2532,9 @@ objects:
 - id: PomBase:SPAC1687.12c
   label: coq4 Spom
   type: gocam:Object
+- id: ECO:0000305
+  label: curator inference used in manual assertion
+  type: gocam:Object
 - id: GO:0098772
   label: molecular function regulator activity
   type: gocam:Object
@@ -2582,6 +2586,6 @@ objects:
 provenances:
 - contributor:
   - https://orcid.org/0000-0001-6330-7526
-  date: '2025-04-28'
+  date: '2025-11-30'
   provided_by:
   - http://www.pombase.org

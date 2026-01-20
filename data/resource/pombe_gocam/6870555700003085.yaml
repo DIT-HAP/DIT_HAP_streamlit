@@ -2,6 +2,7 @@ id: gomodel:6870555700003085
 title: pteridine-containing compound metabolic process (GO:0042558) - cytosolic
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-12-01'
 activities:
 - id: gomodel:6870555700003085/6870555700003235
   enabled_by:
@@ -65,6 +66,16 @@ activities:
       provided_by:
       - http://www.pombase.org
     term: GO:0046656
+  has_input:
+  - type: MoleculeAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-10-23'
+      provided_by:
+      - http://www.pombase.org
+    term: CHEBI:58406
   has_output:
   - type: MoleculeAssociation
     evidence:
@@ -85,27 +96,15 @@ activities:
       provided_by:
       - http://www.pombase.org
     term: CHEBI:15361
-  causal_associations:
-  - type: CausalAssociation
-    evidence:
-    - term: ECO:0000266
-      reference: GO_REF:0000024
-      with_objects:
-      - SGD:S000004902
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-07-21'
-        provided_by:
-        - http://www.pombase.org
+  - type: MoleculeAssociation
+    evidence: []
     provenances:
     - contributor:
       - https://orcid.org/0009-0003-9059-1333
-      date: '2025-07-21'
+      date: '2025-10-23'
       provided_by:
       - http://www.pombase.org
-    predicate: RO:0002413
-    downstream_activity: gomodel:6870555700003085/6870555700003230
+    term: CHEBI:17836
 - id: gomodel:6870555700003085/6870555700003185
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -1308,6 +1307,15 @@ activities:
     term: CHEBI:58359
   has_output:
   - type: MoleculeAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-10-23'
+      provided_by:
+      - http://www.pombase.org
+    term: CHEBI:58406
+  - type: MoleculeAssociation
     evidence:
     - term: ECO:0000266
       reference: GO_REF:0000024
@@ -1338,39 +1346,6 @@ activities:
       provided_by:
       - http://www.pombase.org
     term: CHEBI:29985
-  causal_associations:
-  - type: CausalAssociation
-    evidence:
-    - term: ECO:0000266
-      reference: GO_REF:0000024
-      with_objects:
-      - SGD:S000005316
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-07-21'
-        provided_by:
-        - http://www.pombase.org
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN002599721
-      - TAIR:locus:2053255
-      - SGD:S000005316
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-07-21'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-07-21'
-      provided_by:
-      - http://www.pombase.org
-    predicate: RO:0002413
-    downstream_activity: gomodel:6870555700003085/6870555700003235
 - id: gomodel:6870555700003085/6870555700003121
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -1787,33 +1762,25 @@ activities:
       provided_by:
       - http://www.pombase.org
     term: CHEBI:72950
-  causal_associations:
-  - type: CausalAssociation
-    evidence:
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN000468650
-      - UniProtKB:P9WND1
-      - UniProtKB:Q8IAU3
-      - TAIR:locus:2026471
-      - UniProtKB:Q9HV49
-      - SGD:S000005200
-      - UniProtKB:P0AC13
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-07-21'
-        provided_by:
-        - http://www.pombase.org
+  - type: MoleculeAssociation
+    evidence: []
     provenances:
     - contributor:
       - https://orcid.org/0009-0003-9059-1333
-      date: '2025-07-21'
+      date: '2025-10-23'
       provided_by:
       - http://www.pombase.org
-    predicate: RO:0002413
-    downstream_activity: gomodel:6870555700003085/6870555700003224
+    term: CHEBI:17836
+  has_output:
+  - type: MoleculeAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-10-23'
+      provided_by:
+      - http://www.pombase.org
+    term: CHEBI:17839
 - id: gomodel:6870555700003085/6870555700003286
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -2153,31 +2120,25 @@ activities:
       provided_by:
       - http://www.pombase.org
     term: CHEBI:29985
-  causal_associations:
-  - type: CausalAssociation
-    evidence:
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN000123998
-      - UniProtKB:P08192
-      - SGD:S000004719
-      - TAIR:locus:2177916
-      - CGD:CAL0000182677
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-07-21'
-        provided_by:
-        - http://www.pombase.org
+  - type: MoleculeAssociation
+    evidence: []
     provenances:
     - contributor:
       - https://orcid.org/0009-0003-9059-1333
-      date: '2025-07-21'
+      date: '2025-10-23'
       provided_by:
       - http://www.pombase.org
-    predicate: RO:0002413
-    downstream_activity: gomodel:6870555700003085/6870555700003103
+    term: CHEBI:17839
+  has_output:
+  - type: MoleculeAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-10-23'
+      provided_by:
+      - http://www.pombase.org
+    term: CHEBI:57451
 - id: gomodel:6870555700003085/6870555700003190
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -2230,14 +2191,14 @@ activities:
   part_of:
     type: BiologicalProcessAssociation
     evidence:
-    - term: ECO:0000501
-      reference: GO_REF:0000041
+    - term: ECO:0000305
+      reference: GO_REF:0000036
       with_objects:
-      - UniPathway:UPA00850
+      - GO:0004326
       provenances:
       - contributor:
         - https://orcid.org/0009-0003-9059-1333
-        date: '2025-07-21'
+        date: '2025-12-01'
         provided_by:
         - http://www.pombase.org
     provenances:
@@ -2799,236 +2760,6 @@ activities:
       provided_by:
       - http://www.pombase.org
     term: CHEBI:18608
-- id: gomodel:6870555700003085/6870555700003103
-  enabled_by:
-    type: EnabledByGeneProductAssociation
-    evidence:
-    - term: ECO:0000316
-      reference: PMID:8088538
-      with_objects:
-      - UniProtKB:P07807
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-07-21'
-        provided_by:
-        - http://www.pombase.org
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN000167322
-      - MGI:MGI:94890
-      - UniProtKB:P00374
-      - FB:FBgn0004087
-      - RGD:2500
-      - UniProtKB:Q86XF0
-      - SGD:S000005762
-      - PomBase:SPCC1223.08c
-      - UniProtKB:P9WNX1
-      - ZFIN:ZDB-GENE-010406-5
-      - UniProtKB:P0ABQ4
-      - dictyBase:DDB_G0286755
-      - CGD:CAL0000177250
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-07-21'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-07-21'
-      provided_by:
-      - http://www.pombase.org
-    term: PomBase:SPCC1223.08c
-  molecular_function:
-    type: MolecularFunctionAssociation
-    term: GO:0004146
-  occurs_in:
-    type: CellularAnatomicalEntityAssociation
-    evidence:
-    - term: ECO:0007005
-      reference: PMID:16823372
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-07-21'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-07-21'
-      provided_by:
-      - http://www.pombase.org
-    term: GO:0005829
-  part_of:
-    type: BiologicalProcessAssociation
-    evidence:
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN000167322
-      - ZFIN:ZDB-GENE-010406-5
-      - RGD:2500
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-07-21'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-07-21'
-      provided_by:
-      - http://www.pombase.org
-    term: GO:0046655
-  has_output:
-  - type: MoleculeAssociation
-    evidence:
-    - term: ECO:0000316
-      reference: PMID:8088538
-      with_objects:
-      - UniProtKB:P07807
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-07-21'
-        provided_by:
-        - http://www.pombase.org
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN000167322
-      - MGI:MGI:94890
-      - UniProtKB:P00374
-      - FB:FBgn0004087
-      - RGD:2500
-      - UniProtKB:Q86XF0
-      - SGD:S000005762
-      - PomBase:SPCC1223.08c
-      - UniProtKB:P9WNX1
-      - ZFIN:ZDB-GENE-010406-5
-      - UniProtKB:P0ABQ4
-      - dictyBase:DDB_G0286755
-      - CGD:CAL0000177250
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-07-21'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-07-21'
-      provided_by:
-      - http://www.pombase.org
-    term: CHEBI:57453
-- id: gomodel:6870555700003085/6870555700003251
-  enabled_by:
-    type: EnabledByGeneProductAssociation
-    evidence:
-    - term: ECO:0000250
-      reference: GO_REF:0000024
-      with_objects:
-      - UniProtKB:P35270
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-07-21'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-07-21'
-      provided_by:
-      - http://www.pombase.org
-    term: PomBase:SPBC30D10.05c
-  molecular_function:
-    type: MolecularFunctionAssociation
-    term: GO:0004757
-  occurs_in:
-    type: CellularAnatomicalEntityAssociation
-    evidence:
-    - term: ECO:0007005
-      reference: PMID:16823372
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-07-21'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-07-21'
-      provided_by:
-      - http://www.pombase.org
-    term: GO:0005829
-  part_of:
-    type: BiologicalProcessAssociation
-    evidence:
-    - term: ECO:0000250
-      reference: GO_REF:0000024
-      with_objects:
-      - UniProtKB:P35270
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-07-21'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-07-21'
-      provided_by:
-      - http://www.pombase.org
-    term: GO:0006729
-  has_input:
-  - type: MoleculeAssociation
-    evidence:
-    - term: ECO:0000250
-      reference: GO_REF:0000024
-      with_objects:
-      - UniProtKB:P35270
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-07-21'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-07-21'
-      provided_by:
-      - http://www.pombase.org
-    term: CHEBI:136564
-  has_output:
-  - type: MoleculeAssociation
-    evidence:
-    - term: ECO:0000250
-      reference: GO_REF:0000024
-      with_objects:
-      - UniProtKB:P35270
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-07-21'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-07-21'
-      provided_by:
-      - http://www.pombase.org
-    term: CHEBI:15642
 - id: gomodel:6870555700003085/6870555700003147
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -3178,6 +2909,246 @@ activities:
       provided_by:
       - http://www.pombase.org
     term: CHEBI:195366
+- id: gomodel:6870555700003085/6870555700003103
+  enabled_by:
+    type: EnabledByGeneProductAssociation
+    evidence:
+    - term: ECO:0000316
+      reference: PMID:8088538
+      with_objects:
+      - UniProtKB:P07807
+      provenances:
+      - contributor:
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2025-07-21'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000318
+      reference: GO_REF:0000033
+      with_objects:
+      - PANTHER:PTN000167322
+      - MGI:MGI:94890
+      - UniProtKB:P00374
+      - FB:FBgn0004087
+      - RGD:2500
+      - UniProtKB:Q86XF0
+      - SGD:S000005762
+      - PomBase:SPCC1223.08c
+      - UniProtKB:P9WNX1
+      - ZFIN:ZDB-GENE-010406-5
+      - UniProtKB:P0ABQ4
+      - dictyBase:DDB_G0286755
+      - CGD:CAL0000177250
+      provenances:
+      - contributor:
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2025-07-21'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-07-21'
+      provided_by:
+      - http://www.pombase.org
+    term: PomBase:SPCC1223.08c
+  molecular_function:
+    type: MolecularFunctionAssociation
+    term: GO:0004146
+  occurs_in:
+    type: CellularAnatomicalEntityAssociation
+    evidence:
+    - term: ECO:0007005
+      reference: PMID:16823372
+      provenances:
+      - contributor:
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2025-07-21'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-07-21'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0005829
+  part_of:
+    type: BiologicalProcessAssociation
+    evidence:
+    - term: ECO:0000318
+      reference: GO_REF:0000033
+      with_objects:
+      - PANTHER:PTN000167322
+      - ZFIN:ZDB-GENE-010406-5
+      - RGD:2500
+      provenances:
+      - contributor:
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2025-07-21'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-07-21'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0046655
+  has_input:
+  - type: MoleculeAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-10-23'
+      provided_by:
+      - http://www.pombase.org
+    term: CHEBI:57451
+  has_output:
+  - type: MoleculeAssociation
+    evidence:
+    - term: ECO:0000316
+      reference: PMID:8088538
+      with_objects:
+      - UniProtKB:P07807
+      provenances:
+      - contributor:
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2025-07-21'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000318
+      reference: GO_REF:0000033
+      with_objects:
+      - PANTHER:PTN000167322
+      - MGI:MGI:94890
+      - UniProtKB:P00374
+      - FB:FBgn0004087
+      - RGD:2500
+      - UniProtKB:Q86XF0
+      - SGD:S000005762
+      - PomBase:SPCC1223.08c
+      - UniProtKB:P9WNX1
+      - ZFIN:ZDB-GENE-010406-5
+      - UniProtKB:P0ABQ4
+      - dictyBase:DDB_G0286755
+      - CGD:CAL0000177250
+      provenances:
+      - contributor:
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2025-07-21'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-07-21'
+      provided_by:
+      - http://www.pombase.org
+    term: CHEBI:57453
+- id: gomodel:6870555700003085/6870555700003251
+  enabled_by:
+    type: EnabledByGeneProductAssociation
+    evidence:
+    - term: ECO:0000250
+      reference: GO_REF:0000024
+      with_objects:
+      - UniProtKB:P35270
+      provenances:
+      - contributor:
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2025-07-21'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-07-21'
+      provided_by:
+      - http://www.pombase.org
+    term: PomBase:SPBC30D10.05c
+  molecular_function:
+    type: MolecularFunctionAssociation
+    term: GO:0004757
+  occurs_in:
+    type: CellularAnatomicalEntityAssociation
+    evidence:
+    - term: ECO:0007005
+      reference: PMID:16823372
+      provenances:
+      - contributor:
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2025-07-21'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-07-21'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0005829
+  part_of:
+    type: BiologicalProcessAssociation
+    evidence:
+    - term: ECO:0000250
+      reference: GO_REF:0000024
+      with_objects:
+      - UniProtKB:P35270
+      provenances:
+      - contributor:
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2025-07-21'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-07-21'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0006729
+  has_input:
+  - type: MoleculeAssociation
+    evidence:
+    - term: ECO:0000250
+      reference: GO_REF:0000024
+      with_objects:
+      - UniProtKB:P35270
+      provenances:
+      - contributor:
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2025-07-21'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-07-21'
+      provided_by:
+      - http://www.pombase.org
+    term: CHEBI:136564
+  has_output:
+  - type: MoleculeAssociation
+    evidence:
+    - term: ECO:0000250
+      reference: GO_REF:0000024
+      with_objects:
+      - UniProtKB:P35270
+      provenances:
+      - contributor:
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2025-07-21'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-07-21'
+      provided_by:
+      - http://www.pombase.org
+    term: CHEBI:15642
 - id: gomodel:6870555700003085/6870555700003258
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -3286,6 +3257,228 @@ activities:
       provided_by:
       - http://www.pombase.org
     term: CHEBI:43120
+- id: gomodel:6870555700003085/68d5ebd600003721
+  enabled_by:
+    type: EnabledByGeneProductAssociation
+    evidence:
+    - term: ECO:0000250
+      reference: GO_REF:0000024
+      with_objects:
+      - UniProtKB:P53848
+      provenances:
+      - contributor:
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2025-10-23'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-10-23'
+      provided_by:
+      - http://www.pombase.org
+    term: PomBase:SPBC1734.03
+  molecular_function:
+    type: MolecularFunctionAssociation
+    term: GO:0004150
+  occurs_in:
+    type: CellularAnatomicalEntityAssociation
+    evidence:
+    - term: ECO:0007005
+      reference: PMID:16823372
+      provenances:
+      - contributor:
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2025-10-23'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-10-23'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0005829
+  part_of:
+    type: BiologicalProcessAssociation
+    evidence:
+    - term: ECO:0000250
+      reference: GO_REF:0000024
+      with_objects:
+      - UniProtKB:P53848
+      provenances:
+      - contributor:
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2025-10-23'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-10-23'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0046656
+  has_input:
+  - type: MoleculeAssociation
+    evidence:
+    - term: ECO:0000250
+      reference: GO_REF:0000024
+      with_objects:
+      - UniProtKB:P53848
+      provenances:
+      - contributor:
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2025-10-23'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-10-23'
+      provided_by:
+      - http://www.pombase.org
+    term: CHEBI:17001
+  has_output:
+  - type: MoleculeAssociation
+    evidence:
+    - term: ECO:0000250
+      reference: GO_REF:0000024
+      with_objects:
+      - UniProtKB:P53848
+      provenances:
+      - contributor:
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2025-10-23'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-10-23'
+      provided_by:
+      - http://www.pombase.org
+    term: CHEBI:17071
+  - type: MoleculeAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-10-23'
+      provided_by:
+      - http://www.pombase.org
+    term: CHEBI:44841
+- id: gomodel:6870555700003085/68d5ebd600003712
+  enabled_by:
+    type: EnabledByGeneProductAssociation
+    evidence:
+    - term: ECO:0000250
+      reference: GO_REF:0000024
+      with_objects:
+      - UniProtKB:P53848
+      provenances:
+      - contributor:
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2025-10-23'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-10-23'
+      provided_by:
+      - http://www.pombase.org
+    term: PomBase:SPBC1734.03
+  molecular_function:
+    type: MolecularFunctionAssociation
+    term: GO:0003848
+  occurs_in:
+    type: CellularAnatomicalEntityAssociation
+    evidence:
+    - term: ECO:0007005
+      reference: PMID:16823372
+      provenances:
+      - contributor:
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2025-10-23'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-10-23'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0005829
+  part_of:
+    type: BiologicalProcessAssociation
+    evidence:
+    - term: ECO:0000250
+      reference: GO_REF:0000024
+      with_objects:
+      - UniProtKB:P53848
+      provenances:
+      - contributor:
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2025-10-23'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-10-23'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0046656
+  has_input:
+  - type: MoleculeAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-10-23'
+      provided_by:
+      - http://www.pombase.org
+    term: CHEBI:44841
+  has_output:
+  - type: MoleculeAssociation
+    evidence:
+    - term: ECO:0000250
+      reference: GO_REF:0000024
+      with_objects:
+      - UniProtKB:P53848
+      provenances:
+      - contributor:
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2025-10-23'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000250
+      reference: GO_REF:0000024
+      with_objects:
+      - UniProtKB:P53848
+      provenances:
+      - contributor:
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2025-10-23'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-10-23'
+      provided_by:
+      - http://www.pombase.org
+    term: CHEBI:72950
+  - type: MoleculeAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-10-23'
+      provided_by:
+      - http://www.pombase.org
+    term: CHEBI:72950
 - id: gomodel:6870555700003085/6870555700003265
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -3341,6 +3534,48 @@ activities:
       - http://www.pombase.org
     term: CHEBI:136564
 objects:
+- id: CHEBI:58406
+  label: 4-amino-4-deoxychorismate(1-)
+  type: gocam:Object
+- id: GO:0005829
+  label: cytosol
+  type: gocam:Object
+- id: CHEBI:17836
+  label: 4-aminobenzoate
+  type: gocam:Object
+- id: CHEBI:17839
+  label: 7,8-dihydropteroate
+  type: gocam:Object
+- id: CHEBI:57451
+  label: dihydrofolate(2-)
+  type: gocam:Object
+- id: GO:0003848
+  label: 2-amino-4-hydroxy-6-hydroxymethyldihydropteridine diphosphokinase activity
+  type: gocam:Object
+- id: PomBase:SPBC1734.03
+  label: fol1 Spom
+  type: gocam:Object
+- id: GO:0046656
+  label: folic acid biosynthetic process
+  type: gocam:Object
+- id: ECO:0000250
+  label: sequence similarity evidence used in manual assertion
+  type: gocam:Object
+- id: ECO:0007005
+  label: high throughput direct assay evidence used in manual assertion
+  type: gocam:Object
+- id: GO:0004150
+  label: dihydroneopterin aldolase activity
+  type: gocam:Object
+- id: CHEBI:44841
+  label: 2-amino-6-(hydroxymethyl)-7,8-dihydropteridin-4-one
+  type: gocam:Object
+- id: CHEBI:17071
+  label: glycolaldehyde
+  type: gocam:Object
+- id: CHEBI:17001
+  label: 7,8-dihydroneopterin
+  type: gocam:Object
 - id: GO:0004372
   label: glycine hydroxymethyltransferase activity
   type: gocam:Object
@@ -3355,9 +3590,6 @@ objects:
   type: gocam:Object
 - id: ECO:0000318
   label: biological aspect of ancestor evidence used in manual assertion
-  type: gocam:Object
-- id: GO:0005829
-  label: cytosol
   type: gocam:Object
 - id: GO:0004146
   label: dihydrofolate reductase activity
@@ -3380,9 +3612,6 @@ objects:
 - id: GO:0009257
   label: 10-formyltetrahydrofolate biosynthetic process
   type: gocam:Object
-- id: ECO:0000250
-  label: sequence similarity evidence used in manual assertion
-  type: gocam:Object
 - id: GO:0004477
   label: methenyltetrahydrofolate cyclohydrolase activity
   type: gocam:Object
@@ -3392,17 +3621,11 @@ objects:
 - id: ECO:0000314
   label: direct assay evidence used in manual assertion
   type: gocam:Object
-- id: ECO:0007005
-  label: high throughput direct assay evidence used in manual assertion
-  type: gocam:Object
 - id: GO:0004487
   label: methylenetetrahydrofolate dehydrogenase (NAD+) activity
   type: gocam:Object
 - id: PomBase:SPBC1711.04
   label: mtd1 Spom
-  type: gocam:Object
-- id: GO:0046656
-  label: folic acid biosynthetic process
   type: gocam:Object
 - id: ECO:0000266
   label: sequence orthology evidence used in manual assertion
@@ -3434,8 +3657,8 @@ objects:
 - id: PomBase:SPAC227.09
   label: fol3 Spom
   type: gocam:Object
-- id: ECO:0000501
-  label: evidence used in automatic assertion
+- id: ECO:0000305
+  label: curator inference used in manual assertion
   type: gocam:Object
 - id: GO:0004329
   label: formate-tetrahydrofolate ligase activity
@@ -3449,6 +3672,9 @@ objects:
 - id: GO:0046654
   label: tetrahydrofolate biosynthetic process
   type: gocam:Object
+- id: ECO:0000501
+  label: evidence used in automatic assertion
+  type: gocam:Object
 - id: GO:0008841
   label: dihydrofolate synthase activity
   type: gocam:Object
@@ -3457,9 +3683,6 @@ objects:
   type: gocam:Object
 - id: GO:0004156
   label: dihydropteroate synthase activity
-  type: gocam:Object
-- id: PomBase:SPBC1734.03
-  label: fol1 Spom
   type: gocam:Object
 - id: GO:0008696
   label: 4-amino-4-deoxychorismate lyase activity
@@ -3572,6 +3795,6 @@ objects:
 provenances:
 - contributor:
   - https://orcid.org/0009-0003-9059-1333
-  date: '2025-07-21'
+  date: '2025-12-01'
   provided_by:
   - http://www.pombase.org

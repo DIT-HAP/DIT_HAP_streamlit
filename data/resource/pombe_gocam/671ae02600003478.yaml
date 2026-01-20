@@ -4,6 +4,7 @@ title: 'cell integrity MAPK cascade (GO:0000196)
   '
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-03-17'
 comments:
 - pathway hole inferred from genetics https://github.com/pombase/curation/issues/3773#issuecomment-2724485082
 activities:

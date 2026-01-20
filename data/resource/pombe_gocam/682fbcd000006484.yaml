@@ -4,6 +4,7 @@ title: 'cytochrome c biosynthetic process
   (GO:1903607)'
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-11-30'
 activities:
 - id: gomodel:682fbcd000006484/685de18700007564
   enabled_by:
@@ -175,21 +176,11 @@ activities:
     term: GO:0004408
   occurs_in:
     type: CellularAnatomicalEntityAssociation
-    evidence:
-    - term: ECO:0000501
-      reference: GO_REF:0000044
-      with_objects:
-      - UniProtKB-SubCell:SL-0168
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2025-06-19'
-        provided_by:
-        - http://www.pombase.org
+    evidence: []
     provenances:
     - contributor:
       - https://orcid.org/0000-0001-6330-7526
-      date: '2025-06-19'
+      date: '2025-11-30'
       provided_by:
       - http://www.pombase.org
     term: GO:0005743
@@ -636,9 +627,6 @@ objects:
 - id: GO:0005743
   label: mitochondrial inner membrane
   type: gocam:Object
-- id: ECO:0000501
-  label: evidence used in automatic assertion
-  type: gocam:Object
 - id: GO:0008121
   label: quinol-cytochrome-c reductase activity
   type: gocam:Object
@@ -648,6 +636,6 @@ objects:
 provenances:
 - contributor:
   - https://orcid.org/0000-0001-6330-7526
-  date: '2025-07-10'
+  date: '2025-11-30'
   provided_by:
   - http://www.pombase.org

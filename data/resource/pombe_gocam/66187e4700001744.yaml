@@ -2,6 +2,7 @@ id: gomodel:66187e4700001744
 title: meiotic cohesion protection in anaphase I (GO:1990813)
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-07-24'
 comments:
 - 'Automated change 2025-07-24: GO:0072371 replaced by GO:1990244'
 activities:
@@ -325,49 +326,6 @@ activities:
       - http://www.pombase.org
     predicate: RO:0002629
     downstream_activity: gomodel:66187e4700001744/66187e4700001951
-- id: gomodel:66187e4700001744/66187e4700001997
-  enabled_by:
-    type: EnabledByGeneProductAssociation
-    evidence: []
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2024-04-23'
-      provided_by:
-      - http://www.pombase.org
-    term: PR:000050512
-  molecular_function:
-    type: MolecularFunctionAssociation
-    term: GO:0060090
-  part_of:
-    type: BiologicalProcessAssociation
-    evidence:
-    - term: ECO:0000269
-      reference: PMID:19965387
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2024-04-23'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2024-04-23'
-      provided_by:
-      - http://www.pombase.org
-    term: GO:1990813
-  causal_associations:
-  - type: CausalAssociation
-    evidence: []
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2024-04-23'
-      provided_by:
-      - http://www.pombase.org
-    predicate: RO:0002629
-    downstream_activity: gomodel:66187e4700001744/66187e4700001951
 - id: gomodel:66187e4700001744/66187e4700001765
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -483,6 +441,49 @@ activities:
       - http://www.pombase.org
     predicate: RO:0002629
     downstream_activity: gomodel:66187e4700001744/66187e4700001997
+- id: gomodel:66187e4700001744/66187e4700001997
+  enabled_by:
+    type: EnabledByGeneProductAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2024-04-23'
+      provided_by:
+      - http://www.pombase.org
+    term: PR:000050512
+  molecular_function:
+    type: MolecularFunctionAssociation
+    term: GO:0060090
+  part_of:
+    type: BiologicalProcessAssociation
+    evidence:
+    - term: ECO:0000269
+      reference: PMID:19965387
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2024-04-23'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2024-04-23'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:1990813
+  causal_associations:
+  - type: CausalAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2024-04-23'
+      provided_by:
+      - http://www.pombase.org
+    predicate: RO:0002629
+    downstream_activity: gomodel:66187e4700001744/66187e4700001951
 - id: gomodel:66187e4700001744/66187e4700001974
   enabled_by:
     type: EnabledByGeneProductAssociation

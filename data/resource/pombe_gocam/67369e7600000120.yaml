@@ -2,6 +2,7 @@ id: gomodel:67369e7600000120
 title: mitotic sister chromatid cohesion (GO:0007064)
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-04-17'
 activities:
 - id: gomodel:67369e7600000120/67369e7600000238
   enabled_by:

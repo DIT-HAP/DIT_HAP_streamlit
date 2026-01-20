@@ -2,6 +2,7 @@ id: gomodel:671ae02600003548
 title: dolichyl monophosphate biosynthetic process (GO:0043048)
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-08-14'
 comments:
 - 'Automated change 2025-06-12: GO:0019408 replaced by GO:0043048'
 activities:
@@ -28,7 +29,7 @@ activities:
     term: PomBase:SPAC7D4.09c
   molecular_function:
     type: MolecularFunctionAssociation
-    term: GO:0102389
+    term: GO:0160198
   occurs_in:
     type: CellularAnatomicalEntityAssociation
     evidence:
@@ -498,8 +499,8 @@ objects:
 - id: CHEBI:27845
   label: ditrans,polycis-polyprenyl diphosphate
   type: gocam:Object
-- id: GO:0102389
-  label: polyprenol reductase activity
+- id: GO:0160198
+  label: polyprenal reductase activity
   type: gocam:Object
 - id: PomBase:SPAC7D4.09c
   label: dfg10 Spom
@@ -525,6 +526,6 @@ objects:
 provenances:
 - contributor:
   - https://orcid.org/0000-0001-6330-7526
-  date: '2025-06-15'
+  date: '2025-08-14'
   provided_by:
   - http://www.pombase.org

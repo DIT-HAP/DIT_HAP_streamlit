@@ -2,6 +2,7 @@ id: gomodel:685de18700006767
 title: phospholipid transport (GO:0015914) (ER/mitochondrion)
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-07-22'
 comments:
 - replaced [ERMES complex -- has output --> phospholipid in mitochondrial outer membrane
   -- input of --> pls1]  with [ERMES complex -- provides input for --> pls1] for joining

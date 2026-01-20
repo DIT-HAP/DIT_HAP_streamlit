@@ -3,6 +3,7 @@ title: riboflavin biosynthetic process (GO:0009231), FMN biosynthetic process (G
   biosynthetic process (GO:0006747)
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-12-01'
 comments:
 - something is not quite right around rib2 and rib7 see https://pathway.yeastgenome.org/YEAST/new-image?type=PATHWAY&object=YEAST-RIBOSYN-PWY&detail-level=2
 activities:
@@ -51,20 +52,20 @@ activities:
   part_of:
     type: BiologicalProcessAssociation
     evidence:
-    - term: ECO:0000501
-      reference: GO_REF:0000041
+    - term: ECO:0000250
+      reference: GO_REF:0000024
       with_objects:
-      - UniPathway:UPA00275
+      - SGD:S000005427
       provenances:
       - contributor:
         - https://orcid.org/0000-0001-6330-7526
-        date: '2025-01-28'
+        date: '2025-11-29'
         provided_by:
         - http://www.pombase.org
     provenances:
     - contributor:
       - https://orcid.org/0000-0001-6330-7526
-      date: '2025-01-28'
+      date: '2025-11-29'
       provided_by:
       - http://www.pombase.org
     term: GO:0009231
@@ -255,19 +256,19 @@ activities:
     provenances:
     - contributor:
       - https://orcid.org/0000-0001-6330-7526
-      date: '2025-03-06'
+      date: '2025-01-28'
       provided_by:
       - http://www.pombase.org
-    term: CHEBI:15740
+    term: CHEBI:58614
   - type: MoleculeAssociation
     evidence: []
     provenances:
     - contributor:
       - https://orcid.org/0000-0001-6330-7526
-      date: '2025-01-28'
+      date: '2025-03-06'
       provided_by:
       - http://www.pombase.org
-    term: CHEBI:58614
+    term: CHEBI:15740
 - id: gomodel:6796b94c00000731/6796b94c00000756
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -746,14 +747,13 @@ activities:
   occurs_in:
     type: CellularAnatomicalEntityAssociation
     evidence:
-    - term: ECO:0000255
-      reference: GO_REF:0000050
-      with_objects:
-      - Pfam:PF00153
+    - term: ECO:0007005
+      reference: PMID:16823372
       provenances:
       - contributor:
+        - https://orcid.org/0009-0003-9059-1333
         - https://orcid.org/0000-0001-6330-7526
-        date: '2025-06-21'
+        date: '2025-12-01'
         provided_by:
         - http://www.pombase.org
     provenances:
@@ -762,7 +762,7 @@ activities:
       date: '2025-06-21'
       provided_by:
       - http://www.pombase.org
-    term: GO:0005743
+    term: GO:0005739
   part_of:
     type: BiologicalProcessAssociation
     evidence:
@@ -879,13 +879,11 @@ activities:
     type: CellularAnatomicalEntityAssociation
     evidence:
     - term: ECO:0007005
-      reference: hda
-      with_objects:
-      - PMID:16823372
+      reference: PMID:16823372
       provenances:
       - contributor:
         - https://orcid.org/0000-0001-6330-7526
-        date: '2025-03-06'
+        date: '2025-12-01'
         provided_by:
         - http://www.pombase.org
     provenances:
@@ -1449,16 +1447,13 @@ objects:
 - id: GO:1990548
   label: mitochondrial FAD transmembrane transport
   type: gocam:Object
-- id: GO:0005743
-  label: mitochondrial inner membrane
-  type: gocam:Object
-- id: ECO:0000255
-  label: match to sequence model evidence used in manual assertion
+- id: GO:0005739
+  label: mitochondrion
   type: gocam:Object
 provenances:
 - contributor:
   - https://orcid.org/0000-0001-6330-7526
   - https://orcid.org/0009-0003-9059-1333
-  date: '2025-06-21'
+  date: '2025-12-01'
   provided_by:
   - http://www.pombase.org

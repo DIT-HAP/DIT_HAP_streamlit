@@ -2,6 +2,7 @@ id: gomodel:6796b94c00004743
 title: glycerol metabolic process (GO:0006071)
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-12-15'
 activities:
 - id: gomodel:6796b94c00004743/6796b94c00004803
   enabled_by:
@@ -81,15 +82,14 @@ activities:
   part_of:
     type: BiologicalProcessAssociation
     evidence:
-    - term: ECO:0000318
-      reference: GO_REF:0000033
+    - term: ECO:0000316
+      reference: PMID:3912263
       with_objects:
-      - PANTHER:PTN000474559
-      - TAIR:locus:2047072
+      - SGD:S000002457
       provenances:
       - contributor:
         - https://orcid.org/0009-0003-9059-1333
-        date: '2025-02-07'
+        date: '2025-09-11'
         provided_by:
         - http://www.pombase.org
     provenances:
@@ -98,7 +98,7 @@ activities:
       date: '2025-02-07'
       provided_by:
       - http://www.pombase.org
-    term: GO:0019563
+    term: GO:0061621
   has_input:
   - type: MoleculeAssociation
     evidence: []
@@ -109,47 +109,6 @@ activities:
       provided_by:
       - http://www.pombase.org
     term: CHEBI:57642
-  has_output:
-  - type: MoleculeAssociation
-    evidence:
-    - term: ECO:0000316
-      reference: PMID:3912263
-      with_objects:
-      - SGD:S000002457
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-02-07'
-        provided_by:
-        - http://www.pombase.org
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN000474559
-      - SGD:S000002457
-      - TAIR:locus:2047072
-      - PomBase:SPCC24B10.21
-      - UniProtKB:P9WG43
-      - TAIR:locus:2099906
-      - RGD:3896
-      - FB:FBgn0086355
-      - UniProtKB:Q7KQM0
-      - UniProtKB:P0A858
-      - UniProtKB:P60174
-      - MGI:MGI:98797
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-02-07'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-02-07'
-      provided_by:
-      - http://www.pombase.org
-    term: CHEBI:59776
 - id: gomodel:6796b94c00004743/6796b94c00004787
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -466,8 +425,9 @@ activities:
       reference: PMID:20396879
       provenances:
       - contributor:
+        - https://orcid.org/0000-0001-6330-7526
         - https://orcid.org/0009-0003-9059-1333
-        date: '2025-02-07'
+        date: '2025-12-15'
         provided_by:
         - http://www.pombase.org
     provenances:
@@ -476,7 +436,7 @@ activities:
       date: '2025-02-07'
       provided_by:
       - http://www.pombase.org
-    term: GO:0061613
+    term: GO:0061610
   has_input:
   - type: MoleculeAssociation
     evidence: []
@@ -571,14 +531,17 @@ activities:
   part_of:
     type: BiologicalProcessAssociation
     evidence:
-    - term: ECO:0000501
-      reference: GO_REF:0000041
+    - term: ECO:0000318
+      reference: GO_REF:0000033
       with_objects:
-      - UniPathway:UPA00618
+      - PANTHER:PTN008531985
+      - FB:FBgn0022160
+      - TAIR:locus:2076314
+      - MGI:MGI:99778
       provenances:
       - contributor:
         - https://orcid.org/0009-0003-9059-1333
-        date: '2025-02-07'
+        date: '2025-12-01'
         provided_by:
         - http://www.pombase.org
     provenances:
@@ -587,7 +550,7 @@ activities:
       date: '2025-02-07'
       provided_by:
       - http://www.pombase.org
-    term: GO:0019563
+    term: GO:0006127
   has_input:
   - type: MoleculeAssociation
     evidence:
@@ -884,260 +847,6 @@ activities:
       provided_by:
       - http://www.pombase.org
     term: CHEBI:57642
-- id: gomodel:6796b94c00004743/6796b94c00004815
-  enabled_by:
-    type: EnabledByGeneProductAssociation
-    evidence:
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN000089475
-      - FB:FBgn0001092
-      - SGD:S000003424
-      - TAIR:locus:2032810
-      - FB:FBgn0001091
-      - RGD:2661
-      - CGD:CAL0000197744
-      - SGD:S000003588
-      - TAIR:locus:2206435
-      - SGD:S000003769
-      - MGI:MGI:95653
-      - UniProtKB:P20445
-      - MGI:MGI:95640
-      - TAIR:locus:2010007
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-02-07'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-02-07'
-      provided_by:
-      - http://www.pombase.org
-    term: PomBase:SPBC354.12
-  molecular_function:
-    type: MolecularFunctionAssociation
-    term: GO:0004365
-  occurs_in:
-    type: CellularAnatomicalEntityAssociation
-    evidence:
-    - term: ECO:0007005
-      reference: PMID:16823372
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-06-09'
-        provided_by:
-        - http://www.pombase.org
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN000089475
-      - SGD:S000003424
-      - SGD:S000003588
-      - UniProtKB:P04406
-      - MGI:MGI:95640
-      - TAIR:locus:2103085
-      - RGD:2661
-      - TAIR:locus:2010007
-      - SGD:S000003769
-      - UniProtKB:Q8IKK7
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-06-09'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-06-09'
-      provided_by:
-      - http://www.pombase.org
-    term: GO:0005829
-  part_of:
-    type: BiologicalProcessAssociation
-    evidence:
-    - term: ECO:0000266
-      reference: GO_REF:0000024
-      with_objects:
-      - SGD:S000003588
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-02-07'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-02-07'
-      provided_by:
-      - http://www.pombase.org
-    term: GO:0061621
-  has_input:
-  - type: MoleculeAssociation
-    evidence:
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN000089475
-      - FB:FBgn0001092
-      - SGD:S000003424
-      - TAIR:locus:2032810
-      - FB:FBgn0001091
-      - RGD:2661
-      - CGD:CAL0000197744
-      - SGD:S000003588
-      - TAIR:locus:2206435
-      - SGD:S000003769
-      - MGI:MGI:95653
-      - UniProtKB:P20445
-      - MGI:MGI:95640
-      - TAIR:locus:2010007
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-02-07'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-02-07'
-      provided_by:
-      - http://www.pombase.org
-    term: CHEBI:59776
-- id: gomodel:6796b94c00004743/6796b94c00004820
-  enabled_by:
-    type: EnabledByGeneProductAssociation
-    evidence:
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN000089475
-      - FB:FBgn0001092
-      - SGD:S000003424
-      - TAIR:locus:2032810
-      - FB:FBgn0001091
-      - RGD:2661
-      - CGD:CAL0000197744
-      - SGD:S000003588
-      - TAIR:locus:2206435
-      - SGD:S000003769
-      - MGI:MGI:95653
-      - UniProtKB:P20445
-      - MGI:MGI:95640
-      - TAIR:locus:2010007
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-02-07'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-02-07'
-      provided_by:
-      - http://www.pombase.org
-    term: PomBase:SPBC32F12.11
-  molecular_function:
-    type: MolecularFunctionAssociation
-    term: GO:0004365
-  occurs_in:
-    type: CellularAnatomicalEntityAssociation
-    evidence:
-    - term: ECO:0007005
-      reference: PMID:16823372
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-06-09'
-        provided_by:
-        - http://www.pombase.org
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN000089475
-      - SGD:S000003424
-      - SGD:S000003588
-      - UniProtKB:P04406
-      - MGI:MGI:95640
-      - TAIR:locus:2103085
-      - RGD:2661
-      - TAIR:locus:2010007
-      - SGD:S000003769
-      - UniProtKB:Q8IKK7
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-06-09'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-06-09'
-      provided_by:
-      - http://www.pombase.org
-    term: GO:0005829
-  part_of:
-    type: BiologicalProcessAssociation
-    evidence:
-    - term: ECO:0000305
-      reference: GO_REF:0000111
-      with_objects:
-      - GO:0004365
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-02-07'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-02-07'
-      provided_by:
-      - http://www.pombase.org
-    term: GO:0061621
-  has_input:
-  - type: MoleculeAssociation
-    evidence:
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN000089475
-      - FB:FBgn0001092
-      - SGD:S000003424
-      - TAIR:locus:2032810
-      - FB:FBgn0001091
-      - RGD:2661
-      - CGD:CAL0000197744
-      - SGD:S000003588
-      - TAIR:locus:2206435
-      - SGD:S000003769
-      - MGI:MGI:95653
-      - UniProtKB:P20445
-      - MGI:MGI:95640
-      - TAIR:locus:2010007
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-02-07'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-02-07'
-      provided_by:
-      - http://www.pombase.org
-    term: CHEBI:59776
 - id: gomodel:6796b94c00004743/6796b94c00004761
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -1327,7 +1036,7 @@ objects:
   label: glycerol channel activity
   type: gocam:Object
 - id: PomBase:SPAC977.17
-  label: SPAC977.17 Spom
+  label: aqp1 Spom
   type: gocam:Object
 - id: GO:0015793
   label: glycerol transmembrane transport
@@ -1353,17 +1062,14 @@ objects:
 - id: PomBase:SPCC1223.03c
   label: gut2 Spom
   type: gocam:Object
-- id: GO:0019563
-  label: glycerol catabolic process
+- id: GO:0006127
+  label: glycerol-3-phosphate shuttle
   type: gocam:Object
 - id: GO:0005741
   label: mitochondrial outer membrane
   type: gocam:Object
 - id: ECO:0000266
   label: sequence orthology evidence used in manual assertion
-  type: gocam:Object
-- id: ECO:0000501
-  label: evidence used in automatic assertion
   type: gocam:Object
 - id: CHEBI:57642
   label: glycerone phosphate(2-)
@@ -1376,6 +1082,9 @@ objects:
   type: gocam:Object
 - id: GO:0006114
   label: glycerol biosynthetic process
+  type: gocam:Object
+- id: ECO:0000501
+  label: evidence used in automatic assertion
   type: gocam:Object
 - id: ECO:0000315
   label: mutant phenotype evidence used in manual assertion
@@ -1392,35 +1101,23 @@ objects:
 - id: PomBase:SPCC24B10.21
   label: tpi1 Spom
   type: gocam:Object
+- id: GO:0061621
+  label: canonical glycolysis
+  type: gocam:Object
 - id: ECO:0000316
   label: genetic interaction evidence used in manual assertion
   type: gocam:Object
 - id: ECO:0007005
   label: high throughput direct assay evidence used in manual assertion
   type: gocam:Object
-- id: CHEBI:59776
-  label: D-glyceraldehyde 3-phosphate(2-)
-  type: gocam:Object
-- id: GO:0004365
-  label: glyceraldehyde-3-phosphate dehydrogenase (NAD+) (phosphorylating) activity
-  type: gocam:Object
-- id: PomBase:SPBC354.12
-  label: gpd3 Spom
-  type: gocam:Object
-- id: GO:0061621
-  label: canonical glycolysis
-  type: gocam:Object
-- id: PomBase:SPBC32F12.11
-  label: tdh1 Spom
-  type: gocam:Object
-- id: ECO:0000305
-  label: curator inference used in manual assertion
-  type: gocam:Object
 - id: GO:0004371
   label: glycerone kinase activity
   type: gocam:Object
 - id: PomBase:SPAC22A12.11
   label: dak1 Spom
+  type: gocam:Object
+- id: GO:0019563
+  label: glycerol catabolic process
   type: gocam:Object
 - id: ECO:0000314
   label: direct assay evidence used in manual assertion
@@ -1434,8 +1131,8 @@ objects:
 - id: PomBase:SPAC13F5.03c
   label: gld1 Spom
   type: gocam:Object
-- id: GO:0061613
-  label: glycolytic process from glycerol
+- id: GO:0061610
+  label: glycerol catabolic process to glycerone phosphate
   type: gocam:Object
 - id: CHEBI:132124
   label: 1,4-benzoquinones
@@ -1445,7 +1142,8 @@ objects:
   type: gocam:Object
 provenances:
 - contributor:
+  - https://orcid.org/0000-0001-6330-7526
   - https://orcid.org/0009-0003-9059-1333
-  date: '2025-07-18'
+  date: '2025-12-15'
   provided_by:
   - http://www.pombase.org

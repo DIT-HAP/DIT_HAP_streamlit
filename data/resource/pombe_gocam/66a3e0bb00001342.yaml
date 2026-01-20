@@ -1,9 +1,10 @@
 id: gomodel:66a3e0bb00001342
-title: L-methionine biosynthetic process (GO:0071265),  sulfate assimilation (GO:0000103),
-  sulfite transmembrane  transport. (GO:0000316), sulfate import across plasma membrane
-  (GO:1902434)
+title: '''de novo'' L-methionine biosynthetic process (GO:0071266),  sulfate assimilation
+  (GO:0000103), sulfite transmembrane  transport. (GO:0000316), sulfate import across
+  plasma membrane (GO:1902434)'
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-10-26'
 comments:
 - https://www.nature.com/articles/s41598-019-48433-5
 activities:
@@ -1930,16 +1931,14 @@ activities:
   part_of:
     type: BiologicalProcessAssociation
     evidence:
-    - term: ECO:0000318
+    - term: ECO:0000305
       reference: GO_REF:0000033
       with_objects:
-      - PANTHER:PTN001834647
-      - MGI:MGI:1891037
-      - UniProtKB:Q9UBK8
+      - GO:0030586
       provenances:
       - contributor:
         - https://orcid.org/0000-0001-6330-7526
-        date: '2025-01-22'
+        date: '2025-10-26'
         provided_by:
         - http://www.pombase.org
     provenances:
@@ -1948,7 +1947,7 @@ activities:
       date: '2025-01-22'
       provided_by:
       - http://www.pombase.org
-    term: GO:0009086
+    term: GO:0071266
   has_input:
   - type: MoleculeAssociation
     evidence: []
@@ -2169,16 +2168,14 @@ activities:
   part_of:
     type: BiologicalProcessAssociation
     evidence:
-    - term: ECO:0000318
-      reference: GO_REF:0000033
+    - term: ECO:0000305
+      reference: GO_REF:0000111
       with_objects:
-      - PANTHER:PTN001834647
-      - MGI:MGI:1891037
-      - UniProtKB:Q9UBK8
+      - GO:0030586
       provenances:
       - contributor:
         - https://orcid.org/0000-0001-6330-7526
-        date: '2025-01-22'
+        date: '2025-10-26'
         provided_by:
         - http://www.pombase.org
     provenances:
@@ -2187,7 +2184,7 @@ activities:
       date: '2025-01-22'
       provided_by:
       - http://www.pombase.org
-    term: GO:0009086
+    term: GO:0071266
   has_input:
   - type: MoleculeAssociation
     evidence: []
@@ -2718,8 +2715,8 @@ objects:
 - id: PomBase:SPAC1783.01
   label: SPAC1783.01 Spom
   type: gocam:Object
-- id: GO:0009086
-  label: methionine biosynthetic process
+- id: GO:0071266
+  label: '''de novo'' L-methionine biosynthetic process'
   type: gocam:Object
 - id: CHEBI:59789
   label: S-adenosyl-L-methionine zwitterion
@@ -2738,9 +2735,6 @@ objects:
   type: gocam:Object
 - id: PomBase:SPBC56F2.11
   label: met6 Spom
-  type: gocam:Object
-- id: GO:0071266
-  label: '''de novo'' L-methionine biosynthetic process'
   type: gocam:Object
 - id: ECO:0000314
   label: direct assay evidence used in manual assertion
@@ -2763,6 +2757,6 @@ objects:
 provenances:
 - contributor:
   - https://orcid.org/0000-0001-6330-7526
-  date: '2025-05-10'
+  date: '2025-10-26'
   provided_by:
   - http://www.pombase.org

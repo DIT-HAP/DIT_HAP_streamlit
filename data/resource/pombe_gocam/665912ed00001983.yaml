@@ -2,6 +2,7 @@ id: gomodel:665912ed00001983
 title: subtelomeric heterochromatin formation (GO:0031509)
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-04-24'
 activities:
 - id: gomodel:665912ed00001983/665912ed00002237
   enabled_by:

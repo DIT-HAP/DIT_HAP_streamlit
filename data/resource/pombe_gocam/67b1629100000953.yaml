@@ -2,6 +2,7 @@ id: gomodel:67b1629100000953
 title: pentose-phosphate shunt (GO:0006098) (and gluconate shunt, waiting for term)
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-09-09'
 comments:
 - 'source
 
@@ -397,99 +398,6 @@ activities:
     term: GO:0006098
   has_input:
   - type: MoleculeAssociation
-    evidence:
-    - term: ECO:0000269
-      reference: PMID:9872416
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2025-02-19'
-        provided_by:
-        - http://www.pombase.org
-    - term: ECO:0000315
-      reference: PMID:28667014
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2025-02-19'
-        provided_by:
-        - http://www.pombase.org
-    - term: ECO:0000314
-      reference: PMID:7840612
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2025-02-19'
-        provided_by:
-        - http://www.pombase.org
-    - term: ECO:0000314
-      reference: PMID:7840611
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2025-02-19'
-        provided_by:
-        - http://www.pombase.org
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN000176126
-      - UniProtKB:P39208
-      - PomBase:SPAC4G9.12
-      - UniProtKB:P46859
-      - SGD:S000002656
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2025-02-19'
-        provided_by:
-        - http://www.pombase.org
-    - term: ECO:0000269
-      reference: PMID:9872416
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2025-02-19'
-        provided_by:
-        - http://www.pombase.org
-    - term: ECO:0000314
-      reference: PMID:7840612
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2025-02-19'
-        provided_by:
-        - http://www.pombase.org
-    - term: ECO:0000314
-      reference: PMID:7840611
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2025-02-19'
-        provided_by:
-        - http://www.pombase.org
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN000176126
-      - UniProtKB:P39208
-      - PomBase:SPAC4G9.12
-      - UniProtKB:P46859
-      - SGD:S000002656
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2025-02-19'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2025-02-19'
-      provided_by:
-      - http://www.pombase.org
-    term: CHEBI:16217
-  - type: MoleculeAssociation
     evidence: []
     provenances:
     - contributor:
@@ -498,23 +406,6 @@ activities:
       provided_by:
       - http://www.pombase.org
     term: CHEBI:18391
-  - type: MoleculeAssociation
-    evidence:
-    - term: ECO:0000315
-      reference: PMID:28667014
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2025-02-19'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2025-02-19'
-      provided_by:
-      - http://www.pombase.org
-    term: CHEBI:16217
   has_output:
   - type: MoleculeAssociation
     evidence:
@@ -1577,57 +1468,51 @@ activities:
       provided_by:
       - http://www.pombase.org
     term: CHEBI:16217
-  - type: MoleculeAssociation
+  causal_associations:
+  - type: CausalAssociation
     evidence:
     - term: ECO:0000314
       reference: PMID:28667014
       provenances:
       - contributor:
         - https://orcid.org/0000-0001-6330-7526
-        date: '2025-02-19'
+        date: '2025-09-09'
         provided_by:
         - http://www.pombase.org
     provenances:
     - contributor:
       - https://orcid.org/0000-0001-6330-7526
-      date: '2025-02-19'
+      date: '2025-09-09'
       provided_by:
       - http://www.pombase.org
-    term: CHEBI:18391
-  - type: MoleculeAssociation
+    predicate: RO:0002413
+    downstream_activity: gomodel:67b1629100000953/67b1629100001369
+  - type: CausalAssociation
     evidence:
     - term: ECO:0000314
       reference: PMID:28667014
       provenances:
       - contributor:
         - https://orcid.org/0000-0001-6330-7526
-        date: '2025-02-19'
+        date: '2025-09-09'
         provided_by:
         - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2025-02-19'
-      provided_by:
-      - http://www.pombase.org
-    term: CHEBI:18391
-  - type: MoleculeAssociation
-    evidence:
     - term: ECO:0000314
       reference: PMID:28667014
       provenances:
       - contributor:
         - https://orcid.org/0000-0001-6330-7526
-        date: '2025-02-19'
+        date: '2025-09-09'
         provided_by:
         - http://www.pombase.org
     provenances:
     - contributor:
       - https://orcid.org/0000-0001-6330-7526
-      date: '2025-02-19'
+      date: '2025-09-09'
       provided_by:
       - http://www.pombase.org
-    term: CHEBI:18391
+    predicate: RO:0002413
+    downstream_activity: gomodel:67b1629100000953/67b1629100001369
 - id: gomodel:67b1629100000953/67b1629100001031
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -2085,6 +1970,6 @@ objects:
 provenances:
 - contributor:
   - https://orcid.org/0000-0001-6330-7526
-  date: '2025-02-19'
+  date: '2025-09-09'
   provided_by:
   - http://www.pombase.org

@@ -2,6 +2,7 @@ id: gomodel:665912ed00000652
 title: pericentric heterochromatin formation (GO:0031508)
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-04-25'
 activities:
 - id: gomodel:665912ed00000652/67f85f2b00004476
   enabled_by:
@@ -42,67 +43,6 @@ activities:
       provided_by:
       - http://www.pombase.org
     term: GO:0031508
-- id: gomodel:665912ed00000652/665912ed00000859
-  enabled_by:
-    type: EnabledByGeneProductAssociation
-    evidence: []
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-04-23'
-      provided_by:
-      - http://www.pombase.org
-    term: PomBase:SPAC13G7.07
-  molecular_function:
-    type: MolecularFunctionAssociation
-    term: GO:0003674
-  occurs_in:
-    type: CellularAnatomicalEntityAssociation
-    evidence:
-    - term: ECO:0000314
-      reference: PMID:17310250
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2024-06-03'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2024-06-03'
-      provided_by:
-      - http://www.pombase.org
-    term: GO:0005634
-  part_of:
-    type: BiologicalProcessAssociation
-    evidence:
-    - term: ECO:0000315
-      reference: PMID:17310250
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2024-06-03'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2024-06-03'
-      provided_by:
-      - http://www.pombase.org
-    term: GO:0140727
-  causal_associations:
-  - type: CausalAssociation
-    evidence: []
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-04-24'
-      provided_by:
-      - http://www.pombase.org
-    predicate: RO:0002305
-    downstream_activity: gomodel:665912ed00000652/665912ed00000867
 - id: gomodel:665912ed00000652/67f85f2b00004057
   enabled_by:
     type: EnabledByProteinComplexAssociation
@@ -175,6 +115,67 @@ activities:
       - http://www.pombase.org
     predicate: RO:0002413
     downstream_activity: gomodel:665912ed00000652/665912ed00000658
+- id: gomodel:665912ed00000652/665912ed00000859
+  enabled_by:
+    type: EnabledByGeneProductAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-04-23'
+      provided_by:
+      - http://www.pombase.org
+    term: PomBase:SPAC13G7.07
+  molecular_function:
+    type: MolecularFunctionAssociation
+    term: GO:0003674
+  occurs_in:
+    type: CellularAnatomicalEntityAssociation
+    evidence:
+    - term: ECO:0000314
+      reference: PMID:17310250
+      provenances:
+      - contributor:
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2024-06-03'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2024-06-03'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0005634
+  part_of:
+    type: BiologicalProcessAssociation
+    evidence:
+    - term: ECO:0000315
+      reference: PMID:17310250
+      provenances:
+      - contributor:
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2024-06-03'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2024-06-03'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0140727
+  causal_associations:
+  - type: CausalAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-04-24'
+      provided_by:
+      - http://www.pombase.org
+    predicate: RO:0002305
+    downstream_activity: gomodel:665912ed00000652/665912ed00000867
 - id: gomodel:665912ed00000652/665912ed00000882
   enabled_by:
     type: EnabledByGeneProductAssociation

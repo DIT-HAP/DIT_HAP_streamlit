@@ -2,6 +2,7 @@ id: gomodel:67c10cc400000238
 title: '''de novo'' cotranslational protein folding (GO:0051083)'
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-11-03'
 activities:
 - id: gomodel:67c10cc400000238/67c10cc400000239
   enabled_by:
@@ -247,6 +248,6 @@ objects:
 provenances:
 - contributor:
   - https://orcid.org/0000-0001-6330-7526
-  date: '2025-06-15'
+  date: '2025-11-03'
   provided_by:
   - http://www.pombase.org

@@ -2,6 +2,7 @@ id: gomodel:67f85f2b00002506
 title: mitochondrial proton-transporting ATP synthase complex assembly (GO:0033615)
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-08-13'
 activities:
 - id: gomodel:67f85f2b00002506/67f85f2b00002522
   enabled_by:

@@ -2,6 +2,7 @@ id: gomodel:67b1629100001554
 title: ' glycine decarboxylation via glycine cleavage system (GO:0004375)'
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-06-13'
 activities:
 - id: gomodel:67b1629100001554/684b6c8100000253
   enabled_by:

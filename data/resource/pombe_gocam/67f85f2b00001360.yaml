@@ -2,6 +2,7 @@ id: gomodel:67f85f2b00001360
 title: proteasome assembly (GO:0043248)
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-06-15'
 activities:
 - id: gomodel:67f85f2b00001360/67f85f2b00001739
   enabled_by:

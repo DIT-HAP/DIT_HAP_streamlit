@@ -2,6 +2,7 @@ id: gomodel:66187e4700003150
 title: adenylate cyclase-activating G protein-coupled receptor signaling pathway (GO:0007189)
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-07-24'
 activities:
 - id: gomodel:66187e4700003150/682fbcd000005727
   enabled_by:

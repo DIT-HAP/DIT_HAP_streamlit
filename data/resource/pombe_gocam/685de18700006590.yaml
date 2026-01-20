@@ -2,6 +2,7 @@ id: gomodel:685de18700006590
 title: ammonium utilization (GO:0019740)
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-07-08'
 activities:
 - id: gomodel:685de18700006590/685de18700006635
   enabled_by:

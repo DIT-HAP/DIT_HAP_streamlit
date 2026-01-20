@@ -2,6 +2,7 @@ id: gomodel:6690711d00002904
 title: L-histidine biosynthetic process (GO:0000105)
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-08-27'
 activities:
 - id: gomodel:6690711d00002904/6690711d00002944
   enabled_by:
@@ -409,6 +410,15 @@ activities:
       provided_by:
       - http://www.pombase.org
     term: CHEBI:57595
+  - type: MoleculeAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-08-27'
+      provided_by:
+      - http://www.pombase.org
+    term: PomBase:SPMITTRNAHIS.01
 - id: gomodel:6690711d00002904/6690711d00002965
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -1192,9 +1202,12 @@ objects:
 - id: ECO:0000305
   label: curator inference used in manual assertion
   type: gocam:Object
+- id: PomBase:SPMITTRNAHIS.01
+  label: SPMITTRNAHIS.01 Spom
+  type: gocam:Object
 provenances:
 - contributor:
   - https://orcid.org/0000-0001-6330-7526
-  date: '2025-07-19'
+  date: '2025-08-27'
   provided_by:
   - http://www.pombase.org

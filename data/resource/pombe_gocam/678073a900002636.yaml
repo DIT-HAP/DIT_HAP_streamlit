@@ -3,6 +3,7 @@ title: coenzyme A biosynthetic process (GO:0015937) and acetyl-CoA biosynthetic 
   from acetate (GO:0019427)
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-09-17'
 activities:
 - id: gomodel:678073a900002636/678073a900002708
   enabled_by:
@@ -1218,6 +1219,9 @@ objects:
 - id: GO:0005743
   label: mitochondrial inner membrane
   type: gocam:Object
+- id: GO:0005759
+  label: mitochondrial matrix
+  type: gocam:Object
 - id: CHEBI:35235
   label: L-cysteine zwitterion
   type: gocam:Object
@@ -1227,6 +1231,6 @@ objects:
 provenances:
 - contributor:
   - https://orcid.org/0009-0003-9059-1333
-  date: '2025-06-09'
+  date: '2025-09-17'
   provided_by:
   - http://www.pombase.org

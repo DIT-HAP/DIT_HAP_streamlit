@@ -2,6 +2,7 @@ id: gomodel:6796b94c00000168
 title: transcription elongation by RNA polymerase II (GO:0006368) (incomplete)
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-02-25'
 activities:
 - id: gomodel:6796b94c00000168/6796b94c00000296
   enabled_by:

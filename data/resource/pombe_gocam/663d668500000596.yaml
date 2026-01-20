@@ -2,6 +2,7 @@ id: gomodel:663d668500000596
 title: oxidative phosphorylation (GO:0006119)
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-08-20'
 comments:
 - ' https://www.pombase.org/term/GO:0006119'
 - Add etf1 complex
@@ -69,7 +70,7 @@ activities:
       date: '2025-01-31'
       provided_by:
       - http://www.pombase.org
-    term: GO:1905706
+    term: GO:0042776
   causal_associations:
   - type: CausalAssociation
     evidence: []
@@ -1630,9 +1631,6 @@ objects:
 - id: PomBase:SPCC70.02c
   label: inh1 Spom
   type: gocam:Object
-- id: GO:1905706
-  label: regulation of mitochondrial ATP synthesis coupled proton transport
-  type: gocam:Object
 - id: GO:0005739
   label: mitochondrion
   type: gocam:Object
@@ -1673,6 +1671,6 @@ provenances:
 - contributor:
   - https://orcid.org/0000-0001-6277-726X
   - https://orcid.org/0000-0001-6330-7526
-  date: '2025-07-23'
+  date: '2025-08-20'
   provided_by:
   - http://www.pombase.org

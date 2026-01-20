@@ -2,6 +2,7 @@ id: gomodel:663d668500001911
 title: '''de novo'' IMP biosynthetic process (GO:0006189)'
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-07-21'
 activities:
 - id: gomodel:663d668500001911/663d668500001954
   enabled_by:

@@ -3,6 +3,7 @@ title: "phosphatidylinositol/phosphatidylinositol phosphate/ biosynthetic proces
   \ (GO:0043647)\t (GO:0006661)\n"
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-05-14'
 comments:
 - Need to add "inositol phosphate metabolic process" (GO:0043647) to everything after
   plc1

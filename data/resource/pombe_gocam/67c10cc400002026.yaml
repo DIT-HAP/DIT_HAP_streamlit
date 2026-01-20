@@ -3,6 +3,7 @@ title: biotin import across plasma membrane (GO:1905135),  biotin biosynthetic p
   (GO:0009102),  protein maturation (GO:0051604) - biotinylated proteins
 taxon: NCBITaxon:4896
 status: production
+date_modified: '2025-11-29'
 comments:
 - These pathway holes are working on the assumption that the location of biotin synthase
   is correct, but this seems unlikely, especially since the substrates are both cytosolic.
@@ -255,16 +256,6 @@ activities:
   part_of:
     type: BiologicalProcessAssociation
     evidence:
-    - term: ECO:0000501
-      reference: GO_REF:0000041
-      with_objects:
-      - UniPathway:UPA00655
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2025-03-28'
-        provided_by:
-        - http://www.pombase.org
     - term: ECO:0000318
       reference: GO_REF:0000033
       with_objects:
@@ -287,7 +278,7 @@ activities:
     provenances:
     - contributor:
       - https://orcid.org/0000-0001-6330-7526
-      date: '2025-03-28'
+      date: '2025-11-29'
       provided_by:
       - http://www.pombase.org
     term: GO:0006633
@@ -1119,9 +1110,6 @@ objects:
 - id: GO:0006633
   label: fatty acid biosynthetic process
   type: gocam:Object
-- id: ECO:0000501
-  label: evidence used in automatic assertion
-  type: gocam:Object
 - id: ECO:0007005
   label: high throughput direct assay evidence used in manual assertion
   type: gocam:Object
@@ -1144,6 +1132,6 @@ provenances:
 - contributor:
   - https://orcid.org/0000-0001-6330-7526
   - https://orcid.org/0009-0003-9059-1333
-  date: '2025-07-23'
+  date: '2025-11-29'
   provided_by:
   - http://www.pombase.org
