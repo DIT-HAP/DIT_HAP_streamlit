@@ -4,6 +4,7 @@ import yaml
 import json
 from pathlib import Path
 from typing import Any, Literal
+from stqdm import stqdm
 
 import pandas as pd
 import numpy as np
@@ -194,14 +195,15 @@ def _parse_gocam_model(yaml_file_path: Path) -> Model:
 def load_all_gocam_models(directory_path: Path) -> dict[str, dict]:
     """Load all GO-CAM models from a specified directory."""
     models = {}
-    for file_path in directory_path.glob('*.yaml'):
-        model = _parse_gocam_model(file_path)
+    files = list(directory_path.glob('*.yaml'))
+    for file in stqdm(files, desc="\nLoading GO-CAM models", st_container=st.container()):
+        model = _parse_gocam_model(file)
         cx2_network = model_to_cx2(
             model,
             validate_iquery_gene_symbol_pattern=True,
             apply_dot_layout=True
         )
-        models[model.title] = {
+        models[model.title.strip()] = {
             "model": model,
             "id": model.id,
             "title": model.title.strip(),
@@ -218,7 +220,8 @@ def load_all_gocam_models(directory_path: Path) -> dict[str, dict]:
 def load_all_kegg_pathways(directory_path: Path) -> dict[str, list]:
     """Load all KEGG CX2 pathway files from a specified directory."""
     pathways = {}
-    for file in directory_path.glob('*.cx2'):
+    files = list(directory_path.glob('*.cx2'))
+    for file in stqdm(files, desc="\nLoading KEGG pathways", st_container=st.container()):
         with open(file, 'r') as f:
             cx2_json = json.load(f)
             network_meta = cx2_json[3]["networkAttributes"][0]
@@ -226,7 +229,6 @@ def load_all_kegg_pathways(directory_path: Path) -> dict[str, list]:
             pathway_name = network_meta["name"]
             pathways[pathway_name] = network_meta
             pathways[pathway_name]["json"] = cx2_json
-    
     # sort by keys
     pathways = dict(sorted(pathways.items()))
     return pathways
