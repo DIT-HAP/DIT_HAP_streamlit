@@ -4,14 +4,17 @@ import sys
 from pathlib import Path
 
 sys.path.append(str(Path(__file__).parent.parent / "src"))
-from kegg_pathway_functions import (
+from src.network_functions import (
     load_all_kegg_pathways,
-    convert_cx2_file_to_cytoscape_elements,
+    convert_cx2_json_to_cytoscape_elements,
     node_color_mapping_panel,
     layout_algorithm_panel,
+    get_layout_config,
+    display_network,
+    display_selected_object
+)
+from src.kegg_pathway_functions import (
     get_stylesheet,
-    display_kegg_network,
-    display_selected_object,
 )
 
 # ================================= Page Config ====================================
@@ -164,7 +167,7 @@ def analysis_tips():
 
 def display_pathway_information(
     kegg_pathways: dict,
-) -> dict:
+) -> tuple[str, dict]:
     st.header("Pathway Information", divider="gray")
     selected_pathway_title = str(st.selectbox("Select a KEGG Pathway", list(kegg_pathways.keys())))
     selected_pathway = kegg_pathways[selected_pathway_title]
@@ -173,14 +176,13 @@ def display_pathway_information(
     classes = "\n\n".join(selected_pathway.get("classes", []))
     pathway_link = selected_pathway.get("KEGG_PATHWAY_LINK", "#")
 
-
     # Display pathway information
     col1, col2, col3 = st.columns(3)
     col1.markdown(f":material/barcode_scanner: **Pathway ID**\n\n{pathway_id}")
     col2.markdown(f":material/category: **Class**\n\n{classes if classes else 'N/A'}")
     col3.markdown(f":material/link: **KEGG Link**\n\n[View on KEGG]({pathway_link})")
 
-    return selected_pathway
+    return selected_pathway_title, selected_pathway
 
 # ================================ Page Code ================================
 def main():
@@ -211,7 +213,7 @@ def main():
         fill_feature, border_feature, label_feature = node_color_mapping_panel()
 
     with st.sidebar.expander(":material/dashboard: Layout settings", expanded=False):
-        layout_type, _ = layout_algorithm_panel()
+        layout_type, ranker = layout_algorithm_panel()
 
     network_col, detail_col = st.columns([2, 1], border=True)
     with detail_col:
@@ -220,33 +222,33 @@ def main():
 
     with network_col:
         with st.container(border=True):
-            selected_pathway = display_pathway_information(kegg_pathways)
+            selected_pathway_title, selected_pathway = display_pathway_information(kegg_pathways)
 
         if selected_pathway:
             with st.spinner("Loading pathway network..."):
-                cx2_data = selected_pathway.get("json", None)
-                cytoscape_elements, elements_dict = convert_cx2_file_to_cytoscape_elements(cx2_data)
+                cx2_data = selected_pathway.get("json", [])
+                cytoscape_elements, elements_dict, positions = convert_cx2_json_to_cytoscape_elements(cx2_data, pathway_type="kegg")
+                layout_config = get_layout_config(positions, layout_type=layout_type, ranker=ranker)
 
             if cytoscape_elements:
-                custom_stylesheet, positions = get_stylesheet(
+                custom_stylesheet = get_stylesheet(
                     cytoscape_elements,
                     fill_feature,
                     border_feature,
                     label_feature
                 )
             else:
-                custom_stylesheet, positions = get_stylesheet()
+                raise ValueError("No cytoscape elements generated from the selected pathway.")  
 
             with st.container(border=True):
                 network_tab, image_tab = st.tabs([":material/device_hub: KEGG Pathway Network", ":material/image: Pathway Image"])
 
                 with network_tab:
                     st.markdown(f"<h2 style='text-align: center;'>{selected_pathway.get('name', 'Unknown Pathway')}</h2>", unsafe_allow_html=True)
-                    selected_objects = display_kegg_network(
+                    selected_objects = display_network(
                         cytoscape_elements,
                         stylesheet=custom_stylesheet,
-                        positions=positions,
-                        layout_type=layout_type
+                        layout_config=layout_config,
                     )
                 with image_tab:
                     st.markdown(f"<h2 style='text-align: center;'>{selected_pathway.get('name', 'Unknown Pathway')}</h2>", unsafe_allow_html=True)

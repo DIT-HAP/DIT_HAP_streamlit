@@ -3,19 +3,19 @@ import streamlit as st
 import sys
 from pathlib import Path
 
-from src.go_cam_functions import get_stylesheet
-
 sys.path.append(str(Path(__file__).parent.parent / "src"))
-from go_cam_functions import (
+from src.network_functions import (
     load_all_gocam_models,
-    convert_model_to_cytoscape_elements,
+    convert_cx2_json_to_cytoscape_elements,
     node_color_mapping_panel,
     layout_algorithm_panel,
     get_layout_config,
+    display_network,
+    display_selected_object
+)
+from src.go_cam_functions import (
     get_stylesheet,
-    plot_interaction_type_legend,
-    display_gocam_network,
-    display_selected_object,
+    # plot_interaction_type_legend,
 )
 # ================================= Page Config ====================================
 st.set_page_config(
@@ -167,7 +167,7 @@ def display_model_information(
 ) -> tuple[str, dict]:
     st.header("Model Information", divider="gray")
     selected_model_title = str(st.selectbox("Select a GO-CAM Model", list(gocam_models.keys())))
-    selected_model = gocam_models[selected_model_title]["model"]
+    selected_model = gocam_models[selected_model_title]
     col1, col2, col3 = st.columns(3)
     col1.markdown(f":material/barcode_scanner: **Model ID**\n\n{gocam_models[selected_model_title]['id']}")
     col2.markdown(f":material/fact_check: **Status** {MODEL_STATES.get(gocam_models[selected_model_title]['status'], gocam_models[selected_model_title]['status'])}")
@@ -205,12 +205,12 @@ def main():
     
     with st.sidebar.expander(":material/dashboard: Layout settings", expanded=False):
         layout_type, ranker = layout_algorithm_panel()
-        layout_config = get_layout_config(layout_type=layout_type, ranker=ranker)
 
     network_col, detail_col = st.columns([2, 1], border=True)
     with detail_col:
         with st.expander(":material/legend_toggle: Interaction Type Legend", expanded=True):
-            plot_interaction_type_legend()
+            # plot_interaction_type_legend()
+            pass
 
 
     with network_col:
@@ -219,7 +219,9 @@ def main():
         
         if selected_model:
             with st.spinner("Converting model to network elements..."):
-                cytoscape_elements, elements_dict = convert_model_to_cytoscape_elements(selected_model)
+                cx2_data = selected_model.get('cx2_network', [])
+                cytoscape_elements, elements_dict, positions = convert_cx2_json_to_cytoscape_elements(cx2_data, pathway_type="go-cam")
+                layout_config = get_layout_config(positions, layout_type=layout_type, ranker=ranker)
             if cytoscape_elements:
                 custom_stylesheet = get_stylesheet(
                     cytoscape_elements,
@@ -228,10 +230,10 @@ def main():
                     label_feature
                 )
             else:
-                custom_stylesheet = get_stylesheet()
+                raise ValueError("No cytoscape elements generated from the selected model.")
             with st.container(border=True):
                 st.markdown(f"<h2 style='text-align: center;'>{gocam_models[selected_model_title]['title']}</h2>", unsafe_allow_html=True)
-                selected_objects = display_gocam_network(
+                selected_objects = display_network(
                     cytoscape_elements, 
                     stylesheet=custom_stylesheet,
                     layout_config=layout_config
@@ -249,9 +251,5 @@ def main():
         # with st.sidebar.expander(":material/dashboard: Layout settings", expanded=False):
         #     selected_layout_config = layout_selection_panel()
         
-
-
-
-
 if __name__ == "__main__":
     main()
