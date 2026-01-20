@@ -25,6 +25,143 @@ st.set_page_config(
 KEGG_DATA_DIR = Path(__file__).parent.parent / "data" / "resource" / "kegg_pathways"
 
 # =============================== Functions ================================
+
+@st.dialog("❓ How to Use This Tool", width="large")
+def how_to_use_this_tool():
+    """Dialog explaining how to use the KEGG pathway visualization tool."""
+    st.markdown("""
+        **Step 1: Select a KEGG Pathway**
+        - Browse available pathways from the curated collection
+        - View pathway metadata including name and file information
+        - Choose pathways based on your biological interests
+        - Pathways are organized by biological process and function
+
+        **Step 2: Customize Network Display**
+        - Adjust node colors based on biological features (viability, cluster, etc.)
+        - Configure border styles and labels for better visual clarity
+        - Apply different visual styles based on node characteristics
+        - Network layout preserves original KEGG pathway structure
+
+        **Step 3: Explore Pathway Interactions**
+        - Click on nodes to view detailed biological information
+        - Hover over edges to understand reaction types and relationships
+        - Zoom and pan for detailed examination of complex pathways
+        - Use edge labels to understand reaction mechanisms
+
+        **Step 4: Analyze Biological Pathways**
+        - Identify key enzymes and regulatory nodes
+        - Trace metabolic pathways from substrates to products
+        - Discover pathway connections and crosstalk
+        - Compare different pathway structures across biological processes
+        """)
+
+@st.dialog("🔬 Understanding KEGG Pathways", width="large")
+def understanding_kegg():
+    """Dialog explaining KEGG pathway visualization."""
+    st.markdown("""
+        **🧬 What is KEGG?**
+
+        **Kyoto Encyclopedia of Genes and Genomes** is a collection of databases depicting:
+        - **Molecular pathways**: Metabolic and regulatory pathways
+        - **Chemical compounds**: Metabolites and small molecules
+        - **Enzymatic reactions**: Biochemical transformations
+        - **Gene networks**: Regulatory and signaling networks
+        - **Disease connections**: Pathological mechanisms
+
+        **Network Components:**
+        - **Nodes**: Enzymes, compounds, and genes
+        - **Edges**: Reactions and regulatory relationships
+        - **Shapes**: Different molecular types (enzymes, compounds, etc.)
+        - **Colors**: Functional categories and pathways
+        - **Labels**: Gene names and compound identifiers
+
+        **📊 Pathway Visualizations**
+
+        **Node Representations:**
+        - **Rectangles**: Enzymes and gene products
+        - **Circles**: Small molecules and compounds
+        - **Rounded rectangles**: Complexes and multi-protein assemblies
+        - **Color**: Functional categories or pathway membership
+        - **Size**: Importance or abundance in the pathway
+
+        **Edge Types:**
+        - **Solid arrows**: Direct reactions (activation, conversion)
+        - **Dashed lines**: Indirect effects or associations
+        - **T-headed arrows**: Inhibition or repression
+        - **Triangle arrows**: Activation or promotion
+        - **Diamond arrows**: Binding/association
+
+        **Pathway Layouts:**
+        - **Original KEGG**: Preserves curated pathway structure
+        - **Force-directed**: Auto-optimized node spacing
+        - **Hierarchical**: Shows flow from upstream to downstream
+        """)
+
+@st.dialog("⚙️ Data Requirements", width="large")
+def data_requirements():
+    """Dialog explaining the data requirements for KEGG pathway visualization."""
+    st.markdown("""
+        **Required Data Files:**
+        - **KEGG CX2 files**: Standardized Cytoscape Network Exchange format
+        - **Pathway metadata**: Pathway names, IDs, and classifications
+        - **KEGG KGML**: Original KEGG Markup Language representation (optional)
+        - **Pathway images**: Reference images from KEGG database
+
+        **Data Format:**
+        - **CX2 format**: Standardized Cytoscape Network Exchange format
+        - **KEGG KGML**: Original KEGG Markup Language representation
+        - **Pathway coordinates**: Preserves original KEGG visual layout
+        - **Node attributes**: Gene identifiers, compound names, enzyme classes
+        - **Edge attributes**: Reaction types, stoichiometry, regulation
+
+        **Data Organization:**
+        - **Pathway repository**: Centralized collection of KEGG CX2 files
+        - **Automatic loading**: Efficient parsing and indexing of pathway files
+        - **Caching**: Fast repeated access to frequently used pathways
+        - **Error handling**: Robust processing of incomplete or corrupted files
+        - **Metadata tracking**: Pathway provenance and curation status
+
+        **Data Sources:**
+        - **KEGG Database**: [Kyoto Encyclopedia of Genes and Genomes](https://www.genome.jp/kegg/)
+        - **CX2 conversion**: KEGG to Cytoscape format conversion
+        - **Pathway images**: Original KEGG pathway reference figures
+        """)
+
+@st.dialog("🎯 Analysis Tips", width="large")
+def analysis_tips():
+    """Dialog providing analysis tips for KEGG pathway exploration."""
+    st.markdown("""
+        **🔍 Pathway Selection**
+        - **Start with central pathways**: Choose well-studied pathways like glycolysis or TCA cycle
+        - **Match biological interests**: Select pathways relevant to your research questions
+        - **Check file availability**: Ensure CX2 files are present in the data directory
+        - **Review pathway documentation**: Look for pathway descriptions and supporting literature
+
+        **🎨 Visual Customization**
+        - **Color coding**: Use biologically meaningful colors (e.g., viability for essential genes)
+        - **Label clarity**: Ensure gene names are readable at chosen zoom level
+        - **Edge styling**: Differentiate between reaction types and regulatory relationships
+        - **Layout optimization**: Try different layouts to best reveal pathway structure
+
+        **🔬 Biological Interpretation**
+        - **Follow metabolic chains**: Trace pathways from initial substrates to final products
+        - **Identify control points**: Look for enzymes with many connections (hubs)
+        - **Find regulatory loops**: Look for feedback regulation in metabolic pathways
+        - **Assess pathway flux**: Consider directionality and reversibility of reactions
+
+        **🔌 Integration with DIT-HAP Pipeline**
+        - **Gene essentiality**: Connect essential genes from depletion curves to metabolic functions
+        - **Pathway mapping**: Visualize how essential genes fit into complete metabolic pathways
+        - **Mechanistic insight**: Understand why certain genes are essential for cell survival
+        - **Compensation analysis**: Identify redundant pathways that can mask essentiality
+
+        **📈 Advanced Analysis**
+        - **Compare multiple pathways**: Identify common network patterns across processes
+        - **Pathway topology**: Analyze connectivity, branching, and pathway organization
+        - **Flux simulation**: Consider how perturbations might affect pathway behavior
+        - **Cross-reference with data**: Validate pathway connections with experimental evidence
+        """)
+
 def display_pathway_information(
     kegg_pathways: dict,
 ) -> dict:
@@ -56,195 +193,14 @@ def main():
     This page provides **interactive network visualization of KEGG pathways** for understanding **molecular interactions** and **biological pathways** in cellular processes. KEGG (Kyoto Encyclopedia of Genes and Genomes) represents molecular interactions, reactions, and relation networks through pathway maps.
     """)
 
-    with st.expander("📖 How to Use This Tool", expanded=False):
-        st.markdown("""
-        **Step 1: Select a KEGG Pathway**
-        - Browse available pathways from the curated collection
-        - View pathway metadata including name and file information
-        - Choose pathways based on your biological interests
-        - Pathways are organized by biological process and function
-
-        **Step 2: Customize Network Display**
-        - Adjust node colors based on biological features (viability, cluster, etc.)
-        - Configure border styles and labels for better visual clarity
-        - Apply different visual styles based on node characteristics
-        - Network layout preserves original KEGG pathway structure
-
-        **Step 3: Explore Pathway Interactions**
-        - Click on nodes to view detailed biological information
-        - Hover over edges to understand reaction types and relationships
-        - Zoom and pan for detailed examination of complex pathways
-        - Use edge labels to understand reaction mechanisms
-
-        **Step 4: Analyze Biological Pathways**
-        - Identify key enzymes and regulatory nodes
-        - Trace metabolic pathways from substrates to products
-        - Discover pathway connections and crosstalk
-        - Compare different pathway structures across biological processes
-        """)
-
-    with st.expander("🔬 Understanding KEGG Pathways", expanded=False):
-        col1, col2 = st.columns(2)
-
-        with col1:
-            st.markdown("""
-                **🧬 What is KEGG?**
-
-                **Kyoto Encyclopedia of Genes and Genomes** is a collection of databases depicting:
-                - **Molecular pathways**: Metabolic and regulatory pathways
-                - **Chemical compounds**: Metabolites and small molecules
-                - **Enzymatic reactions**: Biochemical transformations
-                - **Gene networks**: Regulatory and signaling networks
-                - **Disease connections**: Pathological mechanisms
-
-                **Network Components:**
-                - **Nodes**: Enzymes, compounds, and genes
-                - **Edges**: Reactions and regulatory relationships
-                - **Shapes**: Different molecular types (enzymes, compounds, etc.)
-                - **Colors**: Functional categories and pathways
-                - **Labels**: Gene names and compound identifiers
-
-                **Advantages:**
-                - **Curated knowledge**: Expert-validated pathway information
-                - **Standardized format**: Consistent representation across species
-                - **Comprehensive coverage**: Multiple organism databases
-                - **Integration**: Links to genes, compounds, and diseases
-                """)
-
-        with col2:
-            st.markdown("""
-                **📊 Pathway Visualizations**
-
-                **Node Representations:**
-                - **Rectangles**: Enzymes and gene products
-                - **Circles**: Small molecules and compounds
-                - **Rounded rectangles**: Complexes and multi-protein assemblies
-                - **Color**: Functional categories or pathway membership
-                - **Size**: Importance or abundance in the pathway
-
-                **Edge Types:**
-                - **Solid arrows**: Direct reactions (activation, conversion)
-                - **Dashed lines**: Indirect effects or associations
-                - **T-headed arrows**: Inhibition or repression
-                - **Triangle arrows**: Activation or promotion
-                - **Diamond arrows**: Binding/association
-
-                **Pathway Layouts:**
-                - **Original KEGG**: Preserves curated pathway structure
-                - **Force-directed**: Auto-optimized node spacing
-                - **Hierarchical**: Shows flow from upstream to downstream
-                """)
-
-    with st.expander("🎯 Analysis Applications", expanded=False):
-        st.markdown("""
-        **📈 Metabolic Research**
-        - **Pathway reconstruction**: Build complete metabolic models from genomic data
-        - **Flux analysis**: Understand metabolic flow and regulation
-        - **Enzyme discovery**: Identify key enzymes in metabolic pathways
-        - **Comparative metabolism**: Compare pathways across different species
-
-        **🧪 Experimental Design**
-        - **Hypothesis generation**: Predict metabolic consequences of genetic changes
-        - **Target validation**: Assess essentiality of metabolic enzymes
-        - **Biomarker discovery**: Identify pathway intermediates as markers
-        - **Mechanism elucidation**: Understand how mutations affect metabolism
-
-        **💊 Drug Discovery**
-        - **Target identification**: Find enzymes for therapeutic intervention
-        - **Mechanism of action**: Model drug effects on metabolic pathways
-        - **Side effect prediction**: Anticipate off-target effects through pathway connections
-        - **Combination therapy**: Design synergistic drug combinations based on pathway analysis
-
-        **🔬 Disease Research**
-        - **Disease mechanisms**: Model how genetic mutations cause metabolic disorders
-        - **Genotype-phenotype mapping**: Connect molecular defects to cellular phenotypes
-        - **Biomarker identification**: Find diagnostic markers for disease states
-        - **Therapeutic strategies**: Design interventions based on pathway understanding
-        """)
-
-    with st.expander("⚙️ Technical Details", expanded=False):
-        st.markdown("""
-        **🔧 Data Format**
-        - **CX2 format**: Standardized Cytoscape Network Exchange format
-        - **KEGG KGML**: Original KEGG Markup Language representation
-        - **Pathway coordinates**: Preserves original KEGG visual layout
-        - **Node attributes**: Gene identifiers, compound names, enzyme classes
-        - **Edge attributes**: Reaction types, stoichiometry, regulation
-
-        **📊 Visualization Technology**
-        - **Cytoscape.js**: Interactive network rendering in web browsers
-        - **CX2 integration**: Direct KEGG to Cytoscape conversion
-        - **Responsive design**: Works on desktop and mobile devices
-        - **Performance optimization**: Efficient rendering of large pathways
-        - **Custom styling**: Flexible visual appearance and layout options
-
-        **🗂️ Data Management**
-        - **Pathway repository**: Centralized collection of KEGG CX2 files
-        - **Automatic loading**: Efficient parsing and indexing of pathway files
-        - **Caching**: Fast repeated access to frequently used pathways
-        - **Error handling**: Robust processing of incomplete or corrupted files
-        - **Metadata tracking**: Pathway provenance and curation status
-
-        **🔌 Integration with DIT-HAP Pipeline**
-        - **Gene essentiality**: Connect essential genes to their metabolic functions
-        - **Pathway mapping**: Visualize how essential genes fit into metabolic pathways
-        - **Phenotype understanding**: Model how gene disruptions affect cellular metabolism
-        - **Cross-species analysis**: Compare *S. pombe* pathways with other model organisms
-        """)
-
-    with st.expander("🔗 Integration with Other Analyses", expanded=False):
-        st.markdown("""
-        **🧬 Depletion Analysis Integration**
-        - **Gene essentiality**: Connect essential genes from depletion curves to metabolic functions
-        - **Pathway mapping**: Visualize how essential genes fit into complete metabolic pathways
-        - **Mechanistic insight**: Understand why certain genes are essential for cell survival
-        - **Compensation analysis**: Identify redundant pathways that can mask essentiality
-
-        **📊 Feature Space Analysis Integration**
-        - **Cluster interpretation**: Explain gene clusters in terms of shared metabolic pathways
-        - **Pattern analysis**: Correlate statistical profiles with pathway membership
-        - **Network motifs**: Identify recurring sub-network patterns in different gene sets
-        - **Systems properties**: Analyze how gene clusters affect overall pathway behavior
-
-        **🔍 Enrichment Analysis Integration**
-        - **Mechanistic context**: Provide pathway explanations for enriched GO terms
-        - **Network-based enrichment**: Identify over-represented pathway patterns and motifs
-        - **Cross-validation**: Confirm enrichment results with pathway topology analysis
-        - **Functional prediction**: Predict functions for uncharacterized genes based on pathway connections
-
-        **🧫 Translational Research**
-        - **Drug target validation**: Assess therapeutic potential of essential metabolic genes
-        - **Disease gene mapping**: Connect *S. pombe* genes to human disease mechanisms
-        - **Conserved pathways**: Identify evolutionarily conserved metabolic processes
-        - **Mechanism-based therapy**: Design treatments based on pathway understanding
-        """)
-
-    with st.expander("💡 Analysis Tips", expanded=False):
-        st.markdown("""
-        **🔍 Pathway Selection**
-        - **Start with central pathways**: Choose well-studied pathways like glycolysis or TCA cycle
-        - **Match biological interests**: Select pathways relevant to your research questions
-        - **Check file availability**: Ensure CX2 files are present in the data directory
-        - **Review pathway documentation**: Look for pathway descriptions and supporting literature
-
-        **🎨 Visual Customization**
-        - **Color coding**: Use biologically meaningful colors (e.g., viability for essential genes)
-        - **Label clarity**: Ensure gene names are readable at chosen zoom level
-        - **Edge styling**: Differentiate between reaction types and regulatory relationships
-        - **Layout optimization**: Try different layouts to best reveal pathway structure
-
-        **🔬 Biological Interpretation**
-        - **Follow metabolic chains**: Trace pathways from initial substrates to final products
-        - **Identify control points**: Look for enzymes with many connections (hubs)
-        - **Find regulatory loops**: Look for feedback regulation in metabolic pathways
-        - **Assess pathway flux**: Consider directionality and reversibility of reactions
-
-        **📈 Advanced Analysis**
-        - **Compare multiple pathways**: Identify common network patterns across processes
-        - **Pathway topology**: Analyze connectivity, branching, and pathway organization
-        - **Flux simulation**: Consider how perturbations might affect pathway behavior
-        - **Cross-reference with data**: Validate pathway connections with experimental evidence
-        """)
+    if st.button("❓ How to Use This Tool"):
+        how_to_use_this_tool()
+    if st.button("🔬 Understanding KEGG Pathways"):
+        understanding_kegg()
+    if st.button("⚙️ Data Requirements"):
+        data_requirements()
+    if st.button("🎯 Analysis Tips"):
+        analysis_tips()
 
     st.markdown("---")
 

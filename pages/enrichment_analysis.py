@@ -18,6 +18,161 @@ from src.enrichment_functions import background_configuration, ontology_enrichme
 # ================================= Constants =================================
 P_VALUE_THRESHOLD = 0.05
 
+# ================================= Dialog Functions =================================
+
+@st.dialog("❓ How to Use This Tool", width="large")
+def how_to_use_this_tool():
+    """Dialog explaining how to use the enrichment analysis tool."""
+    st.markdown("""
+        **Step 1: Configure Background** (Main Page)
+        - Choose background gene set for statistical comparison
+        - Options: All genes, essential genes only, non-essential genes only
+        - Set FDR threshold for significance testing (default: 0.05)
+
+        **Step 2: Input Genes** (Sidebar)
+        - Enter genes identified from DIT-HAP pipeline analysis
+        - Use gene names (`cdc2`, `wee1`) or systematic IDs (`SPAC1002.09c`)
+        - Separate multiple genes with commas or newlines
+        - Click "Submit" to start analysis
+
+        **Step 3: Review Results**
+        - **GO Enrichment**: Gene Ontology biological processes, molecular functions
+        - **FYPO Enrichment**: Fission yeast phenotype ontology analysis
+        - **MONDO Enrichment**: Human disease ontology associations
+        - **STRING Enrichment**: Protein-protein interaction network analysis
+
+        **Step 4: Interpret Findings**
+        - Compare significant terms across different ontologies
+        - Download results for downstream analysis
+        - Use enriched terms to generate biological hypotheses
+        """)
+
+@st.dialog("🔬 Enrichment Methods", width="large")
+def enrichment_methods():
+    """Dialog explaining the different enrichment methods available."""
+    st.markdown("""
+        **🧬 Gene Ontology (GO) Enrichment**
+
+        **What it tests**: Over-representation of biological functions in your gene set
+
+        **Categories analyzed**:
+        - **Biological Process (BP)**: Cellular processes and pathways
+        - **Molecular Function (MF)**: Molecular activities and binding
+        - **Cellular Component (CC)**: Cellular locations and structures
+
+        **Statistical method**: Fisher's exact test with Benjamini-Hochberg FDR correction
+        **Database source**: [Gene Ontology Consortium](http://geneontology.org/)
+        **Best for**: Understanding general biological functions and pathways
+
+        ---
+
+        **🧫 FYPO Enrichment**
+
+        **What it tests**: Over-representation of phenotypic characteristics in *S. pombe*
+
+        **Categories analyzed**:
+        - **Growth phenotypes**: Colony size, growth rate, morphology
+        - **Cell cycle**: Mitosis, meiosis, cytokinesis defects
+        - **Stress responses**: Environmental, chemical, genetic stresses
+        - **Metabolism**: Nutrient utilization, biosynthetic pathways
+
+        **Statistical method**: Fisher's exact test with Benjamini-Hochberg FDR correction
+        **Database source**: [FYPO Ontology](https://github.com/pombase/fypo)
+        **Best for**: Yeast-specific phenotypic interpretations
+
+        ---
+
+        **🏥 MONDO Disease Enrichment**
+
+        **What it tests**: Over-representation of human disease associations
+
+        **Categories analyzed**:
+        - **Genetic diseases**: Inherited disorders and syndromes
+        - **Complex diseases**: Cancer, neurodegeneration, metabolic disorders
+        - **Molecular mechanisms**: Pathway conservation across species
+        - **Therapeutic targets**: Drug discovery and validation insights
+
+        **Statistical method**: Fisher's exact test with Benjamini-Hochberg FDR correction
+        **Database source**: [MONDO Disease Ontology](https://github.com/mondo-initiative/mondo)
+        **Best for**: Translational research and medical relevance
+
+        ---
+
+        **🕸️ STRING Enrichment**
+
+        **What it tests**: Enrichment of protein-protein interaction networks
+
+        **Network metrics**:
+        - **Protein interactions**: Physical and functional associations
+        - **Pathway enrichment**: KEGG, Reactome, BioCyc pathways
+        - **Domain analysis**: Pfam, InterPro protein domains
+        - **Co-expression**: Gene co-regulation and expression patterns
+
+        **Statistical method**: Hypergeometric test with multiple testing correction
+        **Database source**: [STRING Database](https://string-db.org/)
+        **Best for**: Understanding molecular interactions and networks
+        """)
+
+@st.dialog("⚙️ Data Requirements", width="large")
+def data_requirements():
+    """Dialog explaining the data requirements for enrichment analysis."""
+    st.markdown("""
+        **Required Data Files:**
+
+        **Gene Metadata:**
+        - Gene information with essentiality classifications
+        - Gene name to systematic ID mappings
+        - PomBase reference annotations
+
+        **Gene Level Statistics:**
+        - Gene-level depletion measurements from DIT-HAP pipeline
+        - Statistical fitting results for background configuration
+
+        **Ontology Data:**
+        - **GO**: Gene Ontology files (OBO format, GAF annotations)
+        - **FYPO**: Fission Yeast Phenotype Ontology (OBO format, PHAF annotations)
+        - **MONDO**: Disease ontology (OBO format, cross-species mappings)
+
+        **Optional External Data:**
+        - **STRING**: Protein interaction database (accessed via API)
+
+        **Data Organization:**
+        - Files should follow standard DIT-HAP pipeline structure
+        - Ontology files in pombase_data directory with version subfolder
+        - Proper file format validation for ontology parsing
+        """)
+
+@st.dialog("🎯 Analysis Guidelines", width="large")
+def analysis_guidelines():
+    """Dialog providing analysis guidelines for enrichment analysis."""
+    st.markdown("""
+        **Gene Selection Strategy:**
+        - **Essential genes**: From depletion analysis (strong negative fitness)
+        - **Clustered genes**: From feature space analysis (similar statistical profiles)
+        - **Condition-specific genes**: Genes responding to particular experimental conditions
+        - **Pathway candidates**: Genes with related functional annotations
+
+        **Interpreting Results:**
+        - **Lower p-values**: More statistically significant enrichment
+        - **Higher fold enrichment**: Stronger over-representation
+        - **FDR < 0.05**: Generally considered significant after correction
+        - **Consistent patterns**: Same biological theme across multiple ontologies
+
+        **Quality Considerations:**
+        - **Background set selection**: Critical for valid statistical comparison
+        - **Gene set size**: Too few genes reduce statistical power
+        - **Multiple testing**: FDR correction accounts for multiple comparisons
+        - **Biological validation**: Cross-check with literature and experimental evidence
+
+        **Understanding Output:**
+        - **Term ID**: Ontology identifier (e.g., `GO:0007049`, `FYPO:0000015`)
+        - **Term Name**: Human-readable description of biological concept
+        - **p-value**: Raw statistical significance from enrichment test
+        - **FDR/q-value**: Multiple testing corrected significance
+        - **Fold Enrichment**: How much more common than expected by chance
+        - **Genes in Term**: How many of your genes are annotated to this term
+        """)
+
 # ================================= Functions =================================
 
 def load_enrichment_data():
@@ -132,180 +287,14 @@ def main():
     Discover biological meaning in your transposon insertion results through multiple ontology approaches.
     """)
 
-    with st.expander("📖 How to Use This Tool", expanded=False):
-        st.markdown("""
-        **Step 1: Configure Background** (Main Page)
-        - Choose background gene set for statistical comparison
-        - Options: All genes, essential genes only, non-essential genes only
-        - Set FDR threshold for significance testing (default: 0.05)
-
-        **Step 2: Input Genes** (Sidebar)
-        - Enter genes identified from DIT-HAP pipeline analysis
-        - Use gene names (`cdc2`, `wee1`) or systematic IDs (`SPAC1002.09c`)
-        - Separate multiple genes with commas or newlines
-        - Click "Submit" to start analysis
-
-        **Step 3: Review Results**
-        - **GO Enrichment**: Gene Ontology biological processes, molecular functions
-        - **FYPO Enrichment**: Fission yeast phenotype ontology analysis
-        - **MONDO Enrichment**: Human disease ontology associations
-        - **STRING Enrichment**: Protein-protein interaction network analysis
-
-        **Step 4: Interpret Findings**
-        - Compare significant terms across different ontologies
-        - Download results for downstream analysis
-        - Use enriched terms to generate biological hypotheses
-        """)
-
-    with st.expander("🔬 Enrichment Methods", expanded=False):
-        col1, col2 = st.columns(2)
-
-        with col1:
-            st.markdown("""
-                **🧬 Gene Ontology (GO) Enrichment**
-
-                **What it tests**: Over-representation of biological functions in your gene set
-
-                **Categories analyzed**:
-                - **Biological Process (BP)**: Cellular processes and pathways
-                - **Molecular Function (MF)**: Molecular activities and binding
-                - **Cellular Component (CC)**: Cellular locations and structures
-
-                **Statistical method**: Fisher's exact test with Benjamini-Hochberg FDR correction
-                **Database source**: [Gene Ontology Consortium](http://geneontology.org/)
-                **Best for**: Understanding general biological functions and pathways
-                """)
-
-            st.markdown("""
-                **🧫 FYPO Enrichment**
-
-                **What it tests**: Over-representation of phenotypic characteristics in *S. pombe*
-
-                **Categories analyzed**:
-                - **Growth phenotypes**: Colony size, growth rate, morphology
-                - **Cell cycle**: Mitosis, meiosis, cytokinesis defects
-                - **Stress responses**: Environmental, chemical, genetic stresses
-                - **Metabolism**: Nutrient utilization, biosynthetic pathways
-
-                **Statistical method**: Fisher's exact test with Benjamini-Hochberg FDR correction
-                **Database source**: [FYPO Ontology](https://github.com/pombase/fypo)
-                **Best for**: Yeast-specific phenotypic interpretations
-                """)
-
-        with col2:
-            st.markdown("""
-                **🏥 MONDO Disease Enrichment**
-
-                **What it tests**: Over-representation of human disease associations
-
-                **Categories analyzed**:
-                - **Genetic diseases**: Inherited disorders and syndromes
-                - **Complex diseases**: Cancer, neurodegeneration, metabolic disorders
-                - **Molecular mechanisms**: Pathway conservation across species
-                - **Therapeutic targets**: Drug discovery and validation insights
-
-                **Statistical method**: Fisher's exact test with Benjamini-Hochberg FDR correction
-                **Database source**: [MONDO Disease Ontology](https://github.com/mondo-initiative/mondo)
-                **Best for**: Translational research and medical relevance
-                """)
-
-            st.markdown("""
-                **🕸️ STRING Enrichment**
-
-                **What it tests**: Enrichment of protein-protein interaction networks
-
-                **Network metrics**:
-                - **Protein interactions**: Physical and functional associations
-                - **Pathway enrichment**: KEGG, Reactome, BioCyc pathways
-                - **Domain analysis**: Pfam, InterPro protein domains
-                - **Co-expression**: Gene co-regulation and expression patterns
-
-                **Statistical method**: Hypergeometric test with multiple testing correction
-                **Database source**: [STRING Database](https://string-db.org/)
-                **Best for**: Understanding molecular interactions and networks
-                """)
-
-    with st.expander("🎯 Analysis Guidelines", expanded=False):
-        st.markdown("""
-        **Gene Selection Strategy:**
-        - **Essential genes**: From depletion analysis (strong negative fitness)
-        - **Clustered genes**: From feature space analysis (similar statistical profiles)
-        - **Condition-specific genes**: Genes responding to particular experimental conditions
-        - **Pathway candidates**: Genes with related functional annotations
-
-        **Interpreting Results:**
-        - **Lower p-values**: More statistically significant enrichment
-        - **Higher fold enrichment**: Stronger over-representation
-        - **FDR < 0.05**: Generally considered significant after correction
-        - **Consistent patterns**: Same biological theme across multiple ontologies
-
-        **Quality Considerations:**
-        - **Background set selection**: Critical for valid statistical comparison
-        - **Gene set size**: Too few genes reduce statistical power
-        - **Multiple testing**: FDR correction accounts for multiple comparisons
-        - **Biological validation**: Cross-check with literature and experimental evidence
-        """)
-
-    with st.expander("📊 Understanding Output", expanded=False):
-        st.markdown("""
-        **Result Tables Include:**
-        - **Term ID**: Ontology identifier (e.g., `GO:0007049`, `FYPO:0000015`)
-        - **Term Name**: Human-readable description of biological concept
-        - **p-value**: Raw statistical significance from enrichment test
-        - **FDR/q-value**: Multiple testing corrected significance
-        - **Fold Enrichment**: How much more common than expected by chance
-        - **Genes in Term**: How many of your genes are annotated to this term
-        - **Background Genes**: Total genes with this annotation in background
-        - **List of Genes**: Which of your specific genes contribute to enrichment
-
-        **Visualizations:**
-        - **Bar charts**: Top enriched terms by statistical significance
-        - **Scatter plots**: Enrichment significance vs. term specificity
-        - **Interactive charts**: Hover for detailed term information
-        - **Color coding**: Different significance levels and categories
-        """)
-
-    with st.expander("⚙️ Technical Details", expanded=False):
-        st.markdown("""
-        **Statistical Methods:**
-        - **Fisher's Exact Test**: For GO, FYPO, and MONDO enrichment
-        - **Hypergeometric Test**: For STRING protein interaction enrichment
-        - **Benjamini-Hochberg Procedure**: False Discovery Rate correction
-        - **Multiple Relationships**: `is_a` and `part_of` ontology relationships
-
-        **Data Sources:**
-        - **GO**: Gene Ontology Consortium (current monthly release)
-        - **FYPO**: PomBase phenotype annotations (fission yeast specific)
-        - **MONDO**: Human disease ontology cross-species mappings
-        - **STRING**: Protein interaction networks (experimental + computational)
-
-        **Performance Considerations:**
-        - **Caching**: Ontology data cached for faster repeated analyses
-        - **Parallel processing**: Multiple ontologies analyzed simultaneously
-        - **Memory optimization**: Efficient data structures for large gene sets
-        - **Background selection**: Pre-computed gene sets for common comparisons
-        """)
-
-    with st.expander("🔗 Integration with DIT-HAP Pipeline", expanded=False):
-        st.markdown("""
-        **Input from Pipeline:**
-        - **Essential genes**: Genes showing strong depletion in time course analysis
-        - **Fitness clusters**: Genes with similar depletion profiles from feature space
-        - **Conditional hits**: Genes essential under specific experimental conditions
-        - **Quality filtered genes**: High-confidence identifications from pipeline QC
-
-        **Complementary to Other Analyses:**
-        - **Depletion curves**: Identify which genes to test for functional enrichment
-        - **Feature space**: Discover gene clusters with shared functional properties
-        - **Genome browser**: Visualize genomic context for significant genes
-        - **Network analysis**: Extend with protein-protein interaction data
-
-        **Biological Interpretation:**
-        - **Pathway discovery**: Identify affected biological processes
-        - **Phenotype prediction**: Anticipate cellular effects of gene disruption
-        - **Drug target validation**: Assess therapeutic potential of essential genes
-        - **Evolutionary conservation**: Compare findings across model organisms
-        """)
+    if st.button("❓ How to Use This Tool"):
+        how_to_use_this_tool()
+    if st.button("🔬 Enrichment Methods"):
+        enrichment_methods()
+    if st.button("⚙️ Data Requirements"):
+        data_requirements()
+    if st.button("🎯 Analysis Guidelines"):
+        analysis_guidelines()
 
     st.markdown("---")
 

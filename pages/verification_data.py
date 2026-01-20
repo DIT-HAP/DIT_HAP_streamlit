@@ -24,18 +24,135 @@ def image_to_base64(image_path):
     mime = mime_types.get(suffix, "image/png")
     return f"data:{mime};base64,{data}"
 
+@st.dialog("❓ How to Use This Tool", width="large")
+def how_to_use_this_tool():
+    """Dialog explaining how to use the verification data tool."""
+    st.markdown("""
+        **Step 1: Browse the Data Table**
+        - Scroll through the verification data table to view all entries
+        - Use the search/filter functionality to find specific genes
+        - Sort columns by clicking on column headers
+        - Resize columns as needed for better viewing
+
+        **Step 2: View Plate Images**
+        - **3d-6d images**: Cropped tetrad images showing colony growth over 3-6 days
+        - **Color YES/HYG/NAT/LEU/ADE images**: Color plates showing auxotrophic markers
+        - Click on images to view them at full resolution
+        - Compare growth patterns across different time points
+
+        **Step 3: Analyze Phenotypes**
+        - Assess colony size and growth rate from time series images
+        - Check color plates for auxotrophic marker validation
+        - Compare phenotypes across different genetic backgrounds
+        - Cross-reference with depletion analysis results
+
+        **Step 4: Export Data**
+        - Use the download button to export the full table
+        - Save images for publication or presentation
+        - Combine data with other analysis results
+        """)
+
+@st.dialog("🔬 Understanding Verification Data", width="large")
+def understanding_verification_data():
+    """Dialog explaining the verification data."""
+    st.markdown("""
+        **What is Verification Data?**
+
+        Verification data provides experimental validation of DIT-HAP pipeline results:
+        - **Tetrad analysis**: Traditional yeast genetic technique for studying gene segregation
+        - **Phenotype validation**: Confirms predicted essentiality from depletion analysis
+        - **Auxotrophic markers**: Color plates verify nutritional requirements
+        - **Time course**: Documents colony growth over multiple days
+
+        **Data Columns:**
+        - **Gene information**: Systematic ID, gene name, deletion status
+        - **Round**: Experimental round number
+        - **Image paths**: Links to cropped plate images at different time points
+        - **Phenotype annotations**: Manual curation of observed phenotypes
+
+        **Plate Types:**
+        - **3d-6d images**: Growth progression over time (day 3-6)
+        - **YES**: Yellow minimal media with supplements
+        - **HYG**: Hygromycin resistance marker
+        - **NAT**: Nourseothricin resistance marker
+        - **LEU**: Leucine auxotrophy marker
+        - **ADE**: Adenine auxotrophy marker
+        """)
+
+@st.dialog("⚙️ Data Requirements", width="large")
+def data_requirements():
+    """Dialog explaining the data requirements for verification data."""
+    st.markdown("""
+        **Required Data Files:**
+        - **Excel summary file**: Combined verification data with manual annotations
+        - **Plate images**: Cropped tetrad images for each time point and condition
+        - **Color plate images**: Auxotrophic marker validation plates
+
+        **Data Organization:**
+        - Images stored in `data/tetrad_plate_images/` directory
+        - Excel file contains image path references and phenotype annotations
+        - Images are encoded as base64 for web display
+        - File naming convention follows round and gene identification
+
+        **Image Format:**
+        - Standard image formats (PNG, JPG) supported
+        - Automatic conversion to base64 for embedding
+        - Optimal sizing for web viewing
+        - High-resolution images for detailed examination
+        """)
+
+@st.dialog("🎯 Analysis Tips", width="large")
+def analysis_tips():
+    """Dialog providing analysis tips for interpreting verification data."""
+    st.markdown("""
+        **Interpreting Growth Patterns:**
+        - **Essential genes**: No colony growth or very small colonies
+        - **Non-essential genes**: Normal colony size and growth rate
+        - **Slow-growing genes**: Reduced colony size compared to wild-type
+        - **Conditional genes**: Growth defects only under specific conditions
+
+        **Color Plate Interpretation:**
+        - **YES plate**: General growth control
+        - **Antibiotic plates**: Verify resistance marker integration
+        - **Auxotrophic plates**: Confirm nutritional requirements
+        - **Color intensity**: Indicates strength of auxotrophic phenotype
+
+        **Integration with DIT-HAP Results:**
+        - **Depletion curves**: Genes showing strong depletion should show growth defects
+        - **Gene essentiality**: Verify pipeline predictions with experimental data
+        - **False positives**: Check if pipeline over-predicted essentiality
+        - **False negatives**: Identify essential genes missed by pipeline
+
+        **Quality Control:**
+        - **Plate contamination**: Look for non-colony growth patterns
+        - **Edge effects**: Colonies at plate edges may grow differently
+        - **Replicate consistency**: Compare results across experimental replicates
+        - **Manual curation**: Refer to phenotype annotations for expert interpretation
+        """)
+
 def main():
     """Main entry point for the Verification Data page."""
-    
-    st.title("🧬 Verification Data for DIT-HAP")
-    # st.info(
-    #     """
-    #     This page provides access to verification data used in the DIT-HAP project.
-    #     You can explore various datasets and images that validate the findings of our research.
 
-    #     The verification data is hosted on GitHub and can be accessed directly via the link below.
-    #     """
-    # )
+    st.title("🧬 Verification Data for DIT-HAP")
+
+    # Introduction and Usage Guide
+    st.markdown("""
+    ### 🔬 Experimental Validation of DIT-HAP Pipeline Results
+
+    This page provides **verification data** from tetrad analysis experiments that validate the findings of the **[DIT-HAP pipeline](https://github.com/DIT-HAP/DIT_HAP_pipeline)**.
+    Browse plate images and phenotype annotations to confirm gene essentiality predictions.
+    """)
+
+    if st.button("❓ How to Use This Tool"):
+        how_to_use_this_tool()
+    if st.button("🔬 Understanding Verification Data"):
+        understanding_verification_data()
+    if st.button("⚙️ Data Requirements"):
+        data_requirements()
+    if st.button("🎯 Analysis Tips"):
+        analysis_tips()
+
+    st.markdown("---")
     
     df = pd.read_excel(
         "./data/resource/all_rounds_combined_verification_summary_manually_annotated.xlsx"
