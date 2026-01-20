@@ -7,11 +7,11 @@ altair>=5.5.0
 streamlit>=1.51.0
 goatools>=1.5.2
 loguru>=0.7.3
+gocam>=0.7.0
 beautifulsoup4
+git+https://github.com/Sotdo/st-cytoscape.git
 networkx
 ndex2
-gocam
-git+https://github.com/Sotdo/st-cytoscape.git
 pytest
 lxml
 openpyxl
