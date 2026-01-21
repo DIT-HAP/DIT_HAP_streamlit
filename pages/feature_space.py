@@ -154,16 +154,20 @@ def main():
     This page provides **interactive visualization of genes in feature space** based on statistical parameters from the **[DIT-HAP pipeline](https://github.com/DIT-HAP/DIT_HAP_pipeline)**. Explore how your genes of interest compare to the genome-wide distribution.
     """)
 
-    if st.button("❓ How to Use This Tool"):
-        how_to_use_this_tool()
-    if st.button("🔬 Understanding Feature Space"):
-        understanding_feature_space()
-    if st.button("⚙️ Data Requirements"):
-        data_requirements()
-    if st.button("🎯 Analysis Tips"):
-        analysis_tips()
-
-    st.markdown("---")
+    usage_guides = {
+        "❓ How to Use This Tool": how_to_use_this_tool,
+        "🔬 Understanding Feature Space": understanding_feature_space,
+        "⚙️ Data Requirements": data_requirements,
+        "🎯 Analysis Tips": analysis_tips
+    }
+    st.segmented_control(
+        label="📖 Usage Guides",
+        options=list(usage_guides.keys()),
+        key="usage_guide_selector",
+        on_change=lambda: usage_guides[st.session_state.usage_guide_selector](),
+        width="stretch",
+        label_visibility="collapsed"
+    )
 
     # Load required data
     gene_metadata, gene_level = load_data()

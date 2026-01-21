@@ -143,16 +143,20 @@ def main():
     Browse plate images and phenotype annotations to confirm gene essentiality predictions.
     """)
 
-    if st.button("❓ How to Use This Tool"):
-        how_to_use_this_tool()
-    if st.button("🔬 Understanding Verification Data"):
-        understanding_verification_data()
-    if st.button("⚙️ Data Requirements"):
-        data_requirements()
-    if st.button("🎯 Analysis Tips"):
-        analysis_tips()
-
-    st.markdown("---")
+    usage_guides = {
+        "❓ How to Use This Tool": how_to_use_this_tool,
+        "🔬 Understanding Verification Data": understanding_verification_data,
+        "⚙️ Data Requirements": data_requirements,
+        "🎯 Analysis Tips": analysis_tips
+    }
+    st.segmented_control(
+        label="📖 Usage Guides",
+        options=list(usage_guides.keys()),
+        key="usage_guide_selector",
+        on_change=lambda: usage_guides[st.session_state.usage_guide_selector](),
+        width="stretch",
+        label_visibility="collapsed"
+    )
     
     df = pd.read_excel(
         "./data/resource/all_rounds_combined_verification_summary_manually_annotated.xlsx"

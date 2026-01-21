@@ -186,18 +186,23 @@ def main():
     This page provides **interactive network visualization of GO-CAM models** for understanding **causal relationships** and **biological mechanisms** in cellular processes. GO-CAM represents molecular activities and their causal interactions through directed networks.
     """)
 
-    if st.button("❓ How to Use This Tool"):
-        how_to_use_this_tool()
-    if st.button("🔬 Understanding GO-CAM"):
-        understanding_gocam()
-    if st.button("⚙️ Data Requirements"):
-        data_requirements()
-    if st.button("🎯 Analysis Tips"):
-        analysis_tips()
+    usage_guides = {
+        "❓ How to Use This Tool": how_to_use_this_tool,
+        "🔬 Understanding GO-CAM": understanding_gocam,
+        "⚙️ Data Requirements": data_requirements,
+        "🎯 Analysis Tips": analysis_tips
+    }
+    st.segmented_control(
+        label="📖 Usage Guides",
+        options=list(usage_guides.keys()),
+        key="usage_guide_selector",
+        on_change=lambda: usage_guides[st.session_state.usage_guide_selector](),
+        width="stretch",
+        label_visibility="collapsed"
+    )
 
-    st.markdown("---")
-
-    with st.spinner("Loading GO-CAM models..."):
+    # with st.spinner("Loading GO-CAM models..."):
+    with st.spinner():
         gocam_models = load_all_gocam_models(GO_CAM_DATA_DIR)
     
     with st.sidebar.expander(":material/brush: Node style settings", expanded=False):
@@ -205,6 +210,9 @@ def main():
     
     with st.sidebar.expander(":material/dashboard: Layout settings", expanded=False):
         layout_type, ranker = layout_algorithm_panel()
+
+    with st.sidebar.expander(":material/visibility_off: Show chemicals", expanded=False):
+        show_chemicals = st.toggle("Show chemical nodes in the network", value=False)
 
     network_col, detail_col = st.columns([2, 1], border=True)
     with detail_col:

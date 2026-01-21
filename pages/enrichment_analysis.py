@@ -287,16 +287,20 @@ def main():
     Discover biological meaning in your transposon insertion results through multiple ontology approaches.
     """)
 
-    if st.button("❓ How to Use This Tool"):
-        how_to_use_this_tool()
-    if st.button("🔬 Enrichment Methods"):
-        enrichment_methods()
-    if st.button("⚙️ Data Requirements"):
-        data_requirements()
-    if st.button("🎯 Analysis Guidelines"):
-        analysis_guidelines()
-
-    st.markdown("---")
+    usage_guides = {
+        "❓ How to Use This Tool": how_to_use_this_tool,
+        "🔬 Enrichment Methods": enrichment_methods,
+        "⚙️ Data Requirements": data_requirements,
+        "🎯 Analysis Guidelines": analysis_guidelines
+    }
+    st.segmented_control(
+        label="📖 Usage Guides",
+        options=list(usage_guides.keys()),
+        key="usage_guide_selector",
+        on_change=lambda: usage_guides[st.session_state.usage_guide_selector](),
+        width="stretch",
+        label_visibility="collapsed"
+    )
 
     # Load required data
     gene_metadata, gene_level, gene_ontology_data, gene_phenotype_data, disease_ontology_data = load_enrichment_data()

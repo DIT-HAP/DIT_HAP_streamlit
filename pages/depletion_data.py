@@ -200,6 +200,24 @@ def analysis_tips():
 
 def main():
     """Main entry point for the depletion data page."""
+
+    # with st.container(border=True):
+    #     col1, col2, col3, col4 = st.columns(4)
+    #     with col1:
+    #         if st.button("❓ How to Use This Tool"):
+    #             how_to_use_this_tool()
+    #     with col2:
+    #         if st.button("🔬 Understanding the Plots"):
+    #             understanding_plots()
+    #     with col3:
+    #         if st.button("⚙️ Data Requirements"):
+    #             data_requirements()
+    #     with col4:
+    #         if st.button("🎯 Analysis Tips"):
+    #             analysis_tips()
+
+    
+
     st.title(":chart_with_upwards_trend: Depletion Data Visualization")
 
     # Introduction and Usage Guide
@@ -210,16 +228,20 @@ def main():
     Analyze how individual genes respond to transposon insertions over multiple time courses.
     """)
 
-    if st.button("❓ How to Use This Tool"):
-        how_to_use_this_tool()
-    if st.button("🔬 Understanding the Plots"):
-        understanding_plots()
-    if st.button("⚙️ Data Requirements"):
-        data_requirements()
-    if st.button("🎯 Analysis Tips"):
-        analysis_tips()
-
-    st.markdown("---")
+    usage_guides = {
+        "❓ How to Use This Tool": how_to_use_this_tool,
+        "🔬 Understanding the Plots": understanding_plots,
+        "⚙️ Data Requirements": data_requirements,
+        "🎯 Analysis Tips": analysis_tips
+    }
+    st.segmented_control(
+        label="📖 Usage Guides",
+        options=list(usage_guides.keys()),
+        key="usage_guide_selector",
+        on_change=lambda: usage_guides[st.session_state.usage_guide_selector](),
+        width="stretch",
+        label_visibility="collapsed"
+    )
 
     # Get default configuration
     config = get_default_config()

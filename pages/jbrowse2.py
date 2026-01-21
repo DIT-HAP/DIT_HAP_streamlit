@@ -124,16 +124,20 @@ def main():
     Explore genomic features, insertion patterns, and gene annotations in an interactive interface.
     """)
 
-    if st.button("❓ How to Use This Tool"):
-        how_to_use_this_tool()
-    if st.button("🔬 Understanding JBrowse2"):
-        understanding_jbrowse()
-    if st.button("⚙️ Data Requirements"):
-        data_requirements()
-    if st.button("🎯 Analysis Tips"):
-        analysis_tips()
-
-    st.markdown("---")
+    usage_guides = {
+        "❓ How to Use This Tool": how_to_use_this_tool,
+        "🔬 Understanding JBrowse2": understanding_jbrowse,
+        "⚙️ Data Requirements": data_requirements,
+        "🎯 Analysis Tips": analysis_tips
+    }
+    st.segmented_control(
+        label="📖 Usage Guides",
+        options=list(usage_guides.keys()),
+        key="usage_guide_selector",
+        on_change=lambda: usage_guides[st.session_state.usage_guide_selector](),
+        width="stretch",
+        label_visibility="collapsed"
+    )
 
     st.info(
         """

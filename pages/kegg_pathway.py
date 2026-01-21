@@ -195,16 +195,20 @@ def main():
     This page provides **interactive network visualization of KEGG pathways** for understanding **molecular interactions** and **biological pathways** in cellular processes. KEGG (Kyoto Encyclopedia of Genes and Genomes) represents molecular interactions, reactions, and relation networks through pathway maps.
     """)
 
-    if st.button("❓ How to Use This Tool"):
-        how_to_use_this_tool()
-    if st.button("🔬 Understanding KEGG Pathways"):
-        understanding_kegg()
-    if st.button("⚙️ Data Requirements"):
-        data_requirements()
-    if st.button("🎯 Analysis Tips"):
-        analysis_tips()
-
-    st.markdown("---")
+    usage_guides = {
+        "❓ How to Use This Tool": how_to_use_this_tool,
+        "🔬 Understanding KEGG Pathways": understanding_kegg,
+        "⚙️ Data Requirements": data_requirements,
+        "🎯 Analysis Tips": analysis_tips
+    }
+    st.segmented_control(
+        label="📖 Usage Guides",
+        options=list(usage_guides.keys()),
+        key="usage_guide_selector",
+        on_change=lambda: usage_guides[st.session_state.usage_guide_selector](),
+        width="stretch",
+        label_visibility="collapsed"
+    )
 
     with st.spinner("Loading KEGG pathways..."):
         kegg_pathways = load_all_kegg_pathways(KEGG_DATA_DIR)
