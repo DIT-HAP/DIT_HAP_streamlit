@@ -17,7 +17,7 @@ from gocam.translation.cx2.main import model_to_cx2
 from st_cytoscape import cytoscape
 
 # ================================= Constants =================================
-GENE_LEVEL_DATA_FILE = Path(__file__).parent.parent / "data" / "raw" / "HD_DIT_HAP" / "gene_level" / "kmeans_cluster_result.tsv"
+GENE_LEVEL_DATA_FILE = Path(__file__).parent.parent / "data" / "raw" / "HD_DIT_HAP" / "gene_level" / "all_coding_genes_with_DIT_HAP_clustering.tsv"
 
 
 ADDITIONAL_METRICS_CONFIG = {
@@ -52,7 +52,7 @@ ADDITIONAL_METRICS_CONFIG = {
         "range": (0, 13),
         "type": "numerical",
         "colormap": [
-            mcolors.LinearSegmentedColormap.from_list("reds", ["#FFFFFF", "#FF0000"]),
+            mcolors.LinearSegmentedColormap.from_list("reds", ["#FF0000", "#00FF00"]),
             mcolors.Normalize(vmin=0, vmax=13)
         ]
     },
@@ -82,7 +82,7 @@ def _FILE_READERS(handler: str, file_path: str | Path, **kwargs) -> pd.DataFrame
 
 def get_theme_aware_label_color() -> tuple[str, str, str]:
     """Get appropriate label color and background color based on Streamlit theme."""
-    _DEFAULT_COLOR = "#000000"
+    _DEFAULT_COLOR = "#888888"
     streamlit_theme = st.context.theme.type
     try:
         if streamlit_theme == "dark":
@@ -487,22 +487,22 @@ def convert_cx2_json_to_cytoscape_elements(cx2_network: list, pathway_type: Lite
 
 # =============================== Node style mapping =================================
 # -------------------------------- Node Style Configuration --------------------------------
-def _get_color_for_value(feature: str, value) -> str:
+def _get_color_for_value(feature: str, value: float | int | str | None, default_color: str = _DEFAULT_COLOR) -> str:
     """Map a feature value to a color.    
     - Categorical: lookup in color_map
     - Numerical: use colormap with normalization
     - Missing/None: return default gray
     """
     if value is None or (isinstance(value, float) and pd.isna(value)):
-        return _DEFAULT_COLOR
+        return default_color
     
     config = ADDITIONAL_METRICS_CONFIG.get(feature)
     if not config:
-        return _DEFAULT_COLOR
+        return default_color
     
     if config["type"] == "categorical":
         color_map = config.get("color_map", {})
-        return color_map.get(str(value), color_map.get("default", _DEFAULT_COLOR))
+        return color_map.get(str(value), color_map.get("default", default_color))
     
     # Numerical
     cmap, norm = config["colormap"]
@@ -534,7 +534,12 @@ def map_feature_value(
         
         node_style = {}
         for feature, css_prop, extras in active_mappings:
-            node_style[css_prop] = _get_color_for_value(feature, data.get(feature))
+            if feature == label_feature:
+                node_style[css_prop] = _get_color_for_value(feature, data.get(feature), default_color=THEME_COLOR)
+            elif feature == border_feature:
+                node_style[css_prop] = _get_color_for_value(feature, data.get(feature))
+            else:
+                node_style[css_prop] = _get_color_for_value(feature, data.get(feature), default_color=THEME_BACKGROUND)
             node_style.update(extras)
         
         if node_style:
@@ -634,7 +639,8 @@ def get_layout_config(positions: dict, layout_type: str = "preset", ranker: str 
         return config
     else:
         raise ValueError(f"Unsupported layout type: {layout_type}")
-    
+
+# -------------------------------- Display Network --------------------------------
 def display_network(
     elements: list,
     stylesheet: list,
