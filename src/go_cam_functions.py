@@ -6,6 +6,8 @@ from .network_functions import (
     map_feature_value
 )
 
+
+
 # ================================ Style sheet Configuration =================================
 # ------------------------------- Default node styles -------------------------------
 NODE_STYLES = [  
@@ -25,11 +27,10 @@ NODE_STYLES = [
       "label": "data(name)",  
       "color": "#000000",  
       "font-size": 12,  
-      "font-family": "sans-serif",  
+      "font-family": "arial",  
       "text-opacity": 1,  
       "text-max-width": 200,  
-      "text-valign": "center",  
-      "text-halign": "center"  
+      "text-valign": "center"
     }  
   },  
 
@@ -41,8 +42,10 @@ NODE_STYLES = [
       "height": 40,  
       "width": 85,  
       "shape": "rectangle",  
-      "font-size": 12,  
-      "text-max-width": 80  
+      "font-size": 18,  
+      "text-max-width": 80,  
+      "text-halign": "left",
+      "font-weight": "bold"
     }  
   },  
   {  
@@ -159,8 +162,9 @@ EDGE_STYLES = [
     "style": {  
       "line-color": "#6495ED",  
       "line-style": "solid",  
-      "target-arrow-shape": "circle",  
-      "target-arrow-color": "#6495ED",  
+      "target-arrow-shape": "none",  
+      "source-arrow-shape": "circle",
+      "source-arrow-color": "#6495ED",  
       "width": 5  
     }  
   },  
