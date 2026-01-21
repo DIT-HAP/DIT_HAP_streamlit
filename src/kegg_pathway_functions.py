@@ -17,38 +17,38 @@ NODE_STYLES = [
     {  
         "selector": "node[KEGG_NODE_TYPE = 'ortholog']",  
         "style": {  
-            "label-font-size": 9,  
+            "label-font-size": 2,
         }  
     },  
     {  
         "selector": "node[KEGG_NODE_TYPE = 'gene']",  
         "style": {  
-            "label-font-size": 9  
+            "label-font-size": 3,
         }  
     },  
     {  
         "selector": "node[KEGG_NODE_TYPE = 'map']",  
         "style": {  
-            "label-font-size": 9  
+            "label-font-size": 3,
         }  
     },  
     {  
         "selector": "node[KEGG_NODE_TYPE = 'compound']",  
         "style": {  
-            "label-font-size": 6,  
+            "label-font-size": 2,  
             "border-width": 2.0,  
             "text-valign": "top",  
             "text-margin-y": 2.0,
             "text-wrap": "wrap",
             "text-max-width": 60,
             "text-justification": "center",
-            "text-overflow-wrap": "whitespace"
+            "text-overflow-wrap": "whispace"
         }  
     },  
     {  
         "selector": "node[KEGG_NODE_TYPE = 'group']",  
         "style": {  
-            "label-font-size": 9,  
+            "label-font-size": 5,  
             "border-width": 1.0,  
             "background-opacity": 0.0  
         }  
@@ -67,10 +67,10 @@ EDGE_STYLES = [
             "curve-style": "bezier",
             "target-arrow-shape": "none",
             "target-arrow-color": THEME_COLOR,
-            "target-arrow-size": 6.0,
+            "target-arrow-size": 10,
             "source-arrow-shape": "none",
             "source-arrow-color": THEME_COLOR,
-            "source-arrow-size": 6.0,
+            "source-arrow-size": 10,
             "label": "data(KEGG_EDGE_LABEL)",
             "label-color": "#DC143C",
             "label-opacity": 1.0,
@@ -178,19 +178,91 @@ def get_node_styles(
         width = int(element_data.get("KEGG_NODE_WIDTH", 10))
         height = int(element_data.get("KEGG_NODE_HEIGHT", 10))
 
-        style = {
-            "label": "data(label)",
-            "text-valign": "center",
-            "text-halign": "center",
-            "shape": element_data.get("KEGG_NODE_SHAPE", "ellipse").lower(),
-            "background-color": fill_color,
-            "color": label_color,
-            "border-color": THEME_COLOR,
-            "border-width": 1,
-            "width": width,
-            "height": height,
-        }
-        styles.append({"selector": f"node[id='{node_id}']", "style": style})
+        node_type = element_data.get("KEGG_NODE_TYPE", "")
+        if node_type == "compound":
+            style = {
+                "label": "",
+                "text-valign": "center",
+                "text-halign": "center",
+                "shape": element_data.get("KEGG_NODE_SHAPE", "ellipse").lower(),
+                "background-color": fill_color,
+                "color": label_color,
+                "border-color": THEME_COLOR,
+                "border-width": 1,
+                "width": width if width > 1 else 10,
+                "height": height if height > 1 else 10,
+            }
+            styles.append({"selector": f"node[id='{node_id}']", "style": style})
+        elif node_type == "ortholog":
+            style = {
+                "label": "",
+                "text-valign": "center",
+                "text-halign": "center",
+                "shape": element_data.get("KEGG_NODE_SHAPE", "ellipse").lower(),
+                "background-color": fill_color,
+                "color": label_color,
+                "border-color": THEME_COLOR,
+                "border-width": 1,
+                "width": width if width > 1 else 15,
+                "height": height if height > 1 else 15,
+            }
+            styles.append({"selector": f"node[id='{node_id}']", "style": style})
+        elif node_type == "group":
+            style = {
+                "label": "data(label)",
+                "text-valign": "center",
+                "text-halign": "center",
+                "shape": element_data.get("KEGG_NODE_SHAPE", "ellipse").lower(),
+                "background-color": fill_color,
+                "color": label_color,
+                "border-color": THEME_COLOR,
+                "border-width": 0,
+                "width": width if width > 1 else 20,
+                "height": height if height > 1 else 20,
+            }
+            styles.append({"selector": f"node[id='{node_id}']", "style": style})
+        elif node_type == "map":
+            style = {
+                "label": "data(label)",
+                "text-valign": "center",
+                "text-halign": "center",
+                "shape": element_data.get("KEGG_NODE_SHAPE", "rectangle").lower(),
+                "background-color": fill_color,
+                "color": label_color,
+                "border-color": THEME_COLOR,
+                "border-width": 1,
+                "width": width if width > 1 else 30,
+                "height": height if height > 1 else 20,
+            }
+            styles.append({"selector": f"node[id='{node_id}']", "style": style})
+        elif node_type == "gene":
+            style = {
+                "label": "data(label)",
+                "text-valign": "center",
+                "text-halign": "center",
+                "shape": element_data.get("KEGG_NODE_SHAPE", "ellipse").lower(),
+                "background-color": fill_color,
+                "color": label_color,
+                "border-color": THEME_COLOR,
+                "border-width": 1,
+                "width": width if width > 1 else 10,
+                "height": height if height > 1 else 10,
+            }
+            styles.append({"selector": f"node[id='{node_id}']", "style": style})
+        else:
+            style = {
+                "label": "data(label)",
+                "text-valign": "center",
+                "text-halign": "center",
+                "shape": element_data.get("KEGG_NODE_SHAPE", "ellipse").lower(),
+                "background-color": fill_color,
+                "color": label_color,
+                "border-color": THEME_COLOR,
+                "border-width": 1,
+                "width": width if width > 1 else 20,
+                "height": height if height > 1 else 20,
+            }
+            styles.append({"selector": f"node[id='{node_id}']", "style": style})
 
     active_mapping, mapping_styles = map_feature_value(
         elements,
