@@ -5,7 +5,8 @@ import json
 from pathlib import Path
 from typing import Any, Literal
 from stqdm import stqdm
-
+import base64
+import requests
 import pandas as pd
 import numpy as np
 from bs4 import BeautifulSoup
@@ -32,15 +33,16 @@ ADDITIONAL_METRICS_CONFIG = {
         }
     },
     "RevisedDeletion_essentiality": {
-        "range": ["E", "V", "Not_determined"],
+        "range": ["E", "V", "V/E", "Not_determined"],
         "type": "categorical",
         "color_map": {
             "E": "#FF0000",  # Red for E/inviable
             "V": "#00FF00",  # Green for V/viable
+            "V/E": "#FFA500",  # Orange for V/E/condition-dependent
             "Not_determined": "#CCCCCC"  # Gray for unknown
         }
     },
-    "um": {
+    "DR": {
         "range": (-0.3, 1.5),
         "type": "numerical",
         "colormap": [
@@ -48,7 +50,7 @@ ADDITIONAL_METRICS_CONFIG = {
             mcolors.TwoSlopeNorm(vmin=-1.5, vcenter=0, vmax=1.5)
         ]
     },
-    "lam": {
+    "DL": {
         "range": (0, 13),
         "type": "numerical",
         "colormap": [
@@ -56,11 +58,19 @@ ADDITIONAL_METRICS_CONFIG = {
             mcolors.Normalize(vmin=0, vmax=13)
         ]
     },
-    "revised_cluster": {
+    "Cluster": {
         "range": None,
         "type": "categorical",
         "color_map": {
-            "default": "#CCCCCC"  # Gray for others
+            "1": "#a50202",
+            "2": "#d24c38",
+            "3": "#d85b08",
+            "4": "#ee8e19",
+            "5": "#d6b200",
+            "6": "#c6d70a",
+            "7": "#5bd609",
+            "8": "#00b9da",
+            "9": "#0224bb",
         }
     }
 }
@@ -72,11 +82,11 @@ def _FILE_READERS(handler: str, file_path: str | Path, **kwargs) -> pd.DataFrame
     """Reads different types of table files and returns a pandas DataFrame."""
     match handler:
         case "tsv":
-            return pd.read_csv(file_path, sep="\t", index_col=1, **kwargs)
+            return pd.read_csv(file_path, sep="\t", index_col=0, **kwargs)
         case "csv":
-            return pd.read_csv(file_path, index_col=1, **kwargs)
+            return pd.read_csv(file_path, index_col=0, **kwargs)
         case "xlsx":
-            return pd.read_excel(file_path, index_col=1, **kwargs)
+            return pd.read_excel(file_path, index_col=0, **kwargs)
         case _:
             raise ValueError(f"Unsupported file handler: {handler}")
 
@@ -294,7 +304,7 @@ def deduplicate_cx2_edges(cx2_data: list) -> list[dict]:
 
 # ---------------------------- Merge Additional Attributes ----------------------------
 @st.cache_data
-def prepare_additional_attributes(gene_level_data_file: Path) -> dict[str, dict[str, Any]]:
+def prepare_additional_attributes(gene_level_data_file: Path) -> tuple[dict[str, dict[str, Any]], dict[str, dict[str, Any]]]:
     """Load gene-level data and extract metrics as lookup dictionaries."""
     suffix = gene_level_data_file.suffix.lower()
     
@@ -302,23 +312,37 @@ def prepare_additional_attributes(gene_level_data_file: Path) -> dict[str, dict[
         handler=suffix.removeprefix('.'),
         file_path=gene_level_data_file
     )
-    
-    return {
+    df["Cluster"] = df["Cluster"].fillna(0).astype(int)
+    df.fillna("NA", inplace=True)
+    df["Cluster"].replace(0, "NA", inplace=True)
+
+    ID_dict = {
         metric: df[metric].to_dict()
         for metric in ADDITIONAL_METRICS
         if metric in df.columns
     }
 
-def _aggregate_metric_values(values: list) -> Any:
+    name_as_index_df = df.reset_index().set_index('Name')
+    name_dict = {
+        metric: name_as_index_df[metric].to_dict()
+        for metric in ADDITIONAL_METRICS
+        if metric in name_as_index_df.columns
+    }
+
+    return ID_dict, name_dict
+
+def _aggregate_metric_values(values: list, data_type: str) -> Any:
     """Aggregate metric values based on their type."""
     if not values:
         return None
     
-    first = values[0]
-    if isinstance(first, (int, float)):
-        return round(sum(values) / len(values), 3)
-    elif isinstance(first, str):
-        return ";".join(set(values))
+    if data_type == "numerical":
+        valid_values = [v for v in values if isinstance(v, (int, float))]
+        if not valid_values:
+            return None
+        return round(sum(valid_values) / len(valid_values), 3)
+    elif data_type == "categorical":
+        return ";".join(map(str, set(values)))
     return values
 
 def _enrich_complex_node(node: dict, additional_attributes: dict) -> None:
@@ -327,30 +351,30 @@ def _enrich_complex_node(node: dict, additional_attributes: dict) -> None:
     for metric, metric_dict in additional_attributes.items():
         # Collect values for each member (None if not found)
         member_values = [metric_dict.get(gene) for gene in members]
-        valid_values = [v for v in member_values if v is not None]
+        valid_values = [v for v in member_values if v is not None and v != "NA"]
         
         # Store aggregated value and per-member breakdown
-        node[metric] = _aggregate_metric_values(valid_values)
+        node[metric] = _aggregate_metric_values(valid_values, ADDITIONAL_METRICS_CONFIG[metric]["type"])
         node[f"member_{metric}"] = member_values
 
 def _enrich_gene_or_molecule_node(node: dict, additional_attributes: dict) -> None:
     """Add metrics to a gene node by direct lookup."""
-    gene_id = node['label']
+    gene_id = node['represents']
     for metric, metric_dict in additional_attributes.items():
         node[metric] = metric_dict.get(gene_id)
 
 # @st.cache_data
-def calculate_additional_attributes_for_node(node: dict, additional_attributes: dict) -> dict:
+def calculate_additional_attributes_for_node(node: dict, additional_attributes: dict, name_attributes: dict) -> dict:
     """Enrich a node with additional metrics based on its type.   
-    - gene: Direct lookup by gene label
+    - gene: Direct lookup by gene represents
     - complex: Aggregate metrics from member genes
-    - molecule: Direct lookup by molecule label
+    - molecule: Direct lookup by molecule represents
     """
     node_type = node['type']
     
     # Handle complex nodes specially (need member check)
     if node_type == "complex" and "member" in node:
-        _enrich_complex_node(node, additional_attributes)
+        _enrich_complex_node(node, name_attributes)
     else:
         # Use dispatch table for gene/molecule
         _enrich_gene_or_molecule_node(node, additional_attributes)
@@ -358,7 +382,7 @@ def calculate_additional_attributes_for_node(node: dict, additional_attributes: 
     return node
 
 # ---------------------------- Convert CX2 to Cytoscape Elements ----------------------------
-def _parse_cx2_node(node: dict, additional_attributes: dict, pathway_type: Literal["go-cam", "kegg"]) -> dict:
+def _parse_cx2_node(node: dict, additional_attributes: dict, name_attributes: dict, pathway_type: Literal["go-cam", "kegg"]) -> dict:
     """Parse a single CX2 node into Cytoscape element format."""
     node_id = str(node['id'])
     attrs = node.get('v', {})
@@ -379,7 +403,7 @@ def _parse_cx2_node(node: dict, additional_attributes: dict, pathway_type: Liter
             data['member'] = attrs['member']
         
         # Enrich with additional metrics (e.g., viability, cluster)
-        calculate_additional_attributes_for_node(data, additional_attributes)
+        calculate_additional_attributes_for_node(data, additional_attributes, name_attributes)
     
     elif pathway_type == "kegg":
         # Build core attributes
@@ -394,9 +418,26 @@ def _parse_cx2_node(node: dict, additional_attributes: dict, pathway_type: Liter
         if isinstance(label, list):
             st.write(node)
             raise ValueError("Unexpected list type for KEGG_NODE_LABEL_LIST_FIRST")
+        
+        label = label.strip().removeprefix("SPOM_").removesuffix("...")
+        KEGG_NODE_LABEL = attrs.get(
+            "KEGG_NODE_LABEL_LIST",
+            []
+        )
+        if len(KEGG_NODE_LABEL) >= 1:
+            represents = KEGG_NODE_LABEL[-1].strip().removeprefix("SPOM_").removesuffix("...")
+            if "." in represents:
+                part1, part2 = represents.split(".")
+                represents = part1.upper() + "." + part2.lower()
+            else:
+                represents = represents.upper()
+        else:
+            represents = label
+
         data = {
             "id": node_id,
-            "label": label.removeprefix("SPOM_"),
+            "label": label,
+            "represents": represents,
             "type": attrs.get('KEGG_NODE_TYPE', 'unknown'),
             "x": node.get('x', 0),
             "y": node.get('y', 0),
@@ -404,8 +445,9 @@ def _parse_cx2_node(node: dict, additional_attributes: dict, pathway_type: Liter
         
         # Enrich with additional metrics (e.g., viability, cluster)
         for metric, lookup in additional_attributes.items():
-            if data["label"] in lookup:
-                data[metric] = lookup[data["label"]]
+            if data["represents"] in lookup:
+                value = lookup[data["represents"]]
+                data[metric] = None if value == "NA" else value 
     else:
         raise ValueError(f"Unsupported pathway type: {pathway_type}")
     
@@ -445,7 +487,7 @@ def _parse_cx2_edge(edge: dict, pathway_type: Literal["go-cam", "kegg"]) -> dict
     return {"data": data}
 
 
-def _parse_cx2_network(cx2_network: list, additional_attributes: dict, pathway_type: Literal["go-cam", "kegg"]) -> tuple[list, dict, dict]:
+def _parse_cx2_network(cx2_network: list, additional_attributes: dict, name_attributes: dict, pathway_type: Literal["go-cam", "kegg"]) -> tuple[list, dict, dict]:
     """Parse CX2 network fragments into Cytoscape elements."""
     elements = []
     elements_dict = {}
@@ -456,7 +498,9 @@ def _parse_cx2_network(cx2_network: list, additional_attributes: dict, pathway_t
             for node in fragment['nodes']:
                 if node['v'].get('KEGG_NODE_LABEL_LIST_FIRST', '').startswith("TITLE:"):
                     continue  # Skip title nodes
-                elem = _parse_cx2_node(node, additional_attributes, pathway_type)
+                if node['v'].get('KEGG_NODE_TYPE', '') == 'ortholog':
+                    continue  # Skip ortholog nodes
+                elem = _parse_cx2_node(node, additional_attributes, name_attributes, pathway_type)
                 positions[elem['data']['id']] = {
                     "x": int(elem['data'].get('x', 0)),
                     "y": int(elem['data'].get('y', 0)),
@@ -479,10 +523,10 @@ def convert_cx2_json_to_cytoscape_elements(cx2_network: list, pathway_type: Lite
     cx2_network = deduplicate_cx2_edges(cx2_network)
     
     # Step 2: Load additional gene-level attributes
-    additional_attributes = prepare_additional_attributes(GENE_LEVEL_DATA_FILE)
+    additional_attributes, name_attributes = prepare_additional_attributes(GENE_LEVEL_DATA_FILE)
     
     # Step 3: Parse into Cytoscape elements
-    elements, elements_dict, positions = _parse_cx2_network(cx2_network, additional_attributes, pathway_type)
+    elements, elements_dict, positions = _parse_cx2_network(cx2_network, additional_attributes, name_attributes, pathway_type)
     return elements, elements_dict, positions
 
 # =============================== Node style mapping =================================
@@ -493,7 +537,7 @@ def _get_color_for_value(feature: str, value: float | int | str | None, default_
     - Numerical: use colormap with normalization
     - Missing/None: return default gray
     """
-    if value is None or (isinstance(value, float) and pd.isna(value)):
+    if value is None or (isinstance(value, float) and pd.isna(value)) or value == "NA":
         return default_color
     
     config = ADDITIONAL_METRICS_CONFIG.get(feature)
@@ -562,7 +606,7 @@ LAYOUT_CONFIG = {
         "fit": True,
         "nodeDimensionsIncludeLabels": True,
         # "ranker": "network-simplex",
-        "acyclicer": "greedy",
+        # "acyclicer": "greedy",
         "padding": 10,
         "nodeSep": 50,
         "edgeSep": 70,
@@ -578,24 +622,49 @@ KLAY_LAYOUT_CONFIG = {
     "nodeDimensionsIncludeLabels": True,
     "klay": {
         "direction": "DOWN",
-        "edgeSpacingFactor": 1.5,
-        "inLayerSpacingFactor": 1,
-        "aspectRatio": 0.1,
+        "edgeSpacingFactor": 2,
+        "inLayerSpacingFactor": 1.5,
+        "aspectRatio": 0.8,
         "borderSpacing": 30,
-        "spacing": 30
+        "spacing": 30,
+        "compactComponents": False,
     }
 }
+
+FCOSE_LAYOUT_CONFIG = {
+    "name": "fcose",
+    "fit": True,
+    "padding": 10,
+    "nodeDimensionsIncludeLabels": True,
+    "fcose": {
+        "quality": "default",
+        "randomize": False,
+        "fit": True,
+        "padding": 10,
+        "nodeSeparation": 80,
+        "edgeElasticity": 0.45,
+        "nestingFactor": 0.9,
+        "gravity": 0.25,
+        "numIter": 2500,
+        "initialTemp": 200,
+        "coolingFactor": 0.95,
+        "minTemp": 1.75
+    }
+}
+
+
 
 def layout_algorithm_panel() -> tuple[str, str | None]:
     """Create UI panel for layout algorithm selection. (preset for KEGG since it uses fixed positions)."""
     layout_type = st.selectbox(
         ":material/grid_view: **Layout Algorithm**",
-        options=["Preset", "Dagre", "Klay"],
+        options=["Preset", "Dagre", "Klay", "fCose"],
         index=0,
         help="Select the graph layout algorithm:\n\n"
             "• **Preset**: Use original layout\n\n"
             "• **Dagre**: Directed acyclic graph layout with customizable ranking\n\n"
-            "• **Klay**: Layer-based layout optimized for reducing edge crossings"
+            "• **Klay**: Layer-based layout optimized for reducing edge crossings\n\n"
+            "• **fCose**: Force-directed circular layout with physics simulation"
     )
     
     ranker = None
@@ -631,6 +700,8 @@ def get_layout_config(positions: dict, layout_type: str = "preset", ranker: str 
         return layout_config
     elif layout_type == "klay":
         return KLAY_LAYOUT_CONFIG.copy()
+    elif layout_type == "fcose":
+        return FCOSE_LAYOUT_CONFIG.copy()
     elif layout_type == "dagre":  # dagre
         config = LAYOUT_CONFIG.copy()
         config["config"] = config["config"].copy()
