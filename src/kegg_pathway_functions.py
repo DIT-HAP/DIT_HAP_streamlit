@@ -23,7 +23,7 @@ NODE_STYLES = [
     {  
         "selector": "node[KEGG_NODE_TYPE = 'gene']",  
         "style": {  
-            "label-font-size": 3,
+            "label-font-size": 2,
         }  
     },  
     {  
@@ -52,7 +52,7 @@ NODE_STYLES = [
             "border-width": 1.0,  
             "background-opacity": 0.0  
         }  
-    }  
+    }
 ]
 
 # ------------------------------- Default edge styles -------------------------------
@@ -63,7 +63,7 @@ EDGE_STYLES = [
             "width": 2,
             "line-color": THEME_COLOR,
             "line-style": "solid",
-            "opacity": 0.7058823529411765,
+            "opacity": 0.7,
             "curve-style": "bezier",
             "target-arrow-shape": "none",
             "target-arrow-color": THEME_COLOR,
@@ -98,56 +98,56 @@ EDGE_STYLES = [
         }
     },
     {
-        "selector": "edge[KEGG_EDGE_SUBTYPES = 'expression']",
+        "selector": "edge[interaction = 'expression']",
         "style": {
             "target-arrow-shape": "triangle"
         }
     },
     {
-        "selector": "edge[KEGG_EDGE_SUBTYPES = 'indirect effect']",
+        "selector": "edge[interaction = 'indirect effect']",
         "style": {
             "target-arrow-shape": "triangle-backcurve",
             "line-style": "dashed"
         }
     },
     {
-        "selector": "edge[KEGG_EDGE_SUBTYPES = 'irreversible']",
+        "selector": "edge[interaction = 'irreversible']",
         "style": {
             "target-arrow-shape": "triangle"
         }
     },
     {
-        "selector": "edge[KEGG_EDGE_SUBTYPES = 'inhibition']",
+        "selector": "edge[interaction = 'inhibition']",
         "style": {
             "target-arrow-shape": "tee"
         }
     },
     {
-        "selector": "edge[KEGG_EDGE_SUBTYPES = 'repression']",
+        "selector": "edge[interaction = 'repression']",
         "style": {
             "target-arrow-shape": "tee"
         }
     },
     {
-        "selector": "edge[KEGG_EDGE_SUBTYPES = 'activation']",
+        "selector": "edge[interaction = 'activation']",
         "style": {
             "target-arrow-shape": "triangle"
         }
     },
     {
-        "selector": "edge[KEGG_EDGE_SUBTYPES = 'state change']",
+        "selector": "edge[interaction = 'state change']",
         "style": {
             "line-style": "dotted"
         }
     },
     {
-        "selector": "edge[KEGG_EDGE_SUBTYPES = 'binding/association']",
+        "selector": "edge[interaction = 'binding/association']",
         "style": {
             "line-style": "dashed"
         }
     },
     {
-        "selector": "edge[KEGG_EDGE_SUBTYPES = 'maplink']",
+        "selector": "edge[interaction = 'maplink']",
         "style": {
             "line-style": "dashed"
         }
@@ -189,22 +189,8 @@ def get_node_styles(
                 "color": label_color,
                 "border-color": THEME_COLOR,
                 "border-width": 1,
-                "width": width if width > 1 else 10,
-                "height": height if height > 1 else 10,
-            }
-            styles.append({"selector": f"node[id='{node_id}']", "style": style})
-        elif node_type == "ortholog":
-            style = {
-                "label": "",
-                "text-valign": "center",
-                "text-halign": "center",
-                "shape": element_data.get("KEGG_NODE_SHAPE", "ellipse").lower(),
-                "background-color": fill_color,
-                "color": label_color,
-                "border-color": THEME_COLOR,
-                "border-width": 1,
-                "width": width if width > 1 else 15,
-                "height": height if height > 1 else 15,
+                "width": 4,
+                "height": 4,
             }
             styles.append({"selector": f"node[id='{node_id}']", "style": style})
         elif node_type == "group":
@@ -245,8 +231,8 @@ def get_node_styles(
                 "color": label_color,
                 "border-color": THEME_COLOR,
                 "border-width": 1,
-                "width": width if width > 1 else 10,
-                "height": height if height > 1 else 10,
+                "width": width if width > 1 else 15,
+                "height": height if height > 1 else 15,
             }
             styles.append({"selector": f"node[id='{node_id}']", "style": style})
         else:
