@@ -11,6 +11,7 @@ gocam>=0.7.0
 beautifulsoup4
 git+https://github.com/Sotdo/st-cytoscape.git
 networkx
+pydot
 ndex2
 pytest
 lxml
