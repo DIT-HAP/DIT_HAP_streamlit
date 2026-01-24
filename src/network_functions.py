@@ -5,8 +5,6 @@ import json
 from pathlib import Path
 from typing import Any, Literal
 from stqdm import stqdm
-import base64
-import requests
 import pandas as pd
 import numpy as np
 from bs4 import BeautifulSoup
@@ -201,7 +199,7 @@ def _parse_gocam_model(yaml_file_path: Path) -> Model:
     model = Model.model_validate(model_data)
     return model
 
-@st.cache_data
+@st.cache_resource
 def load_all_gocam_models(directory_path: Path) -> dict[str, dict]:
     """Load all GO-CAM models from a specified directory."""
     models = {}
