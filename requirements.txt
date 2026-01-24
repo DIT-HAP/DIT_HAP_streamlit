@@ -12,6 +12,7 @@ beautifulsoup4
 git+https://github.com/Sotdo/st-cytoscape.git
 networkx
 pydot
+graphviz
 ndex2
 pytest
 lxml
