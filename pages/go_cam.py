@@ -15,7 +15,7 @@ from src.network_functions import (
 )
 from src.go_cam_functions import (
     get_stylesheet,
-    # plot_interaction_type_legend,
+    plot_interaction_type_legend,
 )
 # ================================= Page Config ====================================
 st.set_page_config(
@@ -217,8 +217,7 @@ def main():
     network_col, detail_col = st.columns([2, 1], border=True)
     with detail_col:
         with st.expander(":material/legend_toggle: Interaction Type Legend", expanded=True):
-            # plot_interaction_type_legend()
-            pass
+            plot_interaction_type_legend()
 
 
     with network_col:
@@ -253,11 +252,6 @@ def main():
             st.warning("No model selected.")
             cytoscape_elements = []
             elements_dict = {}
-        
- 
-        
-        # with st.sidebar.expander(":material/dashboard: Layout settings", expanded=False):
-        #     selected_layout_config = layout_selection_panel()
         
 if __name__ == "__main__":
     main()

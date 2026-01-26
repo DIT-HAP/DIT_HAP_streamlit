@@ -6,6 +6,8 @@ from .network_functions import (
     map_feature_value
 )
 
+from st_cytoscape import cytoscape
+
 
 
 # ================================ Style sheet Configuration =================================
@@ -334,8 +336,23 @@ def get_stylesheet(
 #     'causally upstream of, negative effect': 'upstream positive effect',
 #     'causally upstream of, positive effect': 'upstream negative effect',
 # }
-
-
+EDGE_NAMES = {
+  "RO:0002304": "causally upstream of, positive effect",
+  "RO:0002305": "causally upstream of, negative effect",
+  "RO:0012009": "constitutively upstream of",
+  "RO:0002630": "directly negatively regulates",
+  "RO:0002629": "directly positively regulates",
+  "RO:0002233": "has input",
+  "RO:0002234": "has output",
+  "RO:0002407": "indirectly positively regulates",
+  "RO:0002409": "indirectly negatively regulates",
+  "RO:0012006": "is small molecule inhibitor of",
+  "RO:0012005": "is small molecule activator of",
+  "RO:0002212": "negatively regulates",
+  "RO:0002213": "positively regulates",
+  "RO:0002413": "provides input for",
+  "RO:0012010": "removes input for",
+}
 
 # EDGE_STYLES = [
 #     {
@@ -484,116 +501,110 @@ def get_stylesheet(
 
 
 
-# # ================================ Plot Interaction Type Legend =================================
-# def plot_interaction_type_legend():
-#     """Plot a legend for interaction types with alternating edge lines and labels."""
-#     legend_elements = []
+# ================================ Plot Interaction Type Legend =================================
+def plot_interaction_type_legend():
+    """Plot a legend for interaction types with alternating edge lines and labels."""
+    legend_elements = []
     
-#     # First, add all the nodes (one pair per interaction type)
-#     node_pairs = []
-#     for i, edge_style in enumerate(EDGE_STYLES):
-#         selector = edge_style['selector']
-#         # Handle both single and double quotes in selector
-#         if 'edge[interaction="' in selector:
-#             interaction_type = selector.split('edge[interaction="')[1].split('"]')[0]
-#         elif "edge[interaction='" in selector:
-#             interaction_type = selector.split("edge[interaction='")[1].split("']")[0]
-#         else:
-#             continue  # Skip if selector doesn't match expected format
+    # First, add all the nodes (one pair per interaction type)
+    node_pairs = []
+    for i, edge_style in enumerate(EDGE_STYLES):
+        selector = edge_style['selector']
+        # Handle both single and double quotes in selector
+        if 'edge[represents="' in selector:
+            interaction_type = selector.split('edge[represents="')[1].split('"]')[0]
+        elif "edge[represents='" in selector:
+            interaction_type = selector.split("edge[represents='")[1].split("']")[0]
+        else:
+            continue  # Skip if selector doesn't match expected format
         
-#         # Create source and target nodes for the edge line
-#         source_id = f"legend_source_{i}"
-#         target_id = f"legend_target_{i}"
-#         # Create nodes for the label on the next row
-#         label_source_id = f"legend_label_source_{i}"
-#         label_target_id = f"legend_label_target_{i}"
+        # Create source and target nodes for the edge line
+        source_id = f"legend_source_{i}"
+        target_id = f"legend_target_{i}"
+        # Create nodes for the label on the next row
+        label_source_id = f"legend_label_source_{i}"
+        label_target_id = f"legend_label_target_{i}"
         
-#         node_pairs.append((source_id, target_id, label_source_id, label_target_id, interaction_type))
+        node_pairs.append((source_id, target_id, label_source_id, label_target_id, interaction_type))
         
-#         # Add nodes for edge line
-#         legend_elements.append({
-#             "data": {"id": source_id, "label": ""}
-#         })
-#         legend_elements.append({
-#             "data": {"id": target_id, "label": ""}
-#         })
-#         # Add nodes for label line
-#         legend_elements.append({
-#             "data": {"id": label_source_id, "label": ""}
-#         })
-#         legend_elements.append({
-#             "data": {"id": label_target_id, "label": EDGE_NAMES[interaction_type]}
-#         })
+        # Add nodes for edge line
+        legend_elements.append({
+            "data": {"id": source_id, "label": ""}
+        })
+        legend_elements.append({
+            "data": {"id": target_id, "label": ""}
+        })
+        # Add nodes for label line
+        legend_elements.append({
+            "data": {"id": label_source_id, "label": ""}
+        })
+        legend_elements.append({
+            "data": {"id": label_target_id, "label": EDGE_NAMES[interaction_type]}
+        })
     
-#     # Then add all the edges (interaction lines only)
-#     for i, (source_id, target_id, _, _, interaction_type) in enumerate(node_pairs):
-#         legend_elements.append({
-#             "data": {
-#                 "id": f"legend_edge_{i}",
-#                 "source": source_id,
-#                 "target": target_id,
-#                 "interaction": interaction_type,
-#             }
-#         })
+    # Then add all the edges (interaction lines only)
+    for i, (source_id, target_id, _, _, interaction_type) in enumerate(node_pairs):
+        legend_elements.append({
+            "data": {
+                "id": f"legend_edge_{i}",
+                "source": source_id,
+                "target": target_id,
+                "represents": interaction_type,
+            }
+        })
     
-#     # Create legend-specific stylesheet
-#     legend_stylesheet = [
-#         {
-#             "selector": "node",
-#             "style": {
-#                 "opacity": 0,
-#                 "width": 1,
-#                 "height": 1
-#             }
-#         },
-#         {
-#             "selector": "node[label]",
-#             "style": {
-#                 "opacity": 1,
-#                 "label": "data(label)",
-#                 "text-halign": "left",
-#                 "text-valign": "center",
-#                 "color": THEME_COLOR,  # Adapts to Streamlit theme
-#                 "font-size": "14px",
-#                 "background-opacity": 0,
-#                 "width": 1,
-#                 "height": 1
-#             }
-#         },
-#         {
-#             "selector": "edge",
-#             "style": {
-#                 "width": 4,
-#             }
-#         }
-#     ] + EDGE_STYLES
+    # Create legend-specific stylesheet
+    legend_stylesheet = [
+        {
+            "selector": "node",
+            "style": {
+                "opacity": 0,
+                "width": 1,
+                "height": 1
+            }
+        },
+        {
+            "selector": "node[label]",
+            "style": {
+                "opacity": 1,
+                "label": "data(label)",
+                "text-halign": "left",
+                "text-valign": "center",
+                "color": THEME_COLOR,  # Adapts to Streamlit theme
+                "font-size": "14px",
+                "background-opacity": 0,
+                "width": 1,
+                "height": 1
+            }
+        },
+    ] + EDGE_STYLES
     
-#     # Calculate positions: alternating rows for edges and labels
-#     positions = {}
-#     row_spacing = 35
-#     for i, (source_id, target_id, label_source_id, label_target_id, _) in enumerate(node_pairs):
-#         row_index = i * 2  # Each interaction takes 2 rows
-#         # Edge line on even rows (left-aligned)
-#         positions[source_id] = {"x": 2, "y": row_index * row_spacing + 20}
-#         positions[target_id] = {"x": 150, "y": row_index * row_spacing + 20}
-#         # Label on odd rows (left-aligned)
-#         positions[label_source_id] = {"x": 2, "y": (row_index + 1) * row_spacing + 20}
-#         positions[label_target_id] = {"x": 160, "y": (row_index + 1) * row_spacing + 20}
+    # Calculate positions: alternating rows for edges and labels
+    positions = {}
+    row_spacing = 35
+    for i, (source_id, target_id, label_source_id, label_target_id, _) in enumerate(node_pairs):
+        row_index = i * 2  # Each interaction takes 2 rows
+        # Edge line on even rows (left-aligned)
+        positions[source_id] = {"x": 2, "y": row_index * row_spacing + 20}
+        positions[target_id] = {"x": 150, "y": row_index * row_spacing + 20}
+        # Label on odd rows (left-aligned)
+        positions[label_source_id] = {"x": 2, "y": (row_index + 1) * row_spacing + 20}
+        positions[label_target_id] = {"x": 160, "y": (row_index + 1) * row_spacing + 20}
     
-#     cytoscape(
-#         elements=legend_elements,
-#         stylesheet=legend_stylesheet,
-#         layout={
-#             "name": "preset",
-#             "positions": positions,
-#             "fit": True,
-#             "padding": 4
-#         },
-#         height=f"{len(node_pairs) * 2 * row_spacing + 40}px",
-#         key="legend",
-#         user_panning_enabled=False,
-#         user_zooming_enabled=False,
-#         selection_type="none",
-#     )
+    cytoscape(
+        elements=legend_elements,
+        stylesheet=legend_stylesheet,
+        layout={
+            "name": "preset",
+            "positions": positions,
+            "fit": True,
+            "padding": 4
+        },
+        height=f"{len(node_pairs) * 2 * row_spacing + 40}px",
+        key="legend",
+        user_panning_enabled=False,
+        user_zooming_enabled=False,
+        selection_type="none",
+    )
 
 
