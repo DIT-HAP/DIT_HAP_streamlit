@@ -2,7 +2,7 @@ id: gomodel:67c10cc400003549
 title: tRNA wobble guanine modification (GO:0002099) (nuclear/cytoplasmic)
 taxon: NCBITaxon:4896
 status: production
-date_modified: '2025-11-29'
+date_modified: '2026-02-06'
 activities:
 - id: gomodel:67c10cc400003549/67c10cc400003592
   enabled_by:
@@ -60,6 +60,15 @@ activities:
     term: GO:0002099
   has_input:
   - type: MoleculeAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-03-12'
+      provided_by:
+      - http://www.pombase.org
+    term: CHEBI:17433
+  - type: MoleculeAssociation
     evidence:
     - term: ECO:0000318
       reference: GO_REF:0000033
@@ -73,31 +82,11 @@ activities:
         date: '2025-03-12'
         provided_by:
         - http://www.pombase.org
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN002460924
-      - UniProtKB:Q9BXR0
-      - MGI:MGI:1931441
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2025-03-12'
-        provided_by:
-        - http://www.pombase.org
     provenances:
     - contributor:
       - https://orcid.org/0000-0001-6330-7526
-      date: '2025-03-12'
-      provided_by:
-      - http://www.pombase.org
-    term: CHEBI:17433
-  - type: MoleculeAssociation
-    evidence: []
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2025-03-12'
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2026-02-06'
       provided_by:
       - http://www.pombase.org
     term: CHEBI:17433
@@ -329,27 +318,12 @@ activities:
     term: CHEBI:60193
   has_output:
   - type: MoleculeAssociation
-    evidence:
-    - term: ECO:0000314
-      reference: PMID:35940128
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2025-03-12'
-        provided_by:
-        - http://www.pombase.org
-    - term: ECO:0000314
-      reference: PMID:35940128
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2025-03-12'
-        provided_by:
-        - http://www.pombase.org
+    evidence: []
     provenances:
     - contributor:
       - https://orcid.org/0000-0001-6330-7526
-      date: '2025-03-12'
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2026-02-06'
       provided_by:
       - http://www.pombase.org
     term: CHEBI:17433
@@ -362,6 +336,109 @@ activities:
       provided_by:
       - http://www.pombase.org
     term: CHEBI:17433
+- id: gomodel:67c10cc400003549/69729a3800005865
+  enabled_by:
+    type: EnabledByGeneProductAssociation
+    evidence:
+    - term: ECO:0000314
+      reference: PMID:40526720
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-05'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2026-02-05'
+      provided_by:
+      - http://www.pombase.org
+    term: PomBase:SPCC320.08
+  molecular_function:
+    type: MolecularFunctionAssociation
+    term: GO:0160286
+  part_of:
+    type: BiologicalProcessAssociation
+    evidence:
+    - term: ECO:0000314
+      reference: PMID:40526720
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-05'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2026-02-05'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0160287
+  has_input:
+  - type: MoleculeAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2026-02-05'
+      provided_by:
+      - http://www.pombase.org
+    term: CHEBI:60193
+  - type: MoleculeAssociation
+    evidence:
+    - term: ECO:0000314
+      reference: PMID:40526720
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-05'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000314
+      reference: PMID:40526720
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-05'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2026-02-05'
+      provided_by:
+      - http://www.pombase.org
+    term: CHEBI:60193
+  has_output:
+  - type: MoleculeAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2026-02-06'
+      provided_by:
+      - http://www.pombase.org
+    term: CHEBI:60193
+  - type: MoleculeAssociation
+    evidence:
+    - term: ECO:0000314
+      reference: PMID:40526720
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-05'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2026-02-05'
+      provided_by:
+      - http://www.pombase.org
+    term: CHEBI:60193
 objects:
 - id: GO:0160283
   label: queuine transmembrane transporter activity
@@ -429,9 +506,16 @@ objects:
 - id: ECO:0000305
   label: curator inference used in manual assertion
   type: gocam:Object
+- id: GO:0160286
+  label: queuosine transmembrane transporter activity
+  type: gocam:Object
+- id: GO:0160287
+  label: queuosine import across plasma membrane
+  type: gocam:Object
 provenances:
 - contributor:
   - https://orcid.org/0000-0001-6330-7526
-  date: '2025-11-29'
+  - https://orcid.org/0009-0003-9059-1333
+  date: '2026-02-06'
   provided_by:
   - http://www.pombase.org

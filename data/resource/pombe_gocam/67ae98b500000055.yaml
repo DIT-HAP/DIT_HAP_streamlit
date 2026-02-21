@@ -2002,6 +2002,24 @@ activities:
     downstream_activity: gomodel:67ae98b500000055/67ae98b500000100
   - type: CausalAssociation
     evidence:
+    - term: ECO:0000315
+      reference: PMID:20435771
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2025-02-27'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-02-27'
+      provided_by:
+      - http://www.pombase.org
+    predicate: RO:0002409
+    downstream_activity: gomodel:67ae98b500000055/67ae98b500000081
+  - type: CausalAssociation
+    evidence:
     - term: ECO:0000318
       reference: GO_REF:0000033
       with_objects:
@@ -2051,24 +2069,6 @@ activities:
       - http://www.pombase.org
     predicate: RO:0002409
     downstream_activity: gomodel:67ae98b500000055/67ae98b500000063
-  - type: CausalAssociation
-    evidence:
-    - term: ECO:0000315
-      reference: PMID:20435771
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2025-02-27'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2025-02-27'
-      provided_by:
-      - http://www.pombase.org
-    predicate: RO:0002409
-    downstream_activity: gomodel:67ae98b500000055/67ae98b500000081
   - type: CausalAssociation
     evidence:
     - term: ECO:0000318

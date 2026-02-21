@@ -1762,7 +1762,7 @@ objects:
   label: biological aspect of ancestor evidence used in manual assertion
   type: gocam:Object
 - id: GO:0004042
-  label: L-glutamate N-acetyltransferase activity
+  label: L-glutamate N-acetyltransferase activity, acting on acetyl-CoA as donor
   type: gocam:Object
 - id: PomBase:SPBC725.14
   label: arg6 Spom
@@ -1792,7 +1792,7 @@ objects:
   label: curator inference used in manual assertion
   type: gocam:Object
 - id: GO:0003992
-  label: N2-acetyl-L-ornithine:2-oxoglutarate 5-aminotransferase activity
+  label: N2-acetyl-L-ornithine:2-oxoglutarate 5-transaminase activity
   type: gocam:Object
 - id: PomBase:SPCC777.09c
   label: arg1 Spom

@@ -2,8 +2,9 @@ id: gomodel:6918f23700001200
 title: cellular detoxification of methylglyoxal  (GO:0140041)
 taxon: NCBITaxon:4896
 status: production
-date_modified: '2026-01-07'
+date_modified: '2026-01-22'
 comments:
+- 'Automated change 2026-01-22: GO:0019243 replaced by GO:0051596'
 - I left the locations off thse pathways  until we have more info
 activities:
 - id: gomodel:6918f23700001200/6918f23700001279
@@ -159,7 +160,7 @@ activities:
       date: '2025-11-22'
       provided_by:
       - http://www.pombase.org
-    term: GO:0019243
+    term: GO:0051596
   has_input:
   - type: MoleculeAssociation
     evidence:
@@ -295,127 +296,6 @@ activities:
       provided_by:
       - http://www.pombase.org
     term: CHEBI:57925
-- id: gomodel:6918f23700001200/693b3c0900006201
-  enabled_by:
-    type: EnabledByGeneProductAssociation
-    evidence:
-    - term: ECO:0000501
-      reference: GO_REF:0000116
-      with_objects:
-      - RHEA:27754
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2026-01-07'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2026-01-07'
-      provided_by:
-      - http://www.pombase.org
-    term: PomBase:SPAC11D3.13
-  molecular_function:
-    type: MolecularFunctionAssociation
-    term: GO:0019172
-  occurs_in:
-    type: CellularAnatomicalEntityAssociation
-    evidence:
-    - term: ECO:0007005
-      reference: PMID:16823372
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2026-01-07'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2026-01-07'
-      provided_by:
-      - http://www.pombase.org
-    term: GO:0005829
-  part_of:
-    type: BiologicalProcessAssociation
-    evidence:
-    - term: ECO:0000305
-      reference: GO_REF:0000111
-      with_objects:
-      - GO:0019172
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2026-01-07'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2026-01-07'
-      provided_by:
-      - http://www.pombase.org
-    term: GO:0061727
-  has_input:
-  - type: MoleculeAssociation
-    evidence:
-    - term: ECO:0000316
-      reference: PMID:15042280
-      with_objects:
-      - SGD:S000004463
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2026-01-07'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2026-01-07'
-      provided_by:
-      - http://www.pombase.org
-    term: CHEBI:17158
-  has_output:
-  - type: MoleculeAssociation
-    evidence: []
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2026-01-07'
-      provided_by:
-      - http://www.pombase.org
-    term: CHEBI:16651
-  - type: MoleculeAssociation
-    evidence:
-    - term: ECO:0000501
-      reference: GO_REF:0000116
-      with_objects:
-      - RHEA:27754
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2026-01-07'
-        provided_by:
-        - http://www.pombase.org
-    - term: ECO:0000501
-      reference: GO_REF:0000116
-      with_objects:
-      - RHEA:27754
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2026-01-07'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2026-01-07'
-      provided_by:
-      - http://www.pombase.org
-    term: CHEBI:16651
 - id: gomodel:6918f23700001200/6918f23700001262
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -539,6 +419,127 @@ activities:
       provided_by:
       - http://www.pombase.org
     term: CHEBI:18041
+- id: gomodel:6918f23700001200/693b3c0900006201
+  enabled_by:
+    type: EnabledByGeneProductAssociation
+    evidence:
+    - term: ECO:0000501
+      reference: GO_REF:0000116
+      with_objects:
+      - RHEA:27754
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-01-07'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2026-01-07'
+      provided_by:
+      - http://www.pombase.org
+    term: PomBase:SPAC11D3.13
+  molecular_function:
+    type: MolecularFunctionAssociation
+    term: GO:0019172
+  occurs_in:
+    type: CellularAnatomicalEntityAssociation
+    evidence:
+    - term: ECO:0007005
+      reference: PMID:16823372
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-01-07'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2026-01-07'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0005829
+  part_of:
+    type: BiologicalProcessAssociation
+    evidence:
+    - term: ECO:0000305
+      reference: GO_REF:0000111
+      with_objects:
+      - GO:0019172
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-01-07'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2026-01-07'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0061727
+  has_input:
+  - type: MoleculeAssociation
+    evidence:
+    - term: ECO:0000316
+      reference: PMID:15042280
+      with_objects:
+      - SGD:S000004463
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-01-07'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2026-01-07'
+      provided_by:
+      - http://www.pombase.org
+    term: CHEBI:17158
+  has_output:
+  - type: MoleculeAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2026-01-07'
+      provided_by:
+      - http://www.pombase.org
+    term: CHEBI:16651
+  - type: MoleculeAssociation
+    evidence:
+    - term: ECO:0000501
+      reference: GO_REF:0000116
+      with_objects:
+      - RHEA:27754
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-01-07'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000501
+      reference: GO_REF:0000116
+      with_objects:
+      - RHEA:27754
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-01-07'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2026-01-07'
+      provided_by:
+      - http://www.pombase.org
+    term: CHEBI:16651
 - id: gomodel:6918f23700001200/6918f23700001240
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -588,7 +589,7 @@ activities:
       date: '2025-11-23'
       provided_by:
       - http://www.pombase.org
-    term: GO:0019243
+    term: GO:0051596
   has_input:
   - type: MoleculeAssociation
     evidence:
@@ -965,7 +966,7 @@ activities:
       date: '2025-11-22'
       provided_by:
       - http://www.pombase.org
-    term: GO:0019243
+    term: GO:0051596
   has_input:
   - type: MoleculeAssociation
     evidence:
@@ -1521,8 +1522,8 @@ objects:
 - id: PomBase:SPBC12C2.12c
   label: glo1 Spom
   type: gocam:Object
-- id: GO:0019243
-  label: obsolete methylglyoxal catabolic process to pyruvate via (R)-S-lactoyl-glutathione
+- id: GO:0051596
+  label: methylglyoxal catabolic process
   type: gocam:Object
 - id: ECO:0000316
   label: genetic interaction evidence used in manual assertion
@@ -1584,9 +1585,6 @@ objects:
 - id: CHEBI:36080
   label: protein
   type: gocam:Object
-- id: GO:0051596
-  label: methylglyoxal catabolic process
-  type: gocam:Object
 - id: CHEBI:16651
   label: (S)-lactate
   type: gocam:Object
@@ -1626,6 +1624,6 @@ objects:
 provenances:
 - contributor:
   - https://orcid.org/0000-0001-6330-7526
-  date: '2026-01-07'
+  date: '2026-01-22'
   provided_by:
   - http://www.pombase.org

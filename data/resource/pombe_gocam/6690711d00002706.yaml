@@ -3,8 +3,9 @@ title: L-isoleucine biosynthetic process  (GO:1901705), L-leucine biosynthetic p
   (GO:0009098)
 taxon: NCBITaxon:4896
 status: production
-date_modified: '2025-11-29'
+date_modified: '2026-02-12'
 comments:
+- 'Automated change 2026-02-12: GO:0009097 replaced by GO:1901705'
 - https://pubmed.ncbi.nlm.nih.gov/37455545/#:~:text=Branched%2Dchain%20amino%20acids%20(BCAAs,in%20the%20yeast%20Saccharomyces%20cerevisiae.
 activities:
 - id: gomodel:6690711d00002706/678073a900001335
@@ -515,7 +516,7 @@ activities:
       date: '2024-07-25'
       provided_by:
       - http://www.pombase.org
-    term: GO:0009097
+    term: GO:1901705
   has_input:
   - type: MoleculeAssociation
     evidence:
@@ -1353,7 +1354,7 @@ activities:
       date: '2024-07-25'
       provided_by:
       - http://www.pombase.org
-    term: GO:0009097
+    term: GO:1901705
   causal_associations:
   - type: CausalAssociation
     evidence:
@@ -2215,7 +2216,7 @@ activities:
       date: '2024-07-25'
       provided_by:
       - http://www.pombase.org
-    term: GO:0009097
+    term: GO:1901705
   has_input:
   - type: MoleculeAssociation
     evidence:
@@ -2574,7 +2575,7 @@ activities:
       date: '2024-07-25'
       provided_by:
       - http://www.pombase.org
-    term: GO:0009097
+    term: GO:1901705
   has_input:
   - type: MoleculeAssociation
     evidence:
@@ -2916,8 +2917,8 @@ objects:
 - id: PomBase:SPBC1677.03c
   label: tda1 Spom
   type: gocam:Object
-- id: GO:0009097
-  label: isoleucine biosynthetic process
+- id: GO:1901705
+  label: L-isoleucine biosynthetic process
   type: gocam:Object
 - id: GO:0005759
   label: mitochondrial matrix
@@ -2979,14 +2980,11 @@ objects:
 - id: PomBase:SPAC17G8.06c
   label: ilv3 Spom
   type: gocam:Object
-- id: GO:1901705
-  label: L-isoleucine biosynthetic process
-  type: gocam:Object
 - id: ECO:0000315
   label: mutant phenotype evidence used in manual assertion
   type: gocam:Object
 - id: GO:0052656
-  label: L-isoleucine-2-oxoglutarate transaminase activity
+  label: L-isoleucine:2-oxoglutarate transaminase activity
   type: gocam:Object
 - id: PomBase:SPBC428.02c
   label: eca39 Spom
@@ -3103,7 +3101,7 @@ objects:
   label: (2R,3S)-3-isopropylmalate(2-)
   type: gocam:Object
 - id: GO:0052654
-  label: L-leucine-2-oxoglutarate transaminase activity
+  label: L-leucine:2-oxoglutarate transaminase activity
   type: gocam:Object
 - id: CHEBI:15603
   label: L-leucine
@@ -3133,7 +3131,7 @@ objects:
   label: mpc2 Spom
   type: gocam:Object
 - id: GO:0004021
-  label: L-alanine:2-oxoglutarate aminotransferase activity
+  label: L-alanine:2-oxoglutarate transaminase activity
   type: gocam:Object
 - id: PomBase:SPBC582.08
   label: alt1 Spom
@@ -3151,6 +3149,6 @@ provenances:
 - contributor:
   - https://orcid.org/0000-0001-6330-7526
   - https://orcid.org/0009-0003-9059-1333
-  date: '2025-11-29'
+  date: '2026-02-12'
   provided_by:
   - http://www.pombase.org

@@ -2885,7 +2885,7 @@ objects:
   label: rnl Spom
   type: gocam:Object
 - id: GO:0008650
-  label: rRNA (uridine-2'-O-)-methyltransferase activity
+  label: rRNA (uridine-2'-O-ribose)-methyltransferase activity
   type: gocam:Object
 - id: PomBase:SPBC2G2.15c
   label: mrm2 Spom

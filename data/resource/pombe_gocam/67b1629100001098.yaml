@@ -2,7 +2,7 @@ id: gomodel:67b1629100001098
 title: pantothenate biosynthetic process (GO:0015940)
 taxon: NCBITaxon:4896
 status: production
-date_modified: '2025-07-21'
+date_modified: '2026-01-29'
 comments:
 - Changed ppc1 to ptk1, and localised (R)-pantothenate to the cytosol, for joining
   with CoA biosynthesis model
@@ -45,8 +45,9 @@ activities:
       reference: PMID:16823372
       provenances:
       - contributor:
+        - https://orcid.org/0009-0003-9059-1333
         - https://orcid.org/0000-0001-6330-7526
-        date: '2025-02-18'
+        date: '2026-01-29'
         provided_by:
         - http://www.pombase.org
     provenances:
@@ -110,7 +111,7 @@ activities:
       date: '2025-02-18'
       provided_by:
       - http://www.pombase.org
-    term: CHEBI:67016
+    term: CHEBI:57453
   - type: MoleculeAssociation
     evidence: []
     provenances:
@@ -448,7 +449,8 @@ activities:
       provenances:
       - contributor:
         - https://orcid.org/0000-0001-6330-7526
-        date: '2025-02-18'
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2026-01-29'
         provided_by:
         - http://www.pombase.org
     provenances:
@@ -597,8 +599,8 @@ objects:
 - id: CHEBI:11851
   label: 3-methyl-2-oxobutanoate
   type: gocam:Object
-- id: CHEBI:67016
-  label: tetrahydrofolate
+- id: CHEBI:57453
+  label: (6S)-5,6,7,8-tetrahydrofolate(2-)
   type: gocam:Object
 - id: CHEBI:11561
   label: 2-dehydropantoate
@@ -637,6 +639,6 @@ provenances:
 - contributor:
   - https://orcid.org/0000-0001-6330-7526
   - https://orcid.org/0009-0003-9059-1333
-  date: '2025-07-21'
+  date: '2026-01-29'
   provided_by:
   - http://www.pombase.org

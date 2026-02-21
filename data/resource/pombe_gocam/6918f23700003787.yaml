@@ -1294,6 +1294,65 @@ activities:
       provided_by:
       - http://www.pombase.org
     term: GO:0006906
+- id: gomodel:6918f23700003787/6918f23700003808
+  enabled_by:
+    type: EnabledByGeneProductAssociation
+    evidence:
+    - term: ECO:0000269
+      reference: PMID:41144523
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2025-12-06'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-12-06'
+      provided_by:
+      - http://www.pombase.org
+    term: PomBase:SPAC11E3.02c
+  molecular_function:
+    type: MolecularFunctionAssociation
+    term: GO:0030674
+  part_of:
+    type: BiologicalProcessAssociation
+    evidence:
+    - term: ECO:0000269
+      reference: PMID:41144523
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2025-12-06'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-12-06'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0006887
+  causal_associations:
+  - type: CausalAssociation
+    evidence:
+    - term: ECO:0000269
+      reference: PMID:41144523
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2025-12-06'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-12-06'
+      provided_by:
+      - http://www.pombase.org
+    predicate: RO:0012009
+    downstream_activity: gomodel:6918f23700003787/6918f23700003923
 - id: gomodel:6918f23700003787/6918f23700003846
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -1386,65 +1445,6 @@ activities:
       provided_by:
       - http://www.pombase.org
     term: GO:0031671
-- id: gomodel:6918f23700003787/6918f23700003808
-  enabled_by:
-    type: EnabledByGeneProductAssociation
-    evidence:
-    - term: ECO:0000269
-      reference: PMID:41144523
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2025-12-06'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2025-12-06'
-      provided_by:
-      - http://www.pombase.org
-    term: PomBase:SPAC11E3.02c
-  molecular_function:
-    type: MolecularFunctionAssociation
-    term: GO:0030674
-  part_of:
-    type: BiologicalProcessAssociation
-    evidence:
-    - term: ECO:0000269
-      reference: PMID:41144523
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2025-12-06'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2025-12-06'
-      provided_by:
-      - http://www.pombase.org
-    term: GO:0006887
-  causal_associations:
-  - type: CausalAssociation
-    evidence:
-    - term: ECO:0000269
-      reference: PMID:41144523
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2025-12-06'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2025-12-06'
-      provided_by:
-      - http://www.pombase.org
-    predicate: RO:0012009
-    downstream_activity: gomodel:6918f23700003787/6918f23700003923
 - id: gomodel:6918f23700003787/6918f23700003944
   enabled_by:
     type: EnabledByGeneProductAssociation

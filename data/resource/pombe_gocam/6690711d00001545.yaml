@@ -1,11 +1,9 @@
 id: gomodel:6690711d00001545
-title: 'L-serine biosynthetic process (GO:0006564), cysteine biosynthetic process
-  from serine (GO:0006535)
-
-  '
+title: L-serine biosynthetic process (GO:0006564), L-cysteine biosynthetic process
+  (GO:0019344)
 taxon: NCBITaxon:4896
 status: production
-date_modified: '2025-09-17'
+date_modified: '2026-02-13'
 comments:
 - It might not be obvious why there are 2 instances of dia4 in htis model, but this
   is because there are 2 copies needed in the modification model, which this merges
@@ -703,6 +701,237 @@ activities:
       provided_by:
       - http://www.pombase.org
     term: CHEBI:29162
+- id: gomodel:6690711d00001545/698e557b00000104
+  enabled_by:
+    type: EnabledByGeneProductAssociation
+    evidence:
+    - term: ECO:0000501
+      reference: GO_REF:0000116
+      with_objects:
+      - RHEA:10980
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-13'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000314
+      reference: PMID:19155267
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-13'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000314
+      reference: PMID:19640845
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-13'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000314
+      reference: PMID:24314397
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-13'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2026-02-13'
+      provided_by:
+      - http://www.pombase.org
+    term: PomBase:SPCC320.14
+  molecular_function:
+    type: MolecularFunctionAssociation
+    term: GO:0030378
+  occurs_in:
+    type: CellularAnatomicalEntityAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2026-02-13'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0005829
+  part_of:
+    type: BiologicalProcessAssociation
+    evidence:
+    - term: ECO:0000314
+      reference: PMID:19640845
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-13'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2026-02-13'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0036088
+  has_output:
+  - type: MoleculeAssociation
+    evidence:
+    - term: ECO:0000501
+      reference: GO_REF:0000116
+      with_objects:
+      - RHEA:10980
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-13'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000314
+      reference: PMID:19155267
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-13'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000314
+      reference: PMID:19155267
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-13'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000314
+      reference: PMID:19155267
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-13'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000314
+      reference: PMID:19640845
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-13'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000314
+      reference: PMID:19640845
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-13'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000314
+      reference: PMID:19640845
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-13'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000314
+      reference: PMID:24314397
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-13'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000314
+      reference: PMID:24314397
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-13'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000314
+      reference: PMID:24314397
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-13'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2026-02-13'
+      provided_by:
+      - http://www.pombase.org
+    term: CHEBI:17115
+  - type: MoleculeAssociation
+    evidence:
+    - term: ECO:0000501
+      reference: GO_REF:0000116
+      with_objects:
+      - RHEA:10980
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-13'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000314
+      reference: PMID:19155267
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-13'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000314
+      reference: PMID:19640845
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-13'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000314
+      reference: PMID:24314397
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-13'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000501
+      reference: GO_REF:0000116
+      with_objects:
+      - RHEA:10980
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-13'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000501
+      reference: GO_REF:0000116
+      with_objects:
+      - RHEA:10980
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-13'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2026-02-13'
+      provided_by:
+      - http://www.pombase.org
+    term: CHEBI:17115
 - id: gomodel:6690711d00001545/689e7a5d00005534
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -1578,7 +1807,7 @@ objects:
   label: high throughput direct assay evidence used in manual assertion
   type: gocam:Object
 - id: GO:0004648
-  label: O-phospho-L-serine:2-oxoglutarate aminotransferase activity
+  label: O-phospho-L-serine:2-oxoglutarate transaminase activity
   type: gocam:Object
 - id: PomBase:SPAC1F12.07
   label: ser1 Spom
@@ -1695,7 +1924,7 @@ objects:
   label: succinate
   type: gocam:Object
 - id: GO:0009001
-  label: serine O-acetyltransferase activity
+  label: L-serine O-acetyltransferase activity
   type: gocam:Object
 - id: PomBase:SPAC1039.08
   label: SPAC1039.08 Spom
@@ -1715,9 +1944,21 @@ objects:
 - id: PomBase:SPMITTRNASER.02
   label: SPMITTRNASER.02 Spom
   type: gocam:Object
+- id: GO:0030378
+  label: serine racemase activity
+  type: gocam:Object
+- id: PomBase:SPCC320.14
+  label: sry1 Spom
+  type: gocam:Object
+- id: GO:0036088
+  label: D-serine catabolic process
+  type: gocam:Object
+- id: ECO:0000501
+  label: evidence used in automatic assertion
+  type: gocam:Object
 provenances:
 - contributor:
   - https://orcid.org/0000-0001-6330-7526
-  date: '2025-09-17'
+  date: '2026-02-13'
   provided_by:
   - http://www.pombase.org

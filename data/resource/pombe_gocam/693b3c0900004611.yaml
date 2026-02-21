@@ -301,54 +301,6 @@ activities:
       provided_by:
       - http://www.pombase.org
     term: GO:0000743
-- id: gomodel:693b3c0900004611/693b3c0900004656
-  enabled_by:
-    type: EnabledByGeneProductAssociation
-    evidence:
-    - term: ECO:0000314
-      reference: PMID:15062095
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2026-01-01'
-        provided_by:
-        - http://www.pombase.org
-    - term: ECO:0000269
-      reference: PMID:23128140
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2026-01-01'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2026-01-01'
-      provided_by:
-      - http://www.pombase.org
-    term: PomBase:SPAC18G6.15
-  molecular_function:
-    type: MolecularFunctionAssociation
-    term: GO:0051010
-  part_of:
-    type: BiologicalProcessAssociation
-    evidence:
-    - term: ECO:0000315
-      reference: PMID:23755176
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2026-01-01'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2026-01-01'
-      provided_by:
-      - http://www.pombase.org
-    term: GO:0000743
 - id: gomodel:693b3c0900004611/693b3c0900004640
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -392,6 +344,54 @@ activities:
     evidence:
     - term: ECO:0000315
       reference: PMID:25869666
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-01-01'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2026-01-01'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0000743
+- id: gomodel:693b3c0900004611/693b3c0900004656
+  enabled_by:
+    type: EnabledByGeneProductAssociation
+    evidence:
+    - term: ECO:0000314
+      reference: PMID:15062095
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-01-01'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000269
+      reference: PMID:23128140
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-01-01'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2026-01-01'
+      provided_by:
+      - http://www.pombase.org
+    term: PomBase:SPAC18G6.15
+  molecular_function:
+    type: MolecularFunctionAssociation
+    term: GO:0051010
+  part_of:
+    type: BiologicalProcessAssociation
+    evidence:
+    - term: ECO:0000315
+      reference: PMID:23755176
       provenances:
       - contributor:
         - https://orcid.org/0000-0001-6330-7526

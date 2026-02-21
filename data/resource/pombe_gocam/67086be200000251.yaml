@@ -2472,7 +2472,7 @@ objects:
   label: evidence used in automatic assertion
   type: gocam:Object
 - id: GO:0004021
-  label: L-alanine:2-oxoglutarate aminotransferase activity
+  label: L-alanine:2-oxoglutarate transaminase activity
   type: gocam:Object
 - id: PomBase:SPBC582.08
   label: alt1 Spom

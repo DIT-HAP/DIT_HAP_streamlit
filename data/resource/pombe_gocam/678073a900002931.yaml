@@ -2,7 +2,7 @@ id: gomodel:678073a900002931
 title: fatty acid biosynthetic process (GO:0006633)
 taxon: NCBITaxon:4896
 status: production
-date_modified: '2025-12-01'
+date_modified: '2026-02-06'
 comments:
 - 'Automated change 2025-04-24: GO:0004108 replaced by GO:0036440'
 - SPAPB2B4.06 appears to be a mitochondrial paralogy of the4, but I couldn't find
@@ -1242,7 +1242,7 @@ activities:
       provided_by:
       - http://www.pombase.org
     predicate: RO:0002413
-    downstream_activity: gomodel:678073a900002931/6792e70800000042
+    downstream_activity: gomodel:678073a900002931/6792e70800000033
   - type: CausalAssociation
     evidence:
     - term: ECO:0000318
@@ -1263,7 +1263,7 @@ activities:
       provided_by:
       - http://www.pombase.org
     predicate: RO:0002413
-    downstream_activity: gomodel:678073a900002931/6792e70800000033
+    downstream_activity: gomodel:678073a900002931/6792e70800000042
 - id: gomodel:678073a900002931/678073a900003764
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -1367,26 +1367,11 @@ activities:
     term: CHEBI:57384
   causal_associations:
   - type: CausalAssociation
-    evidence:
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN002448244
-      - SGD:S000005747
-      - UniProtKB:P9WNG5
-      - UniProtKB:Q8IVS2
-      - UniProtKB:P0AAI9
-      - TAIR:locus:2060884
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-03-13'
-        provided_by:
-        - http://www.pombase.org
+    evidence: []
     provenances:
     - contributor:
       - https://orcid.org/0009-0003-9059-1333
-      date: '2025-03-13'
+      date: '2026-02-06'
       provided_by:
       - http://www.pombase.org
     predicate: RO:0002413
@@ -2976,74 +2961,27 @@ activities:
     term: CHEBI:16947
   causal_associations:
   - type: CausalAssociation
-    evidence:
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN000640552
-      - UniProtKB:P79110
-      - RGD:3703
-      - UniProtKB:P53007
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2025-06-29'
-        provided_by:
-        - http://www.pombase.org
+    evidence: []
     provenances:
     - contributor:
       - https://orcid.org/0000-0001-6330-7526
-      date: '2025-06-29'
-      provided_by:
-      - http://www.pombase.org
-    predicate: RO:0002413
-    downstream_activity: gomodel:678073a900002931/6792e70800000110
-  - type: CausalAssociation
-    evidence:
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN000640552
-      - UniProtKB:P79110
-      - RGD:3703
-      - UniProtKB:P53007
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2025-06-29'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2025-06-29'
-      provided_by:
-      - http://www.pombase.org
-    predicate: RO:0002413
-    downstream_activity: gomodel:678073a900002931/6792e70800000110
-  - type: CausalAssociation
-    evidence:
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN000640552
-      - UniProtKB:P79110
-      - RGD:3703
-      - UniProtKB:P53007
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2025-06-29'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2025-06-29'
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2026-02-06'
       provided_by:
       - http://www.pombase.org
     predicate: RO:0002413
     downstream_activity: gomodel:678073a900002931/6792e70800000118
+  - type: CausalAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2026-02-06'
+      provided_by:
+      - http://www.pombase.org
+    predicate: RO:0002413
+    downstream_activity: gomodel:678073a900002931/6792e70800000110
   - type: CausalAssociation
     evidence:
     - term: ECO:0000318
@@ -3771,47 +3709,27 @@ activities:
     term: GO:0006633
   causal_associations:
   - type: CausalAssociation
-    evidence:
-    - term: ECO:0000266
-      reference: GO_REF:0000024
-      with_objects:
-      - SGD:S000006069
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-01-23'
-        provided_by:
-        - http://www.pombase.org
-    - term: ECO:0000255
-      reference: PMID:21270388
-      with_objects:
-      - Pfam:PF01648
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-01-23'
-        provided_by:
-        - http://www.pombase.org
-    - term: ECO:0000266
-      reference: GO_REF:0000024
-      with_objects:
-      - SGD:S000006069
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-01-23'
-        provided_by:
-        - http://www.pombase.org
+    evidence: []
     provenances:
     - contributor:
       - https://orcid.org/0009-0003-9059-1333
-      date: '2025-01-23'
+      date: '2026-02-06'
       provided_by:
       - http://www.pombase.org
     predicate: RO:0002629
     downstream_activity: gomodel:678073a900002931/678073a900003770
   - type: CausalAssociation
     evidence:
+    - term: ECO:0000266
+      reference: GO_REF:0000024
+      with_objects:
+      - SGD:S000006069
+      provenances:
+      - contributor:
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2025-01-23'
+        provided_by:
+        - http://www.pombase.org
     - term: ECO:0000255
       reference: PMID:21270388
       with_objects:
@@ -3825,7 +3743,7 @@ activities:
     provenances:
     - contributor:
       - https://orcid.org/0009-0003-9059-1333
-      date: '2025-01-23'
+      date: '2026-02-06'
       provided_by:
       - http://www.pombase.org
     predicate: RO:0002629
@@ -4182,9 +4100,6 @@ objects:
 - id: ECO:0000305
   label: curator inference used in manual assertion
   type: gocam:Object
-- id: PomBase:SPAC4A8.11c
-  label: fas2 Spom
-  type: gocam:Object
 - id: CHEBI:57288
   label: acetyl-CoA(4-)
   type: gocam:Object
@@ -4256,6 +4171,9 @@ objects:
   type: gocam:Object
 - id: GO:0005835
   label: fatty acid synthase complex
+  type: gocam:Object
+- id: PomBase:SPAC4A8.11c
+  label: fas2 Spom
   type: gocam:Object
 - id: GO:0047617
   label: fatty acyl-CoA hydrolase activity
@@ -4359,12 +4277,6 @@ objects:
 - id: CHEBI:7896
   label: hexadecanoate
   type: gocam:Object
-- id: PomBase:SPAPB2B4.06
-  label: SPAPB2B4.06 Spom
-  type: gocam:Object
-- id: GO:0006631
-  label: fatty acid metabolic process
-  type: gocam:Object
 - id: GO:0036042
   label: long-chain fatty acyl-CoA binding
   type: gocam:Object
@@ -4396,6 +4308,6 @@ provenances:
 - contributor:
   - https://orcid.org/0000-0001-6330-7526
   - https://orcid.org/0009-0003-9059-1333
-  date: '2025-12-01'
+  date: '2026-02-06'
   provided_by:
   - http://www.pombase.org

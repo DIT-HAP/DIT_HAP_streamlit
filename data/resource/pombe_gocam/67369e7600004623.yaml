@@ -2899,7 +2899,7 @@ objects:
   label: keto-phenylpyruvate
   type: gocam:Object
 - id: GO:0080130
-  label: L-phenylalanine-2-oxoglutarate transaminase activity
+  label: L-phenylalanine:2-oxoglutarate transaminase activity
   type: gocam:Object
 - id: PomBase:SPAC56E4.03
   label: SPAC56E4.03 Spom
@@ -2929,7 +2929,7 @@ objects:
   label: 3-(4-hydroxyphenyl)pyruvate
   type: gocam:Object
 - id: GO:0004838
-  label: L-tyrosine-2-oxoglutarate transaminase activity
+  label: L-tyrosine:2-oxoglutarate transaminase activity
   type: gocam:Object
 - id: ECO:0000303
   label: author statement without traceable support used in manual assertion

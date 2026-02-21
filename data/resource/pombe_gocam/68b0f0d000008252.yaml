@@ -673,7 +673,7 @@ objects:
   label: high throughput direct assay evidence used in manual assertion
   type: gocam:Object
 - id: GO:0004360
-  label: glutamine-fructose-6-phosphate transaminase (isomerizing) activity
+  label: L-glutamine:D-fructose-6-phosphate transaminase (isomerizing) activity
   type: gocam:Object
 - id: PomBase:SPBC12C2.11
   label: gfa1 Spom

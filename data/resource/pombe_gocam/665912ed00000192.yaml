@@ -3896,6 +3896,73 @@ activities:
       - http://www.pombase.org
     predicate: RO:0002629
     downstream_activity: gomodel:665912ed00000192/665912ed00000316
+- id: gomodel:665912ed00000192/6882d2b800004786
+  enabled_by:
+    type: EnabledByGeneProductAssociation
+    evidence:
+    - term: ECO:0000318
+      reference: GO_REF:0000033
+      with_objects:
+      - PANTHER:PTN000322177
+      - UniProtKB:Q96FM1
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2025-08-14'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-08-14'
+      provided_by:
+      - http://www.pombase.org
+    term: PomBase:SPAC823.07
+  molecular_function:
+    type: MolecularFunctionAssociation
+    term: GO:0016788
+  occurs_in:
+    type: CellularAnatomicalEntityAssociation
+    evidence:
+    - term: ECO:0000266
+      reference: GO_REF:0000033
+      with_objects:
+      - UniProtKB:Q96FM1
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2025-08-14'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-08-14'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0000139
+  part_of:
+    type: BiologicalProcessAssociation
+    evidence:
+    - term: ECO:0000318
+      reference: GO_REF:0000033
+      with_objects:
+      - PANTHER:PTN000322177
+      - UniProtKB:Q96FM1
+      - SGD:S000000640
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2025-08-14'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-08-14'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0180046
 - id: gomodel:665912ed00000192/665912ed00000250
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -4003,73 +4070,6 @@ activities:
       - http://www.pombase.org
     predicate: RO:0002413
     downstream_activity: gomodel:665912ed00000192/665912ed00000261
-- id: gomodel:665912ed00000192/6882d2b800004786
-  enabled_by:
-    type: EnabledByGeneProductAssociation
-    evidence:
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN000322177
-      - UniProtKB:Q96FM1
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2025-08-14'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2025-08-14'
-      provided_by:
-      - http://www.pombase.org
-    term: PomBase:SPAC823.07
-  molecular_function:
-    type: MolecularFunctionAssociation
-    term: GO:0016788
-  occurs_in:
-    type: CellularAnatomicalEntityAssociation
-    evidence:
-    - term: ECO:0000266
-      reference: GO_REF:0000033
-      with_objects:
-      - UniProtKB:Q96FM1
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2025-08-14'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2025-08-14'
-      provided_by:
-      - http://www.pombase.org
-    term: GO:0000139
-  part_of:
-    type: BiologicalProcessAssociation
-    evidence:
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN000322177
-      - UniProtKB:Q96FM1
-      - SGD:S000000640
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2025-08-14'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2025-08-14'
-      provided_by:
-      - http://www.pombase.org
-    term: GO:0180046
 - id: gomodel:665912ed00000192/665912ed00000232
   enabled_by:
     type: EnabledByGeneProductAssociation

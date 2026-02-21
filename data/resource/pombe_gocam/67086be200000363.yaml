@@ -595,7 +595,7 @@ activities:
       date: '2026-01-03'
       provided_by:
       - http://www.pombase.org
-    term: CHEBI:57597
+    term: CHEBI:17815
   - type: MoleculeAssociation
     evidence:
     - term: ECO:0000318
@@ -615,7 +615,7 @@ activities:
       date: '2026-01-03'
       provided_by:
       - http://www.pombase.org
-    term: CHEBI:17815
+    term: CHEBI:57597
   - type: MoleculeAssociation
     evidence:
     - term: ECO:0000318

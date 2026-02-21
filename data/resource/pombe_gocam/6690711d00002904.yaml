@@ -1164,7 +1164,7 @@ objects:
   label: L-histidine zwitterion
   type: gocam:Object
 - id: GO:0004400
-  label: histidinol-phosphate transaminase activity
+  label: L-histidinol-phosphate:2-oxoglutarate transaminase activity
   type: gocam:Object
 - id: ECO:0000304
   label: author statement supported by traceable reference used in manual assertion

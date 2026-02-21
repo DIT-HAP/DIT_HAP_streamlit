@@ -77,7 +77,7 @@ activities:
       provided_by:
       - http://www.pombase.org
     predicate: RO:0012009
-    downstream_activity: gomodel:693b3c0900004859/693b3c0900004896
+    downstream_activity: gomodel:693b3c0900004859/693b3c0900004881
   - type: CausalAssociation
     evidence:
     - term: ECO:0000318
@@ -98,7 +98,7 @@ activities:
       provided_by:
       - http://www.pombase.org
     predicate: RO:0012009
-    downstream_activity: gomodel:693b3c0900004859/693b3c0900004881
+    downstream_activity: gomodel:693b3c0900004859/693b3c0900004896
   - type: CausalAssociation
     evidence:
     - term: ECO:0000318

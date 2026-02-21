@@ -1726,7 +1726,7 @@ objects:
   label: 2-oxoglutarate(2-)
   type: gocam:Object
 - id: GO:0047536
-  label: 2-aminoadipate transaminase activity
+  label: L-2-aminoadipate:2-oxoglutarate transaminase activity
   type: gocam:Object
 - id: CHEBI:36080
   label: protein

@@ -8,66 +8,6 @@ comments:
 - Review regulation by Hhp1/2
 - 'vw: added ppc89 as upstream SPB anchor, changed dma1 to unubiquitinated form'
 activities:
-- id: gomodel:66187e4700002284/67c10cc400002363
-  enabled_by:
-    type: EnabledByProteinComplexAssociation
-    evidence: []
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-03-10'
-      provided_by:
-      - http://www.pombase.org
-    term: GO:0090443
-    members:
-    - PomBase:SPBC1773.01
-    - PomBase:SPAC2C4.10c
-    - PomBase:SPAP8A3.09c
-    - PomBase:SPBC27B12.04c
-    - PomBase:SPAC22H10.04
-    - PomBase:SPBC3H7.13
-  molecular_function:
-    type: MolecularFunctionAssociation
-    term: GO:0004721
-  occurs_in:
-    type: CellularAnatomicalEntityAssociation
-    evidence: []
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-03-10'
-      provided_by:
-      - http://www.pombase.org
-    term: GO:0071957
-  part_of:
-    type: BiologicalProcessAssociation
-    evidence: []
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-03-10'
-      provided_by:
-      - http://www.pombase.org
-    term: GO:0031030
-  causal_associations:
-  - type: CausalAssociation
-    evidence:
-    - term: ECO:0000269
-      reference: PMID:22119525
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-03-10'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-03-10'
-      provided_by:
-      - http://www.pombase.org
-    predicate: RO:0002630
-    downstream_activity: gomodel:66187e4700002284/66187e4700002301
 - id: gomodel:66187e4700002284/67369e7600000071
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -163,6 +103,66 @@ activities:
       - http://www.pombase.org
     predicate: RO:0012009
     downstream_activity: gomodel:66187e4700002284/66187e4700002292
+- id: gomodel:66187e4700002284/67c10cc400002363
+  enabled_by:
+    type: EnabledByProteinComplexAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-03-10'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0090443
+    members:
+    - PomBase:SPBC1773.01
+    - PomBase:SPAC2C4.10c
+    - PomBase:SPAP8A3.09c
+    - PomBase:SPBC27B12.04c
+    - PomBase:SPAC22H10.04
+    - PomBase:SPBC3H7.13
+  molecular_function:
+    type: MolecularFunctionAssociation
+    term: GO:0004721
+  occurs_in:
+    type: CellularAnatomicalEntityAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-03-10'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0071957
+  part_of:
+    type: BiologicalProcessAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-03-10'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0031030
+  causal_associations:
+  - type: CausalAssociation
+    evidence:
+    - term: ECO:0000269
+      reference: PMID:22119525
+      provenances:
+      - contributor:
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2025-03-10'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-03-10'
+      provided_by:
+      - http://www.pombase.org
+    predicate: RO:0002630
+    downstream_activity: gomodel:66187e4700002284/66187e4700002301
 - id: gomodel:66187e4700002284/66187e4700002394
   enabled_by:
     type: EnabledByGeneProductAssociation

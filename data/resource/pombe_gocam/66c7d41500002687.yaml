@@ -1,8 +1,8 @@
 id: gomodel:66c7d41500002687
-title: "mitotic cytokinesis, division site positioning\n (GO:1902408)"
+title: "mitotic cytokinesis, division site positioning\n (GO:1902408) (G2)"
 taxon: NCBITaxon:4896
 status: production
-date_modified: '2026-01-13'
+date_modified: '2026-02-14'
 comments:
 - ' Duc1 binds PM PI(4,5)P2 at ER-PM contacts where it promotes proper Its3 PM distribution,
   promotes PM PI(4,5)P2 synthesis, and therefore contributes to proper CR-PM anchoring.
@@ -310,212 +310,146 @@ activities:
       provenances:
       - contributor:
         - https://orcid.org/0000-0001-6330-7526
-        date: '2026-01-13'
-        provided_by:
-        - http://www.pombase.org
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN000557041
-      - TAIR:locus:2066246
-      - UniProtKB:P78356
-      - dictyBase:DDB_G0267588
-      - TAIR:locus:2077397
-      - TAIR:locus:2203211
-      - TAIR:locus:2125098
-      - PomBase:SPAC19G12.14
-      - RGD:621711
-      - MGI:MGI:107930
-      - MGI:MGI:1298224
-      - MGI:MGI:2448520
-      - UniProtKB:Q8TBX8
-      - TAIR:locus:2201108
-      - UniProtKB:Q99755
-      - ZFIN:ZDB-GENE-080721-18
-      - FB:FBgn0016984
-      - CGD:CAL0000192511
-      - WB:WBGene00004087
-      - UniProtKB:Q8I239
-      - UniProtKB:P48426
-      - TAIR:locus:2040327
-      - SGD:S000002616
-      - TAIR:locus:2080585
-      - ZFIN:ZDB-GENE-050522-517
-      - MGI:MGI:107929
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2026-01-13'
+        date: '2026-01-27'
         provided_by:
         - http://www.pombase.org
     provenances:
     - contributor:
       - https://orcid.org/0000-0001-6330-7526
-      date: '2026-01-13'
+      date: '2026-01-27'
+      provided_by:
+      - http://www.pombase.org
+    predicate: RO:0002413
+    downstream_activity: gomodel:66c7d41500002687/66c7d41500002727
+- id: gomodel:66c7d41500002687/698e557b00000743
+  enabled_by:
+    type: EnabledByGeneProductAssociation
+    evidence:
+    - term: ECO:0000269
+      reference: PMID:23966468
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-14'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2026-02-14'
+      provided_by:
+      - http://www.pombase.org
+    term: PomBase:SPAC31A2.16
+  molecular_function:
+    type: MolecularFunctionAssociation
+    term: GO:0005085
+  occurs_in:
+    type: CellularAnatomicalEntityAssociation
+    evidence:
+    - term: ECO:0000314
+      reference: PMID:23349808
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-14'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000314
+      reference: PMID:23966468
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-14'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2026-02-14'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0071341
+  part_of:
+    type: BiologicalProcessAssociation
+    evidence:
+    - term: ECO:0000316
+      reference: PMID:23966468
+      with_objects:
+      - PomBase:SPAC23C11.16
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-14'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2026-02-14'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:1902408
+  causal_associations:
+  - type: CausalAssociation
+    evidence:
+    - term: ECO:0000269
+      reference: PMID:23966468
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-14'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000269
+      reference: PMID:23966468
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-14'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000269
+      reference: PMID:23966468
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-14'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000269
+      reference: PMID:23966468
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-14'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000269
+      reference: PMID:23966468
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-14'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2026-02-14'
       provided_by:
       - http://www.pombase.org
     predicate: RO:0012009
     downstream_activity: gomodel:66c7d41500002687/66c7d41500002727
   - type: CausalAssociation
-    evidence:
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN000557041
-      - TAIR:locus:2066246
-      - UniProtKB:P78356
-      - dictyBase:DDB_G0267588
-      - TAIR:locus:2077397
-      - TAIR:locus:2203211
-      - TAIR:locus:2125098
-      - PomBase:SPAC19G12.14
-      - RGD:621711
-      - MGI:MGI:107930
-      - MGI:MGI:1298224
-      - MGI:MGI:2448520
-      - UniProtKB:Q8TBX8
-      - TAIR:locus:2201108
-      - UniProtKB:Q99755
-      - ZFIN:ZDB-GENE-080721-18
-      - FB:FBgn0016984
-      - CGD:CAL0000192511
-      - WB:WBGene00004087
-      - UniProtKB:Q8I239
-      - UniProtKB:P48426
-      - TAIR:locus:2040327
-      - SGD:S000002616
-      - TAIR:locus:2080585
-      - ZFIN:ZDB-GENE-050522-517
-      - MGI:MGI:107929
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2026-01-13'
-        provided_by:
-        - http://www.pombase.org
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN000557041
-      - TAIR:locus:2066246
-      - UniProtKB:P78356
-      - dictyBase:DDB_G0267588
-      - TAIR:locus:2077397
-      - TAIR:locus:2203211
-      - TAIR:locus:2125098
-      - PomBase:SPAC19G12.14
-      - RGD:621711
-      - MGI:MGI:107930
-      - MGI:MGI:1298224
-      - MGI:MGI:2448520
-      - UniProtKB:Q8TBX8
-      - TAIR:locus:2201108
-      - UniProtKB:Q99755
-      - ZFIN:ZDB-GENE-080721-18
-      - FB:FBgn0016984
-      - CGD:CAL0000192511
-      - WB:WBGene00004087
-      - UniProtKB:Q8I239
-      - UniProtKB:P48426
-      - TAIR:locus:2040327
-      - SGD:S000002616
-      - TAIR:locus:2080585
-      - ZFIN:ZDB-GENE-050522-517
-      - MGI:MGI:107929
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2026-01-13'
-        provided_by:
-        - http://www.pombase.org
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN000557041
-      - TAIR:locus:2066246
-      - UniProtKB:P78356
-      - dictyBase:DDB_G0267588
-      - TAIR:locus:2077397
-      - TAIR:locus:2203211
-      - TAIR:locus:2125098
-      - PomBase:SPAC19G12.14
-      - RGD:621711
-      - MGI:MGI:107930
-      - MGI:MGI:1298224
-      - MGI:MGI:2448520
-      - UniProtKB:Q8TBX8
-      - TAIR:locus:2201108
-      - UniProtKB:Q99755
-      - ZFIN:ZDB-GENE-080721-18
-      - FB:FBgn0016984
-      - CGD:CAL0000192511
-      - WB:WBGene00004087
-      - UniProtKB:Q8I239
-      - UniProtKB:P48426
-      - TAIR:locus:2040327
-      - SGD:S000002616
-      - TAIR:locus:2080585
-      - ZFIN:ZDB-GENE-050522-517
-      - MGI:MGI:107929
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2026-01-13'
-        provided_by:
-        - http://www.pombase.org
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN000557041
-      - TAIR:locus:2066246
-      - UniProtKB:P78356
-      - dictyBase:DDB_G0267588
-      - TAIR:locus:2077397
-      - TAIR:locus:2203211
-      - TAIR:locus:2125098
-      - PomBase:SPAC19G12.14
-      - RGD:621711
-      - MGI:MGI:107930
-      - MGI:MGI:1298224
-      - MGI:MGI:2448520
-      - UniProtKB:Q8TBX8
-      - TAIR:locus:2201108
-      - UniProtKB:Q99755
-      - ZFIN:ZDB-GENE-080721-18
-      - FB:FBgn0016984
-      - CGD:CAL0000192511
-      - WB:WBGene00004087
-      - UniProtKB:Q8I239
-      - UniProtKB:P48426
-      - TAIR:locus:2040327
-      - SGD:S000002616
-      - TAIR:locus:2080585
-      - ZFIN:ZDB-GENE-050522-517
-      - MGI:MGI:107929
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2026-01-13'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2026-01-13'
-      provided_by:
-      - http://www.pombase.org
-    predicate: RO:0012009
-    downstream_activity: gomodel:66c7d41500002687/66c7d41500002714
-  - type: CausalAssociation
     evidence: []
     provenances:
     - contributor:
       - https://orcid.org/0000-0001-6330-7526
-      date: '2026-01-13'
+      date: '2026-02-14'
       provided_by:
       - http://www.pombase.org
-    predicate: RO:0002413
-    downstream_activity: gomodel:66c7d41500002687/66c7d41500002714
+    predicate: RO:0012009
+    downstream_activity: gomodel:66c7d41500002687/66c7d41500002727
 - id: gomodel:66c7d41500002687/66c7d41500002727
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -600,6 +534,195 @@ activities:
       provided_by:
       - http://www.pombase.org
     term: CHEBI:18348
+- id: gomodel:66c7d41500002687/698e557b00000725
+  enabled_by:
+    type: EnabledByGeneProductAssociation
+    evidence:
+    - term: ECO:0000353
+      reference: PMID:23966468
+      with_objects:
+      - PomBase:SPAC20G8.05c
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-14'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000353
+      reference: PMID:23966468
+      with_objects:
+      - PomBase:SPAC31A2.16
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-14'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2026-02-14'
+      provided_by:
+      - http://www.pombase.org
+    term: PomBase:SPAC12B10.10
+  molecular_function:
+    type: MolecularFunctionAssociation
+    term: GO:0005515
+  occurs_in:
+    type: CellularAnatomicalEntityAssociation
+    evidence:
+    - term: ECO:0000314
+      reference: PMID:23349808
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-14'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000269
+      reference: PMID:23966468
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-14'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2026-02-14'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0071341
+  part_of:
+    type: BiologicalProcessAssociation
+    evidence:
+    - term: ECO:0000315
+      reference: PMID:23349808
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-14'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000316
+      reference: PMID:23966468
+      with_objects:
+      - PomBase:SPAC23C11.16
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-14'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2026-02-14'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:1902408
+  causal_associations:
+  - type: CausalAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2026-02-14'
+      provided_by:
+      - http://www.pombase.org
+    predicate: RO:0012009
+    downstream_activity: gomodel:66c7d41500002687/66c7d41500002727
+  - type: CausalAssociation
+    evidence:
+    - term: ECO:0000353
+      reference: PMID:23966468
+      with_objects:
+      - PomBase:SPAC20G8.05c
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-14'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000353
+      reference: PMID:23966468
+      with_objects:
+      - PomBase:SPAC31A2.16
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-14'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000353
+      reference: PMID:23966468
+      with_objects:
+      - PomBase:SPAC20G8.05c
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-14'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000353
+      reference: PMID:23966468
+      with_objects:
+      - PomBase:SPAC20G8.05c
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-14'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000353
+      reference: PMID:23966468
+      with_objects:
+      - PomBase:SPAC31A2.16
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-14'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000353
+      reference: PMID:23966468
+      with_objects:
+      - PomBase:SPAC31A2.16
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-14'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000353
+      reference: PMID:23966468
+      with_objects:
+      - PomBase:SPAC20G8.05c
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-14'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000353
+      reference: PMID:23966468
+      with_objects:
+      - PomBase:SPAC31A2.16
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2026-02-14'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2026-02-14'
+      provided_by:
+      - http://www.pombase.org
+    predicate: RO:0012009
+    downstream_activity: gomodel:66c7d41500002687/66c7d41500002727
 - id: gomodel:66c7d41500002687/696022cd00001113
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -644,37 +767,11 @@ activities:
     term: GO:1902408
   causal_associations:
   - type: CausalAssociation
-    evidence:
-    - term: ECO:0000269
-      reference: PMID:19427212
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2026-01-13'
-        provided_by:
-        - http://www.pombase.org
+    evidence: []
     provenances:
     - contributor:
       - https://orcid.org/0000-0001-6330-7526
-      date: '2026-01-13'
-      provided_by:
-      - http://www.pombase.org
-    predicate: RO:0012009
-    downstream_activity: gomodel:66c7d41500002687/66c7d41500002727
-  - type: CausalAssociation
-    evidence:
-    - term: ECO:0000269
-      reference: PMID:19427212
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2026-01-13'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2026-01-13'
+      date: '2026-01-27'
       provided_by:
       - http://www.pombase.org
     predicate: RO:0002629
@@ -755,9 +852,30 @@ objects:
 - id: GO:0000085
   label: mitotic G2 phase
   type: gocam:Object
+- id: GO:0005515
+  label: protein binding
+  type: gocam:Object
+- id: PomBase:SPAC12B10.10
+  label: nod1 Spom
+  type: gocam:Object
+- id: GO:0071341
+  label: medial cortical node
+  type: gocam:Object
+- id: ECO:0000353
+  label: physical interaction evidence used in manual assertion
+  type: gocam:Object
+- id: ECO:0000316
+  label: genetic interaction evidence used in manual assertion
+  type: gocam:Object
+- id: GO:0005085
+  label: guanyl-nucleotide exchange factor activity
+  type: gocam:Object
+- id: PomBase:SPAC31A2.16
+  label: gef2 Spom
+  type: gocam:Object
 provenances:
 - contributor:
   - https://orcid.org/0000-0001-6330-7526
-  date: '2026-01-13'
+  date: '2026-02-14'
   provided_by:
   - http://www.pombase.org

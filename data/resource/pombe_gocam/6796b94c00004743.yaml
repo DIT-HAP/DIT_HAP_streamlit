@@ -2,7 +2,7 @@ id: gomodel:6796b94c00004743
 title: glycerol metabolic process (GO:0006071)
 taxon: NCBITaxon:4896
 status: production
-date_modified: '2025-12-15'
+date_modified: '2026-01-30'
 activities:
 - id: gomodel:6796b94c00004743/6796b94c00004803
   enabled_by:
@@ -484,6 +484,70 @@ activities:
       - http://www.pombase.org
     predicate: RO:0002413
     downstream_activity: gomodel:6796b94c00004743/6796b94c00004827
+- id: gomodel:6796b94c00004743/6796b94c00004799
+  enabled_by:
+    type: EnabledByGeneProductAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-02-07'
+      provided_by:
+      - http://www.pombase.org
+    term: CHEBI:36080
+  molecular_function:
+    type: MolecularFunctionAssociation
+    term: GO:0043136
+  occurs_in:
+    type: CellularAnatomicalEntityAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-06-09'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0005829
+  part_of:
+    type: BiologicalProcessAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-02-07'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0006114
+  has_input:
+  - type: MoleculeAssociation
+    evidence:
+    - term: ECO:0000266
+      reference: GO_REF:0000024
+      with_objects:
+      - SGD:S000001417
+      provenances:
+      - contributor:
+        - https://orcid.org/0009-0003-9059-1333
+        date: '2025-02-07'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-02-07'
+      provided_by:
+      - http://www.pombase.org
+    term: CHEBI:57597
+  has_output:
+  - type: MoleculeAssociation
+    evidence: []
+    provenances:
+    - contributor:
+      - https://orcid.org/0009-0003-9059-1333
+      date: '2025-02-07'
+      provided_by:
+      - http://www.pombase.org
+    term: CHEBI:17754
 - id: gomodel:6796b94c00004743/6796b94c00004765
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -638,70 +702,6 @@ activities:
       provided_by:
       - http://www.pombase.org
     term: CHEBI:57642
-- id: gomodel:6796b94c00004743/6796b94c00004799
-  enabled_by:
-    type: EnabledByGeneProductAssociation
-    evidence: []
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-02-07'
-      provided_by:
-      - http://www.pombase.org
-    term: CHEBI:36080
-  molecular_function:
-    type: MolecularFunctionAssociation
-    term: GO:0043136
-  occurs_in:
-    type: CellularAnatomicalEntityAssociation
-    evidence: []
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-06-09'
-      provided_by:
-      - http://www.pombase.org
-    term: GO:0005829
-  part_of:
-    type: BiologicalProcessAssociation
-    evidence: []
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-02-07'
-      provided_by:
-      - http://www.pombase.org
-    term: GO:0006114
-  has_input:
-  - type: MoleculeAssociation
-    evidence:
-    - term: ECO:0000266
-      reference: GO_REF:0000024
-      with_objects:
-      - SGD:S000001417
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-02-07'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-02-07'
-      provided_by:
-      - http://www.pombase.org
-    term: CHEBI:57597
-  has_output:
-  - type: MoleculeAssociation
-    evidence: []
-    provenances:
-    - contributor:
-      - https://orcid.org/0009-0003-9059-1333
-      date: '2025-02-07'
-      provided_by:
-      - http://www.pombase.org
-    term: CHEBI:17754
 - id: gomodel:6796b94c00004743/6796b94c00004827
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -785,27 +785,16 @@ activities:
       provenances:
       - contributor:
         - https://orcid.org/0009-0003-9059-1333
-        date: '2025-02-07'
-        provided_by:
-        - http://www.pombase.org
-    - term: ECO:0000318
-      reference: GO_REF:0000033
-      with_objects:
-      - PANTHER:PTN002007945
-      - PomBase:SPAC22A12.11
-      provenances:
-      - contributor:
-        - https://orcid.org/0009-0003-9059-1333
-        date: '2025-02-07'
+        date: '2026-01-30'
         provided_by:
         - http://www.pombase.org
     provenances:
     - contributor:
       - https://orcid.org/0009-0003-9059-1333
-      date: '2025-02-07'
+      date: '2026-01-30'
       provided_by:
       - http://www.pombase.org
-    term: GO:0019563
+    term: GO:0061610
   has_output:
   - type: MoleculeAssociation
     evidence:
@@ -971,15 +960,15 @@ activities:
   part_of:
     type: BiologicalProcessAssociation
     evidence:
-    - term: ECO:0000318
-      reference: GO_REF:0000033
+    - term: ECO:0000305
+      reference: GO_REF:0000111
       with_objects:
-      - PANTHER:PTN002007945
-      - PomBase:SPAC22A12.11
+      - GO:0004371
+      - GO:0019563
       provenances:
       - contributor:
         - https://orcid.org/0009-0003-9059-1333
-        date: '2025-02-07'
+        date: '2026-01-30'
         provided_by:
         - http://www.pombase.org
     provenances:
@@ -988,7 +977,7 @@ activities:
       date: '2025-02-07'
       provided_by:
       - http://www.pombase.org
-    term: GO:0019563
+    term: GO:0061610
   has_output:
   - type: MoleculeAssociation
     evidence:
@@ -1116,8 +1105,8 @@ objects:
 - id: PomBase:SPAC22A12.11
   label: dak1 Spom
   type: gocam:Object
-- id: GO:0019563
-  label: glycerol catabolic process
+- id: GO:0061610
+  label: glycerol catabolic process to glycerone phosphate
   type: gocam:Object
 - id: ECO:0000314
   label: direct assay evidence used in manual assertion
@@ -1125,14 +1114,14 @@ objects:
 - id: PomBase:SPAC977.16c
   label: dak2 Spom
   type: gocam:Object
+- id: ECO:0000305
+  label: curator inference used in manual assertion
+  type: gocam:Object
 - id: GO:0008888
   label: glycerol dehydrogenase (NAD+) activity
   type: gocam:Object
 - id: PomBase:SPAC13F5.03c
   label: gld1 Spom
-  type: gocam:Object
-- id: GO:0061610
-  label: glycerol catabolic process to glycerone phosphate
   type: gocam:Object
 - id: CHEBI:132124
   label: 1,4-benzoquinones
@@ -1144,6 +1133,6 @@ provenances:
 - contributor:
   - https://orcid.org/0000-0001-6330-7526
   - https://orcid.org/0009-0003-9059-1333
-  date: '2025-12-15'
+  date: '2026-01-30'
   provided_by:
   - http://www.pombase.org

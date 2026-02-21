@@ -92,19 +92,19 @@ activities:
     provenances:
     - contributor:
       - https://orcid.org/0000-0001-6330-7526
-      date: '2025-04-09'
+      date: '2025-04-23'
       provided_by:
       - http://www.pombase.org
-    term: CHEBI:57305
+    term: PomBase:SPMITTRNAGLY.01
   - type: MoleculeAssociation
     evidence: []
     provenances:
     - contributor:
       - https://orcid.org/0000-0001-6330-7526
-      date: '2025-04-23'
+      date: '2025-04-09'
       provided_by:
       - http://www.pombase.org
-    term: PomBase:SPMITTRNAGLY.01
+    term: CHEBI:57305
   - type: MoleculeAssociation
     evidence:
     - term: ECO:0000316

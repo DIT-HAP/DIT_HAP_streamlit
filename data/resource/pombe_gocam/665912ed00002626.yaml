@@ -2,7 +2,7 @@ id: gomodel:665912ed00002626
 title: nitrogen cycle metabolic process (GO:0071941)
 taxon: NCBITaxon:4896
 status: production
-date_modified: '2025-09-22'
+date_modified: '2026-02-09'
 activities:
 - id: gomodel:665912ed00002626/665912ed00002657
   enabled_by:
@@ -441,7 +441,7 @@ activities:
       provenances:
       - contributor:
         - https://orcid.org/0009-0003-9059-1333
-        date: '2025-02-12'
+        date: '2026-02-09'
         provided_by:
         - http://www.pombase.org
     provenances:
@@ -457,7 +457,7 @@ activities:
     - PomBase:SPAC29A4.13
   molecular_function:
     type: MolecularFunctionAssociation
-    term: GO:0170061
+    term: GO:0018237
   occurs_in:
     type: CellularAnatomicalEntityAssociation
     evidence: []
@@ -2648,8 +2648,8 @@ objects:
 - id: CHEBI:46911
   label: L-ornithinium(1+)
   type: gocam:Object
-- id: GO:0170061
-  label: nickel chaperone activity
+- id: GO:0018237
+  label: urease activator activity
   type: gocam:Object
 - id: GO:0150006
   label: urease activator complex
@@ -2673,6 +2673,6 @@ provenances:
 - contributor:
   - https://orcid.org/0000-0001-6330-7526
   - https://orcid.org/0009-0003-9059-1333
-  date: '2025-09-22'
+  date: '2026-02-09'
   provided_by:
   - http://www.pombase.org

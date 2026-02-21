@@ -430,64 +430,6 @@ activities:
       - http://www.pombase.org
     predicate: RO:0012009
     downstream_activity: gomodel:6918f23700004102/6918f23700004375
-- id: gomodel:6918f23700004102/6918f23700004133
-  enabled_by:
-    type: EnabledByProteinComplexAssociation
-    evidence:
-    - term: ECO:0000305
-      reference: GO_REF:0000111
-      with_objects:
-      - GO:0033565
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2025-12-07'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2025-12-07'
-      provided_by:
-      - http://www.pombase.org
-    term: GO:0033565
-    members:
-    - PomBase:SPBC1734.08
-    - PomBase:SPAC19A8.05c
-  molecular_function:
-    type: MolecularFunctionAssociation
-    term: GO:0030674
-  causal_associations:
-  - type: CausalAssociation
-    evidence:
-    - term: ECO:0000305
-      reference: GO_REF:0000111
-      with_objects:
-      - GO:0033565
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2025-12-07'
-        provided_by:
-        - http://www.pombase.org
-    - term: ECO:0000305
-      reference: GO_REF:0000111
-      with_objects:
-      - GO:0033565
-      provenances:
-      - contributor:
-        - https://orcid.org/0000-0001-6330-7526
-        date: '2025-12-07'
-        provided_by:
-        - http://www.pombase.org
-    provenances:
-    - contributor:
-      - https://orcid.org/0000-0001-6330-7526
-      date: '2025-12-07'
-      provided_by:
-      - http://www.pombase.org
-    predicate: RO:0012009
-    downstream_activity: gomodel:6918f23700004102/6918f23700004103
 - id: gomodel:6918f23700004102/696022cd00000006
   enabled_by:
     type: EnabledByGeneProductAssociation
@@ -569,6 +511,64 @@ activities:
       - http://www.pombase.org
     predicate: RO:0012009
     downstream_activity: gomodel:6918f23700004102/6918f23700004128
+- id: gomodel:6918f23700004102/6918f23700004133
+  enabled_by:
+    type: EnabledByProteinComplexAssociation
+    evidence:
+    - term: ECO:0000305
+      reference: GO_REF:0000111
+      with_objects:
+      - GO:0033565
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2025-12-07'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-12-07'
+      provided_by:
+      - http://www.pombase.org
+    term: GO:0033565
+    members:
+    - PomBase:SPBC1734.08
+    - PomBase:SPAC19A8.05c
+  molecular_function:
+    type: MolecularFunctionAssociation
+    term: GO:0030674
+  causal_associations:
+  - type: CausalAssociation
+    evidence:
+    - term: ECO:0000305
+      reference: GO_REF:0000111
+      with_objects:
+      - GO:0033565
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2025-12-07'
+        provided_by:
+        - http://www.pombase.org
+    - term: ECO:0000305
+      reference: GO_REF:0000111
+      with_objects:
+      - GO:0033565
+      provenances:
+      - contributor:
+        - https://orcid.org/0000-0001-6330-7526
+        date: '2025-12-07'
+        provided_by:
+        - http://www.pombase.org
+    provenances:
+    - contributor:
+      - https://orcid.org/0000-0001-6330-7526
+      date: '2025-12-07'
+      provided_by:
+      - http://www.pombase.org
+    predicate: RO:0012009
+    downstream_activity: gomodel:6918f23700004102/6918f23700004103
 - id: gomodel:6918f23700004102/6918f23700004103
   enabled_by:
     type: EnabledByProteinComplexAssociation

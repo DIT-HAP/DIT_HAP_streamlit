@@ -4,7 +4,7 @@ title: '''de novo'' L-methionine biosynthetic process (GO:0071266),  sulfate ass
   plasma membrane (GO:1902434)'
 taxon: NCBITaxon:4896
 status: production
-date_modified: '2025-10-26'
+date_modified: '2026-01-27'
 comments:
 - https://www.nature.com/articles/s41598-019-48433-5
 activities:
@@ -2757,6 +2757,6 @@ objects:
 provenances:
 - contributor:
   - https://orcid.org/0000-0001-6330-7526
-  date: '2025-10-26'
+  date: '2026-01-27'
   provided_by:
   - http://www.pombase.org
