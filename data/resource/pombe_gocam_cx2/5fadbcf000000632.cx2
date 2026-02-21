@@ -1,0 +1,1479 @@
+[
+    {
+        "CXVersion": "2.0",
+        "hasFragments": false
+    },
+    {
+        "metaData": [
+            {
+                "elementCount": 1,
+                "name": "attributeDeclarations"
+            },
+            {
+                "elementCount": 1,
+                "name": "networkAttributes"
+            },
+            {
+                "elementCount": 20,
+                "name": "nodes"
+            },
+            {
+                "elementCount": 42,
+                "name": "edges"
+            },
+            {
+                "elementCount": 1,
+                "name": "visualProperties"
+            },
+            {
+                "elementCount": 1,
+                "name": "visualEditorProperties"
+            }
+        ]
+    },
+    {
+        "attributeDeclarations": [
+            {
+                "networkAttributes": {
+                    "@context": {
+                        "d": "string"
+                    },
+                    "name": {
+                        "d": "string"
+                    },
+                    "prov:wasDerivedFrom": {
+                        "d": "string"
+                    },
+                    "description": {
+                        "d": "string"
+                    },
+                    "labels": {
+                        "d": "list_of_string"
+                    }
+                },
+                "nodes": {
+                    "name": {
+                        "d": "string"
+                    },
+                    "represents": {
+                        "d": "string"
+                    },
+                    "type": {
+                        "d": "string"
+                    },
+                    "member": {
+                        "d": "list_of_string"
+                    },
+                    "Evidence": {
+                        "d": "string"
+                    },
+                    "Molecular Function": {
+                        "d": "string"
+                    },
+                    "Occurs In": {
+                        "d": "string"
+                    },
+                    "Part Of": {
+                        "d": "string"
+                    }
+                },
+                "edges": {
+                    "name": {
+                        "d": "string"
+                    },
+                    "represents": {
+                        "d": "string"
+                    },
+                    "Evidence": {
+                        "d": "string"
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "networkAttributes": [
+            {
+                "@context": "{\"AspGD_LOCUS\": \"http://identifiers.org/aspgd.locus/\", \"BFO\": \"http://purl.obolibrary.org/obo/BFO_\", \"BTO\": \"http://purl.obolibrary.org/obo/BTO_\", \"CARO\": \"http://purl.obolibrary.org/obo/CARO_\", \"CAS\": \"http://identifiers.org/cas/\", \"CGD\": \"http://identifiers.org/cgd/\", \"CHEBI\": \"http://purl.obolibrary.org/obo/CHEBI_\", \"CL\": \"http://purl.obolibrary.org/obo/CL_\", \"dbSNP\": \"http://identifiers.org/dbsnp/\", \"DDANAT\": \"http://purl.obolibrary.org/obo/DDANAT_\", \"dictyBase\": \"http://identifiers.org/dictybase.gene/\", \"ECO\": \"http://purl.obolibrary.org/obo/ECO_\", \"EMAPA\": \"http://purl.obolibrary.org/obo/EMAPA_\", \"ENSEMBL\": \"http://identifiers.org/ensembl/\", \"FB\": \"http://identifiers.org/flybase/\", \"FBbt\": \"http://purl.obolibrary.org/obo/FBbt_\", \"FBdv\": \"http://purl.obolibrary.org/obo/FBdv_\", \"FMA\": \"http://purl.obolibrary.org/obo/FMA_\", \"FYPO\": \"http://purl.obolibrary.org/obo/FYPO_\", \"GeneDB\": \"http://identifiers.org/genedb/\", \"GO\": \"http://purl.obolibrary.org/obo/GO_\", \"GO_REF\": \"http://purl.obolibrary.org/obo/go/references/\", \"gomodel\": \"http://model.geneontology.org/\", \"GR_GENE\": \"http://identifiers.org/gramene.gene/\", \"GR_PROTEIN\": \"http://identifiers.org/gramene.protein/\", \"GR_QTL\": \"http://identifiers.org/gramene.qtl/\", \"HGNC\": \"http://identifiers.org/hgnc/\", \"IAO\": \"http://purl.obolibrary.org/obo/IAO_\", \"IntAct\": \"http://identifiers.org/intact/\", \"InterPro\": \"http://identifiers.org/interpro/\", \"KEGG_ENZYME\": \"http://identifiers.org/kegg.enzyme/\", \"KEGG_PATHWAY\": \"http://identifiers.org/kegg.pathway/\", \"MA\": \"http://purl.obolibrary.org/obo/MA_\", \"MaizeGDB_Locus\": \"http://identifiers.org/maizegdb.locus/\", \"MetaCyc\": \"http://identifiers.org/metacyc.reaction/\", \"MGI\": \"http://identifiers.org/MGI/\", \"NCBIGene\": \"http://identifiers.org/ncbigene/\", \"NCBITaxon\": \"http://purl.obolibrary.org/obo/NCBITaxon_\", \"PANTHER\": \"http://identifiers.org/panther.family/\", \"PATO\": \"http://purl.obolibrary.org/obo/PATO_\", \"PlasmoDB\": \"http://identifiers.org/plasmodb/\", \"PMID\": \"http://identifiers.org/pubmed/\", \"PO\": \"http://purl.obolibrary.org/obo/PO_\", \"PomBase\": \"http://identifiers.org/pombase/\", \"PR\": \"http://purl.obolibrary.org/obo/PR_\", \"Reactome\": \"http://identifiers.org/reactome/\", \"RGD\": \"http://identifiers.org/rgd/\", \"RO\": \"http://purl.obolibrary.org/obo/RO_\", \"SGD\": \"http://identifiers.org/sgd/\", \"SGN\": \"http://identifiers.org/sgn/\", \"SO\": \"http://purl.obolibrary.org/obo/SO_\", \"TAIR\": \"http://identifiers.org/tair.locus/\", \"TGD\": \"http://identifiers.org/tgd/\", \"TriTrypDB\": \"http://identifiers.org/tritrypdb/\", \"UBERON\": \"http://purl.obolibrary.org/obo/UBERON_\", \"UniProtKB\": \"http://identifiers.org/uniprot/\", \"WB\": \"http://identifiers.org/wormbase/\", \"WBls\": \"http://purl.obolibrary.org/obo/WBls_\", \"WBPhenotype\": \"http://purl.obolibrary.org/obo/WBPhenotype_\", \"Xenbase\": \"http://identifiers.org/xenbase/\", \"ZFIN\": \"http://identifiers.org/zfin/\"}",
+                "name": " \np38MAPK cascade (GO:0038066)",
+                "prov:wasDerivedFrom": "http://model.geneontology.org/5fadbcf000000632",
+                "description": "<p><img src=\"https://geneontology.org/assets/ndex-gocam-legend-v2.png\" style=\"width: 100%;\"/></p>",
+                "labels": [
+                    "gomodel:5fadbcf000000632"
+                ]
+            }
+        ]
+    },
+    {
+        "nodes": [
+            {
+                "id": 0,
+                "x": 1144.0,
+                "y": 972.0,
+                "v": {
+                    "name": "cytoplasmic cyclin-dependent protein kinase holoenzyme complex",
+                    "represents": "GO:0000308",
+                    "type": "complex",
+                    "member": [
+                        "cdc13",
+                        "cdc2"
+                    ],
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"></ul>",
+                    "Molecular Function": "<a href=\"http://purl.obolibrary.org/obo/GO_0004693\" target=\"_blank\" rel=\"noopener noreferrer\">cyclin-dependent protein serine/threonine kinase activity [GO:0004693]</a>",
+                    "Occurs In": "<a href=\"http://purl.obolibrary.org/obo/GO_0005634\" target=\"_blank\" rel=\"noopener noreferrer\">nucleus [GO:0005634]</a>",
+                    "Part Of": "<a href=\"http://purl.obolibrary.org/obo/GO_0000086\" target=\"_blank\" rel=\"noopener noreferrer\">G2/M transition of mitotic cell cycle [GO:0000086]</a>"
+                }
+            },
+            {
+                "id": 1,
+                "x": 1008.0,
+                "y": 540.0,
+                "v": {
+                    "name": "sty1",
+                    "represents": "PomBase:SPAC24B11.06c",
+                    "type": "gene",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/10398679\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10398679</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/11886858\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:11886858</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/12080074\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:12080074</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/12080074\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:12080074</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/12135491\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:12135491</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/14633985\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:14633985</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/22144909\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:22144909</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/28924043\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:28924043</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/31911490\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:31911490</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/7501024\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:7501024</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/8824587\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:8824587</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/8824588\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:8824588</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9136929\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9136929</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9188094\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9188094</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9251044\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9251044</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9450957\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9450957</a> (direct assay evidence used in manual assertion)</li></ul>",
+                    "Molecular Function": "<a href=\"http://purl.obolibrary.org/obo/GO_0004707\" target=\"_blank\" rel=\"noopener noreferrer\">MAP kinase activity [GO:0004707]</a>",
+                    "Occurs In": "<a href=\"http://purl.obolibrary.org/obo/GO_0005634\" target=\"_blank\" rel=\"noopener noreferrer\">nucleus [GO:0005634]</a>\n<br>\n<div style=\"font-size: smaller; display: block; margin-inline-start: 1rem\">\n  Evidence:\n  <ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/10233152\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10233152</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/12181336\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:12181336</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/16141205\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:16141205</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/16141205\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:16141205</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/16823372\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:16823372</a> (high throughput direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/19672306\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:19672306</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/19672306\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:19672306</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/33225241\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:33225241</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/36174923\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:36174923</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9585506\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9585506</a> (direct assay evidence used in manual assertion)</li></ul>\n</div>\n",
+                    "Part Of": "<a href=\"http://purl.obolibrary.org/obo/GO_0010972\" target=\"_blank\" rel=\"noopener noreferrer\">negative regulation of G2/M transition of mitotic cell cycle [GO:0010972]</a>\n<br>\n<div style=\"font-size: smaller; display: block; margin-inline-start: 1rem\">\n  Evidence:\n  <ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (physical interaction evidence used in manual assertion) with/from <a href=\"http://identifiers.org/pombase/SPCC1322.08\" target=\"_blank\" rel=\"noopener noreferrer\">PomBase:SPCC1322.08</a></li><li><a href=\"http://identifiers.org/pubmed/21965528\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:21965528</a> (mutant phenotype evidence used in manual assertion)</li></ul>\n</div>\n"
+                }
+            },
+            {
+                "id": 2,
+                "x": 720.0,
+                "y": 0.0,
+                "v": {
+                    "name": "ptc1",
+                    "represents": "PomBase:SPCC4F11.02",
+                    "type": "gene",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/10398679\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10398679</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/8196617\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:8196617</a> (direct assay evidence used in manual assertion)</li></ul>",
+                    "Molecular Function": "<a href=\"http://purl.obolibrary.org/obo/GO_1990439\" target=\"_blank\" rel=\"noopener noreferrer\">MAP kinase serine/threonine phosphatase activity [GO:1990439]</a>",
+                    "Occurs In": "<a href=\"http://purl.obolibrary.org/obo/GO_0005829\" target=\"_blank\" rel=\"noopener noreferrer\">cytosol [GO:0005829]</a>\n<br>\n<div style=\"font-size: smaller; display: block; margin-inline-start: 1rem\">\n  Evidence:\n  <ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/16823372\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:16823372</a> (high throughput direct assay evidence used in manual assertion)</li></ul>\n</div>\n",
+                    "Part Of": "<a href=\"http://purl.obolibrary.org/obo/GO_1903753\" target=\"_blank\" rel=\"noopener noreferrer\">negative regulation of p38MAPK cascade [GO:1903753]</a>\n<br>\n<div style=\"font-size: smaller; display: block; margin-inline-start: 1rem\">\n  Evidence:\n  <ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/10398679\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10398679</a> (mutant phenotype evidence used in manual assertion)</li></ul>\n</div>\n"
+                }
+            },
+            {
+                "id": 3,
+                "x": 1008.0,
+                "y": 108.0,
+                "v": {
+                    "name": "mcs4",
+                    "represents": "PomBase:SPBC887.10",
+                    "type": "gene",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/17559414\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:17559414</a> (physical interaction evidence used in manual assertion) with/from <a href=\"http://identifiers.org/pombase/SPBC725.02\" target=\"_blank\" rel=\"noopener noreferrer\">PomBase:SPBC725.02</a></li></ul>",
+                    "Molecular Function": "<a href=\"http://purl.obolibrary.org/obo/GO_0000156\" target=\"_blank\" rel=\"noopener noreferrer\">phosphorelay response regulator activity [GO:0000156]</a>",
+                    "Occurs In": "<a href=\"http://purl.obolibrary.org/obo/GO_0005829\" target=\"_blank\" rel=\"noopener noreferrer\">cytosol [GO:0005829]</a>\n<br>\n<div style=\"font-size: smaller; display: block; margin-inline-start: 1rem\">\n  Evidence:\n  <ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/16823372\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:16823372</a> (high throughput direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/20919928\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:20919928</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/20919928\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:20919928</a> (direct assay evidence used in manual assertion)</li></ul>\n</div>\n",
+                    "Part Of": "<a href=\"http://purl.obolibrary.org/obo/GO_1900745\" target=\"_blank\" rel=\"noopener noreferrer\">positive regulation of p38MAPK cascade [GO:1900745]</a>\n<br>\n<div style=\"font-size: smaller; display: block; margin-inline-start: 1rem\">\n  Evidence:\n  <ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/10749922\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10749922</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/11179424\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:11179424</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/16087744\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:16087744</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18406331\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18406331</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/23389634\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:23389634</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9136929\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9136929</a> (genetic interaction evidence used in manual assertion) with/from <a href=\"http://identifiers.org/pombase/SPAC24B11.06c\" target=\"_blank\" rel=\"noopener noreferrer\">PomBase:SPAC24B11.06c</a></li></ul>\n</div>\n"
+                }
+            },
+            {
+                "id": 4,
+                "x": 576.0,
+                "y": 0.0,
+                "v": {
+                    "name": "crm1",
+                    "represents": "PomBase:SPAC1805.17",
+                    "type": "gene",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/10233152\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10233152</a> (experimental evidence used in manual assertion)</li></ul>",
+                    "Molecular Function": "<a href=\"http://purl.obolibrary.org/obo/GO_0005049\" target=\"_blank\" rel=\"noopener noreferrer\">nuclear export signal receptor activity [GO:0005049]</a>",
+                    "Part Of": "<a href=\"http://purl.obolibrary.org/obo/GO_0006611\" target=\"_blank\" rel=\"noopener noreferrer\">protein export from nucleus [GO:0006611]</a>"
+                }
+            },
+            {
+                "id": 5,
+                "x": 1008.0,
+                "y": 648.0,
+                "v": {
+                    "name": "srk1",
+                    "represents": "PomBase:SPCC1322.08",
+                    "type": "gene",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://purl.obolibrary.org/obo/go/references/0000003\" target=\"_blank\" rel=\"noopener noreferrer\">GO_REF:0000003</a> (evidence used in automatic assertion) with/from <a href=\"None\" target=\"_blank\" rel=\"noopener noreferrer\">EC:2.7.11.1</a></li><li><a href=\"http://identifiers.org/pubmed/15629716\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:15629716</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/15629716\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:15629716</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li></ul>",
+                    "Molecular Function": "<a href=\"http://purl.obolibrary.org/obo/GO_0004674\" target=\"_blank\" rel=\"noopener noreferrer\">protein serine/threonine kinase activity [GO:0004674]</a>",
+                    "Occurs In": "<a href=\"http://purl.obolibrary.org/obo/GO_0005634\" target=\"_blank\" rel=\"noopener noreferrer\">nucleus [GO:0005634]</a>\n<br>\n<div style=\"font-size: smaller; display: block; margin-inline-start: 1rem\">\n  Evidence:\n  <ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/12080074\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:12080074</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/12080074\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:12080074</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/12080074\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:12080074</a> (direct assay evidence used in manual assertion)</li></ul>\n</div>\n",
+                    "Part Of": "<a href=\"http://purl.obolibrary.org/obo/GO_0010972\" target=\"_blank\" rel=\"noopener noreferrer\">negative regulation of G2/M transition of mitotic cell cycle [GO:0010972]</a>\n<br>\n<div style=\"font-size: smaller; display: block; margin-inline-start: 1rem\">\n  Evidence:\n  <ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/15629716\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:15629716</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (genetic interaction evidence used in manual assertion) with/from <a href=\"http://identifiers.org/pombase/SPBC29B5.01\" target=\"_blank\" rel=\"noopener noreferrer\">PomBase:SPBC29B5.01</a></li></ul>\n</div>\n"
+                }
+            },
+            {
+                "id": 6,
+                "x": 1008.0,
+                "y": 324.0,
+                "v": {
+                    "name": "wis1",
+                    "represents": "PomBase:SPBC409.07c",
+                    "type": "gene",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/10398679\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10398679</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/12181336\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:12181336</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/7501024\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:7501024</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/7657164\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:7657164</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9321395\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9321395</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9585506\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9585506</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9693384\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9693384</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9718372\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9718372</a> (direct assay evidence used in manual assertion)</li></ul>",
+                    "Molecular Function": "<a href=\"http://purl.obolibrary.org/obo/GO_0004708\" target=\"_blank\" rel=\"noopener noreferrer\">MAP kinase kinase activity [GO:0004708]</a>",
+                    "Part Of": "<a href=\"http://purl.obolibrary.org/obo/GO_0038066\" target=\"_blank\" rel=\"noopener noreferrer\">p38MAPK cascade [GO:0038066]</a>\n<br>\n<div style=\"font-size: smaller; display: block; margin-inline-start: 1rem\">\n  Evidence:\n  <ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://purl.obolibrary.org/obo/go/references/0000033\" target=\"_blank\" rel=\"noopener noreferrer\">GO_REF:0000033</a> (biological aspect of ancestor evidence used in manual assertion) with/from <a href=\"http://identifiers.org/panther.family/PTN000684494\" target=\"_blank\" rel=\"noopener noreferrer\">PANTHER:PTN000684494</a>, <a href=\"http://identifiers.org/MGI/MGI:1346871\" target=\"_blank\" rel=\"noopener noreferrer\">MGI:MGI:1346871</a>, <a href=\"http://identifiers.org/uniprot/P46734\" target=\"_blank\" rel=\"noopener noreferrer\">UniProtKB:P46734</a>, <a href=\"http://identifiers.org/rgd/1560043\" target=\"_blank\" rel=\"noopener noreferrer\">RGD:1560043</a>, <a href=\"http://identifiers.org/uniprot/P52564\" target=\"_blank\" rel=\"noopener noreferrer\">UniProtKB:P52564</a>, <a href=\"http://identifiers.org/zfin/ZDB-GENE-060512-98\" target=\"_blank\" rel=\"noopener noreferrer\">ZFIN:ZDB-GENE-060512-98</a>, <a href=\"http://identifiers.org/MGI/MGI:1346869\" target=\"_blank\" rel=\"noopener noreferrer\">MGI:MGI:1346869</a>, <a href=\"http://identifiers.org/rgd/70495\" target=\"_blank\" rel=\"noopener noreferrer\">RGD:70495</a>, <a href=\"http://identifiers.org/pombase/SPBC543.07\" target=\"_blank\" rel=\"noopener noreferrer\">PomBase:SPBC543.07</a>, <a href=\"http://identifiers.org/pombase/SPBC409.07c\" target=\"_blank\" rel=\"noopener noreferrer\">PomBase:SPBC409.07c</a>, <a href=\"http://identifiers.org/MGI/MGI:1346870\" target=\"_blank\" rel=\"noopener noreferrer\">MGI:MGI:1346870</a>, <a href=\"http://identifiers.org/wormbase/WBGene00003185\" target=\"_blank\" rel=\"noopener noreferrer\">WB:WBGene00003185</a>, <a href=\"http://identifiers.org/flybase/FBgn0010269\" target=\"_blank\" rel=\"noopener noreferrer\">FB:FBgn0010269</a>, <a href=\"http://identifiers.org/MGI/MGI:1346867\" target=\"_blank\" rel=\"noopener noreferrer\">MGI:MGI:1346867</a>, <a href=\"http://identifiers.org/pombase/SPAC1D4.13\" target=\"_blank\" rel=\"noopener noreferrer\">PomBase:SPAC1D4.13</a>, <a href=\"http://identifiers.org/MGI/MGI:1346868\" target=\"_blank\" rel=\"noopener noreferrer\">MGI:MGI:1346868</a>, <a href=\"http://identifiers.org/uniprot/P36507\" target=\"_blank\" rel=\"noopener noreferrer\">UniProtKB:P36507</a>, <a href=\"http://identifiers.org/MGI/MGI:1346866\" target=\"_blank\" rel=\"noopener noreferrer\">MGI:MGI:1346866</a>, <a href=\"http://identifiers.org/flybase/FBgn0261524\" target=\"_blank\" rel=\"noopener noreferrer\">FB:FBgn0261524</a>, <a href=\"http://identifiers.org/wormbase/WBGene00003186\" target=\"_blank\" rel=\"noopener noreferrer\">WB:WBGene00003186</a>, <a href=\"http://identifiers.org/sgd/S000002318\" target=\"_blank\" rel=\"noopener noreferrer\">SGD:S000002318</a>, <a href=\"http://identifiers.org/wormbase/WBGene00004758\" target=\"_blank\" rel=\"noopener noreferrer\">WB:WBGene00004758</a>, <a href=\"http://identifiers.org/wormbase/WBGene00003368\" target=\"_blank\" rel=\"noopener noreferrer\">WB:WBGene00003368</a>, <a href=\"http://identifiers.org/sgd/S000005757\" target=\"_blank\" rel=\"noopener noreferrer\">SGD:S000005757</a>, <a href=\"http://identifiers.org/sgd/S000006061\" target=\"_blank\" rel=\"noopener noreferrer\">SGD:S000006061</a>, <a href=\"http://identifiers.org/rgd/61890\" target=\"_blank\" rel=\"noopener noreferrer\">RGD:61890</a>, <a href=\"http://identifiers.org/uniprot/O14733\" target=\"_blank\" rel=\"noopener noreferrer\">UniProtKB:O14733</a>, <a href=\"http://identifiers.org/MGI/MGI:1346345\" target=\"_blank\" rel=\"noopener noreferrer\">MGI:MGI:1346345</a>, <a href=\"http://identifiers.org/sgd/S000003664\" target=\"_blank\" rel=\"noopener noreferrer\">SGD:S000003664</a>, <a href=\"http://identifiers.org/flybase/FBgn0024326\" target=\"_blank\" rel=\"noopener noreferrer\">FB:FBgn0024326</a></li><li><a href=\"http://identifiers.org/pubmed/10398679\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10398679</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/10749922\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10749922</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/23389634\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:23389634</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/7501024\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:7501024</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/7657164\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:7657164</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/8649397\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:8649397</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/8824588\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:8824588</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9693384\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9693384</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9718372\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9718372</a> (mutant phenotype evidence used in manual assertion)</li></ul>\n</div>\n"
+                }
+            },
+            {
+                "id": 7,
+                "x": 1080.0,
+                "y": 216.0,
+                "v": {
+                    "name": "wis4",
+                    "represents": "PomBase:SPAC9G1.02",
+                    "type": "gene",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/9718372\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9718372</a> (direct assay evidence used in manual assertion)</li></ul>",
+                    "Molecular Function": "<a href=\"http://purl.obolibrary.org/obo/GO_0004709\" target=\"_blank\" rel=\"noopener noreferrer\">MAP kinase kinase kinase activity [GO:0004709]</a>",
+                    "Occurs In": "<a href=\"http://purl.obolibrary.org/obo/GO_0005829\" target=\"_blank\" rel=\"noopener noreferrer\">cytosol [GO:0005829]</a>\n<br>\n<div style=\"font-size: smaller; display: block; margin-inline-start: 1rem\">\n  Evidence:\n  <ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/16823372\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:16823372</a> (high throughput direct assay evidence used in manual assertion)</li></ul>\n</div>\n",
+                    "Part Of": "<a href=\"http://purl.obolibrary.org/obo/GO_0038066\" target=\"_blank\" rel=\"noopener noreferrer\">p38MAPK cascade [GO:0038066]</a>\n<br>\n<div style=\"font-size: smaller; display: block; margin-inline-start: 1rem\">\n  Evidence:\n  <ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/16087744\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:16087744</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/23389634\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:23389634</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9136929\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9136929</a> (genetic interaction evidence used in manual assertion) with/from <a href=\"http://identifiers.org/pombase/SPAC24B11.06c\" target=\"_blank\" rel=\"noopener noreferrer\">PomBase:SPAC24B11.06c</a></li><li><a href=\"http://identifiers.org/pubmed/9321395\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9321395</a> (genetic interaction evidence used in manual assertion) with/from <a href=\"http://identifiers.org/pombase/SPBC409.07c\" target=\"_blank\" rel=\"noopener noreferrer\">PomBase:SPBC409.07c</a></li><li><a href=\"http://identifiers.org/pubmed/9450957\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9450957</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9718372\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9718372</a> (mutant phenotype evidence used in manual assertion)</li></ul>\n</div>\n"
+                }
+            },
+            {
+                "id": 8,
+                "x": 432.0,
+                "y": 0.0,
+                "v": {
+                    "name": "pyp1",
+                    "represents": "PomBase:SPAC26F1.10c",
+                    "type": "gene",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/10398679\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10398679</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/7501024\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:7501024</a> (mutant phenotype evidence used in manual assertion)</li></ul>",
+                    "Molecular Function": "<a href=\"http://purl.obolibrary.org/obo/GO_0033550\" target=\"_blank\" rel=\"noopener noreferrer\">MAP kinase tyrosine phosphatase activity [GO:0033550]</a>",
+                    "Occurs In": "<a href=\"http://purl.obolibrary.org/obo/GO_0005737\" target=\"_blank\" rel=\"noopener noreferrer\">cytoplasm [GO:0005737]</a>\n<br>\n<div style=\"font-size: smaller; display: block; margin-inline-start: 1rem\">\n  Evidence:\n  <ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/10233152\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10233152</a> (direct assay evidence used in manual assertion)</li></ul>\n</div>\n",
+                    "Part Of": "<a href=\"http://purl.obolibrary.org/obo/GO_1903753\" target=\"_blank\" rel=\"noopener noreferrer\">negative regulation of p38MAPK cascade [GO:1903753]</a>\n<br>\n<div style=\"font-size: smaller; display: block; margin-inline-start: 1rem\">\n  Evidence:\n  <ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/10398679\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10398679</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/16087744\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:16087744</a> (genetic interaction evidence used in manual assertion) with/from <a href=\"http://identifiers.org/pombase/SPAC9G1.02\" target=\"_blank\" rel=\"noopener noreferrer\">PomBase:SPAC9G1.02</a></li></ul>\n</div>\n"
+                }
+            },
+            {
+                "id": 9,
+                "x": 864.0,
+                "y": 0.0,
+                "v": {
+                    "name": "mak3",
+                    "represents": "PomBase:SPCC74.06",
+                    "type": "gene",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/11758939\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:11758939</a> (genetic interaction evidence used in manual assertion) with/from <a href=\"http://identifiers.org/pombase/SPBC725.02\" target=\"_blank\" rel=\"noopener noreferrer\">PomBase:SPBC725.02</a></li><li><a href=\"http://identifiers.org/pubmed/20919928\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:20919928</a> (experimental evidence used in manual assertion)</li></ul>",
+                    "Molecular Function": "<a href=\"http://purl.obolibrary.org/obo/GO_0000155\" target=\"_blank\" rel=\"noopener noreferrer\">phosphorelay sensor kinase activity [GO:0000155]</a>",
+                    "Occurs In": "<a href=\"http://purl.obolibrary.org/obo/GO_0005829\" target=\"_blank\" rel=\"noopener noreferrer\">cytosol [GO:0005829]</a>\n<br>\n<div style=\"font-size: smaller; display: block; margin-inline-start: 1rem\">\n  Evidence:\n  <ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/16823372\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:16823372</a> (high throughput direct assay evidence used in manual assertion)</li></ul>\n</div>\n",
+                    "Part Of": "<a href=\"http://purl.obolibrary.org/obo/GO_1900745\" target=\"_blank\" rel=\"noopener noreferrer\">positive regulation of p38MAPK cascade [GO:1900745]</a>\n<br>\n<div style=\"font-size: smaller; display: block; margin-inline-start: 1rem\">\n  Evidence:\n  <ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/11179424\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:11179424</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/11758939\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:11758939</a> (genetic interaction evidence used in manual assertion) with/from <a href=\"http://identifiers.org/pombase/SPBC725.02\" target=\"_blank\" rel=\"noopener noreferrer\">PomBase:SPBC725.02</a></li><li><a href=\"http://identifiers.org/pubmed/20919928\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:20919928</a> (physical interaction evidence used in manual assertion) with/from <a href=\"http://identifiers.org/pombase/SPAC27E2.09\" target=\"_blank\" rel=\"noopener noreferrer\">PomBase:SPAC27E2.09</a></li></ul>\n</div>\n"
+                }
+            },
+            {
+                "id": 10,
+                "x": 1080.0,
+                "y": 756.0,
+                "v": {
+                    "name": "rad24",
+                    "represents": "PomBase:SPAC8E11.02c",
+                    "type": "gene",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/15629716\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:15629716</a> (physical interaction evidence used in manual assertion) with/from <a href=\"http://identifiers.org/pombase/SPAC24H6.05\" target=\"_blank\" rel=\"noopener noreferrer\">PomBase:SPAC24H6.05</a></li></ul>",
+                    "Molecular Function": "<a href=\"http://purl.obolibrary.org/obo/GO_0140311\" target=\"_blank\" rel=\"noopener noreferrer\">protein sequestering activity [GO:0140311]</a>",
+                    "Occurs In": "<a href=\"http://purl.obolibrary.org/obo/GO_0005829\" target=\"_blank\" rel=\"noopener noreferrer\">cytosol [GO:0005829]</a>\n<br>\n<div style=\"font-size: smaller; display: block; margin-inline-start: 1rem\">\n  Evidence:\n  <ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/16823372\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:16823372</a> (high throughput direct assay evidence used in manual assertion)</li></ul>\n</div>\n",
+                    "Part Of": "<a href=\"http://purl.obolibrary.org/obo/GO_0010972\" target=\"_blank\" rel=\"noopener noreferrer\">negative regulation of G2/M transition of mitotic cell cycle [GO:0010972]</a>"
+                }
+            },
+            {
+                "id": 11,
+                "x": 1080.0,
+                "y": 864.0,
+                "v": {
+                    "name": "cdc25",
+                    "represents": "PomBase:SPAC24H6.05",
+                    "type": "gene",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/1464318\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:1464318</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/1703321\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:1703321</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/1756737\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:1756737</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/1819507\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:1819507</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9042863\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9042863</a> (mutant phenotype evidence used in manual assertion)</li></ul>",
+                    "Molecular Function": "<a href=\"http://purl.obolibrary.org/obo/GO_0004725\" target=\"_blank\" rel=\"noopener noreferrer\">protein tyrosine phosphatase activity [GO:0004725]</a>",
+                    "Occurs In": "<a href=\"http://purl.obolibrary.org/obo/GO_0005634\" target=\"_blank\" rel=\"noopener noreferrer\">nucleus [GO:0005634]</a>\n<br>\n<div style=\"font-size: smaller; display: block; margin-inline-start: 1rem\">\n  Evidence:\n  <ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/1500423\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:1500423</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/1500423\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:1500423</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/15629716\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:15629716</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li></ul>\n</div>\n",
+                    "Part Of": "<a href=\"http://purl.obolibrary.org/obo/GO_0010971\" target=\"_blank\" rel=\"noopener noreferrer\">positive regulation of G2/M transition of mitotic cell cycle [GO:0010971]</a>"
+                }
+            },
+            {
+                "id": 12,
+                "x": 1008.0,
+                "y": 0.0,
+                "v": {
+                    "name": "mak2",
+                    "represents": "PomBase:SPAC27E2.09",
+                    "type": "gene",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/17559414\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:17559414</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/20919928\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:20919928</a> (experimental evidence used in manual assertion)</li></ul>",
+                    "Molecular Function": "<a href=\"http://purl.obolibrary.org/obo/GO_0000155\" target=\"_blank\" rel=\"noopener noreferrer\">phosphorelay sensor kinase activity [GO:0000155]</a>",
+                    "Occurs In": "<a href=\"http://purl.obolibrary.org/obo/GO_0005829\" target=\"_blank\" rel=\"noopener noreferrer\">cytosol [GO:0005829]</a>\n<br>\n<div style=\"font-size: smaller; display: block; margin-inline-start: 1rem\">\n  Evidence:\n  <ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/11179424\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:11179424</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/20919928\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:20919928</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/20919928\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:20919928</a> (direct assay evidence used in manual assertion)</li></ul>\n</div>\n",
+                    "Part Of": "<a href=\"http://purl.obolibrary.org/obo/GO_1900745\" target=\"_blank\" rel=\"noopener noreferrer\">positive regulation of p38MAPK cascade [GO:1900745]</a>\n<br>\n<div style=\"font-size: smaller; display: block; margin-inline-start: 1rem\">\n  Evidence:\n  <ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/11179424\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:11179424</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/20919928\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:20919928</a> (mutant phenotype evidence used in manual assertion)</li></ul>\n</div>\n"
+                }
+            },
+            {
+                "id": 13,
+                "x": 288.0,
+                "y": 0.0,
+                "v": {
+                    "name": "ptc4",
+                    "represents": "PomBase:SPAC4A8.03c",
+                    "type": "gene",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/22139357\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:22139357</a> (experimental evidence used in manual assertion)</li></ul>",
+                    "Molecular Function": "<a href=\"http://purl.obolibrary.org/obo/GO_0033549\" target=\"_blank\" rel=\"noopener noreferrer\">MAP kinase phosphatase activity [GO:0033549]</a>"
+                }
+            },
+            {
+                "id": 14,
+                "x": 880.0,
+                "y": 432.0,
+                "v": {
+                    "name": "cut15",
+                    "represents": "PomBase:SPCC962.03c",
+                    "type": "gene",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"></ul>",
+                    "Molecular Function": "<a href=\"http://purl.obolibrary.org/obo/GO_0061608\" target=\"_blank\" rel=\"noopener noreferrer\">nuclear import signal receptor activity [GO:0061608]</a>",
+                    "Part Of": "<a href=\"http://purl.obolibrary.org/obo/GO_0006607\" target=\"_blank\" rel=\"noopener noreferrer\">NLS-bearing protein import into nucleus [GO:0006607]</a>\n<br>\n<div style=\"font-size: smaller; display: block; margin-inline-start: 1rem\">\n  Evidence:\n  <ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://purl.obolibrary.org/obo/go/references/0000033\" target=\"_blank\" rel=\"noopener noreferrer\">GO_REF:0000033</a> (biological aspect of ancestor evidence used in manual assertion) with/from <a href=\"http://identifiers.org/panther.family/PTN000593662\" target=\"_blank\" rel=\"noopener noreferrer\">PANTHER:PTN000593662</a>, <a href=\"http://identifiers.org/uniprot/Q8IAW0\" target=\"_blank\" rel=\"noopener noreferrer\">UniProtKB:Q8IAW0</a>, <a href=\"http://identifiers.org/sgd/S000005133\" target=\"_blank\" rel=\"noopener noreferrer\">SGD:S000005133</a>, <a href=\"http://identifiers.org/flybase/FBgn0287720\" target=\"_blank\" rel=\"noopener noreferrer\">FB:FBgn0287720</a>, <a href=\"http://identifiers.org/rgd/735064\" target=\"_blank\" rel=\"noopener noreferrer\">RGD:735064</a>, <a href=\"http://identifiers.org/uniprot/P52294\" target=\"_blank\" rel=\"noopener noreferrer\">UniProtKB:P52294</a>, <a href=\"http://identifiers.org/MGI/MGI:103560\" target=\"_blank\" rel=\"noopener noreferrer\">MGI:MGI:103560</a>, <a href=\"http://identifiers.org/flybase/FBgn0024889\" target=\"_blank\" rel=\"noopener noreferrer\">FB:FBgn0024889</a>, <a href=\"http://identifiers.org/wormbase/WBGene00002074\" target=\"_blank\" rel=\"noopener noreferrer\">WB:WBGene00002074</a>, <a href=\"http://identifiers.org/uniprot/P52292\" target=\"_blank\" rel=\"noopener noreferrer\">UniProtKB:P52292</a>, <a href=\"http://identifiers.org/uniprot/O00629\" target=\"_blank\" rel=\"noopener noreferrer\">UniProtKB:O00629</a></li></ul>\n</div>\n"
+                }
+            },
+            {
+                "id": 15,
+                "x": 288.0,
+                "y": 108.0,
+                "v": {
+                    "name": "sty1",
+                    "represents": "PomBase:SPAC24B11.06c",
+                    "type": "gene",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/9251044\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9251044</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/12135491\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:12135491</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/10398679\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10398679</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9450957\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9450957</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/11886858\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:11886858</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/12080074\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:12080074</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/12080074\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:12080074</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9136929\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9136929</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/28924043\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:28924043</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/7501024\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:7501024</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/8824587\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:8824587</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/22144909\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:22144909</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/8824588\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:8824588</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/21873635\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:21873635</a> (biological aspect of ancestor evidence used in manual assertion) with/from <a href=\"http://identifiers.org/panther.family/PTN000622075\" target=\"_blank\" rel=\"noopener noreferrer\">PANTHER:PTN000622075</a></li></ul>",
+                    "Molecular Function": "<a href=\"http://purl.obolibrary.org/obo/GO_0004707\" target=\"_blank\" rel=\"noopener noreferrer\">MAP kinase activity [GO:0004707]</a>",
+                    "Occurs In": "<a href=\"http://purl.obolibrary.org/obo/GO_0005829\" target=\"_blank\" rel=\"noopener noreferrer\">cytosol [GO:0005829]</a>"
+                }
+            },
+            {
+                "id": 16,
+                "x": 864.0,
+                "y": 108.0,
+                "v": {
+                    "name": "mpr1",
+                    "represents": "PomBase:SPBC725.02",
+                    "type": "gene",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/10749922\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10749922</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/10940030\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10940030</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/17559414\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:17559414</a> (direct assay evidence used in manual assertion)</li></ul>",
+                    "Molecular Function": "<a href=\"http://purl.obolibrary.org/obo/GO_0009927\" target=\"_blank\" rel=\"noopener noreferrer\">histidine phosphotransfer kinase activity [GO:0009927]</a>",
+                    "Occurs In": "<a href=\"http://purl.obolibrary.org/obo/GO_0005829\" target=\"_blank\" rel=\"noopener noreferrer\">cytosol [GO:0005829]</a>\n<br>\n<div style=\"font-size: smaller; display: block; margin-inline-start: 1rem\">\n  Evidence:\n  <ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/20919928\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:20919928</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/20919928\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:20919928</a> (direct assay evidence used in manual assertion)</li></ul>\n</div>\n",
+                    "Part Of": "<a href=\"http://purl.obolibrary.org/obo/GO_1900745\" target=\"_blank\" rel=\"noopener noreferrer\">positive regulation of p38MAPK cascade [GO:1900745]</a>\n<br>\n<div style=\"font-size: smaller; display: block; margin-inline-start: 1rem\">\n  Evidence:\n  <ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/10749922\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10749922</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18406331\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18406331</a> (mutant phenotype evidence used in manual assertion)</li></ul>\n</div>\n"
+                }
+            },
+            {
+                "id": 17,
+                "x": 144.0,
+                "y": 0.0,
+                "v": {
+                    "name": "ptc3",
+                    "represents": "PomBase:SPAC2G11.07c",
+                    "type": "gene",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/10398679\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10398679</a> (direct assay evidence used in manual assertion)</li></ul>",
+                    "Molecular Function": "<a href=\"http://purl.obolibrary.org/obo/GO_1990439\" target=\"_blank\" rel=\"noopener noreferrer\">MAP kinase serine/threonine phosphatase activity [GO:1990439]</a>",
+                    "Occurs In": "<a href=\"http://purl.obolibrary.org/obo/GO_0005829\" target=\"_blank\" rel=\"noopener noreferrer\">cytosol [GO:0005829]</a>\n<br>\n<div style=\"font-size: smaller; display: block; margin-inline-start: 1rem\">\n  Evidence:\n  <ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/16823372\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:16823372</a> (high throughput direct assay evidence used in manual assertion)</li></ul>\n</div>\n",
+                    "Part Of": "<a href=\"http://purl.obolibrary.org/obo/GO_1903753\" target=\"_blank\" rel=\"noopener noreferrer\">negative regulation of p38MAPK cascade [GO:1903753]</a>\n<br>\n<div style=\"font-size: smaller; display: block; margin-inline-start: 1rem\">\n  Evidence:\n  <ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/10398679\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10398679</a> (mutant phenotype evidence used in manual assertion)</li></ul>\n</div>\n"
+                }
+            },
+            {
+                "id": 18,
+                "x": 936.0,
+                "y": 216.0,
+                "v": {
+                    "name": "win1",
+                    "represents": "PomBase:SPAC1006.09",
+                    "type": "gene",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/9693384\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9693384</a> (direct assay evidence used in manual assertion)</li></ul>",
+                    "Molecular Function": "<a href=\"http://purl.obolibrary.org/obo/GO_0004709\" target=\"_blank\" rel=\"noopener noreferrer\">MAP kinase kinase kinase activity [GO:0004709]</a>",
+                    "Occurs In": "<a href=\"http://purl.obolibrary.org/obo/GO_0005737\" target=\"_blank\" rel=\"noopener noreferrer\">cytoplasm [GO:0005737]</a>\n<br>\n<div style=\"font-size: smaller; display: block; margin-inline-start: 1rem\">\n  Evidence:\n  <ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://purl.obolibrary.org/obo/go/references/0000002\" target=\"_blank\" rel=\"noopener noreferrer\">GO_REF:0000002</a> (evidence used in automatic assertion) with/from <a href=\"http://identifiers.org/interpro/IPR017240\" target=\"_blank\" rel=\"noopener noreferrer\">InterPro:IPR017240</a></li></ul>\n</div>\n",
+                    "Part Of": "<a href=\"http://purl.obolibrary.org/obo/GO_0038066\" target=\"_blank\" rel=\"noopener noreferrer\">p38MAPK cascade [GO:0038066]</a>\n<br>\n<div style=\"font-size: smaller; display: block; margin-inline-start: 1rem\">\n  Evidence:\n  <ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/16087744\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:16087744</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/23389634\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:23389634</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9321395\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9321395</a> (genetic interaction evidence used in manual assertion) with/from <a href=\"http://identifiers.org/pombase/SPAC9G1.02\" target=\"_blank\" rel=\"noopener noreferrer\">PomBase:SPAC9G1.02</a></li><li><a href=\"http://identifiers.org/pubmed/9450957\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9450957</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9693384\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9693384</a> (mutant phenotype evidence used in manual assertion)</li></ul>\n</div>\n"
+                }
+            },
+            {
+                "id": 19,
+                "x": 0.0,
+                "y": 0.0,
+                "v": {
+                    "name": "pyp2",
+                    "represents": "PomBase:SPAC19D5.01",
+                    "type": "gene",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/8649397\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:8649397</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/7657164\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:7657164</a> (direct assay evidence used in manual assertion)</li></ul>",
+                    "Molecular Function": "<a href=\"http://purl.obolibrary.org/obo/GO_0033550\" target=\"_blank\" rel=\"noopener noreferrer\">MAP kinase tyrosine phosphatase activity [GO:0033550]</a>",
+                    "Occurs In": "<a href=\"http://purl.obolibrary.org/obo/GO_0005737\" target=\"_blank\" rel=\"noopener noreferrer\">cytoplasm [GO:0005737]</a>\n<br>\n<div style=\"font-size: smaller; display: block; margin-inline-start: 1rem\">\n  Evidence:\n  <ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/10233152\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10233152</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/10233152\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10233152</a> (direct assay evidence used in manual assertion)</li></ul>\n</div>\n",
+                    "Part Of": "<a href=\"http://purl.obolibrary.org/obo/GO_1903753\" target=\"_blank\" rel=\"noopener noreferrer\">negative regulation of p38MAPK cascade [GO:1903753]</a>\n<br>\n<div style=\"font-size: smaller; display: block; margin-inline-start: 1rem\">\n  Evidence:\n  <ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/8649397\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:8649397</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/7657164\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:7657164</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/7657164\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:7657164</a> (mutant phenotype evidence used in manual assertion)</li></ul>\n</div>\n"
+                }
+            }
+        ]
+    },
+    {
+        "edges": [
+            {
+                "id": 0,
+                "s": 1,
+                "t": 5,
+                "v": {
+                    "name": "directly positively regulates",
+                    "represents": "RO:0002629",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/10398679\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10398679</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/12080074\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:12080074</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/12080074\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:12080074</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/12080074\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:12080074</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/12080074\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:12080074</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/22144909\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:22144909</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/12135491\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:12135491</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/12135491\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:12135491</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/28924043\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:28924043</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/14633985\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:14633985</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/14633985\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:14633985</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/31911490\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:31911490</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/7501024\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:7501024</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/8824587\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:8824587</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/8824588\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:8824588</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9450957\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9450957</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/8824588\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:8824588</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9136929\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9136929</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9136929\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9136929</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9188094\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9188094</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9188094\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9188094</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/11886858\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:11886858</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9251044\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9251044</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/12080074\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:12080074</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9450957\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9450957</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9450957\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9450957</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/12080074\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:12080074</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/12135491\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:12135491</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/14633985\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:14633985</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9136929\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9136929</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9188094\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9188094</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9251044\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9251044</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9450957\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9450957</a> (direct assay evidence used in manual assertion)</li></ul>"
+                }
+            },
+            {
+                "id": 1,
+                "s": 1,
+                "t": 5,
+                "v": {
+                    "name": "directly positively regulates",
+                    "represents": "RO:0002629",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/10398679\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10398679</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9251044\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9251044</a> (direct assay evidence used in manual assertion)</li></ul>"
+                }
+            },
+            {
+                "id": 2,
+                "s": 1,
+                "t": 5,
+                "v": {
+                    "name": "directly positively regulates",
+                    "represents": "RO:0002629",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/10398679\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10398679</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/11886858\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:11886858</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/12080074\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:12080074</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/12080074\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:12080074</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/12135491\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:12135491</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/14633985\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:14633985</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/22144909\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:22144909</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/28924043\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:28924043</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/31911490\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:31911490</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/7501024\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:7501024</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/8824587\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:8824587</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/8824588\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:8824588</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/10398679\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10398679</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9136929\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9136929</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/11886858\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:11886858</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/12080074\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:12080074</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9450957\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9450957</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/12080074\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:12080074</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/12135491\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:12135491</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/10398679\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10398679</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/14633985\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:14633985</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/11886858\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:11886858</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/11886858\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:11886858</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/22144909\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:22144909</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/28924043\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:28924043</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/31911490\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:31911490</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/7501024\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:7501024</a> (direct assay evidence used in manual assertion)</li></ul>"
+                }
+            },
+            {
+                "id": 3,
+                "s": 1,
+                "t": 5,
+                "v": {
+                    "name": "directly positively regulates",
+                    "represents": "RO:0002629",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/9188094\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9188094</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9251044\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9251044</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/22144909\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:22144909</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/8824587\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:8824587</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/22144909\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:22144909</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/28924043\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:28924043</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/8824588\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:8824588</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/28924043\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:28924043</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/31911490\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:31911490</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9136929\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9136929</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/31911490\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:31911490</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9188094\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9188094</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/7501024\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:7501024</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/7501024\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:7501024</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/8824587\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:8824587</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9251044\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9251044</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/8824587\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:8824587</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/8824588\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:8824588</a> (direct assay evidence used in manual assertion)</li></ul>"
+                }
+            },
+            {
+                "id": 4,
+                "s": 2,
+                "t": 15,
+                "v": {
+                    "name": "directly negatively regulates",
+                    "represents": "RO:0002630",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/10398679\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10398679</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/10398679\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10398679</a> (direct assay evidence used in manual assertion)</li></ul>"
+                }
+            },
+            {
+                "id": 5,
+                "s": 2,
+                "t": 15,
+                "v": {
+                    "name": "directly negatively regulates",
+                    "represents": "RO:0002630",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/10398679\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10398679</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/8196617\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:8196617</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/10398679\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10398679</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/8196617\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:8196617</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/8196617\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:8196617</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/8196617\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:8196617</a> (direct assay evidence used in manual assertion)</li></ul>"
+                }
+            },
+            {
+                "id": 6,
+                "s": 3,
+                "t": 7,
+                "v": {
+                    "name": "directly positively regulates",
+                    "represents": "RO:0002629",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/17559414\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:17559414</a> (physical interaction evidence used in manual assertion) with/from <a href=\"http://identifiers.org/pombase/SPBC725.02\" target=\"_blank\" rel=\"noopener noreferrer\">PomBase:SPBC725.02</a></li><li><a href=\"http://identifiers.org/pubmed/17559414\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:17559414</a> (physical interaction evidence used in manual assertion) with/from <a href=\"http://identifiers.org/pombase/SPBC725.02\" target=\"_blank\" rel=\"noopener noreferrer\">PomBase:SPBC725.02</a></li></ul>"
+                }
+            },
+            {
+                "id": 7,
+                "s": 3,
+                "t": 18,
+                "v": {
+                    "name": "directly positively regulates",
+                    "represents": "RO:0002629",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/17559414\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:17559414</a> (physical interaction evidence used in manual assertion) with/from <a href=\"http://identifiers.org/pombase/SPBC725.02\" target=\"_blank\" rel=\"noopener noreferrer\">PomBase:SPBC725.02</a></li></ul>"
+                }
+            },
+            {
+                "id": 8,
+                "s": 3,
+                "t": 18,
+                "v": {
+                    "name": "directly positively regulates",
+                    "represents": "RO:0002629",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/17559414\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:17559414</a> (physical interaction evidence used in manual assertion) with/from <a href=\"http://identifiers.org/pombase/SPBC725.02\" target=\"_blank\" rel=\"noopener noreferrer\">PomBase:SPBC725.02</a></li></ul>"
+                }
+            },
+            {
+                "id": 9,
+                "s": 3,
+                "t": 7,
+                "v": {
+                    "name": "directly positively regulates",
+                    "represents": "RO:0002629",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/17559414\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:17559414</a> (physical interaction evidence used in manual assertion) with/from <a href=\"http://identifiers.org/pombase/SPBC725.02\" target=\"_blank\" rel=\"noopener noreferrer\">PomBase:SPBC725.02</a></li></ul>"
+                }
+            },
+            {
+                "id": 10,
+                "s": 4,
+                "t": 15,
+                "v": {
+                    "name": "constitutively upstream of",
+                    "represents": "RO:0012009",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/10233152\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10233152</a> (experimental evidence used in manual assertion)</li></ul>"
+                }
+            },
+            {
+                "id": 11,
+                "s": 5,
+                "t": 11,
+                "v": {
+                    "name": "directly negatively regulates",
+                    "represents": "RO:0002630",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://purl.obolibrary.org/obo/go/references/0000003\" target=\"_blank\" rel=\"noopener noreferrer\">GO_REF:0000003</a> (evidence used in automatic assertion) with/from <a href=\"None\" target=\"_blank\" rel=\"noopener noreferrer\">EC:2.7.11.1</a></li><li><a href=\"http://identifiers.org/pubmed/15629716\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:15629716</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/15629716\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:15629716</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/15629716\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:15629716</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/15629716\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:15629716</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/15629716\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:15629716</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/15629716\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:15629716</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/15629716\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:15629716</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li></ul>"
+                }
+            },
+            {
+                "id": 12,
+                "s": 5,
+                "t": 11,
+                "v": {
+                    "name": "directly negatively regulates",
+                    "represents": "RO:0002630",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://purl.obolibrary.org/obo/go/references/0000003\" target=\"_blank\" rel=\"noopener noreferrer\">GO_REF:0000003</a> (evidence used in automatic assertion) with/from <a href=\"None\" target=\"_blank\" rel=\"noopener noreferrer\">EC:2.7.11.1</a></li><li><a href=\"http://identifiers.org/pubmed/15629716\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:15629716</a> (direct assay evidence used in manual assertion)</li></ul>"
+                }
+            },
+            {
+                "id": 13,
+                "s": 5,
+                "t": 11,
+                "v": {
+                    "name": "directly negatively regulates",
+                    "represents": "RO:0002630",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://purl.obolibrary.org/obo/go/references/0000003\" target=\"_blank\" rel=\"noopener noreferrer\">GO_REF:0000003</a> (evidence used in automatic assertion) with/from <a href=\"None\" target=\"_blank\" rel=\"noopener noreferrer\">EC:2.7.11.1</a></li><li><a href=\"http://purl.obolibrary.org/obo/go/references/0000003\" target=\"_blank\" rel=\"noopener noreferrer\">GO_REF:0000003</a> (evidence used in automatic assertion) with/from <a href=\"None\" target=\"_blank\" rel=\"noopener noreferrer\">EC:2.7.11.1</a></li><li><a href=\"http://purl.obolibrary.org/obo/go/references/0000003\" target=\"_blank\" rel=\"noopener noreferrer\">GO_REF:0000003</a> (evidence used in automatic assertion) with/from <a href=\"None\" target=\"_blank\" rel=\"noopener noreferrer\">EC:2.7.11.1</a></li><li><a href=\"http://identifiers.org/pubmed/15629716\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:15629716</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/15629716\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:15629716</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li></ul>"
+                }
+            },
+            {
+                "id": 14,
+                "s": 5,
+                "t": 0,
+                "v": {
+                    "name": "indirectly positively regulates",
+                    "represents": "RO:0002409",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://purl.obolibrary.org/obo/go/references/0000003\" target=\"_blank\" rel=\"noopener noreferrer\">GO_REF:0000003</a> (evidence used in automatic assertion) with/from <a href=\"None\" target=\"_blank\" rel=\"noopener noreferrer\">EC:2.7.11.1</a></li><li><a href=\"http://identifiers.org/pubmed/15629716\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:15629716</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/15629716\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:15629716</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li></ul>"
+                }
+            },
+            {
+                "id": 15,
+                "s": 5,
+                "t": 0,
+                "v": {
+                    "name": "indirectly positively regulates",
+                    "represents": "RO:0002409",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://purl.obolibrary.org/obo/go/references/0000003\" target=\"_blank\" rel=\"noopener noreferrer\">GO_REF:0000003</a> (evidence used in automatic assertion) with/from <a href=\"None\" target=\"_blank\" rel=\"noopener noreferrer\">EC:2.7.11.1</a></li><li><a href=\"http://purl.obolibrary.org/obo/go/references/0000003\" target=\"_blank\" rel=\"noopener noreferrer\">GO_REF:0000003</a> (evidence used in automatic assertion) with/from <a href=\"None\" target=\"_blank\" rel=\"noopener noreferrer\">EC:2.7.11.1</a></li><li><a href=\"http://identifiers.org/pubmed/15629716\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:15629716</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/15629716\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:15629716</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/15629716\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:15629716</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/15629716\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:15629716</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li></ul>"
+                }
+            },
+            {
+                "id": 16,
+                "s": 5,
+                "t": 10,
+                "v": {
+                    "name": "provides input for",
+                    "represents": "RO:0002413",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://purl.obolibrary.org/obo/go/references/0000003\" target=\"_blank\" rel=\"noopener noreferrer\">GO_REF:0000003</a> (evidence used in automatic assertion) with/from <a href=\"None\" target=\"_blank\" rel=\"noopener noreferrer\">EC:2.7.11.1</a></li><li><a href=\"http://identifiers.org/pubmed/15629716\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:15629716</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/15629716\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:15629716</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/18272791\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:18272791</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://purl.obolibrary.org/obo/go/references/0000003\" target=\"_blank\" rel=\"noopener noreferrer\">GO_REF:0000003</a> (evidence used in automatic assertion) with/from <a href=\"None\" target=\"_blank\" rel=\"noopener noreferrer\">EC:2.7.11.1</a></li></ul>"
+                }
+            },
+            {
+                "id": 17,
+                "s": 6,
+                "t": 1,
+                "v": {
+                    "name": "directly positively regulates",
+                    "represents": "RO:0002629",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/10398679\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10398679</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/12181336\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:12181336</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/7501024\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:7501024</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/7657164\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:7657164</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9321395\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9321395</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9585506\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9585506</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9693384\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9693384</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9718372\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9718372</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/10398679\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10398679</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/10398679\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10398679</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/7501024\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:7501024</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9321395\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9321395</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9321395\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9321395</a> (direct assay evidence used in manual assertion)</li></ul>"
+                }
+            },
+            {
+                "id": 18,
+                "s": 6,
+                "t": 1,
+                "v": {
+                    "name": "directly positively regulates",
+                    "represents": "RO:0002629",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/10398679\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10398679</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/12181336\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:12181336</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/12181336\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:12181336</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/12181336\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:12181336</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/7501024\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:7501024</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/7501024\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:7501024</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/7657164\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:7657164</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/7657164\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:7657164</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/7657164\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:7657164</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9321395\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9321395</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9585506\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9585506</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9585506\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9585506</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9585506\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9585506</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9693384\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9693384</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9693384\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9693384</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9693384\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9693384</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9718372\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9718372</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9718372\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9718372</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9718372\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9718372</a> (direct assay evidence used in manual assertion)</li></ul>"
+                }
+            },
+            {
+                "id": 19,
+                "s": 6,
+                "t": 14,
+                "v": {
+                    "name": "constitutively upstream of",
+                    "represents": "RO:0012009",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/10398679\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10398679</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/10398679\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10398679</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/12181336\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:12181336</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/12181336\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:12181336</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/7501024\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:7501024</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/7501024\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:7501024</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/7657164\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:7657164</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9321395\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9321395</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/7657164\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:7657164</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9585506\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9585506</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9321395\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9321395</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9693384\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9693384</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9585506\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9585506</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9718372\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9718372</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9693384\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9693384</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/10398679\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10398679</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9718372\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9718372</a> (direct assay evidence used in manual assertion)</li></ul>"
+                }
+            },
+            {
+                "id": 20,
+                "s": 7,
+                "t": 6,
+                "v": {
+                    "name": "directly positively regulates",
+                    "represents": "RO:0002629",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/9718372\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9718372</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9718372\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9718372</a> (direct assay evidence used in manual assertion)</li></ul>"
+                }
+            },
+            {
+                "id": 21,
+                "s": 7,
+                "t": 6,
+                "v": {
+                    "name": "directly positively regulates",
+                    "represents": "RO:0002629",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/9718372\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9718372</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9718372\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9718372</a> (direct assay evidence used in manual assertion)</li></ul>"
+                }
+            },
+            {
+                "id": 22,
+                "s": 8,
+                "t": 15,
+                "v": {
+                    "name": "directly negatively regulates",
+                    "represents": "RO:0002630",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/7501024\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:7501024</a> (mutant phenotype evidence used in manual assertion)</li></ul>"
+                }
+            },
+            {
+                "id": 23,
+                "s": 8,
+                "t": 15,
+                "v": {
+                    "name": "directly negatively regulates",
+                    "represents": "RO:0002630",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/10398679\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10398679</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/7501024\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:7501024</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/10398679\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10398679</a> (direct assay evidence used in manual assertion)</li></ul>"
+                }
+            },
+            {
+                "id": 24,
+                "s": 9,
+                "t": 16,
+                "v": {
+                    "name": "directly positively regulates",
+                    "represents": "RO:0002629",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/11758939\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:11758939</a> (genetic interaction evidence used in manual assertion) with/from <a href=\"http://identifiers.org/pombase/SPBC725.02\" target=\"_blank\" rel=\"noopener noreferrer\">PomBase:SPBC725.02</a></li><li><a href=\"http://identifiers.org/pubmed/11758939\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:11758939</a> (genetic interaction evidence used in manual assertion) with/from <a href=\"http://identifiers.org/pombase/SPBC725.02\" target=\"_blank\" rel=\"noopener noreferrer\">PomBase:SPBC725.02</a></li><li><a href=\"http://identifiers.org/pubmed/11758939\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:11758939</a> (genetic interaction evidence used in manual assertion) with/from <a href=\"http://identifiers.org/pombase/SPBC725.02\" target=\"_blank\" rel=\"noopener noreferrer\">PomBase:SPBC725.02</a></li><li><a href=\"http://identifiers.org/pubmed/20919928\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:20919928</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/20919928\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:20919928</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/20919928\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:20919928</a> (experimental evidence used in manual assertion)</li></ul>"
+                }
+            },
+            {
+                "id": 25,
+                "s": 10,
+                "t": 11,
+                "v": {
+                    "name": "directly negatively regulates",
+                    "represents": "RO:0002630",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/15629716\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:15629716</a> (physical interaction evidence used in manual assertion) with/from <a href=\"http://identifiers.org/pombase/SPAC24H6.05\" target=\"_blank\" rel=\"noopener noreferrer\">PomBase:SPAC24H6.05</a></li></ul>"
+                }
+            },
+            {
+                "id": 26,
+                "s": 10,
+                "t": 11,
+                "v": {
+                    "name": "directly negatively regulates",
+                    "represents": "RO:0002630",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/15629716\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:15629716</a> (physical interaction evidence used in manual assertion) with/from <a href=\"http://identifiers.org/pombase/SPAC24H6.05\" target=\"_blank\" rel=\"noopener noreferrer\">PomBase:SPAC24H6.05</a></li></ul>"
+                }
+            },
+            {
+                "id": 27,
+                "s": 11,
+                "t": 0,
+                "v": {
+                    "name": "directly positively regulates",
+                    "represents": "RO:0002629",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/1464318\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:1464318</a> (direct assay evidence used in manual assertion)</li></ul>"
+                }
+            },
+            {
+                "id": 28,
+                "s": 11,
+                "t": 0,
+                "v": {
+                    "name": "directly positively regulates",
+                    "represents": "RO:0002629",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/1464318\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:1464318</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/1703321\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:1703321</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/1756737\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:1756737</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/1819507\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:1819507</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9042863\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9042863</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/1464318\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:1464318</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/1464318\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:1464318</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/1703321\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:1703321</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/1703321\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:1703321</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/1703321\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:1703321</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/1756737\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:1756737</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/1756737\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:1756737</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/1756737\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:1756737</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/1819507\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:1819507</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/1819507\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:1819507</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/1819507\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:1819507</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9042863\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9042863</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9042863\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9042863</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/9042863\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9042863</a> (mutant phenotype evidence used in manual assertion)</li></ul>"
+                }
+            },
+            {
+                "id": 29,
+                "s": 12,
+                "t": 16,
+                "v": {
+                    "name": "directly positively regulates",
+                    "represents": "RO:0002629",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/17559414\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:17559414</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/20919928\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:20919928</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/17559414\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:17559414</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/17559414\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:17559414</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/20919928\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:20919928</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/20919928\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:20919928</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/17559414\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:17559414</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/20919928\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:20919928</a> (experimental evidence used in manual assertion)</li></ul>"
+                }
+            },
+            {
+                "id": 30,
+                "s": 12,
+                "t": 3,
+                "v": {
+                    "name": "directly positively regulates",
+                    "represents": "RO:0002629",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/20919928\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:20919928</a> (experimental evidence used in manual assertion)</li></ul>"
+                }
+            },
+            {
+                "id": 31,
+                "s": 12,
+                "t": 3,
+                "v": {
+                    "name": "directly positively regulates",
+                    "represents": "RO:0002629",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/17559414\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:17559414</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/20919928\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:20919928</a> (experimental evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/17559414\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:17559414</a> (direct assay evidence used in manual assertion)</li></ul>"
+                }
+            },
+            {
+                "id": 32,
+                "s": 12,
+                "t": 16,
+                "v": {
+                    "name": "directly positively regulates",
+                    "represents": "RO:0002629"
+                }
+            },
+            {
+                "id": 33,
+                "s": 13,
+                "t": 15,
+                "v": {
+                    "name": "directly negatively regulates",
+                    "represents": "RO:0002630"
+                }
+            },
+            {
+                "id": 34,
+                "s": 14,
+                "t": 1,
+                "v": {
+                    "name": "constitutively upstream of",
+                    "represents": "RO:0012009"
+                }
+            },
+            {
+                "id": 35,
+                "s": 17,
+                "t": 15,
+                "v": {
+                    "name": "directly negatively regulates",
+                    "represents": "RO:0002630"
+                }
+            },
+            {
+                "id": 36,
+                "s": 17,
+                "t": 15,
+                "v": {
+                    "name": "directly negatively regulates",
+                    "represents": "RO:0002630",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/10398679\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10398679</a> (direct assay evidence used in manual assertion)</li></ul>"
+                }
+            },
+            {
+                "id": 37,
+                "s": 17,
+                "t": 15,
+                "v": {
+                    "name": "directly negatively regulates",
+                    "represents": "RO:0002630",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/10398679\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10398679</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/10398679\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10398679</a> (direct assay evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/10398679\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:10398679</a> (direct assay evidence used in manual assertion)</li></ul>"
+                }
+            },
+            {
+                "id": 38,
+                "s": 18,
+                "t": 6,
+                "v": {
+                    "name": "directly positively regulates",
+                    "represents": "RO:0002629",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/9693384\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9693384</a> (direct assay evidence used in manual assertion)</li></ul>"
+                }
+            },
+            {
+                "id": 39,
+                "s": 18,
+                "t": 6,
+                "v": {
+                    "name": "directly positively regulates",
+                    "represents": "RO:0002629",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/9693384\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:9693384</a> (direct assay evidence used in manual assertion)</li></ul>"
+                }
+            },
+            {
+                "id": 40,
+                "s": 19,
+                "t": 15,
+                "v": {
+                    "name": "directly negatively regulates",
+                    "represents": "RO:0002630",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/8649397\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:8649397</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/7657164\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:7657164</a> (direct assay evidence used in manual assertion)</li></ul>"
+                }
+            },
+            {
+                "id": 41,
+                "s": 19,
+                "t": 15,
+                "v": {
+                    "name": "directly negatively regulates",
+                    "represents": "RO:0002630",
+                    "Evidence": "<ul style=\"padding-inline-start: 1rem\"><li><a href=\"http://identifiers.org/pubmed/8649397\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:8649397</a> (mutant phenotype evidence used in manual assertion)</li><li><a href=\"http://identifiers.org/pubmed/7657164\" target=\"_blank\" rel=\"noopener noreferrer\">PMID:7657164</a> (direct assay evidence used in manual assertion)</li></ul>"
+                }
+            }
+        ]
+    },
+    {
+        "visualProperties": [
+            {
+                "default": {
+                    "edge": {
+                        "EDGE_CURVED": true,
+                        "EDGE_LABEL_AUTOROTATE": false,
+                        "EDGE_LABEL_BACKGROUND_COLOR": "#FFFFFF",
+                        "EDGE_LABEL_BACKGROUND_OPACITY": 1,
+                        "EDGE_LABEL_BACKGROUND_SHAPE": "rectangle",
+                        "EDGE_LABEL_COLOR": "#000000",
+                        "EDGE_LABEL_FONT_FACE": {
+                            "FONT_FAMILY": "sans-serif",
+                            "FONT_NAME": "Dialog",
+                            "FONT_STYLE": "normal",
+                            "FONT_WEIGHT": "normal"
+                        },
+                        "EDGE_LABEL_FONT_SIZE": 10,
+                        "EDGE_LABEL_MAX_WIDTH": 200,
+                        "EDGE_LABEL_OPACITY": 1,
+                        "EDGE_LABEL_POSITION": {
+                            "EDGE_ANCHOR": "C",
+                            "JUSTIFICATION": "center",
+                            "LABEL_ANCHOR": "C",
+                            "MARGIN_X": 0,
+                            "MARGIN_Y": 0
+                        },
+                        "EDGE_LABEL_ROTATION": 0,
+                        "EDGE_LINE_COLOR": "#848484",
+                        "EDGE_LINE_STYLE": "solid",
+                        "EDGE_OPACITY": 1,
+                        "EDGE_SELECTED": "false",
+                        "EDGE_SELECTED_PAINT": "#FFFF00",
+                        "EDGE_SOURCE_ARROW_COLOR": "#000000",
+                        "EDGE_SOURCE_ARROW_SELECTED_PAINT": "#FFFF00",
+                        "EDGE_SOURCE_ARROW_SHAPE": "none",
+                        "EDGE_SOURCE_ARROW_SIZE": 6,
+                        "EDGE_STACKING": "AUTO_BEND",
+                        "EDGE_STACKING_DENSITY": 0.5,
+                        "EDGE_STROKE_SELECTED_PAINT": "#FFFF00",
+                        "EDGE_TARGET_ARROW_COLOR": "#000000",
+                        "EDGE_TARGET_ARROW_SELECTED_PAINT": "#FFFF00",
+                        "EDGE_TARGET_ARROW_SHAPE": "none",
+                        "EDGE_TARGET_ARROW_SIZE": 6,
+                        "EDGE_VISIBILITY": "element",
+                        "EDGE_WIDTH": 2,
+                        "EDGE_Z_ORDER": 0
+                    },
+                    "network": {
+                        "NETWORK_BACKGROUND_COLOR": "#FFFFFF"
+                    },
+                    "node": {
+                        "COMPOUND_NODE_PADDING": "10.0",
+                        "COMPOUND_NODE_SHAPE": "ROUND_RECTANGLE",
+                        "NODE_BACKGROUND_COLOR": "#FFFFFF",
+                        "NODE_BACKGROUND_OPACITY": 1,
+                        "NODE_BORDER_COLOR": "#CCCCCC",
+                        "NODE_BORDER_OPACITY": 1,
+                        "NODE_BORDER_STYLE": "solid",
+                        "NODE_BORDER_WIDTH": 1,
+                        "NODE_CUSTOMGRAPHICS_POSITION_1": {
+                            "ENTITY_ANCHOR": "C",
+                            "GRAPHICS_ANCHOR": "C",
+                            "JUSTIFICATION": "center",
+                            "MARGIN_X": 0,
+                            "MARGIN_Y": 0
+                        },
+                        "NODE_CUSTOMGRAPHICS_POSITION_2": {
+                            "ENTITY_ANCHOR": "C",
+                            "GRAPHICS_ANCHOR": "C",
+                            "JUSTIFICATION": "center",
+                            "MARGIN_X": 0,
+                            "MARGIN_Y": 0
+                        },
+                        "NODE_CUSTOMGRAPHICS_POSITION_3": {
+                            "ENTITY_ANCHOR": "C",
+                            "GRAPHICS_ANCHOR": "C",
+                            "JUSTIFICATION": "center",
+                            "MARGIN_X": 0,
+                            "MARGIN_Y": 0
+                        },
+                        "NODE_CUSTOMGRAPHICS_POSITION_4": {
+                            "ENTITY_ANCHOR": "C",
+                            "GRAPHICS_ANCHOR": "C",
+                            "JUSTIFICATION": "center",
+                            "MARGIN_X": 0,
+                            "MARGIN_Y": 0
+                        },
+                        "NODE_CUSTOMGRAPHICS_POSITION_5": {
+                            "ENTITY_ANCHOR": "C",
+                            "GRAPHICS_ANCHOR": "C",
+                            "JUSTIFICATION": "center",
+                            "MARGIN_X": 0,
+                            "MARGIN_Y": 0
+                        },
+                        "NODE_CUSTOMGRAPHICS_POSITION_6": {
+                            "ENTITY_ANCHOR": "C",
+                            "GRAPHICS_ANCHOR": "C",
+                            "JUSTIFICATION": "center",
+                            "MARGIN_X": 0,
+                            "MARGIN_Y": 0
+                        },
+                        "NODE_CUSTOMGRAPHICS_POSITION_7": {
+                            "ENTITY_ANCHOR": "C",
+                            "GRAPHICS_ANCHOR": "C",
+                            "JUSTIFICATION": "center",
+                            "MARGIN_X": 0,
+                            "MARGIN_Y": 0
+                        },
+                        "NODE_CUSTOMGRAPHICS_POSITION_8": {
+                            "ENTITY_ANCHOR": "C",
+                            "GRAPHICS_ANCHOR": "C",
+                            "JUSTIFICATION": "center",
+                            "MARGIN_X": 0,
+                            "MARGIN_Y": 0
+                        },
+                        "NODE_CUSTOMGRAPHICS_POSITION_9": {
+                            "ENTITY_ANCHOR": "C",
+                            "GRAPHICS_ANCHOR": "C",
+                            "JUSTIFICATION": "center",
+                            "MARGIN_X": 0,
+                            "MARGIN_Y": 0
+                        },
+                        "NODE_CUSTOMGRAPHICS_SIZE_1": 50,
+                        "NODE_CUSTOMGRAPHICS_SIZE_2": 50,
+                        "NODE_CUSTOMGRAPHICS_SIZE_3": 50,
+                        "NODE_CUSTOMGRAPHICS_SIZE_4": 50,
+                        "NODE_CUSTOMGRAPHICS_SIZE_5": 50,
+                        "NODE_CUSTOMGRAPHICS_SIZE_6": 50,
+                        "NODE_CUSTOMGRAPHICS_SIZE_7": 50,
+                        "NODE_CUSTOMGRAPHICS_SIZE_8": 50,
+                        "NODE_CUSTOMGRAPHICS_SIZE_9": 50,
+                        "NODE_HEIGHT": 35,
+                        "NODE_LABEL_BACKGROUND_COLOR": "#B6B6B6",
+                        "NODE_LABEL_BACKGROUND_OPACITY": 1,
+                        "NODE_LABEL_BACKGROUND_SHAPE": "none",
+                        "NODE_LABEL_COLOR": "#000000",
+                        "NODE_LABEL_FONT_FACE": {
+                            "FONT_FAMILY": "sans-serif",
+                            "FONT_NAME": "SansSerif",
+                            "FONT_STYLE": "normal",
+                            "FONT_WEIGHT": "normal"
+                        },
+                        "NODE_LABEL_FONT_SIZE": 12,
+                        "NODE_LABEL_MAX_WIDTH": 200,
+                        "NODE_LABEL_OPACITY": 1,
+                        "NODE_LABEL_POSITION": {
+                            "HORIZONTAL_ALIGN": "center",
+                            "HORIZONTAL_ANCHOR": "center",
+                            "JUSTIFICATION": "center",
+                            "MARGIN_X": 0,
+                            "MARGIN_Y": 0,
+                            "VERTICAL_ALIGN": "center",
+                            "VERTICAL_ANCHOR": "center"
+                        },
+                        "NODE_LABEL_ROTATION": 0,
+                        "NODE_SELECTED": false,
+                        "NODE_SELECTED_PAINT": "#FFFF00",
+                        "NODE_SHAPE": "round-rectangle",
+                        "NODE_VISIBILITY": "element",
+                        "NODE_WIDTH": 75,
+                        "NODE_X_LOCATION": 0,
+                        "NODE_Y_LOCATION": 0,
+                        "NODE_Z_LOCATION": 0
+                    }
+                },
+                "edgeMapping": {
+                    "EDGE_LINE_COLOR": {
+                        "type": "DISCRETE",
+                        "definition": {
+                            "attribute": "represents",
+                            "map": [
+                                {
+                                    "v": "RO:0002304",
+                                    "vp": "#95e095"
+                                },
+                                {
+                                    "v": "RO:0002305",
+                                    "vp": "#fF9999"
+                                },
+                                {
+                                    "v": "RO:0012009",
+                                    "vp": "#95e095"
+                                },
+                                {
+                                    "v": "RO:0002630",
+                                    "vp": "#FF0000"
+                                },
+                                {
+                                    "v": "RO:0002629",
+                                    "vp": "#008800"
+                                },
+                                {
+                                    "v": "RO:0002233",
+                                    "vp": "#6495ED"
+                                },
+                                {
+                                    "v": "RO:0002234",
+                                    "vp": "#ED6495"
+                                },
+                                {
+                                    "v": "RO:0002407",
+                                    "vp": "#FF0000"
+                                },
+                                {
+                                    "v": "RO:0002409",
+                                    "vp": "#008800"
+                                },
+                                {
+                                    "v": "RO:0012006",
+                                    "vp": "#FF0000"
+                                },
+                                {
+                                    "v": "RO:0012005",
+                                    "vp": "#008800"
+                                },
+                                {
+                                    "v": "RO:0002212",
+                                    "vp": "#FF0000"
+                                },
+                                {
+                                    "v": "RO:0002213",
+                                    "vp": "#008800"
+                                },
+                                {
+                                    "v": "RO:0002413",
+                                    "vp": "#800080"
+                                },
+                                {
+                                    "v": "RO:0012010",
+                                    "vp": "#fF9999"
+                                }
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "EDGE_LINE_STYLE": {
+                        "type": "DISCRETE",
+                        "definition": {
+                            "attribute": "represents",
+                            "map": [
+                                {
+                                    "v": "RO:0002304",
+                                    "vp": "dashed"
+                                },
+                                {
+                                    "v": "RO:0002305",
+                                    "vp": "dashed"
+                                },
+                                {
+                                    "v": "RO:0012009",
+                                    "vp": "dashed"
+                                },
+                                {
+                                    "v": "RO:0002630",
+                                    "vp": "solid"
+                                },
+                                {
+                                    "v": "RO:0002629",
+                                    "vp": "solid"
+                                },
+                                {
+                                    "v": "RO:0002233",
+                                    "vp": "solid"
+                                },
+                                {
+                                    "v": "RO:0002234",
+                                    "vp": "solid"
+                                },
+                                {
+                                    "v": "RO:0002407",
+                                    "vp": "dashed"
+                                },
+                                {
+                                    "v": "RO:0002409",
+                                    "vp": "dashed"
+                                },
+                                {
+                                    "v": "RO:0012006",
+                                    "vp": "solid"
+                                },
+                                {
+                                    "v": "RO:0012005",
+                                    "vp": "solid"
+                                },
+                                {
+                                    "v": "RO:0002212",
+                                    "vp": "dashed"
+                                },
+                                {
+                                    "v": "RO:0002213",
+                                    "vp": "dashed"
+                                },
+                                {
+                                    "v": "RO:0002413",
+                                    "vp": "solid"
+                                },
+                                {
+                                    "v": "RO:0012010",
+                                    "vp": "solid"
+                                }
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "EDGE_TARGET_ARROW_COLOR": {
+                        "type": "DISCRETE",
+                        "definition": {
+                            "attribute": "represents",
+                            "map": [
+                                {
+                                    "v": "RO:0002304",
+                                    "vp": "#95e095"
+                                },
+                                {
+                                    "v": "RO:0002305",
+                                    "vp": "#fF9999"
+                                },
+                                {
+                                    "v": "RO:0012009",
+                                    "vp": "#95e095"
+                                },
+                                {
+                                    "v": "RO:0002630",
+                                    "vp": "#FF0000"
+                                },
+                                {
+                                    "v": "RO:0002629",
+                                    "vp": "#008800"
+                                },
+                                {
+                                    "v": "RO:0002233",
+                                    "vp": "#6495ED"
+                                },
+                                {
+                                    "v": "RO:0002234",
+                                    "vp": "#ED6495"
+                                },
+                                {
+                                    "v": "RO:0002407",
+                                    "vp": "#FF0000"
+                                },
+                                {
+                                    "v": "RO:0002409",
+                                    "vp": "#008800"
+                                },
+                                {
+                                    "v": "RO:0012006",
+                                    "vp": "#FF0000"
+                                },
+                                {
+                                    "v": "RO:0012005",
+                                    "vp": "#008800"
+                                },
+                                {
+                                    "v": "RO:0002212",
+                                    "vp": "#FF0000"
+                                },
+                                {
+                                    "v": "RO:0002213",
+                                    "vp": "#008800"
+                                },
+                                {
+                                    "v": "RO:0002413",
+                                    "vp": "#800080"
+                                },
+                                {
+                                    "v": "RO:0012010",
+                                    "vp": "#fF9999"
+                                }
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "EDGE_TARGET_ARROW_SHAPE": {
+                        "type": "DISCRETE",
+                        "definition": {
+                            "attribute": "represents",
+                            "map": [
+                                {
+                                    "v": "RO:0002304",
+                                    "vp": "triangle"
+                                },
+                                {
+                                    "v": "RO:0002305",
+                                    "vp": "tee"
+                                },
+                                {
+                                    "v": "RO:0012009",
+                                    "vp": "circle"
+                                },
+                                {
+                                    "v": "RO:0002630",
+                                    "vp": "tee"
+                                },
+                                {
+                                    "v": "RO:0002629",
+                                    "vp": "triangle"
+                                },
+                                {
+                                    "v": "RO:0002233",
+                                    "vp": "circle"
+                                },
+                                {
+                                    "v": "RO:0002234",
+                                    "vp": "circle"
+                                },
+                                {
+                                    "v": "RO:0002407",
+                                    "vp": "tee"
+                                },
+                                {
+                                    "v": "RO:0002409",
+                                    "vp": "triangle"
+                                },
+                                {
+                                    "v": "RO:0012006",
+                                    "vp": "tee"
+                                },
+                                {
+                                    "v": "RO:0012005",
+                                    "vp": "triangle"
+                                },
+                                {
+                                    "v": "RO:0002212",
+                                    "vp": "tee"
+                                },
+                                {
+                                    "v": "RO:0002213",
+                                    "vp": "triangle"
+                                },
+                                {
+                                    "v": "RO:0002413",
+                                    "vp": "circle"
+                                },
+                                {
+                                    "v": "RO:0012010",
+                                    "vp": "square"
+                                }
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "EDGE_WIDTH": {
+                        "type": "DISCRETE",
+                        "definition": {
+                            "attribute": "represents",
+                            "map": [
+                                {
+                                    "v": "RO:0002304",
+                                    "vp": 5
+                                },
+                                {
+                                    "v": "RO:0002305",
+                                    "vp": 5
+                                },
+                                {
+                                    "v": "RO:0012009",
+                                    "vp": 5
+                                },
+                                {
+                                    "v": "RO:0002630",
+                                    "vp": 5
+                                },
+                                {
+                                    "v": "RO:0002629",
+                                    "vp": 5
+                                },
+                                {
+                                    "v": "RO:0002233",
+                                    "vp": 5
+                                },
+                                {
+                                    "v": "RO:0002234",
+                                    "vp": 5
+                                },
+                                {
+                                    "v": "RO:0002407",
+                                    "vp": 5
+                                },
+                                {
+                                    "v": "RO:0002409",
+                                    "vp": 5
+                                },
+                                {
+                                    "v": "RO:0012006",
+                                    "vp": 5
+                                },
+                                {
+                                    "v": "RO:0012005",
+                                    "vp": 5
+                                },
+                                {
+                                    "v": "RO:0002212",
+                                    "vp": 5
+                                },
+                                {
+                                    "v": "RO:0002213",
+                                    "vp": 5
+                                },
+                                {
+                                    "v": "RO:0002413",
+                                    "vp": 5
+                                },
+                                {
+                                    "v": "RO:0012010",
+                                    "vp": 5
+                                }
+                            ],
+                            "type": "integer"
+                        }
+                    }
+                },
+                "nodeMapping": {
+                    "NODE_BACKGROUND_COLOR": {
+                        "type": "DISCRETE",
+                        "definition": {
+                            "attribute": "type",
+                            "map": [
+                                {
+                                    "v": "gene",
+                                    "vp": "#C8E6C9"
+                                },
+                                {
+                                    "v": "complex",
+                                    "vp": "#E2BDE7"
+                                },
+                                {
+                                    "v": "molecule",
+                                    "vp": "#B2DFDB"
+                                }
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "NODE_HEIGHT": {
+                        "type": "DISCRETE",
+                        "definition": {
+                            "attribute": "type",
+                            "map": [
+                                {
+                                    "v": "gene",
+                                    "vp": 40
+                                },
+                                {
+                                    "v": "complex",
+                                    "vp": 70
+                                },
+                                {
+                                    "v": "molecule",
+                                    "vp": 40
+                                }
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "NODE_LABEL": {
+                        "type": "PASSTHROUGH",
+                        "definition": {
+                            "attribute": "name",
+                            "type": "string"
+                        }
+                    },
+                    "NODE_LABEL_FONT_SIZE": {
+                        "type": "DISCRETE",
+                        "definition": {
+                            "attribute": "type",
+                            "map": [
+                                {
+                                    "v": "gene",
+                                    "vp": 12
+                                },
+                                {
+                                    "v": "complex",
+                                    "vp": 15
+                                },
+                                {
+                                    "v": "molecule",
+                                    "vp": 10
+                                }
+                            ],
+                            "type": "integer"
+                        }
+                    },
+                    "NODE_LABEL_MAX_WIDTH": {
+                        "type": "DISCRETE",
+                        "definition": {
+                            "attribute": "type",
+                            "map": [
+                                {
+                                    "v": "gene",
+                                    "vp": 80
+                                },
+                                {
+                                    "v": "complex",
+                                    "vp": 100
+                                },
+                                {
+                                    "v": "molecule",
+                                    "vp": 70
+                                }
+                            ],
+                            "type": "integer"
+                        }
+                    },
+                    "NODE_SHAPE": {
+                        "type": "DISCRETE",
+                        "definition": {
+                            "attribute": "type",
+                            "map": [
+                                {
+                                    "v": "gene",
+                                    "vp": "rectangle"
+                                },
+                                {
+                                    "v": "complex",
+                                    "vp": "rectangle"
+                                },
+                                {
+                                    "v": "molecule",
+                                    "vp": "ellipse"
+                                }
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "NODE_WIDTH": {
+                        "type": "DISCRETE",
+                        "definition": {
+                            "attribute": "type",
+                            "map": [
+                                {
+                                    "v": "gene",
+                                    "vp": 85
+                                },
+                                {
+                                    "v": "complex",
+                                    "vp": 110
+                                },
+                                {
+                                    "v": "molecule",
+                                    "vp": 70
+                                }
+                            ],
+                            "type": "integer"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "visualEditorProperties": [
+            {
+                "properties": {
+                    "nodeSizeLocked": false,
+                    "arrowColorMatchesEdge": false,
+                    "nodeCustomGraphicsSizeSync": true
+                }
+            }
+        ]
+    },
+    {
+        "status": [
+            {
+                "error": "",
+                "success": true
+            }
+        ]
+    }
+]
