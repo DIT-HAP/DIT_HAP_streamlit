@@ -2,10 +2,11 @@
 import streamlit as st
 import sys
 from pathlib import Path
-
+import streamlit.components.v1 as components
 sys.path.append(str(Path(__file__).parent.parent / "src"))
 from src.network_functions import (
     load_all_gocam_models,
+    load_all_gocam_models_cx2,
     convert_cx2_json_to_cytoscape_elements,
     node_color_mapping_panel,
     layout_algorithm_panel,
@@ -26,6 +27,7 @@ st.set_page_config(
 
 # ================================ Configs =================================
 GO_CAM_DATA_DIR = Path(__file__).parent.parent / "data" / "resource" / "pombe_gocam"
+GO_CAM_CX2_DATA_DIR = Path(__file__).parent.parent / "data" / "resource" / "pombe_gocam_cx2"
 
 # =============================== Constants ================================
 MODEL_STATES = {
@@ -168,10 +170,11 @@ def display_model_information(
     st.header("Model Information", divider="gray")
     selected_model_title = str(st.selectbox("Select a GO-CAM Model", list(gocam_models.keys())))
     selected_model = gocam_models[selected_model_title]
-    col1, col2, col3 = st.columns(3)
-    col1.markdown(f":material/barcode_scanner: **Model ID**\n\n{gocam_models[selected_model_title]['id']}")
-    col2.markdown(f":material/fact_check: **Status** {MODEL_STATES.get(gocam_models[selected_model_title]['status'], gocam_models[selected_model_title]['status'])}")
-    col3.markdown(f":material/calendar_month: **Date**\n\n{gocam_models[selected_model_title]['date']}")
+    st.markdown(f":material/barcode_scanner: **Model ID**\n\n{gocam_models[selected_model_title]['id']}")
+    # col1, col2, col3 = st.columns(3)
+    # col1.markdown(f":material/barcode_scanner: **Model ID**\n\n{gocam_models[selected_model_title]['id']}")
+    # col2.markdown(f":material/fact_check: **Status** {MODEL_STATES.get(gocam_models[selected_model_title]['status'], gocam_models[selected_model_title]['status'])}")
+    # col3.markdown(f":material/calendar_month: **Date**\n\n{gocam_models[selected_model_title]['date']}")
 
     return selected_model_title, selected_model
 
@@ -203,7 +206,8 @@ def main():
 
     # with st.spinner("Loading GO-CAM models..."):
     with st.spinner():
-        gocam_models = load_all_gocam_models(GO_CAM_DATA_DIR)
+        # gocam_models = load_all_gocam_models(GO_CAM_DATA_DIR)
+        gocam_models = load_all_gocam_models_cx2(GO_CAM_CX2_DATA_DIR)
     
     with st.sidebar.expander(":material/brush: Node style settings", expanded=False):
         fill_feature, border_feature, label_feature = node_color_mapping_panel()
@@ -226,7 +230,7 @@ def main():
         
         if selected_model:
             with st.spinner("Converting model to network elements..."):
-                cx2_data = selected_model.get('cx2_network', [])
+                cx2_data = selected_model.get('json', [])
                 cytoscape_elements, elements_dict, positions = convert_cx2_json_to_cytoscape_elements(cx2_data, pathway_type="go-cam")
                 layout_config = get_layout_config(positions, layout_type=layout_type, ranker=ranker)
             if cytoscape_elements:
@@ -239,12 +243,18 @@ def main():
             else:
                 raise ValueError("No cytoscape elements generated from the selected model.")
             with st.container(border=True):
-                st.markdown(f"<h2 style='text-align: center;'>{gocam_models[selected_model_title]['title']}</h2>", unsafe_allow_html=True)
-                selected_objects = display_network(
-                    cytoscape_elements, 
-                    stylesheet=custom_stylesheet,
-                    layout_config=layout_config
-                )
+                network_tab, visualization_tab = st.tabs(["Network Visualization", "Visualization by Aim2GO"])
+                with network_tab:
+                    st.markdown(f"<h2 style='text-align: center;'>{gocam_models[selected_model_title]['title']}</h2>", unsafe_allow_html=True)
+                    selected_objects = display_network(
+                        cytoscape_elements, 
+                        stylesheet=custom_stylesheet,
+                        layout_config=layout_config
+                    )
+                with visualization_tab:
+                    url = selected_model.get('url', '')
+                    if url:
+                        components.iframe(url, height=600)
             with detail_col:
                 with st.expander(":material/left_click: Selected Object", expanded=True):
                     display_selected_object(selected_objects, elements_dict)
@@ -252,6 +262,94 @@ def main():
             st.warning("No model selected.")
             cytoscape_elements = []
             elements_dict = {}
+    
+    # # ================================ Cytoscape.js Visualization ================================
+    # st.divider()
+    # st.header(":material/hub: Cytoscape.js Network Visualization", divider="gray")
+    # st.markdown("""
+    # This section demonstrates **native Cytoscape.js visualization** using CDN-loaded library to render network data from JSON file.
+    # """)
+    
+    # # Load JSON data
+    # json_file_path = Path(__file__).parent.parent / "data" / "resource" / "cytoscape_data.json"
+    
+    # if json_file_path.exists():
+    #     import json
+    #     with open(json_file_path, 'r') as f:
+    #         cytoscape_data = json.load(f)
+        
+    #     # Convert Python dict to JavaScript object string
+    #     cytoscape_data_json = json.dumps(cytoscape_data)
+        
+    #     # Create HTML with Cytoscape.js
+    #     html_code = f"""
+    #     <!DOCTYPE html>
+    #     <html>
+    #     <head>
+    #         <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.28.1/cytoscape.min.js"></script>
+    #         <style>
+    #             #cy {{
+    #                 width: 100%;
+    #                 height: 600px;
+    #                 border: 1px solid #ddd;
+    #                 border-radius: 5px;
+    #             }}
+    #         </style>
+    #     </head>
+    #     <body>
+    #         <div id="cy"></div>
+    #         <script>
+    #             var cy = cytoscape({{
+    #                 container: document.getElementById('cy'),
+    #                 elements: {cytoscape_data_json},
+    #                 style: [
+    #                     {{
+    #                         selector: 'node',
+    #                         style: {{
+    #                             'background-color': '#666',
+    #                             'label': 'data(display_label)',
+    #                             'text-valign': 'center',
+    #                             'text-halign': 'center',
+    #                             'font-size': '12px',
+    #                             'width': '40px',
+    #                             'height': '40px'
+    #                         }}
+    #                     }},
+    #                     {{
+    #                         selector: 'edge',
+    #                         style: {{
+    #                             'width': 2,
+    #                             'line-color': '#ccc',
+    #                             'target-arrow-color': '#ccc',
+    #                             'target-arrow-shape': 'triangle',
+    #                             'curve-style': 'bezier'
+    #                         }}
+    #                     }}
+    #                 ],
+    #                 layout: {{
+    #                     name: 'cose',
+    #                     animate: true,
+    #                     animationDuration: 500,
+    #                     nodeRepulsion: 400000,
+    #                     idealEdgeLength: 100
+    #                 }}
+    #             }});
+                
+    #             // Add click event listener
+    #             cy.on('tap', 'node', function(evt){{
+    #                 var node = evt.target;
+    #                 console.log('Clicked node:', node.id());
+    #                 alert('Clicked node: ' + node.data('display_label'));
+    #             }});
+    #         </script>
+    #     </body>
+    #     </html>
+    #     """
+        
+    #     with st.container(border=True):
+    #         components.html(html_code, height=650)
+    # else:
+    #     st.error(f"JSON file not found: {json_file_path}")
         
 if __name__ == "__main__":
     main()
