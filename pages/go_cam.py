@@ -170,7 +170,9 @@ def display_model_information(
     st.header("Model Information", divider="gray")
     selected_model_title = str(st.selectbox("Select a GO-CAM Model", list(gocam_models.keys())))
     selected_model = gocam_models[selected_model_title]
-    st.markdown(f":material/barcode_scanner: **Model ID**\n\n{gocam_models[selected_model_title]['id']}")
+    col1, col2 = st.columns([1, 2])
+    col1.markdown(f":material/barcode_scanner: **Model ID**\n\n{selected_model['id']}")
+    col2.markdown(f":material/link: **Visualized on Aim2GO**\n\n[View on Aim2GO]({selected_model['url']})")
     # col1, col2, col3 = st.columns(3)
     # col1.markdown(f":material/barcode_scanner: **Model ID**\n\n{gocam_models[selected_model_title]['id']}")
     # col2.markdown(f":material/fact_check: **Status** {MODEL_STATES.get(gocam_models[selected_model_title]['status'], gocam_models[selected_model_title]['status'])}")
@@ -243,18 +245,12 @@ def main():
             else:
                 raise ValueError("No cytoscape elements generated from the selected model.")
             with st.container(border=True):
-                network_tab, visualization_tab = st.tabs(["Network Visualization", "Visualization by Aim2GO"])
-                with network_tab:
-                    st.markdown(f"<h2 style='text-align: center;'>{gocam_models[selected_model_title]['title']}</h2>", unsafe_allow_html=True)
-                    selected_objects = display_network(
-                        cytoscape_elements, 
-                        stylesheet=custom_stylesheet,
-                        layout_config=layout_config
-                    )
-                with visualization_tab:
-                    url = selected_model.get('url', '')
-                    if url:
-                        components.iframe(url, height=600)
+                st.markdown(f"<h2 style='text-align: center;'>{gocam_models[selected_model_title]['title']}</h2>", unsafe_allow_html=True)
+                selected_objects = display_network(
+                    cytoscape_elements, 
+                    stylesheet=custom_stylesheet,
+                    layout_config=layout_config
+                )
             with detail_col:
                 with st.expander(":material/left_click: Selected Object", expanded=True):
                     display_selected_object(selected_objects, elements_dict)
