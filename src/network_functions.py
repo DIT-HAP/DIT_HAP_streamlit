@@ -224,6 +224,28 @@ def load_all_gocam_models(directory_path: Path) -> dict[str, dict]:
     models = dict(sorted(models.items()))
     return models
 
+@st.cache_resource
+def load_all_gocam_models_cx2(directory_path: Path) -> dict[str, dict]:
+    """Load all GO-CAM models from a specified directory."""
+    models = {}
+    files = list(directory_path.glob('*.cx2'))
+    for file in stqdm(files, desc="\nLoading GO-CAM models", st_container=st.container()):
+        with open(file, 'r') as f:
+            cx2_json = json.load(f)
+            model_meta = cx2_json[3]["networkAttributes"][0]
+            model_meta["name"] = model_meta["name"].strip()
+            model_name = model_meta["name"]
+            models[model_name] = {
+                "id": model_meta.get("labels", ["Unknown"])[0],
+                "title": model_meta.get("name", "Unknown"),
+                "url": model_meta.get("prov:wasDerivedFrom", "Unknown"),
+                "json": cx2_json
+            }
+
+    # sort by keys
+    models = dict(sorted(models.items()))
+    return models
+
 @st.cache_data
 def load_all_kegg_pathways(directory_path: Path) -> dict[str, list]:
     """Load all KEGG CX2 pathway files from a specified directory."""
