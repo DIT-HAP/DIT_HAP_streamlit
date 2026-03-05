@@ -128,6 +128,169 @@ def sidebar_gene_input(gene_info_with_essentiality: pd.DataFrame, gene_level_LFC
 
     return covered_gene_sysIDs, submit_button
 
+
+def sidebar_gene_group_input(
+    gene_info_with_essentiality: pd.DataFrame,
+    gene_level_LFCs: pd.DataFrame,
+    bg_genes: set[str] | None = None,
+    existing_groups: list[dict] | None = None
+) -> tuple[dict | None, bool, bool]:
+    """
+    Sidebar input for adding gene groups to feature space visualization.
+    
+    Args:
+        gene_info_with_essentiality: DataFrame with gene information
+        gene_level_LFCs: DataFrame with gene level statistics
+        bg_genes: Set of background genes (default: all genes in gene_level_LFCs)
+        existing_groups: List of existing group dictionaries to check for duplicate names
+    
+    Returns:
+        tuple: (group_data dict or None, add_button_clicked bool, clear_button_clicked bool)
+        group_data structure: {"name": str, "genes": list[str], "color": str}
+    """
+    # Default color palette for groups
+    default_color_palette = [
+        "#e41a1c",  # Red
+        "#377eb8",  # Blue
+        "#4daf4a",  # Green
+        "#984ea3",  # Purple
+        "#ff7f00",  # Orange
+        "#ffff33",  # Yellow
+        "#a65628",  # Brown
+        "#f781bf",  # Pink
+    ]
+    
+    if bg_genes is None:
+        bg_genes = set(gene_level_LFCs.index.tolist())
+    
+    if existing_groups is None:
+        existing_groups = []
+    
+    # Initialize session state for group counter if not exists
+    if "group_counter" not in st.session_state:
+        st.session_state.group_counter = len(existing_groups) + 1
+    
+    # Generate default group name
+    default_name = f"Group {st.session_state.group_counter}"
+    
+    # Calculate default color based on current group count
+    default_color = default_color_palette[len(existing_groups) % len(default_color_palette)]
+    
+    # Initialize session state for current group name if not exists
+    if "current_group_name" not in st.session_state:
+        st.session_state.current_group_name = default_name
+    
+    # Create form for group input
+    input_form = st.sidebar.form("gene_group_input", clear_on_submit=True, border=True)
+    input_form.subheader("Add Gene Group:")
+    
+    # Group name input - use session state to preserve the value
+    group_name = input_form.text_input(
+        "Group name",
+        value=st.session_state.current_group_name,
+        help="Enter a descriptive name for this gene group",
+        key="group_name_widget"
+    )
+    
+    # Update session state with the entered name
+    st.session_state.current_group_name = group_name
+    
+    # Color picker input - use session state to preserve the selected color
+    if "current_group_color" not in st.session_state:
+        st.session_state.current_group_color = default_color
+    
+    group_color = input_form.color_picker(
+        "Group color",
+        value=st.session_state.current_group_color,
+        help="Select a color for this group (default: next color in palette)",
+        key="color_picker_widget"
+    )
+    
+    # Update session state with the selected color
+    st.session_state.current_group_color = group_color
+    
+    # Gene list input
+    gene_input = input_form.text_area(
+        "Genes (comma or newline separated)",
+        value="",
+        height=200,
+        help="Enter gene names or systematic IDs"
+    )
+    
+    # Buttons
+    col1, col2 = input_form.columns(2)
+    add_button = col1.form_submit_button("Add Group", type="primary")
+    clear_button = col2.form_submit_button("Clear All", type="secondary")
+    
+    group_data = None
+    
+    if add_button:
+        # Parse and validate genes
+        gene_ids = get_gene_list_from_query(gene_input)
+        
+        if not gene_ids:
+            st.sidebar.warning("⚠️ Please enter at least one gene")
+            return None, True, False
+        
+        if not group_name.strip():
+            st.sidebar.warning("⚠️ Please enter a group name")
+            return None, True, False
+        
+        # Check for duplicate group name
+        existing_names = [g["name"] for g in existing_groups]
+        if group_name.strip() in existing_names:
+            st.sidebar.warning(f"⚠️ Group name '{group_name}' already exists. Please use a different name.")
+            return None, True, False
+        
+        # Validate genes
+        valid_genes, invalid_genes, covered_genes, covered_gene_sysIDs, uncovered_genes = validate_gene_ids(
+            gene_ids, gene_info_with_essentiality, bg_genes
+        )
+        
+        # Show validation badges
+        input_form.badge(f"{len(gene_ids)} genes submitted", icon=":material/arrow_right_alt:", color="gray")
+        input_form.badge(f"{len(valid_genes)} valid genes", icon=":material/check:", color="green")
+        input_form.badge(f"{len(invalid_genes)} invalid genes", icon=":material/close:", color="red")
+        input_form.badge(f"{len(covered_genes)} covered genes", icon=":material/check_circle:", color="blue")
+        input_form.badge(f"{len(uncovered_genes)} uncovered genes", icon=":material/error:", color="orange")
+        
+        # Show invalid/uncovered genes if any
+        if invalid_genes:
+            with st.sidebar.expander("Invalid genes", expanded=False):
+                st.text("\n".join(invalid_genes))
+        
+        if uncovered_genes:
+            with st.sidebar.expander("Uncovered genes", expanded=False):
+                st.text("\n".join(uncovered_genes))
+        
+        # Only add group if there are covered genes
+        if covered_gene_sysIDs:
+            # Use the name and color from session state
+            selected_name = st.session_state.current_group_name
+            selected_color = st.session_state.current_group_color
+            group_data = {
+                "name": selected_name.strip(),
+                "genes": covered_gene_sysIDs,
+                "color": selected_color
+            }
+            # Increment group counter for next default name
+            st.session_state.group_counter += 1
+            # Reset name and color to default for next group
+            next_default_name = f"Group {st.session_state.group_counter}"
+            next_default_color = default_color_palette[len(existing_groups) % len(default_color_palette)]
+            st.session_state.current_group_name = next_default_name
+            st.session_state.current_group_color = next_default_color
+            st.sidebar.success(f"✅ Group '{selected_name}' added with {len(covered_gene_sysIDs)} genes")
+        else:
+            st.sidebar.warning("⚠️ No valid covered genes found. Group not added.")
+        
+        return group_data, True, False
+    
+    if clear_button:
+        return None, False, True
+    
+    return None, False, False
+
 def assign_term_name(term_ID, term_dag):
     if term_ID in term_dag:
         return term_dag[term_ID].name

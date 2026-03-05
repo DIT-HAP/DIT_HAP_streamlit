@@ -10,7 +10,7 @@ import sys
 import pandas as pd
 import altair as alt
 sys.path.append("../src")
-from src.preparation import sidebar_gene_input
+from src.preparation import sidebar_gene_group_input
 from src.data_config import get_default_config
 from src.data_manager import load_gene_metadata, load_gene_level_stats, GeneLevelData
 
@@ -20,22 +20,29 @@ from src.data_manager import load_gene_metadata, load_gene_level_stats, GeneLeve
 def how_to_use_this_tool():
     """Dialog explaining how to use the feature space visualization tool."""
     st.markdown("""
-        **Step 1: Enter Genes** (Sidebar)
+        **Step 1: Add Gene Groups** (Sidebar)
+        - Enter a descriptive name for your gene group (e.g., "Essential genes", "DNA repair")
         - Input gene names (e.g., `cdc2`, `wee1`) or systematic IDs (e.g., `SPAC1002.09c`)
         - Separate multiple genes with commas or newlines
-        - Click "Submit" to visualize your genes in feature space
+        - Click "Add Group" to add the group to the visualization
 
-        **Step 2: Interpret the Plot**
-        - **X-axis (Depletion rate)**: How quickly genes are depleted over time (mu parameter)
-        - **Y-axis (Depletion lag)**: Time delay before depletion begins (lambda parameter)
+        **Step 2: Add Multiple Groups**
+        - Repeat Step 1 to add additional gene groups
+        - Each group will be displayed with a different color
+        - Groups are listed in the sidebar with their names and gene counts
+        - You can add up to 8 groups with distinct colors (colors cycle after 8)
+
+        **Step 3: Interpret the Plot**
+        - **X-axis (Depletion rate)**: How quickly genes are depleted over time (μ parameter)
+        - **Y-axis (Depletion lag)**: Time delay before depletion begins (λ parameter)
         - **Gray circles**: Background genes (all genes in the dataset)
-        - **Red circles**: Your query genes (highlighted for comparison)
+        - **Colored circles**: Your gene groups (each group has a unique color)
+        - **Legend**: Shows group names with corresponding colors
 
-        **Step 3: Analyze Patterns**
-        - **Essential genes**: Typically show high depletion rates (right side of plot)
-        - **Non-essential genes**: Lower depletion rates (left side of plot)
-        - **Gene clusters**: Query genes with similar statistical profiles appear grouped together
-        - **Outliers**: Genes with unusual depletion patterns may indicate unique biology
+        **Step 4: Manage Groups**
+        - View current groups in the sidebar
+        - Click "Clear All" to remove all groups and start fresh
+        - The plot updates automatically when groups are added or cleared
         """)
 
 @st.dialog("🔬 Understanding Feature Space", width="large")
@@ -45,8 +52,8 @@ def understanding_feature_space():
         **What is Feature Space?**
 
         Feature space visualization places genes in a 2D plot based on their statistical properties from the DIT-HAP pipeline:
-        - **Depletion rate (mu)**: The rate at which transposon insertions in a gene decrease over time
-        - **Depletion lag (lambda)**: The time delay before depletion begins
+        - **Depletion rate (μ)**: The rate at which transposon insertions in a gene decrease over time
+        - **Depletion lag (λ)**: The time delay before depletion begins
 
         **Interpreting the Plot:**
         - **Upper right**: High depletion rate, long lag → Genes that deplete quickly but after a delay
@@ -54,10 +61,17 @@ def understanding_feature_space():
         - **Upper left**: Low depletion rate, long lag → Slow depletion with delayed onset
         - **Lower left**: Low depletion rate, short lag → Non-essential genes with minimal depletion
 
+        **Multi-Group Analysis:**
+        - **Compare gene sets**: Add multiple groups to compare different gene categories
+        - **Color-coded groups**: Each group has a distinct color for easy identification
+        - **Legend**: Group names displayed in legend for reference
+        - **Overlap detection**: See if genes from different groups cluster together
+
         **Biological Meaning:**
         - **Essential genes**: Higher depletion rates indicate negative fitness effects
         - **Non-essential genes**: Lower depletion rates suggest neutral fitness effects
         - **Condition-specific genes**: May show intermediate patterns depending on experimental conditions
+        - **Pathway genes**: Genes in the same pathway may cluster in feature space
         """)
 
 @st.dialog("⚙️ Data Requirements", width="large")
@@ -91,18 +105,27 @@ def analysis_tips():
         - **Pathway genes**: Choose genes from the same biological pathway
         - **Cluster genes**: Use genes identified from clustering analysis
         - **Differential genes**: Compare genes from different experimental conditions
+        - **Functional groups**: Group genes by GO terms or phenotype annotations
+
+        **Multi-Group Comparison:**
+        - **Compare pathways**: Add different pathway gene sets as separate groups
+        - **Essential vs non-essential**: Create groups for known essential and non-essential genes
+        - **Time course patterns**: Group genes by their depletion timing patterns
+        - **Mutant comparisons**: Compare gene sets from different mutant backgrounds
 
         **Interpreting Patterns:**
         - **Tightly grouped genes**: Share similar depletion characteristics
         - **Scattered genes**: Diverse fitness effects within your gene set
         - **Overlap with background**: Query genes similar to population average
         - **Outliers**: May indicate unique biological properties or data quality issues
+        - **Group overlap**: Different groups clustering together suggest shared biology
 
         **Comparative Analysis:**
         - Compare gene positions across different experimental conditions
         - Look for shifts in feature space indicating condition-specific effects
         - Use feature space to validate gene essentiality predictions
         - Cross-reference with enrichment analysis results
+        - Identify genes that behave differently across groups
         """)
 
 def load_data():
@@ -123,24 +146,161 @@ def load_data():
     
     return gene_metadata, gene_level
 
-def display_feature_space(query_genes: list[str], gene_level: GeneLevelData) -> alt.LayerChart:
-    """Display the feature space for the query genes."""
+def get_group_color_palette() -> list[str]:
+    """
+    Get a color palette for gene groups.
+    Uses a colorblind-friendly palette with 8 distinct colors.
+    """
+    return [
+        "#e41a1c",  # Red
+        "#377eb8",  # Blue
+        "#4daf4a",  # Green
+        "#984ea3",  # Purple
+        "#ff7f00",  # Orange
+        "#ffff33",  # Yellow
+        "#a65628",  # Brown
+        "#f781bf",  # Pink
+    ]
 
-    all_gene_feature_space = alt.Chart(gene_level.gene_level_fitting_results).mark_circle(opacity=0.6).encode(
-        x=alt.X("um:Q", title="Depletion rate"),
-        y=alt.Y("lam:Q", title="Depletion lag"),
+
+def display_feature_space(gene_groups: list[dict], gene_level: GeneLevelData, gene_metadata) -> alt.Chart | alt.LayerChart:
+    """
+    Display the feature space with multiple gene groups.
+    
+    Args:
+        gene_groups: List of group dictionaries with "name", "genes", and "color" keys
+        gene_level: GeneLevelData containing fitting results with "um" and "lam" columns
+        gene_metadata: GeneMetadataData containing id2name mapping
+    
+    Returns:
+        Altair chart (single or layered) with background genes and colored gene groups
+    """
+    # Get color palette
+    color_palette = get_group_color_palette()
+    
+    # Prepare data with gene names
+    fitting_results = gene_level.gene_level_fitting_results.copy()
+    
+    # Add gene name column using id2name mapping
+    fitting_results["Gene Name"] = fitting_results.index.map(
+        lambda x: gene_metadata.id2name.get(x, x)
+    )
+    
+    # Create background chart (all genes in light gray)
+    background_chart = alt.Chart(fitting_results).mark_circle(
+        opacity=0.4,
+        size=80
+    ).encode(
+        x=alt.X("um:Q", title="Depletion rate (μ)"),
+        y=alt.Y("lam:Q", title="Depletion lag (λ)"),
         color=alt.value("lightgray"),
-        tooltip=gene_level.gene_level_fitting_results.columns.tolist()
+        tooltip=[
+            alt.Tooltip("Gene Name:N", title="Gene Name"),
+            alt.Tooltip("index:N", title="Systematic ID"),
+            alt.Tooltip("um:Q", title="Depletion rate (μ)", format=".3f"),
+            alt.Tooltip("lam:Q", title="Depletion lag (λ)", format=".3f")
+        ]
+    ).properties(
+        width=700,
+        height=700
     )
-
-    query_gene_feature_space = alt.Chart(gene_level.gene_level_fitting_results.loc[query_genes]).mark_circle(opacity=0.6).encode(
-        x=alt.X("um:Q", title="Depletion rate"),
-        y=alt.Y("lam:Q", title="Depletion lag"),
-        color=alt.value("red"),
-        tooltip=gene_level.gene_level_fitting_results.columns.tolist()
+    
+    # If no groups, return just the background
+    if not gene_groups:
+        return background_chart
+    
+    # Prepare combined data for all groups with unified color mapping
+    all_groups_data = []
+    group_names = []
+    group_colors = []
+    
+    for idx, group in enumerate(gene_groups):
+        group_name = group["name"]
+        group_genes = group["genes"]
+        # Use custom color if provided, otherwise use palette color
+        group_color = group.get("color", color_palette[idx % len(color_palette)])
+        
+        # Filter data for this group
+        group_data = fitting_results.loc[
+            fitting_results.index.isin(group_genes)
+        ].copy()
+        
+        # Add group name column
+        group_data["Group"] = group_name
+        
+        all_groups_data.append(group_data)
+        group_names.append(group_name)
+        group_colors.append(group_color)
+    
+    # Combine all group data
+    combined_groups_data = pd.concat(all_groups_data, ignore_index=False)
+    
+    # Create overlay chart for all groups with unified color scale
+    groups_chart = alt.Chart(combined_groups_data).mark_circle(
+        opacity=0.8,
+        size=100
+    ).encode(
+        x=alt.X("um:Q", title="Depletion rate (μ)"),
+        y=alt.Y("lam:Q", title="Depletion lag (λ)"),
+        color=alt.Color(
+            "Group:N",
+            scale=alt.Scale(
+                domain=group_names,
+                range=group_colors
+            ),
+            legend=alt.Legend(
+                title="Gene Groups",
+                orient="right",
+                titleFontSize=20,
+                labelFontSize=16
+            )
+        ),
+        tooltip=[
+            alt.Tooltip("Group:N", title="Group"),
+            alt.Tooltip("Gene Name:N", title="Gene Name"),
+            alt.Tooltip("index:N", title="Systematic ID"),
+            alt.Tooltip("um:Q", title="Depletion rate (μ)", format=".3f"),
+            alt.Tooltip("lam:Q", title="Depletion lag (λ)", format=".3f")
+        ]
+    ).properties(
+        width=700,
+        height=700
     )
+    
+    # Combine background and groups overlay
+    return background_chart + groups_chart
 
-    return all_gene_feature_space + query_gene_feature_space
+def display_current_groups(gene_groups: list[dict]):
+    """
+    Display the current gene groups in the sidebar.
+    
+    Args:
+        gene_groups: List of group dictionaries with "name", "genes", and "color" keys
+    """
+    if not gene_groups:
+        st.sidebar.info("No gene groups added yet")
+        return
+    
+    st.sidebar.markdown("---")
+    st.sidebar.subheader("📋 Current Groups")
+    
+    for group in gene_groups:
+        # Use the group's actual color (from color picker)
+        group_color = group.get("color", "#e41a1c")  # Default to red if no color
+        group_name = group["name"]
+        gene_count = len(group["genes"])
+        
+        # Create a colored badge for each group
+        st.sidebar.markdown(
+            f"<div style='display: flex; align-items: center; margin-bottom: 5px;'>"
+            f"<div style='width: 20px; height: 20px; background-color: {group_color}; "
+            f"border-radius: 50%; margin-right: 10px;'></div>"
+            f"<span style='font-weight: 500;'>{group_name}</span>"
+            f"<span style='color: gray; margin-left: 10px;'>({gene_count} genes)</span>"
+            f"</div>",
+            unsafe_allow_html=True
+        )
+
 
 def main():
     """Main entry point for the feature space page."""
@@ -152,6 +312,11 @@ def main():
     ### 📊 Multi-Dimensional Feature Space Analysis
 
     This page provides **interactive visualization of genes in feature space** based on statistical parameters from the **[DIT-HAP pipeline](https://github.com/DIT-HAP/DIT_HAP_pipeline)**. Explore how your genes of interest compare to the genome-wide distribution.
+    
+    **Features:**
+    - Add multiple gene groups with custom names
+    - Each group displayed with distinct color and legend
+    - Compare multiple gene sets simultaneously
     """)
 
     usage_guides = {
@@ -169,21 +334,56 @@ def main():
         label_visibility="collapsed"
     )
 
+    # Initialize session state for gene groups
+    if "gene_groups" not in st.session_state:
+        st.session_state.gene_groups = []
+    
     # Load required data
     gene_metadata, gene_level = load_data()
     
-    # Get gene input from sidebar
-    covered_gene_sysIDs, submit_button = sidebar_gene_input(
-        gene_metadata.gene_info_with_essentiality, 
-        gene_level.gene_level_LFCs
+    # Get background genes
+    bg_genes = set(gene_level.gene_level_LFCs.index.tolist())
+    
+    # Get gene group input from sidebar
+    group_data, add_clicked, clear_clicked = sidebar_gene_group_input(
+        gene_metadata.gene_info_with_essentiality,
+        gene_level.gene_level_LFCs,
+        bg_genes,
+        st.session_state.gene_groups
     )
     
-    if submit_button and covered_gene_sysIDs:
-
-        bg_genes = gene_level.gene_level_LFCs.index.tolist()
-
-        alt_chart = display_feature_space(covered_gene_sysIDs, gene_level)
-        st.altair_chart(alt_chart, width="content")
+    # Handle add button
+    if add_clicked and group_data:
+        st.session_state.gene_groups.append(group_data)
+    
+    # Handle clear button
+    if clear_clicked:
+        st.session_state.gene_groups = []
+        # Reset group counter to 1 when clearing all groups
+        if "group_counter" in st.session_state:
+            st.session_state.group_counter = 1
+        # Reset name and color to default
+        if "current_group_name" in st.session_state:
+            st.session_state.current_group_name = "Group 1"
+        if "current_group_color" in st.session_state:
+            st.session_state.current_group_color = "#e41a1c"  # First color in palette (red)
+        st.sidebar.success("✅ All groups cleared")
+    
+    # Display current groups in sidebar
+    display_current_groups(st.session_state.gene_groups)
+    
+    # Display feature space chart
+    st.markdown("---")
+    st.subheader("📈 Feature Space Plot")
+    
+    if st.session_state.gene_groups:
+        st.markdown(f"**Displaying {len(st.session_state.gene_groups)} gene group(s)**")
+    else:
+        st.info("💡 Add gene groups using the sidebar to visualize them in feature space")
+    
+    # Create and display the chart (use original aspect ratio, not full width)
+    alt_chart = display_feature_space(st.session_state.gene_groups, gene_level, gene_metadata)
+    st.altair_chart(alt_chart, use_container_width=False)
 
 if __name__ == "__main__":
     main()
