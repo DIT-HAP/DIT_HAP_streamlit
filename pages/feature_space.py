@@ -383,7 +383,9 @@ def main():
     
     # Create and display the chart (use original aspect ratio, not full width)
     alt_chart = display_feature_space(st.session_state.gene_groups, gene_level, gene_metadata)
-    st.altair_chart(alt_chart, use_container_width=False)
+    st.altair_chart(alt_chart, width="content")
+
+    
 
 if __name__ == "__main__":
     main()
