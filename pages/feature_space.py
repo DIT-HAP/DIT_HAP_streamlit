@@ -172,6 +172,144 @@ def get_group_color_palette() -> list[str]:
     ]
 
 
+def display_depletion_curves(gene_groups: list[dict], gene_level: GeneLevelData, gene_metadata, timepoints: dict) -> alt.Chart:
+    """
+    Display depletion curves for gene groups as line charts.
+    
+    Args:
+        gene_groups: List of group dictionaries with "name", "genes", and "color" keys
+        gene_level: GeneLevelData containing gene_level_LFCs with timepoint columns
+        gene_metadata: GeneMetadataData containing id2name mapping
+        timepoints: Dictionary mapping timepoint names to values (e.g., {"YES0": 0, "YES1": 2.352, ...})
+    
+    Returns:
+        Altair chart with line plots for each gene group
+    """
+    # Get color palette
+    color_palette = get_group_color_palette()
+    
+    # Get timepoint keys and values
+    tp_keys = list(timepoints.keys())
+    tp_values = list(timepoints.values())
+    
+    # Prepare data with gene names
+    gene_level_lfcs = gene_level.gene_level_LFCs.copy()
+    
+    # Add gene name column using id2name mapping
+    gene_level_lfcs["Gene Name"] = gene_level_lfcs.index.map(
+        lambda x: gene_metadata.id2name.get(x, x)
+    )
+    
+    # If no groups, return empty chart
+    if not gene_groups:
+        return alt.Chart(pd.DataFrame()).mark_point().encode(
+            x=alt.X("x:Q", title="Generations"),
+            y=alt.Y("y:Q", title="Log Fold Change")
+        ).properties(title="No gene groups to display")
+    
+    # Prepare combined data for all groups
+    all_groups_data = []
+    group_names = []
+    group_colors = []
+    
+    for idx, group in enumerate(gene_groups):
+        group_name = group["name"]
+        group_genes = group["genes"]
+        # Use custom color if provided, otherwise use palette color
+        group_color = group.get("color", color_palette[idx % len(color_palette)])
+        
+        # Filter data for this group
+        group_data = gene_level_lfcs.loc[
+            gene_level_lfcs.index.isin(group_genes)
+        ].copy()
+        
+        # Transform wide format to long format for line plotting
+        for gene_sys_id in group_data.index:
+            gene_row = group_data.loc[gene_sys_id]
+            gene_name = gene_row["Gene Name"]
+            
+            for tp_key in tp_keys:
+                all_groups_data.append({
+                    "Group": group_name,
+                    "Gene Name": gene_name,
+                    "Systematic ID": gene_sys_id,
+                    "Generations": timepoints[tp_key],
+                    "Timepoint": tp_key,
+                    "LFC": gene_row[tp_key]
+                })
+        
+        group_names.append(group_name)
+        group_colors.append(group_color)
+    
+    # Create DataFrame from combined data
+    combined_data = pd.DataFrame(all_groups_data)
+    
+    # Sort data by group and timepoint order (YES0 -> YES1 -> YES2 -> YES3 -> YES4)
+    tp_order = {tp: idx for idx, tp in enumerate(tp_keys)}
+    combined_data["tp_order"] = combined_data["Timepoint"].map(tp_order)
+    combined_data = combined_data.sort_values(["Group", "Gene Name", "tp_order"]).drop(columns=["tp_order"])
+    
+    # Create line chart with points
+    # Lines colored by group, with individual gene tooltips
+    # Use detail to separate different genes within the same group
+    line_chart = alt.Chart(combined_data).mark_line(
+        opacity=0.7,
+        point=True
+    ).encode(
+        x=alt.X("Generations:Q", title="Generations", 
+                scale=alt.Scale(domain=(0, max(tp_values) + 1)),
+                sort=tp_keys),
+        y=alt.Y("LFC:Q", title="Log Fold Change",
+                scale=alt.Scale(domain=(-3, 8))),
+        color=alt.Color(
+            "Group:N",
+            scale=alt.Scale(
+                domain=group_names,
+                range=group_colors
+            ),
+            legend=alt.Legend(
+                title="Gene Groups",
+                orient="right",
+                titleFontSize=14,
+                labelFontSize=12
+            )
+        ),
+        detail=alt.Detail("Systematic ID:N"),
+        tooltip=[
+            alt.Tooltip("Group:N", title="Group"),
+            alt.Tooltip("Gene Name:N", title="Gene Name"),
+            alt.Tooltip("Systematic ID:N", title="Systematic ID"),
+            alt.Tooltip("Timepoint:N", title="Timepoint"),
+            alt.Tooltip("Generations:Q", title="Generations", format=".3f"),
+            alt.Tooltip("LFC:Q", title="LFC", format=".3f")
+        ],
+        order=alt.Order("Timepoint:O", sort="ascending")
+    ).properties(
+        width=700,
+        height=500,
+        title="Gene Depletion Curves by Group"
+    )
+    
+    return line_chart
+
+
+def get_group_color_palette() -> list[str]:
+    """
+    Get a color palette for gene groups.
+    Uses a colorblind-friendly palette with 8 distinct colors.
+    """
+    return [
+        "#e41a1c",  # Red
+        "#377eb8",  # Blue
+        "#4daf4a",  # Green
+        "#984ea3",  # Purple
+        "#ff7f00",  # Orange
+        "#ffff33",  # Yellow
+        "#a65628",  # Brown
+        "#f781bf",  # Pink
+    ]
+
+
 def display_feature_space(gene_groups: list[dict], gene_level: GeneLevelData, gene_metadata) -> alt.Chart | alt.LayerChart:
     """
     Display the feature space with multiple gene groups.
@@ -383,16 +521,29 @@ def main():
     
     # Display feature space chart
     st.markdown("---")
-    st.subheader("📈 Feature Space Plot")
+    st.subheader("📈 Feature Space Plot (μ vs λ)")
     
     if st.session_state.gene_groups:
         st.markdown(f"**Displaying {len(st.session_state.gene_groups)} gene group(s)**")
     else:
         st.info("💡 Add gene groups using the sidebar to visualize them in feature space")
     
-    # Create and display the chart (use original aspect ratio, not full width)
+    # Create and display the feature space chart (use original aspect ratio, not full width)
     alt_chart = display_feature_space(st.session_state.gene_groups, gene_level, gene_metadata)
     st.altair_chart(alt_chart, width="content")
+    
+    # Display depletion curves
+    st.markdown("---")
+    st.subheader("📉 Depletion Curves by Group")
+    
+    if st.session_state.gene_groups:
+        st.markdown(f"**Displaying depletion curves for {len(st.session_state.gene_groups)} gene group(s)**")
+    else:
+        st.info("💡 Add gene groups using the sidebar to visualize depletion curves")
+    
+    # Create and display the depletion curves chart
+    depletion_chart = display_depletion_curves(st.session_state.gene_groups, gene_level, gene_metadata, TIME_POINTS)
+    st.altair_chart(depletion_chart, width="content")
 
 if __name__ == "__main__":
     main()
