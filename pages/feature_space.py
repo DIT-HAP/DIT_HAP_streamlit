@@ -14,6 +14,15 @@ from src.preparation import sidebar_gene_group_input
 from src.data_config import get_default_config
 from src.data_manager import load_gene_metadata, load_gene_level_stats, GeneLevelData
 
+# =============================== Constants ================================
+TIME_POINTS = {
+    "YES0": 0,
+    "YES1": 2.352,
+    "YES2": 5.588,
+    "YES3": 9.104,
+    "YES4": 12.480
+}
+
 # ================================= Functions =================================
 
 @st.dialog("❓ How to Use This Tool", width="large")
@@ -384,8 +393,6 @@ def main():
     # Create and display the chart (use original aspect ratio, not full width)
     alt_chart = display_feature_space(st.session_state.gene_groups, gene_level, gene_metadata)
     st.altair_chart(alt_chart, width="content")
-
-    
 
 if __name__ == "__main__":
     main()
