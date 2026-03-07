@@ -22,10 +22,10 @@ P_VALUE_THRESHOLD = 0.05
 
 TIME_POINTS = {
     "YES0": 0,
-    "YES1": 3.352,
-    "YES2": 6.588,
-    "YES3": 10.104,
-    "YES4": 13.480
+    "YES1": 2.352,
+    "YES2": 5.588,
+    "YES3": 9.104,
+    "YES4": 12.480
 }
 
 TIME_POINTS_LONG_TIMECOURSE = {
