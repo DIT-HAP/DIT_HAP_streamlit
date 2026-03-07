@@ -23,6 +23,15 @@ TIME_POINTS = {
     "YES4": 12.480
 }
 
+gRNA_TIME_POINTS = {
+    "M_G0Tet": 0,
+    "M_YES1_Tet": 3.703,
+    "M_YES2_Tet": 6.816,
+    "M_YES3_Tet": 10.292,
+    "M_YES4_Tet": 13.594,
+    "M_YES5_Tet": 16.723
+}
+
 # ================================= Functions =================================
 
 @st.dialog("❓ How to Use This Tool", width="large")
