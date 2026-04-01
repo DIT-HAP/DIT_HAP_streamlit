@@ -302,9 +302,7 @@ def main():
                     with col1:
                         metrics = st.container(border=True)
                         display_gene_level_metrics(metrics, gene_level_fitting_results_in_current_gene)
-                        chart = st.container(border=True)
-                        with chart:
-                            st.altair_chart(combined_plot, width="stretch", theme=None)
+                        st.altair_chart(combined_plot, width="stretch", theme=None)
                 else:
                     with col1:
                         st.warning("⚠️ No data found")
@@ -312,9 +310,7 @@ def main():
                     with col2:
                         metrics = st.container(border=True)
                         display_gene_level_metrics(metrics, gene_level_fitting_results_in_current_gene_long_timecourse)
-                        chart = st.container(border=True)
-                        with chart:
-                            st.altair_chart(combined_plot_long_timecourse, width="stretch", theme=None)
+                        st.altair_chart(combined_plot_long_timecourse, width="stretch", theme=None)
                 else:
                     with col2:
                         st.warning("⚠️ No data found")
@@ -322,9 +318,7 @@ def main():
                     with col3:
                         metrics = st.container(border=True)
                         display_gene_level_metrics(metrics, gene_level_fitting_results_in_current_gene_haploid)
-                        chart = st.container(border=True)
-                        with chart:
-                            st.altair_chart(combined_plot_haploid, width="stretch", theme=None)
+                        st.altair_chart(combined_plot_haploid, width="stretch", theme=None)
                 else:
                     with col3:
                         st.warning("⚠️ No data found")
