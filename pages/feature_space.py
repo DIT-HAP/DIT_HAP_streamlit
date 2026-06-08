@@ -357,8 +357,8 @@ def display_feature_space(gene_groups: list[dict], gene_level: GeneLevelData, ge
             alt.Tooltip("lam:Q", title="Depletion lag (λ)", format=".3f")
         ]
     ).properties(
-        width=700,
-        height=700
+        width=600,
+        height=600
     )
     
     # If no groups, return just the background
@@ -419,8 +419,8 @@ def display_feature_space(gene_groups: list[dict], gene_level: GeneLevelData, ge
             alt.Tooltip("lam:Q", title="Depletion lag (λ)", format=".3f")
         ]
     ).properties(
-        width=700,
-        height=700
+        width=600,
+        height=600
     )
     
     # Combine background and groups overlay
@@ -530,29 +530,32 @@ def main():
     
     # Display feature space chart
     st.markdown("---")
-    st.subheader("📈 Feature Space Plot (μ vs λ)")
+    col1, col2 = st.columns([1, 1])
+
+    with col1:
+        st.subheader("📈 Feature Space Plot (DR vs DL)")
+        
+        if st.session_state.gene_groups:
+            st.markdown(f"**Displaying {len(st.session_state.gene_groups)} gene group(s)**")
+        else:
+            st.info("💡 Add gene groups using the sidebar to visualize them in feature space")
+        
+        # Create and display the feature space chart (use original aspect ratio, not full width)
+        alt_chart = display_feature_space(st.session_state.gene_groups, gene_level, gene_metadata)
+        st.altair_chart(alt_chart, width="content")
     
-    if st.session_state.gene_groups:
-        st.markdown(f"**Displaying {len(st.session_state.gene_groups)} gene group(s)**")
-    else:
-        st.info("💡 Add gene groups using the sidebar to visualize them in feature space")
-    
-    # Create and display the feature space chart (use original aspect ratio, not full width)
-    alt_chart = display_feature_space(st.session_state.gene_groups, gene_level, gene_metadata)
-    st.altair_chart(alt_chart, width="content")
-    
-    # Display depletion curves
-    st.markdown("---")
-    st.subheader("📉 Depletion Curves by Group")
-    
-    if st.session_state.gene_groups:
-        st.markdown(f"**Displaying depletion curves for {len(st.session_state.gene_groups)} gene group(s)**")
-    else:
-        st.info("💡 Add gene groups using the sidebar to visualize depletion curves")
-    
-    # Create and display the depletion curves chart
-    depletion_chart = display_depletion_curves(st.session_state.gene_groups, gene_level, gene_metadata, TIME_POINTS)
-    st.altair_chart(depletion_chart, width="content")
+    with col2:
+        # Display depletion curves
+        st.subheader("📉 Depletion Curves by Group")
+        
+        if st.session_state.gene_groups:
+            st.markdown(f"**Displaying depletion curves for {len(st.session_state.gene_groups)} gene group(s)**")
+        else:
+            st.info("💡 Add gene groups using the sidebar to visualize depletion curves")
+        
+        # Create and display the depletion curves chart
+        depletion_chart = display_depletion_curves(st.session_state.gene_groups, gene_level, gene_metadata, TIME_POINTS)
+        st.altair_chart(depletion_chart, width="content")
 
 if __name__ == "__main__":
     main()
