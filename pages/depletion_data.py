@@ -11,11 +11,11 @@ import altair as alt
 import pandas as pd
 import sys
 sys.path.append("../src")
-from src.preparation import sidebar_gene_input
-from src.data_config import get_default_config, get_long_timecourse_config, get_haploid_config, DataConfig
-from src.data_manager import load_gene_metadata, load_insertion_level_stats, load_gene_level_stats, GeneMetadataData, InsertionLevelData, GeneLevelData
-from src.get_gene_data import get_gene_info, get_gene_body, get_insertion_level_data, get_gene_level_data
-from src.display_gene_data import display_basic_information, display_gene_body, display_insertion_level_data, display_gene_level_data, combine_plots, display_gene_level_metrics
+from src.ui.inputs import sidebar_gene_input
+from src.data.config import get_default_config, get_long_timecourse_config, get_haploid_config, DataConfig
+from src.data.loader import load_gene_metadata, load_insertion_level_stats, load_gene_level_stats, GeneMetadataData, InsertionLevelData, GeneLevelData
+from src.data.gene_query import get_gene_info, get_gene_body, get_insertion_level_data, get_gene_level_data
+from src.viz.gene_display import display_basic_information, display_gene_body, display_insertion_level_data, display_gene_level_data, combine_plots, display_gene_level_metrics
 
 # ================================= Constants =================================
 P_VALUE_THRESHOLD = 0.05

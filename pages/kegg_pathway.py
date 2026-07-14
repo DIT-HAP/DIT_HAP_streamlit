@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 sys.path.append(str(Path(__file__).parent.parent / "src"))
-from src.network_functions import (
+from src.analysis.network import (
     load_all_kegg_pathways,
     convert_cx2_json_to_cytoscape_elements,
     node_color_mapping_panel,
@@ -13,7 +13,7 @@ from src.network_functions import (
     display_network,
     display_selected_object
 )
-from src.kegg_pathway_functions import (
+from src.analysis.kegg import (
     get_stylesheet,
 )
 

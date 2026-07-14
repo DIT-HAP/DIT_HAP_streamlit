@@ -1,5 +1,5 @@
 # %% ================================= Imports =================================
-from .network_functions import (
+from .network import (
     THEME_COLOR,
     THEME_BACKGROUND,
     map_feature_value

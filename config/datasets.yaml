@@ -1,0 +1,45 @@
+# =============================================================================
+# Dataset registry for the DIT-HAP Streamlit application.
+#
+# Each entry under `datasets` maps a dataset name to the on-disk directory that
+# holds the upstream `release/` output (copied into data/raw/). The fixed
+# sub-paths (insertion_level/LFC.tsv, gene_level/fitting_results.tsv, ...) are
+# the contract shared with the upstream packaging rule and are resolved in
+# src/data/config.py — not repeated here.
+#
+# Adding a new dataset = add a block here + copy its release data. No code edit.
+# =============================================================================
+
+datasets:
+  HD_DIT_HAP:
+    label: "HD DIT-HAP (default)"
+    data_dir: data/raw/HD_DIT_HAP
+    has_imputation: true
+  Long_timecourse:
+    label: "Long timecourse"
+    data_dir: data/raw/Long_timecourse_data
+    has_imputation: false
+  Haploid:
+    label: "Haploid"
+    data_dir: data/raw/haploid_data
+    has_imputation: false
+
+# Default dataset selected on first load.
+default_dataset: HD_DIT_HAP
+
+# Reference data shared across all datasets (versioned, packaged separately
+# upstream via package_reference).
+reference:
+  pombase_version: "2025-10-01"
+  pombase_dir: data/resource/pombase_data
+  resource_dir: data/resource
+
+# Downstream-owned resources (not produced by the upstream Snakemake pipeline).
+resources:
+  deletion_library_essentiality: data/resource/Hayles_2013_OB_merged_categories_sysIDupdated.xlsx
+  kegg_pathways: data/resource/kegg_pathways
+  gocam_cx2: data/resource/pombe_gocam_cx2
+  gocam_json: data/resource/pombe_gocam_json
+  gocam_yaml: data/resource/pombe_gocam
+  gene_features: data/resource/collected_pombe_gene_features.csv
+  verification_summary: data/resource/all_rounds_combined_verification_summary_manually_annotated.xlsx

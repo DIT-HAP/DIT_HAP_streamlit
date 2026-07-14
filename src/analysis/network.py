@@ -16,7 +16,10 @@ from gocam.translation.cx2.main import model_to_cx2
 from st_cytoscape import cytoscape
 
 # ================================= Constants =================================
-GENE_LEVEL_DATA_FILE = Path(__file__).parent.parent / "data" / "raw" / "HD_DIT_HAP" / "gene_level" / "all_coding_genes_with_DIT_HAP_clustering.tsv"
+# Repo root, resolved explicitly: this module lives at src/analysis/network.py,
+# so parents[2] == repo root regardless of the process working directory.
+_REPO_ROOT = Path(__file__).resolve().parents[2]
+GENE_LEVEL_DATA_FILE = _REPO_ROOT / "data" / "raw" / "HD_DIT_HAP" / "gene_level" / "all_coding_genes_with_DIT_HAP_clustering.tsv"
 
 
 ADDITIONAL_METRICS_CONFIG = {

@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 import streamlit.components.v1 as components
 sys.path.append(str(Path(__file__).parent.parent / "src"))
-from src.network_functions import (
+from src.analysis.network import (
     load_all_gocam_models,
     load_all_gocam_models_cx2,
     convert_cx2_json_to_cytoscape_elements,
@@ -14,7 +14,7 @@ from src.network_functions import (
     display_network,
     display_selected_object
 )
-from src.go_cam_functions import (
+from src.analysis.go_cam import (
     get_stylesheet,
     plot_interaction_type_legend,
 )

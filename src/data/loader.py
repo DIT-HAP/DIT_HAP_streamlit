@@ -11,8 +11,8 @@ from pathlib import Path
 from dataclasses import dataclass
 import pandas as pd
 import streamlit as st
-from .data_config import GeneMetadataConfig, InsertionLevelConfig, GeneLevelConfig, GeneOntologyDataConfig, FYPODataConfig, MONDODataConfig
-from .preparation import format_phaf_file, format_mondo_gaf_file
+from .config import GeneMetadataConfig, InsertionLevelConfig, GeneLevelConfig, GeneOntologyDataConfig, FYPODataConfig, MONDODataConfig
+from .ontology_format import format_phaf_file, format_mondo_gaf_file
 
 # ================================= Data Classes =================================
 

@@ -21,8 +21,8 @@ from goatools.go_enrichment import GOEnrichmentRecord
 from goatools.rpt.goea_nt_xfrm import get_goea_nts_prt
 
 # custom imports
-from .data_manager import GeneLevelData, GeneMetadataData, GeneOntologyData, FYPOData, MONDOData
-from .preparation import gene_input_form
+from ..data.loader import GeneLevelData, GeneMetadataData, GeneOntologyData, FYPOData, MONDOData
+from ..ui.inputs import gene_input_form
 # ================================= Constants =================================
 STRING_API_URL = "https://string-db.org/api"
 STRING_OUTPUT_FORMAT = Literal["tsv", "tsv-no-header", "json", "xml"]

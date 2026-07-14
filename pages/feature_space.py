@@ -10,9 +10,9 @@ import sys
 import pandas as pd
 import altair as alt
 sys.path.append("../src")
-from src.preparation import sidebar_gene_group_input
-from src.data_config import get_default_config
-from src.data_manager import load_gene_metadata, load_gene_level_stats, GeneLevelData
+from src.ui.inputs import sidebar_gene_group_input
+from src.data.config import get_default_config
+from src.data.loader import load_gene_metadata, load_gene_level_stats, GeneLevelData
 
 # =============================== Constants ================================
 TIME_POINTS = {

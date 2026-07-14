@@ -10,10 +10,10 @@ import sys
 import pandas as pd
 
 sys.path.append("../src")
-from src.preparation import sidebar_gene_input
-from src.data_config import get_default_config
-from src.data_manager import load_gene_metadata, load_gene_level_stats, load_gene_ontology_data, load_gene_phenotype_data, load_disease_ontology_data
-from src.enrichment_functions import background_configuration, ontology_enrichment_pipeline, stringdb_enrichment, display_enrichment_results
+from src.ui.inputs import sidebar_gene_input
+from src.data.config import get_default_config
+from src.data.loader import load_gene_metadata, load_gene_level_stats, load_gene_ontology_data, load_gene_phenotype_data, load_disease_ontology_data
+from src.analysis.enrichment import background_configuration, ontology_enrichment_pipeline, stringdb_enrichment, display_enrichment_results
 
 # ================================= Constants =================================
 P_VALUE_THRESHOLD = 0.05
