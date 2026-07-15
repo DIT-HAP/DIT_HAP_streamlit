@@ -285,17 +285,16 @@ def show_main_page():
         **💻 Application Architecture**
 
         **Core Framework:**
-        - **Streamlit** (≥1.51.0) - Web application framework
-        - **Pandas** (≥2.3.0) - Data manipulation and analysis
-        - **NumPy** (≥2.3.0) - Numerical computing foundation
-        - **Pydantic** (≥2.11.7) - Data validation and configuration
+        - **Streamlit** (≥1.58.0) - Web application framework
+        - **Pandas** (≥3.0.3) - Data manipulation and analysis
+        - **NumPy** (≥2.5.0) - Numerical computing foundation
 
         **Visualization Stack:**
-        - **Altair** (≥5.5.0) - Interactive statistical visualizations
-        - **Matplotlib** (≥3.10.0) - Static plotting capabilities
+        - **Altair** (≥6.2.0) - Interactive statistical visualizations
+        - **Matplotlib** (≥3.11.0) - Static plotting capabilities
 
         **Bioinformatics Tools:**
-        - **goatools** (≥1.5.2) - Gene Ontology enrichment analysis
+        - **goatools** (≥1.6.5) - Gene Ontology enrichment analysis
         - **BeautifulSoup4** + **lxml** - XML/HTML parsing
         - **NetworkX** - Network analysis and graph algorithms
 

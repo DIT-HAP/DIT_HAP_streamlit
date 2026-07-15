@@ -38,9 +38,9 @@ def get_insertion_level_data(
     ).index.intersection(insertion_level_data.insertion_level_LFCs.index)
 
     annotation_in_current_gene = insertion_level_data.insertion_annotations_with_baseMean.loc[insertions_in_current_gene]
-    insertion_LFCs_in_current_gene = insertion_level_data.insertion_level_LFCs.loc[insertions_in_current_gene][tps].rename_axis("Timepoint", axis=1).stack().rename("LFC")
-    insertion_weights_in_current_gene = insertion_level_data.insertion_level_weights.loc[insertions_in_current_gene][tps].rename_axis("Timepoint", axis=1).stack().rename("weights")
-    insertion_fitting_LFCs_in_current_gene = insertion_level_data.insertion_level_fitting_LFCs.loc[insertions_in_current_gene][tps].rename_axis("Timepoint", axis=1).stack().rename("fitting_LFC")
+    insertion_LFCs_in_current_gene = insertion_level_data.insertion_level_LFCs.loc[insertions_in_current_gene][tps].rename_axis("Timepoint", axis=1).stack().dropna().rename("LFC")
+    insertion_weights_in_current_gene = insertion_level_data.insertion_level_weights.loc[insertions_in_current_gene][tps].rename_axis("Timepoint", axis=1).stack().dropna().rename("weights")
+    insertion_fitting_LFCs_in_current_gene = insertion_level_data.insertion_level_fitting_LFCs.loc[insertions_in_current_gene][tps].rename_axis("Timepoint", axis=1).stack().dropna().rename("fitting_LFC")
     insertion_fitting_results_in_current_gene = insertion_level_data.insertion_level_fitting_results.loc[insertions_in_current_gene]
     insertion_level_data_df = pd.concat([insertion_LFCs_in_current_gene, insertion_weights_in_current_gene, insertion_fitting_LFCs_in_current_gene], axis=1)
     insertion_level_data_df["Generations"] = [ timepoints[tp] for tp in insertion_level_data_df.index.get_level_values(-1)]
@@ -70,8 +70,8 @@ def get_gene_level_data(
     """Get the gene level data for a given gene."""
 
     tps = list(timepoints.keys())
-    gene_level_LFCs_in_current_gene = gene_level_data.gene_level_LFCs.loc[[gene], tps].rename_axis("Timepoint", axis=1).stack().to_frame("LFC")
-    gene_level_fitting_LFCs_in_current_gene = gene_level_data.gene_level_fitting_LFCs.loc[[gene], tps].rename_axis("Timepoint", axis=1).stack().to_frame("fitting_LFC")
+    gene_level_LFCs_in_current_gene = gene_level_data.gene_level_LFCs.loc[[gene], tps].rename_axis("Timepoint", axis=1).stack().dropna().to_frame("LFC")
+    gene_level_fitting_LFCs_in_current_gene = gene_level_data.gene_level_fitting_LFCs.loc[[gene], tps].rename_axis("Timepoint", axis=1).stack().dropna().to_frame("fitting_LFC")
     gene_level_fitting_results_in_current_gene = gene_level_data.gene_level_fitting_results.loc[[gene]]
     gene_level_data_df = pd.concat([gene_level_LFCs_in_current_gene, gene_level_fitting_LFCs_in_current_gene], axis=1)
     gene_level_data_df["Generations"] = [ timepoints[tp] for tp in gene_level_data_df.index.get_level_values(-1)]
