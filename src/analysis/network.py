@@ -336,8 +336,8 @@ def prepare_additional_attributes(gene_level_data_file: Path) -> tuple[dict[str,
         file_path=gene_level_data_file
     )
     df["Cluster"] = df["Cluster"].fillna(0).astype(int)
-    df.fillna("NA", inplace=True)
-    df["Cluster"].replace(0, "NA", inplace=True)
+    df = df.fillna("NA")
+    df["Cluster"] = df["Cluster"].replace(0, "NA")
 
     ID_dict = {
         metric: df[metric].to_dict()
