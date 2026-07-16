@@ -311,19 +311,22 @@ def _merge_duplicate_edges(edge_groups: dict) -> list[dict]:
     return result
 
 @st.cache_data
-def deduplicate_cx2_edges(cx2_data: list) -> list[dict]:
+def deduplicate_cx2_edges(_cx2_data: list, cache_key: str) -> list[dict]:
     """
     Deduplicate edges in CX2 data by merging evidence for identical edges.
-    Edges with the same (source, target, name) are merged into one, 
+    Edges with the same (source, target, name) are merged into one,
     with their Evidence HTML lists combined.
+
+    cache_key identifies the network (e.g. model/pathway id) and is used as
+    the cache key instead of hashing the (potentially multi-MB) cx2 payload.
     """
-    edge_aspect = next((aspect for aspect in cx2_data if "edges" in aspect), None)
+    edge_aspect = next((aspect for aspect in _cx2_data if "edges" in aspect), None)
     if not edge_aspect:
-        return cx2_data
+        return _cx2_data
 
     edge_groups = _group_edges_by_key(edge_aspect["edges"])
     edge_aspect["edges"] = _merge_duplicate_edges(edge_groups)
-    return cx2_data
+    return _cx2_data
 
 # ---------------------------- Merge Additional Attributes ----------------------------
 @st.cache_data
@@ -539,12 +542,17 @@ def _parse_cx2_network(cx2_network: list, additional_attributes: dict, name_attr
     
     return elements, elements_dict, positions
 
-def convert_cx2_json_to_cytoscape_elements(cx2_network: list, pathway_type: Literal["go-cam", "kegg"]) -> tuple[list, dict, dict]:
-    """Convert a cx2 json list to Cytoscape elements."""
-    
+def convert_cx2_json_to_cytoscape_elements(cx2_network: list, pathway_type: Literal["go-cam", "kegg"], cache_key: str) -> tuple[list, dict, dict]:
+    """Convert a cx2 json list to Cytoscape elements.
+
+    cache_key should uniquely identify the selected model/pathway (e.g. its
+    title), so the edge-dedup step can be cached by that key instead of by
+    hashing the whole (potentially multi-MB) cx2 payload on every rerun.
+    """
+
     # Step 1: Merge duplicate edges
-    cx2_network = deduplicate_cx2_edges(cx2_network)
-    
+    cx2_network = deduplicate_cx2_edges(cx2_network, cache_key)
+
     # Step 2: Load additional gene-level attributes
     additional_attributes, name_attributes = prepare_additional_attributes(GENE_LEVEL_DATA_FILE)
     

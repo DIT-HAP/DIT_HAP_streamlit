@@ -12,11 +12,11 @@ import streamlit as st
 GENE_BODY_Y = -0.5
 
 # ================================= Functions =================================
-def fitting_function(x: np.ndarray, A: float, um: float, lam: float) -> np.ndarray:
+def fitting_function(x: np.ndarray, A: float, DR: float, DL: float) -> np.ndarray:
     """Calculate Gompertz function values with numerical stability."""
     if A == 0:
         return np.zeros_like(x)
-    exponent = np.clip((um * np.e / A) * (lam - x) + 1, -700, 700)
+    exponent = np.clip((DR * np.e / A) * (DL - x) + 1, -700, 700)
     return A * np.exp(-np.exp(exponent))
 
 @st.cache_data
@@ -60,13 +60,13 @@ def display_basic_information(gene: str, gene_info: pd.DataFrame) -> None:
 
 def display_gene_body(gene_body: pd.DataFrame) -> tuple[int, alt.LayerChart]:
     gene_body_copy = gene_body.copy()
-    gene_body_copy["um"] = GENE_BODY_Y
+    gene_body_copy["DR"] = GENE_BODY_Y
     gene_length =  gene_body_copy["ParentalRegion_length"].values[0]
 
     gene_body_plot = alt.Chart(gene_body_copy).mark_rule().encode(
         x=alt.X("Start_Fraction_to_start_codon:Q", title="Fraction to start codon"),
         x2=alt.X2("End_Fraction_to_start_codon:Q", title=""),
-        y=alt.Y("um:Q", title=""),
+        y=alt.Y("DR:Q", title=""),
         color=alt.ColorValue("blue"),
         size=alt.Size("Feature:N", title="Feature", scale=alt.Scale(range=[6, 1], domain=["CDS", "intron"]), legend=None),
     ) + alt.Chart(pd.DataFrame({"x": [1], "y": [GENE_BODY_Y]})).mark_point(shape="triangle", filled=True, fillOpacity=1).encode(
@@ -85,7 +85,7 @@ def display_insertion_level_data(gene_length: int, insertion_level_anno_and_resu
 
     insertion_level_data_plot1 = alt.Chart(insertion_level_anno_and_results.reset_index()).mark_circle(opacity=0.6).encode(
         x=alt.X("Distance_to_start_codon:Q", title="Distance to start codon", scale=alt.Scale(domain=(0, gene_length))),
-        y=alt.Y("um:Q", title="DR", scale=alt.Scale(domain=(-0.5, 1.5))),
+        y=alt.Y("DR:Q", title="DR", scale=alt.Scale(domain=(-0.5, 1.5))),
         color=alt.condition(point_selector, "Insertion_direction:N", alt.value("lightgray"), legend=alt.Legend(orient="right", title="Insertion direction")),
         size=alt.Size("baseMean:Q", title="baseMean", scale=alt.Scale(type='symlog')),
         tooltip=insertion_level_anno_and_results.columns.tolist()
@@ -110,7 +110,7 @@ def display_gene_level_data(gene_level_fitting_results_in_current_gene: pd.DataF
     gene_level_DR_line = alt.Chart(fitting_result).mark_line(size=4, color="red", opacity=0.3).encode(
         x=alt.X("x:Q", title=""),
         x2=alt.X2("x2:Q", title=""),
-        y=alt.Y("um:Q", title=""),
+        y=alt.Y("DR:Q", title=""),
         tooltip=fitting_result.columns.tolist()
     )
 
@@ -123,13 +123,13 @@ def display_gene_level_data(gene_level_fitting_results_in_current_gene: pd.DataF
     )
 
     A = fitting_result["A"].values[0]
-    um = fitting_result["um"].values[0]
-    lam = fitting_result["lam"].values[0]
+    DR = fitting_result["DR"].values[0]
+    DL = fitting_result["DL"].values[0]
 
     DL_line = pd.DataFrame(
         {
             "x": [0],
-            "x2": [lam],
+            "x2": [DL],
             "y": [0]
         }
     )
@@ -140,11 +140,11 @@ def display_gene_level_data(gene_level_fitting_results_in_current_gene: pd.DataF
         y=alt.Y("y:Q", title="")
     )
 
-    DR_line_x = np.linspace(lam, min(lam + 7/abs(um), int(max(timepoints.values()))+1), 100)
-    DR_line_y = (DR_line_x-lam)*um
+    DR_line_x = np.linspace(DL, min(DL + 7/abs(DR), int(max(timepoints.values()))+1), 100)
+    DR_line_y = (DR_line_x-DL)*DR
     DR_line = pd.DataFrame(
         {
-            "x": DR_line_x, 
+            "x": DR_line_x,
             "y": DR_line_y
         }
     )
@@ -155,8 +155,8 @@ def display_gene_level_data(gene_level_fitting_results_in_current_gene: pd.DataF
 
     fitting_curve = pd.DataFrame(
         {
-            "x": np.linspace(0, int(max(timepoints.values()))+1, 100), 
-            "y": fitting_function(np.linspace(0, int(max(timepoints.values()))+1, 100), A, um, lam)
+            "x": np.linspace(0, int(max(timepoints.values()))+1, 100),
+            "y": fitting_function(np.linspace(0, int(max(timepoints.values()))+1, 100), A, DR, DL)
         }
     )
 
@@ -206,7 +206,7 @@ def display_gene_level_metrics(container: st.container, gene_level_fitting_resul
 
     with container:
         col1, col2, col3, col4 = container.columns(4)
-        col1.metric(label="$DR$", value=round(gene_level_fitting_results_in_current_gene["um"].values[0], 3))
-        col2.metric(label="$DL$", value=round(gene_level_fitting_results_in_current_gene["lam"].values[0], 3))
+        col1.metric(label="$DR$", value=round(gene_level_fitting_results_in_current_gene["DR"].values[0], 3))
+        col2.metric(label="$DL$", value=round(gene_level_fitting_results_in_current_gene["DL"].values[0], 3))
         col3.metric(label="$R^2$", value=round(gene_level_fitting_results_in_current_gene["R2"].values[0], 3))
         col4.metric(label="$RMSE$", value=round(gene_level_fitting_results_in_current_gene["RMSE"].values[0], 3))

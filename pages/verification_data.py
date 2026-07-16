@@ -101,6 +101,35 @@ def data_requirements():
         - High-resolution images for detailed examination
         """)
 
+@st.cache_data
+def load_verification_data() -> pd.DataFrame:
+    """Load and format the 18th-round verification summary (Excel read + image base64 encoding)."""
+    df = pd.read_excel(
+        "./data/resource/all_rounds_combined_verification_summary_manually_annotated.xlsx"
+    )
+
+    df_18round = df.query("round == '18th_round'").copy()
+
+    # Replace local disk paths with GitHub URLs
+    path_mapping = {
+        "/hugedata/YushengYang/DIT_HAP_verification/data/cropped_images/DIT_HAP_deletion/18th_round/3d": "data/tetrad_plate_images",
+        "/hugedata/YushengYang/DIT_HAP_verification/data/cropped_images/DIT_HAP_deletion/18th_round/4d": "data/tetrad_plate_images",
+        "/hugedata/YushengYang/DIT_HAP_verification/data/cropped_images/DIT_HAP_deletion/18th_round/5d": "data/tetrad_plate_images",
+        "/hugedata/YushengYang/DIT_HAP_verification/data/cropped_images/DIT_HAP_deletion/18th_round/6d": "data/tetrad_plate_images",
+        "/hugedata/YushengYang/DIT_HAP_verification/data/cropped_images/DIT_HAP_deletion/18th_round/replica": "data/tetrad_plate_images",
+    }
+    df_18round.replace(path_mapping, regex=True, inplace=True)
+    df_18round["3d_image_path"] = df_18round["3d_image_path"].apply(image_to_base64)
+    df_18round["4d_image_path"] = df_18round["4d_image_path"].apply(image_to_base64)
+    df_18round["5d_image_path"] = df_18round["5d_image_path"].apply(image_to_base64)
+    df_18round["6d_image_path"] = df_18round["6d_image_path"].apply(image_to_base64)
+    df_18round["YES_image_path"] = df_18round["YES_image_path"].apply(image_to_base64)
+    df_18round["HYG_image_path"] = df_18round["HYG_image_path"].apply(image_to_base64)
+    df_18round["NAT_image_path"] = df_18round["NAT_image_path"].apply(image_to_base64)
+    df_18round["LEU_image_path"] = df_18round["LEU_image_path"].apply(image_to_base64)
+    df_18round["ADE_image_path"] = df_18round["ADE_image_path"].apply(image_to_base64)
+    return df_18round
+
 @st.dialog("🎯 Analysis Tips", width="large")
 def analysis_tips():
     """Dialog providing analysis tips for interpreting verification data."""
@@ -158,31 +187,7 @@ def main():
         label_visibility="collapsed"
     )
     
-    df = pd.read_excel(
-        "./data/resource/all_rounds_combined_verification_summary_manually_annotated.xlsx"
-    )
-
-    df_18round = df.query("round == '18th_round'").copy()
-
-    # Replace local disk paths with GitHub URLs
-    path_mapping = {
-        "/hugedata/YushengYang/DIT_HAP_verification/data/cropped_images/DIT_HAP_deletion/18th_round/3d": "data/tetrad_plate_images",
-        "/hugedata/YushengYang/DIT_HAP_verification/data/cropped_images/DIT_HAP_deletion/18th_round/4d": "data/tetrad_plate_images",
-        "/hugedata/YushengYang/DIT_HAP_verification/data/cropped_images/DIT_HAP_deletion/18th_round/5d": "data/tetrad_plate_images",
-        "/hugedata/YushengYang/DIT_HAP_verification/data/cropped_images/DIT_HAP_deletion/18th_round/6d": "data/tetrad_plate_images",
-        "/hugedata/YushengYang/DIT_HAP_verification/data/cropped_images/DIT_HAP_deletion/18th_round/replica": "data/tetrad_plate_images",
-    }
-    df_18round.replace(path_mapping, regex=True, inplace=True)
-    df_18round["3d_image_path"] = df_18round["3d_image_path"].apply(image_to_base64)
-    df_18round["4d_image_path"] = df_18round["4d_image_path"].apply(image_to_base64)
-    df_18round["5d_image_path"] = df_18round["5d_image_path"].apply(image_to_base64)
-    df_18round["6d_image_path"] = df_18round["6d_image_path"].apply(image_to_base64)
-    df_18round["YES_image_path"] = df_18round["YES_image_path"].apply(image_to_base64)
-    df_18round["HYG_image_path"] = df_18round["HYG_image_path"].apply(image_to_base64)
-    df_18round["NAT_image_path"] = df_18round["NAT_image_path"].apply(image_to_base64)
-    df_18round["LEU_image_path"] = df_18round["LEU_image_path"].apply(image_to_base64)
-    df_18round["ADE_image_path"] = df_18round["ADE_image_path"].apply(image_to_base64)
-    # df_18round.replace("_#", "_%", regex=True, inplace=True)
+    df_18round = load_verification_data()
     st.data_editor(
         df_18round,
         column_config={

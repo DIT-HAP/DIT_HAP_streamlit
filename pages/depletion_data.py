@@ -10,6 +10,9 @@ import streamlit as st
 import altair as alt
 import pandas as pd
 import sys
+import threading
+from concurrent.futures import ThreadPoolExecutor
+from streamlit.runtime.scriptrunner import add_script_run_ctx, get_script_run_ctx
 sys.path.append("../src")
 from src.ui.inputs import sidebar_gene_input
 from src.data.config import get_default_config, get_long_timecourse_config, get_haploid_config, DataConfig
@@ -243,18 +246,21 @@ def main():
         label_visibility="collapsed"
     )
 
-    # Get default configuration
-    config = get_default_config()
-    
-    # Load required data
-    gene_metadata, insertion_level, gene_level = load_depletion_data(config)
+    # Load the three dataset configurations in parallel: each hits a disjoint
+    # set of files, so the I/O has nothing to serialize on.
+    configs = [get_default_config(), get_long_timecourse_config(), get_haploid_config()]
+    ctx = get_script_run_ctx()
 
-    long_timecourse_config = get_long_timecourse_config()
-    _, insertion_level_long_timecourse, gene_level_long_timecourse = load_depletion_data(long_timecourse_config)
-    
-    haploid_config = get_haploid_config()
-    _, insertion_level_haploid, gene_level_haploid = load_depletion_data(haploid_config)
-    
+    def _load(config: DataConfig) -> tuple[GeneMetadataData, InsertionLevelData, GeneLevelData]:
+        add_script_run_ctx(threading.current_thread(), ctx)
+        return load_depletion_data(config)
+
+    with st.spinner("Loading depletion datasets...", show_time=True):
+        with ThreadPoolExecutor(max_workers=3) as executor:
+            (gene_metadata, insertion_level, gene_level), \
+            (_, insertion_level_long_timecourse, gene_level_long_timecourse), \
+            (_, insertion_level_haploid, gene_level_haploid) = executor.map(_load, configs)
+
     # Get gene input from sidebar
     covered_gene_sysIDs, submit_button = sidebar_gene_input(
         gene_metadata.gene_info_with_essentiality, 

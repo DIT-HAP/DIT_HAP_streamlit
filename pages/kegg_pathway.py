@@ -231,7 +231,7 @@ def main():
         if selected_pathway:
             with st.spinner("Loading pathway network..."):
                 cx2_data = selected_pathway.get("json", [])
-                cytoscape_elements, elements_dict, positions = convert_cx2_json_to_cytoscape_elements(cx2_data, pathway_type="kegg")
+                cytoscape_elements, elements_dict, positions = convert_cx2_json_to_cytoscape_elements(cx2_data, pathway_type="kegg", cache_key=selected_pathway_title)
                 layout_config = get_layout_config(positions, layout_type=layout_type, ranker=ranker)
 
             if cytoscape_elements:

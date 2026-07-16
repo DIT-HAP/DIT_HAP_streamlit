@@ -8,6 +8,9 @@ This page provides gene ontology and phenotype enrichment analysis functionality
 import streamlit as st
 import sys
 import pandas as pd
+import threading
+from concurrent.futures import ThreadPoolExecutor
+from streamlit.runtime.scriptrunner import add_script_run_ctx, get_script_run_ctx
 
 sys.path.append("../src")
 from src.ui.inputs import sidebar_gene_input
@@ -344,74 +347,59 @@ def main():
             st.caption(f"Enrichment analysis performed on :green[__{len(covered_gene_sysIDs)}__] query genes against a background of :blue[__{len(bg_genes)}__] genes.")
             st.caption(f"FDR threshold set to :red[__{fdr_threshold}__].")
 
-            ontology_tab = st.tabs(["GO enrichment", "FYPO enrichment", "Mondo enrichment", "STRING enrichment"])
-            with ontology_tab[0]:
-                with st.spinner("Performing GO enrichment analysis..."):
+            format_kwargs = {"itemid2name": gene_metadata.id2name}
 
-                    load_kwargs = {
-                        "relationships": {"is_a", "part_of"},
-                        "propagate_counts": True,
-                        "load_obsolete": False
-                    }
-                    enrichment_kwargs = {
-                        "alpha": fdr_threshold,
-                        "methods": ["fdr_bh"],
-                        "propagate_counts": True,
-                        "relationships": {"is_a", "part_of"},
-                        "prt": None,
-                    }
+            def _run_go():
+                load_kwargs = {"relationships": {"is_a", "part_of"}, "propagate_counts": True, "load_obsolete": False}
+                enrichment_kwargs = {
+                    "alpha": fdr_threshold, "methods": ["fdr_bh"], "propagate_counts": True,
+                    "relationships": {"is_a", "part_of"}, "prt": None,
+                }
+                return ontology_enrichment_pipeline(gene_ontology_data, covered_gene_sysIDs, bg_genes, load_kwargs=load_kwargs, enrichment_kwargs=enrichment_kwargs, format_kwargs=format_kwargs)
 
-                    format_kwargs = {
-                        "itemid2name": gene_metadata.id2name
-                    }
+            def _run_fypo():
+                load_kwargs = {"propagate_counts": True, "load_obsolete": False}
+                enrichment_kwargs = {"alpha": fdr_threshold, "methods": ["fdr_bh"], "propagate_counts": True, "prt": None}
+                return ontology_enrichment_pipeline(gene_phenotype_data, covered_gene_sysIDs, bg_genes, load_kwargs=load_kwargs, enrichment_kwargs=enrichment_kwargs, format_kwargs=format_kwargs)
 
-                    res, res_slim = ontology_enrichment_pipeline(gene_ontology_data, covered_gene_sysIDs, bg_genes, load_kwargs=load_kwargs, enrichment_kwargs=enrichment_kwargs, format_kwargs=format_kwargs)
-                    display_results(res, res_slim, ontology_name="GO")
-            with ontology_tab[1]:
-                with st.spinner("Performing FYPO enrichment analysis..."):
+            def _run_mondo():
+                load_kwargs = {"propagate_counts": True, "load_obsolete": False}
+                enrichment_kwargs = {"alpha": fdr_threshold, "methods": ["fdr_bh"], "propagate_counts": True, "prt": None}
+                return ontology_enrichment_pipeline(disease_ontology_data, covered_gene_sysIDs, bg_genes, load_kwargs=load_kwargs, enrichment_kwargs=enrichment_kwargs, format_kwargs=format_kwargs)
 
-                    load_kwargs = {
-                        "propagate_counts": True,
-                        "load_obsolete": False
-                    }
+            def _run_string():
+                return stringdb_enrichment(covered_gene_sysIDs, bg_genes)
 
-                    enrichment_kwargs = {
-                        "alpha": fdr_threshold,
-                        "methods": ["fdr_bh"],
-                        "propagate_counts": True,
-                        "prt": None,
-                    }
+            # GO/FYPO/Mondo/STRING don't touch any Streamlit UI calls internally,
+            # so run all four analyses concurrently instead of one after another.
+            ctx = get_script_run_ctx()
 
-                    format_kwargs = {
-                        "itemid2name": gene_metadata.id2name
-                    }
+            def _with_ctx(fn):
+                def wrapped():
+                    add_script_run_ctx(threading.current_thread(), ctx)
+                    return fn()
+                return wrapped
 
-                    res, res_slim = ontology_enrichment_pipeline(gene_phenotype_data, covered_gene_sysIDs, bg_genes, load_kwargs=load_kwargs, enrichment_kwargs=enrichment_kwargs, format_kwargs=format_kwargs)
-                    display_results(res, res_slim, ontology_name="FYPO")
-            with ontology_tab[2]:
-                with st.spinner("Performing Mondo enrichment analysis..."):
+            with st.spinner("Performing GO / FYPO / Mondo / STRING enrichment analysis...", show_time=True):
+                with ThreadPoolExecutor(max_workers=4) as executor:
+                    go_future = executor.submit(_with_ctx(_run_go))
+                    fypo_future = executor.submit(_with_ctx(_run_fypo))
+                    mondo_future = executor.submit(_with_ctx(_run_mondo))
+                    string_future = executor.submit(_with_ctx(_run_string))
 
-                    load_kwargs = {
-                        "propagate_counts": True,
-                        "load_obsolete": False
-                    }
-
-                    enrichment_kwargs = {
-                        "alpha": fdr_threshold,
-                        "methods": ["fdr_bh"],
-                        "propagate_counts": True,
-                        "prt": None,
-                    }
-
-                    format_kwargs = {
-                        "itemid2name": gene_metadata.id2name
-                    }
-                    res, res_slim = ontology_enrichment_pipeline(disease_ontology_data, covered_gene_sysIDs, bg_genes, load_kwargs=load_kwargs, enrichment_kwargs=enrichment_kwargs, format_kwargs=format_kwargs)
-                    display_results(res, res_slim, ontology_name="Mondo")
-            with ontology_tab[3]:
-                with st.spinner("Performing STRING enrichment analysis..."):
-                    res = stringdb_enrichment(covered_gene_sysIDs, bg_genes)
-                    display_results(res, ontology_name="STRING")
+                    ontology_tab = st.tabs(["GO enrichment", "FYPO enrichment", "Mondo enrichment", "STRING enrichment"])
+                    with ontology_tab[0]:
+                        res, res_slim = go_future.result()
+                        display_results(res, res_slim, ontology_name="GO")
+                    with ontology_tab[1]:
+                        res, res_slim = fypo_future.result()
+                        display_results(res, res_slim, ontology_name="FYPO")
+                    with ontology_tab[2]:
+                        res, res_slim = mondo_future.result()
+                        display_results(res, res_slim, ontology_name="Mondo")
+                    with ontology_tab[3]:
+                        res = string_future.result()
+                        display_results(res, ontology_name="STRING")
         else:
             st.warning("Please input query genes for enrichment analysis")
 

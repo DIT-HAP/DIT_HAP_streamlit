@@ -233,7 +233,7 @@ def main():
         if selected_model:
             with st.spinner("Converting model to network elements..."):
                 cx2_data = selected_model.get('json', [])
-                cytoscape_elements, elements_dict, positions = convert_cx2_json_to_cytoscape_elements(cx2_data, pathway_type="go-cam")
+                cytoscape_elements, elements_dict, positions = convert_cx2_json_to_cytoscape_elements(cx2_data, pathway_type="go-cam", cache_key=selected_model_title)
                 layout_config = get_layout_config(positions, layout_type=layout_type, ranker=ranker)
             if cytoscape_elements:
                 custom_stylesheet = get_stylesheet(

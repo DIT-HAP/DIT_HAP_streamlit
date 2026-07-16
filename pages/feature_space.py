@@ -97,14 +97,14 @@ def data_requirements():
     """Dialog explaining the data requirements for feature space visualization."""
     st.markdown("""
         **Required DIT-HAP Pipeline Outputs:**
-        - Gene-level fitting results containing mu and lambda parameters
+        - Gene-level fitting results containing DR and DL parameters
         - Gene-level statistics from DIT-HAP pipeline analysis
         - Gene metadata for name/ID conversion
         - Reference genome annotations from PomBase
 
         **Statistical Parameters:**
-        - **mu (μ)**: Depletion rate parameter from model fitting
-        - **lambda (λ)**: Depletion lag parameter from model fitting
+        - **DR**: Depletion rate parameter from model fitting
+        - **DL**: Depletion lag parameter from model fitting
         - Model fitting quality metrics for confidence assessment
         - Time course data from standard DIT-HAP pipeline
 
@@ -325,7 +325,7 @@ def display_feature_space(gene_groups: list[dict], gene_level: GeneLevelData, ge
     
     Args:
         gene_groups: List of group dictionaries with "name", "genes", and "color" keys
-        gene_level: GeneLevelData containing fitting results with "um" and "lam" columns
+        gene_level: GeneLevelData containing fitting results with "DR" and "DL" columns
         gene_metadata: GeneMetadataData containing id2name mapping
     
     Returns:
@@ -347,14 +347,14 @@ def display_feature_space(gene_groups: list[dict], gene_level: GeneLevelData, ge
         opacity=0.4,
         size=80
     ).encode(
-        x=alt.X("um:Q", title="Depletion rate (μ)"),
-        y=alt.Y("lam:Q", title="Depletion lag (λ)"),
+        x=alt.X("DR:Q", title="Depletion rate (μ)"),
+        y=alt.Y("DL:Q", title="Depletion lag (λ)"),
         color=alt.value("lightgray"),
         tooltip=[
             alt.Tooltip("Gene Name:N", title="Gene Name"),
             alt.Tooltip("index:N", title="Systematic ID"),
-            alt.Tooltip("um:Q", title="Depletion rate (μ)", format=".3f"),
-            alt.Tooltip("lam:Q", title="Depletion lag (λ)", format=".3f")
+            alt.Tooltip("DR:Q", title="Depletion rate (μ)", format=".3f"),
+            alt.Tooltip("DL:Q", title="Depletion lag (λ)", format=".3f")
         ]
     ).properties(
         width=600,
@@ -396,8 +396,8 @@ def display_feature_space(gene_groups: list[dict], gene_level: GeneLevelData, ge
         opacity=0.8,
         size=100
     ).encode(
-        x=alt.X("um:Q", title="Depletion rate (μ)"),
-        y=alt.Y("lam:Q", title="Depletion lag (λ)"),
+        x=alt.X("DR:Q", title="Depletion rate (μ)"),
+        y=alt.Y("DL:Q", title="Depletion lag (λ)"),
         color=alt.Color(
             "Group:N",
             scale=alt.Scale(
@@ -415,8 +415,8 @@ def display_feature_space(gene_groups: list[dict], gene_level: GeneLevelData, ge
             alt.Tooltip("Group:N", title="Group"),
             alt.Tooltip("Gene Name:N", title="Gene Name"),
             alt.Tooltip("index:N", title="Systematic ID"),
-            alt.Tooltip("um:Q", title="Depletion rate (μ)", format=".3f"),
-            alt.Tooltip("lam:Q", title="Depletion lag (λ)", format=".3f")
+            alt.Tooltip("DR:Q", title="Depletion rate (μ)", format=".3f"),
+            alt.Tooltip("DL:Q", title="Depletion lag (λ)", format=".3f")
         ]
     ).properties(
         width=600,
