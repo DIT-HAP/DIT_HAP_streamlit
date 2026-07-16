@@ -1,4 +1,4 @@
-Systematic ID	Name	FYPOviability	DeletionLibrary_essentiality	A	um	lam	t10	t50	t90	t_window	t_inflection	y_inflection	auc	R2	RMSE	normalized_RMSE	AIC	BIC
+Systematic ID	Name	FYPOviability	DeletionLibrary_essentiality	A	DR	DL	t10	t50	t90	t_window	t_inflection	y_inflection	auc	R2	RMSE	normalized_RMSE	AIC	BIC
 SPAC1002.02	pom34	viable	V	0.099	-0.007	0.0	0.814	6.703	15.943	15.129	4.905	0.036	0.009	-0.37103	0.133	0.456556	-14.15	-15.322
 SPAC1002.03c	gls2	viable	V	0.258	0.024	0.0	0.648	5.332	12.684	12.036	3.902	0.095	1.722	0.259431	0.128	0.305515	-14.58	-15.752
 SPAC1002.04c	taf11	inviable	E	8.542	0.733	2.629	3.34	8.487	16.564	13.224	6.916	3.142	35.706	0.996478	0.147	0.022741	-13.204	-14.376

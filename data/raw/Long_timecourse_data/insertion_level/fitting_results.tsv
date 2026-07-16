@@ -1,4 +1,4 @@
-Chr	Coordinate	Strand	Target	A	um	lam	t10	t50	t90	t_window	t_inflection	y_inflection	auc	R2	RMSE	normalized_RMSE	AIC	BIC
+Chr	Coordinate	Strand	Target	A	DR	DL	t10	t50	t90	t_window	t_inflection	y_inflection	auc	R2	RMSE	normalized_RMSE	AIC	BIC
 I	12726	+	TTAA	2.415	0.164	1.379	2.276	8.769	18.957	16.681	6.787	0.888	46.368	0.87562	0.31	0.13589	-10.386	-10.548
 I	12726	-	TTAA	1.033	0.173	0.942	1.307	3.943	8.08	6.773	3.138	0.38	25.459	0.403485	0.517	0.243271	-3.224	-3.386
 I	13506	+	TTAA	1.834	0.15	-0.0	0.747	6.148	14.623	13.876	4.499	0.675	40.163	0.66346	0.392	0.164592	-7.115	-7.277
