@@ -5,12 +5,14 @@ Visualize the DIT-HAP data using JBrowse 2 within a Streamlit application.
 # ================================= Imports =================================
 import streamlit as st
 
+from src.ui.guides import usage_guide_bar
+
 # ================================= Constants =================================
 JBROWSE_IFRAME_URL = "https://dit-hap.github.io/"
 
 # ================================= Functions =================================
 
-@st.dialog("❓ How to Use This Tool", width="large")
+@st.dialog("❓ How to Use This Tool", width="medium", position="right")
 def how_to_use_this_tool():
     """Dialog explaining how to use the JBrowse2 genome browser."""
     st.markdown("""
@@ -33,7 +35,7 @@ def how_to_use_this_tool():
         - Correlate insertion patterns with gene essentiality data
         """)
 
-@st.dialog("🔬 Understanding JBrowse2", width="large")
+@st.dialog("🔬 Understanding JBrowse2", width="medium", position="right")
 def understanding_jbrowse():
     """Dialog explaining JBrowse2 genome browser features."""
     st.markdown("""
@@ -58,7 +60,7 @@ def understanding_jbrowse():
         - **Tooltips**: Hover over features for detailed information
         """)
 
-@st.dialog("⚙️ Data Requirements", width="large")
+@st.dialog("⚙️ Data Requirements", width="medium", position="right")
 def data_requirements():
     """Dialog explaining the data requirements for JBrowse2."""
     st.markdown("""
@@ -82,7 +84,7 @@ def data_requirements():
         - Direct access to latest DIT-HAP genomic data
         """)
 
-@st.dialog("🎯 Analysis Tips", width="large")
+@st.dialog("🎯 Analysis Tips", width="medium", position="right")
 def analysis_tips():
     """Dialog providing analysis tips for JBrowse2 genome exploration."""
     st.markdown("""
@@ -130,14 +132,7 @@ def main():
         "⚙️ Data Requirements": data_requirements,
         "🎯 Analysis Tips": analysis_tips
     }
-    st.segmented_control(
-        label="📖 Usage Guides",
-        options=list(usage_guides.keys()),
-        key="usage_guide_selector",
-        on_change=lambda: usage_guides[st.session_state.usage_guide_selector](),
-        width="stretch",
-        label_visibility="collapsed"
-    )
+    usage_guide_bar(usage_guides)
 
     st.info(
         """

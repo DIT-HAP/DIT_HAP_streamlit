@@ -14,6 +14,7 @@ import streamlit as st
 sys.path.append("../src")
 from src.data.config import get_default_config
 from src.data.loader import GeneLevelData, load_gene_level_stats, load_gene_metadata
+from src.ui.guides import usage_guide_bar
 from src.ui.inputs import sidebar_gene_group_input
 
 # =============================== Constants ================================
@@ -36,7 +37,7 @@ gRNA_TIME_POINTS = {
 
 # ================================= Functions =================================
 
-@st.dialog("❓ How to Use This Tool", width="large")
+@st.dialog("❓ How to Use This Tool", width="medium", position="right")
 def how_to_use_this_tool():
     """Dialog explaining how to use the feature space visualization tool."""
     st.markdown("""
@@ -65,7 +66,7 @@ def how_to_use_this_tool():
         - The plot updates automatically when groups are added or cleared
         """)
 
-@st.dialog("🔬 Understanding Feature Space", width="large")
+@st.dialog("🔬 Understanding Feature Space", width="medium", position="right")
 def understanding_feature_space():
     """Dialog explaining the feature space visualization."""
     st.markdown("""
@@ -94,7 +95,7 @@ def understanding_feature_space():
         - **Pathway genes**: Genes in the same pathway may cluster in feature space
         """)
 
-@st.dialog("⚙️ Data Requirements", width="large")
+@st.dialog("⚙️ Data Requirements", width="medium", position="right")
 def data_requirements():
     """Dialog explaining the data requirements for feature space visualization."""
     st.markdown("""
@@ -116,7 +117,7 @@ def data_requirements():
         - Default dataset configuration used for feature space analysis
         """)
 
-@st.dialog("🎯 Analysis Tips", width="large")
+@st.dialog("🎯 Analysis Tips", width="medium", position="right")
 def analysis_tips():
     """Dialog providing analysis tips for interpreting feature space visualizations."""
     st.markdown("""
@@ -483,14 +484,7 @@ def main():
         "⚙️ Data Requirements": data_requirements,
         "🎯 Analysis Tips": analysis_tips
     }
-    st.segmented_control(
-        label="📖 Usage Guides",
-        options=list(usage_guides.keys()),
-        key="usage_guide_selector",
-        on_change=lambda: usage_guides[st.session_state.usage_guide_selector](),
-        width="stretch",
-        label_visibility="collapsed"
-    )
+    usage_guide_bar(usage_guides)
 
     # Initialize session state for gene groups
     if "gene_groups" not in st.session_state:

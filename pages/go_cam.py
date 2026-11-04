@@ -18,6 +18,7 @@ from src.analysis.network import (
     load_all_gocam_models_cx2,
     node_color_mapping_panel,
 )
+from src.ui.guides import usage_guide_bar
 
 # ================================= Page Config ====================================
 st.set_page_config(
@@ -40,7 +41,7 @@ MODEL_STATES = {
 
 # =============================== Functions ================================
 
-@st.dialog("❓ How to Use This Tool", width="large")
+@st.dialog("❓ How to Use This Tool", width="medium", position="right")
 def how_to_use_this_tool():
     """Dialog explaining how to use the GO-CAM visualization tool."""
     st.markdown("""
@@ -69,7 +70,7 @@ def how_to_use_this_tool():
         - Compare different model structures across biological processes
         """)
 
-@st.dialog("🔬 Understanding GO-CAM", width="large")
+@st.dialog("🔬 Understanding GO-CAM", width="medium", position="right")
 def understanding_gocam():
     """Dialog explaining GO-CAM network visualization."""
     st.markdown("""
@@ -110,7 +111,7 @@ def understanding_gocam():
         - **Bidirectional**: Complex regulatory relationships
         """)
 
-@st.dialog("⚙️ Data Requirements", width="large")
+@st.dialog("⚙️ Data Requirements", width="medium", position="right")
 def data_requirements():
     """Dialog explaining the data requirements for GO-CAM visualization."""
     st.markdown("""
@@ -135,7 +136,7 @@ def data_requirements():
         - **Metadata tracking**: Model provenance, creation dates, and curation status
         """)
 
-@st.dialog("🎯 Analysis Tips", width="large")
+@st.dialog("🎯 Analysis Tips", width="medium", position="right")
 def analysis_tips():
     """Dialog providing analysis tips for GO-CAM network exploration."""
     st.markdown("""
@@ -198,14 +199,7 @@ def main():
         "⚙️ Data Requirements": data_requirements,
         "🎯 Analysis Tips": analysis_tips
     }
-    st.segmented_control(
-        label="📖 Usage Guides",
-        options=list(usage_guides.keys()),
-        key="usage_guide_selector",
-        on_change=lambda: usage_guides[st.session_state.usage_guide_selector](),
-        width="stretch",
-        label_visibility="collapsed"
-    )
+    usage_guide_bar(usage_guides)
 
     # with st.spinner("Loading GO-CAM models..."):
     with st.spinner():

@@ -17,6 +17,7 @@ from src.analysis.network import (
     load_all_kegg_pathways,
     node_color_mapping_panel,
 )
+from src.ui.guides import usage_guide_bar
 
 # ================================= Page Config ====================================
 st.set_page_config(
@@ -30,7 +31,7 @@ KEGG_DATA_DIR = Path(__file__).parent.parent / "data" / "resource" / "kegg_pathw
 
 # =============================== Functions ================================
 
-@st.dialog("❓ How to Use This Tool", width="large")
+@st.dialog("❓ How to Use This Tool", width="medium", position="right")
 def how_to_use_this_tool():
     """Dialog explaining how to use the KEGG pathway visualization tool."""
     st.markdown("""
@@ -59,7 +60,7 @@ def how_to_use_this_tool():
         - Compare different pathway structures across biological processes
         """)
 
-@st.dialog("🔬 Understanding KEGG Pathways", width="large")
+@st.dialog("🔬 Understanding KEGG Pathways", width="medium", position="right")
 def understanding_kegg():
     """Dialog explaining KEGG pathway visualization."""
     st.markdown("""
@@ -101,7 +102,7 @@ def understanding_kegg():
         - **Hierarchical**: Shows flow from upstream to downstream
         """)
 
-@st.dialog("⚙️ Data Requirements", width="large")
+@st.dialog("⚙️ Data Requirements", width="medium", position="right")
 def data_requirements():
     """Dialog explaining the data requirements for KEGG pathway visualization."""
     st.markdown("""
@@ -131,7 +132,7 @@ def data_requirements():
         - **Pathway images**: Original KEGG pathway reference figures
         """)
 
-@st.dialog("🎯 Analysis Tips", width="large")
+@st.dialog("🎯 Analysis Tips", width="medium", position="right")
 def analysis_tips():
     """Dialog providing analysis tips for KEGG pathway exploration."""
     st.markdown("""
@@ -202,14 +203,7 @@ def main():
         "⚙️ Data Requirements": data_requirements,
         "🎯 Analysis Tips": analysis_tips
     }
-    st.segmented_control(
-        label="📖 Usage Guides",
-        options=list(usage_guides.keys()),
-        key="usage_guide_selector",
-        on_change=lambda: usage_guides[st.session_state.usage_guide_selector](),
-        width="stretch",
-        label_visibility="collapsed"
-    )
+    usage_guide_bar(usage_guides)
 
     with st.spinner("Loading KEGG pathways..."):
         kegg_pathways = load_all_kegg_pathways(KEGG_DATA_DIR)

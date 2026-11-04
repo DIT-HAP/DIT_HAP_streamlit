@@ -28,6 +28,7 @@ from src.data.loader import (
     load_gene_ontology_data,
     load_gene_phenotype_data,
 )
+from src.ui.guides import usage_guide_bar
 from src.ui.inputs import sidebar_gene_input
 
 # ================================= Constants =================================
@@ -35,7 +36,7 @@ P_VALUE_THRESHOLD = 0.05
 
 # ================================= Dialog Functions =================================
 
-@st.dialog("❓ How to Use This Tool", width="large")
+@st.dialog("❓ How to Use This Tool", width="medium", position="right")
 def how_to_use_this_tool():
     """Dialog explaining how to use the enrichment analysis tool."""
     st.markdown("""
@@ -62,7 +63,7 @@ def how_to_use_this_tool():
         - Use enriched terms to generate biological hypotheses
         """)
 
-@st.dialog("🔬 Enrichment Methods", width="large")
+@st.dialog("🔬 Enrichment Methods", width="medium", position="right")
 def enrichment_methods():
     """Dialog explaining the different enrichment methods available."""
     st.markdown("""
@@ -128,7 +129,7 @@ def enrichment_methods():
         **Best for**: Understanding molecular interactions and networks
         """)
 
-@st.dialog("⚙️ Data Requirements", width="large")
+@st.dialog("⚙️ Data Requirements", width="medium", position="right")
 def data_requirements():
     """Dialog explaining the data requirements for enrichment analysis."""
     st.markdown("""
@@ -157,7 +158,7 @@ def data_requirements():
         - Proper file format validation for ontology parsing
         """)
 
-@st.dialog("🎯 Analysis Guidelines", width="large")
+@st.dialog("🎯 Analysis Guidelines", width="medium", position="right")
 def analysis_guidelines():
     """Dialog providing analysis guidelines for enrichment analysis."""
     st.markdown("""
@@ -307,14 +308,7 @@ def main():
         "⚙️ Data Requirements": data_requirements,
         "🎯 Analysis Guidelines": analysis_guidelines
     }
-    st.segmented_control(
-        label="📖 Usage Guides",
-        options=list(usage_guides.keys()),
-        key="usage_guide_selector",
-        on_change=lambda: usage_guides[st.session_state.usage_guide_selector](),
-        width="stretch",
-        label_visibility="collapsed"
-    )
+    usage_guide_bar(usage_guides)
 
     # Load required data
     gene_metadata, gene_level, gene_ontology_data, gene_phenotype_data, disease_ontology_data = load_enrichment_data()

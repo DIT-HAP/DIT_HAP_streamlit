@@ -5,6 +5,8 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 
+from src.ui.guides import usage_guide_bar
+
 # ================================= Constants =================================
 VERIFICATION_DATA_DIR_URL = "https://github.com/DIT-HAP/DIT_HAP_streamlit/blob/main/data/tetrad_plate_images"
 
@@ -25,7 +27,7 @@ def image_to_base64(image_path):
     mime = mime_types.get(suffix, "image/png")
     return f"data:{mime};base64,{data}"
 
-@st.dialog("❓ How to Use This Tool", width="large")
+@st.dialog("❓ How to Use This Tool", width="medium", position="right")
 def how_to_use_this_tool():
     """Dialog explaining how to use the verification data tool."""
     st.markdown("""
@@ -53,7 +55,7 @@ def how_to_use_this_tool():
         - Combine data with other analysis results
         """)
 
-@st.dialog("🔬 Understanding Verification Data", width="large")
+@st.dialog("🔬 Understanding Verification Data", width="medium", position="right")
 def understanding_verification_data():
     """Dialog explaining the verification data."""
     st.markdown("""
@@ -80,7 +82,7 @@ def understanding_verification_data():
         - **ADE**: Adenine auxotrophy marker
         """)
 
-@st.dialog("⚙️ Data Requirements", width="large")
+@st.dialog("⚙️ Data Requirements", width="medium", position="right")
 def data_requirements():
     """Dialog explaining the data requirements for verification data."""
     st.markdown("""
@@ -131,7 +133,7 @@ def load_verification_data() -> pd.DataFrame:
     df_18round["ADE_image_path"] = df_18round["ADE_image_path"].apply(image_to_base64)
     return df_18round
 
-@st.dialog("🎯 Analysis Tips", width="large")
+@st.dialog("🎯 Analysis Tips", width="medium", position="right")
 def analysis_tips():
     """Dialog providing analysis tips for interpreting verification data."""
     st.markdown("""
@@ -179,14 +181,7 @@ def main():
         "⚙️ Data Requirements": data_requirements,
         "🎯 Analysis Tips": analysis_tips
     }
-    st.segmented_control(
-        label="📖 Usage Guides",
-        options=list(usage_guides.keys()),
-        key="usage_guide_selector",
-        on_change=lambda: usage_guides[st.session_state.usage_guide_selector](),
-        width="stretch",
-        label_visibility="collapsed"
-    )
+    usage_guide_bar(usage_guides)
     
     df_18round = load_verification_data()
     st.data_editor(

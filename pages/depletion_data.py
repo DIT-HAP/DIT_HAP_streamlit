@@ -36,6 +36,7 @@ from src.data.loader import (
     load_gene_metadata,
     load_insertion_level_stats,
 )
+from src.ui.guides import usage_guide_bar
 from src.ui.inputs import sidebar_gene_input
 from src.viz.gene_display import (
     combine_plots,
@@ -139,7 +140,7 @@ def get_gene_result(
     except Exception:
         return None, None, False
     
-@st.dialog("❓ How to use this tool", width="large")
+@st.dialog("❓ How to use this tool", width="medium", position="right")
 def how_to_use_this_tool():
     """Dialog explaining how to use the depletion data visualization tool."""
     st.markdown("""
@@ -167,7 +168,7 @@ def how_to_use_this_tool():
         - **Error bars**: Statistical confidence in measurements
         """)
     
-@st.dialog("🔬 Understanding the Plots", width="large")
+@st.dialog("🔬 Understanding the Plots", width="medium", position="right")
 def understanding_plots():
     """Dialog explaining the different plots shown in the depletion data visualization."""
     st.markdown("""
@@ -189,7 +190,7 @@ def understanding_plots():
         - **Confidence Intervals**: Statistical uncertainty estimates
         """)
     
-@st.dialog("⚙️ Data Requirements", width="large")
+@st.dialog("⚙️ Data Requirements", width="medium", position="right")
 def data_requirements():
     """Dialog explaining the data requirements for the depletion data visualization."""
     st.markdown("""
@@ -207,7 +208,7 @@ def data_requirements():
         - Reference data must be present for gene annotations
         """)
 
-@st.dialog("🎯  Analysis Tips", width="large")
+@st.dialog("🎯  Analysis Tips", width="medium", position="right")
 def analysis_tips():
     """Dialog providing analysis tips for interpreting depletion data."""
     st.markdown("""
@@ -263,14 +264,7 @@ def main():
         "⚙️ Data Requirements": data_requirements,
         "🎯 Analysis Tips": analysis_tips
     }
-    st.segmented_control(
-        label="📖 Usage Guides",
-        options=list(usage_guides.keys()),
-        key="usage_guide_selector",
-        on_change=lambda: usage_guides[st.session_state.usage_guide_selector](),
-        width="stretch",
-        label_visibility="collapsed"
-    )
+    usage_guide_bar(usage_guides)
 
     # Load the three dataset configurations in parallel: each hits a disjoint
     # set of files, so the I/O has nothing to serialize on.
