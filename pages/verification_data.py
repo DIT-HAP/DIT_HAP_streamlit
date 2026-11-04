@@ -222,6 +222,7 @@ def main():
         },
         hide_index=True,
         key="verification_data_editor",
+        on_change="ignore",
     )
 
 if __name__ == "__main__":

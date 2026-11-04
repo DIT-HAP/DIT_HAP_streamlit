@@ -152,11 +152,7 @@ def main():
     
     # Embed JBrowse 2 using an iframe
     with st.container(border=True):
-        st.components.v1.iframe(
-            src=JBROWSE_IFRAME_URL,
-            height=1000,
-            scrolling=True
-        )
+        st.iframe(JBROWSE_IFRAME_URL, height=1000)
 
 if __name__ == "__main__":
     main()
