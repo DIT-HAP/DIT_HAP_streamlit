@@ -7,6 +7,7 @@ including scientific background, pipeline integration, and user guidance.
 
 import streamlit as st
 
+
 # Main page content
 def show_main_page():
     # Application Header

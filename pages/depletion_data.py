@@ -6,19 +6,45 @@ system with modular configuration.
 """
 
 # ================================= Imports =================================
-import streamlit as st
-import altair as alt
-import pandas as pd
 import sys
 import threading
 from concurrent.futures import ThreadPoolExecutor
+
+import altair as alt
+import pandas as pd
+import streamlit as st
 from streamlit.runtime.scriptrunner import add_script_run_ctx, get_script_run_ctx
+
 sys.path.append("../src")
+from src.data.config import (
+    DataConfig,
+    get_default_config,
+    get_haploid_config,
+    get_long_timecourse_config,
+)
+from src.data.gene_query import (
+    get_gene_body,
+    get_gene_info,
+    get_gene_level_data,
+    get_insertion_level_data,
+)
+from src.data.loader import (
+    GeneLevelData,
+    GeneMetadataData,
+    InsertionLevelData,
+    load_gene_level_stats,
+    load_gene_metadata,
+    load_insertion_level_stats,
+)
 from src.ui.inputs import sidebar_gene_input
-from src.data.config import get_default_config, get_long_timecourse_config, get_haploid_config, DataConfig
-from src.data.loader import load_gene_metadata, load_insertion_level_stats, load_gene_level_stats, GeneMetadataData, InsertionLevelData, GeneLevelData
-from src.data.gene_query import get_gene_info, get_gene_body, get_insertion_level_data, get_gene_level_data
-from src.viz.gene_display import display_basic_information, display_gene_body, display_insertion_level_data, display_gene_level_data, combine_plots, display_gene_level_metrics
+from src.viz.gene_display import (
+    combine_plots,
+    display_basic_information,
+    display_gene_body,
+    display_gene_level_data,
+    display_gene_level_metrics,
+    display_insertion_level_data,
+)
 
 # ================================= Constants =================================
 P_VALUE_THRESHOLD = 0.05
@@ -110,7 +136,7 @@ def get_gene_result(
         )
 
         return gene_level_fitting_results_in_current_gene, combined_plot, True
-    except Exception as e:
+    except Exception:
         return None, None, False
     
 @st.dialog("❓ How to use this tool", width="large")

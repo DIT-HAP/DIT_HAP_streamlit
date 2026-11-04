@@ -4,25 +4,33 @@ Enrichment functions.
 
 # ================================= Imports =================================
 
-import pandas as pd
-import streamlit as st
-from typing import Literal, Any
 import time
-import requests
-from requests.exceptions import RequestException
 from io import StringIO
+from typing import Any, Literal
+
 import altair as alt
+import pandas as pd
+import requests
+import streamlit as st
+from goatools.anno.gaf_reader import GafReader
+from goatools.go_enrichment import GOEnrichmentRecord
+from goatools.goea.go_enrichment_ns import GOEnrichmentStudyNS
 
 # == GOATools imports ==
 from goatools.obo_parser import GODag
-from goatools.anno.gaf_reader import GafReader
-from goatools.goea.go_enrichment_ns import GOEnrichmentStudyNS
-from goatools.go_enrichment import GOEnrichmentRecord
 from goatools.rpt.goea_nt_xfrm import get_goea_nts_prt
+from requests.exceptions import RequestException
 
 # custom imports
-from ..data.loader import GeneLevelData, GeneMetadataData, GeneOntologyData, FYPOData, MONDOData
+from ..data.loader import (
+    FYPOData,
+    GeneLevelData,
+    GeneMetadataData,
+    GeneOntologyData,
+    MONDOData,
+)
 from ..ui.inputs import gene_input_form
+
 # ================================= Constants =================================
 STRING_API_URL = "https://string-db.org/api"
 STRING_OUTPUT_FORMAT = Literal["tsv", "tsv-no-header", "json", "xml"]
@@ -170,7 +178,7 @@ def create_enrichment_dataframe(
         # get the definition, but handle the case where it is not available
         try:
             res_dict["defn"] = result.goterm.defn
-        except Exception as e:
+        except Exception:
             res_dict["defn"] = ""
 
         # convert the study and pop items to names, but handle the case where the itemid2name is not available
@@ -251,7 +259,7 @@ def format_ontology_enrichment_results(
     # transform the result to a dataframe
     try:
         oea_results_sig_prt = pd.DataFrame(get_goea_nts_prt(oea_results_sig, **kwargs))
-    except Exception as e:
+    except Exception:
         oea_results_sig_prt = create_enrichment_dataframe(oea_results_sig, **kwargs)
 
     if oea_results_sig_prt.empty:

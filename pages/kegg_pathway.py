@@ -1,20 +1,21 @@
 # ================================= Imports =================================
-import streamlit as st
 import sys
 from pathlib import Path
 
+import streamlit as st
+
 sys.path.append(str(Path(__file__).parent.parent / "src"))
-from src.analysis.network import (
-    load_all_kegg_pathways,
-    convert_cx2_json_to_cytoscape_elements,
-    node_color_mapping_panel,
-    layout_algorithm_panel,
-    get_layout_config,
-    display_network,
-    display_selected_object
-)
 from src.analysis.kegg import (
     get_stylesheet,
+)
+from src.analysis.network import (
+    convert_cx2_json_to_cytoscape_elements,
+    display_network,
+    display_selected_object,
+    get_layout_config,
+    layout_algorithm_panel,
+    load_all_kegg_pathways,
+    node_color_mapping_panel,
 )
 
 # ================================= Page Config ====================================

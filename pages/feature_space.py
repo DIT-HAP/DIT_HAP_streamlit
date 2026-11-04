@@ -5,14 +5,16 @@ This page provides a visualization of the query genes in the feature space.
 """
 
 # ================================= Imports =================================
-import streamlit as st
 import sys
-import pandas as pd
+
 import altair as alt
+import pandas as pd
+import streamlit as st
+
 sys.path.append("../src")
-from src.ui.inputs import sidebar_gene_group_input
 from src.data.config import get_default_config
-from src.data.loader import load_gene_metadata, load_gene_level_stats, GeneLevelData
+from src.data.loader import GeneLevelData, load_gene_level_stats, load_gene_metadata
+from src.ui.inputs import sidebar_gene_group_input
 
 # =============================== Constants ================================
 TIME_POINTS = {

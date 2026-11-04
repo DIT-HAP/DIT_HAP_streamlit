@@ -1,8 +1,9 @@
 # ================================= Imports =================================
-import streamlit as st
-import pandas as pd
 import base64
 from pathlib import Path
+
+import pandas as pd
+import streamlit as st
 
 # ================================= Constants =================================
 VERIFICATION_DATA_DIR_URL = "https://github.com/DIT-HAP/DIT_HAP_streamlit/blob/main/data/tetrad_plate_images"

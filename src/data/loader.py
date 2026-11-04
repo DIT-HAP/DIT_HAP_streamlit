@@ -6,13 +6,21 @@ supporting both individual category loading and full data loading.
 """
 
 # ================================= Imports =================================
-from typing import List, Optional
-from pathlib import Path
 from dataclasses import dataclass
+from pathlib import Path
+
 import pandas as pd
 import streamlit as st
-from .config import GeneMetadataConfig, InsertionLevelConfig, GeneLevelConfig, GeneOntologyDataConfig, FYPODataConfig, MONDODataConfig
-from .ontology_format import format_phaf_file, format_mondo_gaf_file
+
+from .config import (
+    FYPODataConfig,
+    GeneLevelConfig,
+    GeneMetadataConfig,
+    GeneOntologyDataConfig,
+    InsertionLevelConfig,
+    MONDODataConfig,
+)
+from .ontology_format import format_mondo_gaf_file, format_phaf_file
 
 # ================================= Data Classes =================================
 
@@ -76,11 +84,9 @@ class DataManager:
 
 # ================================= Utility Functions =================================
 
-def read_file(file: Path, index_col: Optional[List[int]] = None, header: Optional[List[int] | str] = "infer", **kwargs) -> pd.DataFrame:
+def read_file(file: Path, index_col: list[int] | None = None, header: list[int] | str | None = "infer", **kwargs) -> pd.DataFrame:
     """Read a file into a pandas DataFrame based on file extension."""
-    if "tsv" in file.name:
-        return pd.read_csv(file, index_col=index_col, header=header, sep="\t", **kwargs)
-    elif "bed" in file.name:
+    if "tsv" in file.name or "bed" in file.name:
         return pd.read_csv(file, index_col=index_col, header=header, sep="\t", **kwargs)
     elif "csv" in file.name:
         return pd.read_csv(file, index_col=index_col, header=header, sep=",", **kwargs)

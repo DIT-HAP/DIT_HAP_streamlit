@@ -1,19 +1,19 @@
 # %% ================================= Imports =================================
-import streamlit as st
-import yaml
 import json
 from pathlib import Path
 from typing import Any, Literal
-from stqdm import stqdm
-import pandas as pd
-import numpy as np
-from bs4 import BeautifulSoup
-import matplotlib.pyplot as plt
-import matplotlib.colors as mcolors
 
+import matplotlib.colors as mcolors
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import streamlit as st
+import yaml
+from bs4 import BeautifulSoup
 from gocam.datamodel import Model
 from gocam.translation.cx2.main import model_to_cx2
 from st_cytoscape import cytoscape
+from stqdm import stqdm
 
 # ================================= Constants =================================
 # Repo root, resolved explicitly: this module lives at src/analysis/network.py,
@@ -562,7 +562,7 @@ def convert_cx2_json_to_cytoscape_elements(cx2_network: list, pathway_type: Lite
 
 # =============================== Node style mapping =================================
 # -------------------------------- Node Style Configuration --------------------------------
-def _get_color_for_value(feature: str, value: float | int | str | None, default_color: str = _DEFAULT_COLOR) -> str:
+def _get_color_for_value(feature: str, value: float | str | None, default_color: str = _DEFAULT_COLOR) -> str:
     """Map a feature value to a color.    
     - Categorical: lookup in color_map
     - Numerical: use colormap with normalization

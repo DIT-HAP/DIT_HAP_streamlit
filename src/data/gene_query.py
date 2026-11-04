@@ -4,8 +4,8 @@ Extract DIT-HAP data for a given gene.
 
 # ================================= Imports =================================
 import pandas as pd
-from .loader import InsertionLevelData, GeneLevelData
 
+from .loader import GeneLevelData, InsertionLevelData
 
 # ================================= Functions =================================
 

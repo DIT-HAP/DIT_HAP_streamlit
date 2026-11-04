@@ -1,14 +1,8 @@
 # ================================= Imports =================================
 # from st_cytoscape import cytoscape
-from .network import (
-    THEME_COLOR,
-    THEME_BACKGROUND,
-    map_feature_value
-)
-
 from st_cytoscape import cytoscape
 
-
+from .network import THEME_COLOR, map_feature_value
 
 # ================================ Style sheet Configuration =================================
 # ------------------------------- Default node styles -------------------------------
@@ -497,7 +491,6 @@ EDGE_NAMES = {
 
 
 
-#
 
 
 

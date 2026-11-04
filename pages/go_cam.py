@@ -1,23 +1,24 @@
 # ================================= Imports =================================
-import streamlit as st
 import sys
 from pathlib import Path
-import streamlit.components.v1 as components
+
+import streamlit as st
+
 sys.path.append(str(Path(__file__).parent.parent / "src"))
-from src.analysis.network import (
-    load_all_gocam_models,
-    load_all_gocam_models_cx2,
-    convert_cx2_json_to_cytoscape_elements,
-    node_color_mapping_panel,
-    layout_algorithm_panel,
-    get_layout_config,
-    display_network,
-    display_selected_object
-)
 from src.analysis.go_cam import (
     get_stylesheet,
     plot_interaction_type_legend,
 )
+from src.analysis.network import (
+    convert_cx2_json_to_cytoscape_elements,
+    display_network,
+    display_selected_object,
+    get_layout_config,
+    layout_algorithm_panel,
+    load_all_gocam_models_cx2,
+    node_color_mapping_panel,
+)
+
 # ================================= Page Config ====================================
 st.set_page_config(
     page_title="GO-CAM Model Visualization",

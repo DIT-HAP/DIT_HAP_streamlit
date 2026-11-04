@@ -5,18 +5,30 @@ This page provides gene ontology and phenotype enrichment analysis functionality
 """
 
 # ================================= Imports =================================
-import streamlit as st
 import sys
-import pandas as pd
 import threading
 from concurrent.futures import ThreadPoolExecutor
+
+import pandas as pd
+import streamlit as st
 from streamlit.runtime.scriptrunner import add_script_run_ctx, get_script_run_ctx
 
 sys.path.append("../src")
-from src.ui.inputs import sidebar_gene_input
+from src.analysis.enrichment import (
+    background_configuration,
+    display_enrichment_results,
+    ontology_enrichment_pipeline,
+    stringdb_enrichment,
+)
 from src.data.config import get_default_config
-from src.data.loader import load_gene_metadata, load_gene_level_stats, load_gene_ontology_data, load_gene_phenotype_data, load_disease_ontology_data
-from src.analysis.enrichment import background_configuration, ontology_enrichment_pipeline, stringdb_enrichment, display_enrichment_results
+from src.data.loader import (
+    load_disease_ontology_data,
+    load_gene_level_stats,
+    load_gene_metadata,
+    load_gene_ontology_data,
+    load_gene_phenotype_data,
+)
+from src.ui.inputs import sidebar_gene_input
 
 # ================================= Constants =================================
 P_VALUE_THRESHOLD = 0.05
@@ -236,9 +248,8 @@ def display_full_or_slim(res: pd.DataFrame, label: str, file_name: str, facet_la
         
         # Display charts in their assigned columns
         for col_idx, chart_ns, chart_info in chart_assignments:
-            with chart_cols[col_idx]:
-                with st.container(border=True):
-                    st.altair_chart(chart_info["chart"], width="stretch")  # type: ignore
+            with chart_cols[col_idx], st.container(border=True):
+                st.altair_chart(chart_info["chart"], width="stretch")  # type: ignore
     else:
         for chart_ns, chart_info in charts.items():
             with st.container(border=True):
