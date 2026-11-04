@@ -254,7 +254,7 @@ def show_main_page():
         - `LFC.tsv` - Log fold change values
         - `fitting_LFCs.tsv` - Statistical modeling
         - `fitting_results.tsv` - Model quality metrics
-        - `transformed_weights.tsv` - Statistical weights
+        - `insertion_weights.tsv` - Statistical weights
 
         **Gene-level Analysis:**
         - `LFC.tsv` - Aggregated log fold changes

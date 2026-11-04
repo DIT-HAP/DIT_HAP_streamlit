@@ -131,7 +131,7 @@ data/
 │   │   │   ├── LFC.tsv               # Log fold change values
 │   │   │   ├── fitting_LFCs.tsv      # Fitted log fold changes
 │   │   │   ├── fitting_results.tsv   # Model fitting results
-│   │   │   └── transformed_weights.tsv # Statistical weights
+│   │   │   └── insertion_weights.tsv  # Statistical weights (long format)
 │   │   └── gene_level/          # Gene-level analysis results
 │   │       ├── LFC.tsv               # Gene-level log fold changes
 │   │       ├── fitting_LFCs.tsv      # Gene-level fitted values
@@ -156,12 +156,15 @@ data/
 - `LFC.tsv` - Log fold change calculations
 - `fitting_LFCs.tsv` - Statistical modeling of log fold changes
 - `fitting_results.tsv` - Model fitting quality metrics
-- `transformed_weights.tsv` - Weighted statistical analyses
+- `insertion_weights.tsv` - Statistical weights (long format)
 
 **Gene-level analysis results:**
 - `LFC.tsv` - Aggregated gene-level log fold changes
 - `fitting_LFCs.tsv` - Gene-level statistical modeling
 - `fitting_results.tsv` - Gene-level model quality assessments
+
+**Sign convention:** LFC and the fitted parameters A/DR are negative for
+depletion; more negative means stronger or faster depletion.
 
 **Reference data:**
 - PomBase gene annotations and metadata

@@ -39,7 +39,18 @@ def get_insertion_level_data(
 
     annotation_in_current_gene = insertion_level_data.insertion_annotations_with_baseMean.loc[insertions_in_current_gene]
     insertion_LFCs_in_current_gene = insertion_level_data.insertion_level_LFCs.loc[insertions_in_current_gene][tps].rename_axis("Timepoint", axis=1).stack().dropna().rename("LFC")
-    insertion_weights_in_current_gene = insertion_level_data.insertion_level_weights.loc[insertions_in_current_gene][tps].rename_axis("Timepoint", axis=1).stack().dropna().rename("weights")
+    weights_in_current_gene = insertion_level_data.insertion_level_weights.query("`Systematic ID` == @gene")
+    weights_wide = weights_in_current_gene.pivot(
+        index=["Chr", "Coordinate", "Strand", "Target"],
+        columns="Timepoint",
+        values="Weight",
+    )
+    insertion_weights_in_current_gene = (
+        weights_wide.reindex(insertions_in_current_gene)[tps]
+        .stack()
+        .dropna()
+        .rename("weights")
+    )
     insertion_fitting_LFCs_in_current_gene = insertion_level_data.insertion_level_fitting_LFCs.loc[insertions_in_current_gene][tps].rename_axis("Timepoint", axis=1).stack().dropna().rename("fitting_LFC")
     insertion_fitting_results_in_current_gene = insertion_level_data.insertion_level_fitting_results.loc[insertions_in_current_gene]
     insertion_level_data_df = pd.concat([insertion_LFCs_in_current_gene, insertion_weights_in_current_gene, insertion_fitting_LFCs_in_current_gene], axis=1)

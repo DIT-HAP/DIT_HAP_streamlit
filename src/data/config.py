@@ -44,7 +44,7 @@ INSERTION_LEVEL_FILES = {
     "insertion_annotations": "insertion_level/annotations.tsv.gz",
     "insertion_level_baseMean": "insertion_level/baseMean.tsv",
     "insertion_level_LFCs": "insertion_level/LFC.tsv",
-    "insertion_level_weights": "insertion_level/transformed_weights.tsv",
+    "insertion_level_weights": "insertion_level/insertion_weights.tsv",
     "insertion_level_fitting_LFCs": "insertion_level/fitting_LFCs.tsv",
     "insertion_level_fitting_results": "insertion_level/fitting_results.tsv",
 }

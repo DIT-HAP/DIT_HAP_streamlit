@@ -53,7 +53,7 @@ def how_to_use_this_tool():
         - You can add up to 8 groups with distinct colors (colors cycle after 8)
 
         **Step 3: Interpret the Plot**
-        - **X-axis (Depletion rate)**: How quickly genes are depleted over time (μ parameter)
+        - **X-axis (Depletion rate)**: How quickly genes are depleted over time (μ parameter; negative = faster depletion)
         - **Y-axis (Depletion lag)**: Time delay before depletion begins (λ parameter)
         - **Gray circles**: Background genes (all genes in the dataset)
         - **Colored circles**: Your gene groups (each group has a unique color)
@@ -72,14 +72,14 @@ def understanding_feature_space():
         **What is Feature Space?**
 
         Feature space visualization places genes in a 2D plot based on their statistical properties from the DIT-HAP pipeline:
-        - **Depletion rate (μ)**: The rate at which transposon insertions in a gene decrease over time
+        - **Depletion rate (μ)**: The rate at which transposon insertions in a gene decrease over time (negative = depletion; more negative = faster)
         - **Depletion lag (λ)**: The time delay before depletion begins
 
         **Interpreting the Plot:**
-        - **Upper right**: High depletion rate, long lag → Genes that deplete quickly but after a delay
-        - **Lower right**: High depletion rate, short lag → Rapidly depleting essential genes
-        - **Upper left**: Low depletion rate, long lag → Slow depletion with delayed onset
-        - **Lower left**: Low depletion rate, short lag → Non-essential genes with minimal depletion
+        - **Upper left**: High depletion rate, long lag → Genes that deplete quickly but after a delay
+        - **Lower left**: High depletion rate, short lag → Rapidly depleting essential genes
+        - **Upper right**: Low depletion rate, long lag → Slow depletion with delayed onset
+        - **Lower right**: Low depletion rate, short lag → Non-essential genes with minimal depletion
 
         **Multi-Group Analysis:**
         - **Compare gene sets**: Add multiple groups to compare different gene categories
@@ -88,8 +88,8 @@ def understanding_feature_space():
         - **Overlap detection**: See if genes from different groups cluster together
 
         **Biological Meaning:**
-        - **Essential genes**: Higher depletion rates indicate negative fitness effects
-        - **Non-essential genes**: Lower depletion rates suggest neutral fitness effects
+        - **Essential genes**: More negative depletion rates indicate stronger depletion
+        - **Non-essential genes**: Depletion rates near zero suggest neutral fitness effects
         - **Condition-specific genes**: May show intermediate patterns depending on experimental conditions
         - **Pathway genes**: Genes in the same pathway may cluster in feature space
         """)
@@ -270,8 +270,8 @@ def display_depletion_curves(gene_groups: list[dict], gene_level: GeneLevelData,
         x=alt.X("Generations:Q", title="Generations", 
                 scale=alt.Scale(domain=(0, max(tp_values) + 1)),
                 sort=tp_keys),
-        y=alt.Y("LFC:Q", title="Log Fold Change",
-                scale=alt.Scale(domain=(-3, 8))),
+        y=alt.Y("LFC:Q", title="Log Fold Change (negative = depletion)",
+                scale=alt.Scale(domain=(-10, 4))),
         color=alt.Color(
             "Group:N",
             scale=alt.Scale(
@@ -349,7 +349,7 @@ def display_feature_space(gene_groups: list[dict], gene_level: GeneLevelData, ge
         opacity=0.4,
         size=80
     ).encode(
-        x=alt.X("DR:Q", title="Depletion rate (μ)"),
+        x=alt.X("DR:Q", title="Depletion rate (μ, negative = depletion)"),
         y=alt.Y("DL:Q", title="Depletion lag (λ)"),
         color=alt.value("lightgray"),
         tooltip=[
@@ -398,7 +398,7 @@ def display_feature_space(gene_groups: list[dict], gene_level: GeneLevelData, ge
         opacity=0.8,
         size=100
     ).encode(
-        x=alt.X("DR:Q", title="Depletion rate (μ)"),
+        x=alt.X("DR:Q", title="Depletion rate (μ, negative = depletion)"),
         y=alt.Y("DL:Q", title="Depletion lag (λ)"),
         color=alt.Color(
             "Group:N",

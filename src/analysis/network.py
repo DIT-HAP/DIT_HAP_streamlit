@@ -43,11 +43,14 @@ ADDITIONAL_METRICS_CONFIG = {
             "Not_determined": "#CCCCCC"  # Gray for unknown
         }
     },
+    # Upstream reports DR < 0 for depletion; red therefore sits at the negative end.
     "DR": {
-        "range": (-0.3, 1.5),
+        "range": (-1.5, 0.3),
         "type": "numerical",
         "colormap": [
-            mcolors.LinearSegmentedColormap.from_list("bwr", ["#0000FF", "#FFFFFF", "#FF0000"]),
+            mcolors.LinearSegmentedColormap.from_list(
+                "rwb", ["#FF0000", "#FFFFFF", "#0000FF"]
+            ),
             mcolors.TwoSlopeNorm(vmin=-1.5, vcenter=0, vmax=1.5)
         ]
     },

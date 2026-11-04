@@ -10,6 +10,9 @@ import streamlit as st
 
 # ================================= Constants =================================
 GENE_BODY_Y = -0.5
+# Upstream reports depletion as negative values.
+LFC_DOMAIN = (-12, 4)
+DR_DOMAIN = (-2.5, 1.5)
 
 # ================================= Functions =================================
 def fitting_function(x: np.ndarray, A: float, DR: float, DL: float) -> np.ndarray:
@@ -85,7 +88,7 @@ def display_insertion_level_data(gene_length: int, insertion_level_anno_and_resu
 
     insertion_level_data_plot1 = alt.Chart(insertion_level_anno_and_results.reset_index()).mark_circle(opacity=0.6).encode(
         x=alt.X("Distance_to_start_codon:Q", title="Distance to start codon", scale=alt.Scale(domain=(0, gene_length))),
-        y=alt.Y("DR:Q", title="DR", scale=alt.Scale(domain=(-0.5, 1.5))),
+        y=alt.Y("DR:Q", title="DR", scale=alt.Scale(domain=DR_DOMAIN)),
         color=alt.condition(point_selector, "Insertion_direction:N", alt.value("lightgray"), legend=alt.Legend(orient="right", title="Insertion direction")),
         size=alt.Size("baseMean:Q", title="baseMean", scale=alt.Scale(type='symlog')),
         tooltip=insertion_level_anno_and_results.columns.tolist()
@@ -93,9 +96,9 @@ def display_insertion_level_data(gene_length: int, insertion_level_anno_and_resu
 
     insertion_level_data_plot2 = alt.Chart(insertion_level_data.reset_index()).mark_circle(opacity=0.6).encode(
         x=alt.X("Generations:Q", title="Generations", scale=alt.Scale(domain=(0, int(max(timepoints.values()))+1))),
-        y=alt.Y("LFC:Q", title="LFC", scale=alt.Scale(domain=(-3, 8))),
+        y=alt.Y("LFC:Q", title="LFC", scale=alt.Scale(domain=LFC_DOMAIN)),
         color=alt.condition(point_selector, "num_of_imputed_insertions:N", alt.value("lightgray"), legend=alt.Legend(orient="right", title="Imputation level")),
-        size=alt.Size("weights:Q", title="-log10(padj)", scale=alt.Scale(type='sqrt')),
+        size=alt.Size("weights:Q", title="Weight", scale=alt.Scale(type='sqrt')),
     ).add_params(point_selector).transform_filter(point_selector)
 
     return insertion_level_data_plot1, insertion_level_data_plot2
@@ -116,7 +119,7 @@ def display_gene_level_data(gene_level_fitting_results_in_current_gene: pd.DataF
 
     gene_level_data_plot = alt.Chart(gene_level_data.reset_index()).mark_circle(opacity=0.6).encode(
         x=alt.X("Generations:Q", title="", scale=alt.Scale(domain=(0, int(max(timepoints.values()))+1))),
-        y=alt.Y("LFC:Q", title="", scale=alt.Scale(domain=(-3, 8))),
+        y=alt.Y("LFC:Q", title="", scale=alt.Scale(domain=LFC_DOMAIN)),
         size=alt.value(100),
         color=alt.value("lightgray"),
         tooltip=gene_level_data.columns.tolist()

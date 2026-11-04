@@ -7,20 +7,31 @@ data**, and **downstream-owned resources**. The dataset registry
 
 ## `raw/{dataset}/` — upstream project results
 
-Copied from the upstream DIT_HAP pipeline's per-project `release/` folder
-(produced by the `package_release` rule). One subfolder per dataset:
+Copied from the upstream `DIT_HAP_snakemake` pipeline's per-project `release/`
+folder (produced by the `package_release` rule). One subfolder per dataset:
 
 | Folder | Upstream project |
 |---|---|
 | `raw/HD_DIT_HAP/` | `projects/HD_DIT_HAP/release/` |
-| `raw/Long_timecourse_data/` | long-timecourse project `release/` |
-| `raw/haploid_data/` | haploid project `release/` |
+| `raw/Long_timecourse_data/` | `projects/Spore2YES6_1328/release/` |
+| `raw/haploid_data/` | `projects/LD_haploid/release/` |
 
 Each holds `insertion_level/` and `gene_level/` with the fixed filenames that
 form the upstream↔downstream contract (see `src/data/config.py`):
 `LFC.tsv`, `fitting_LFCs.tsv`, `fitting_results.tsv`, plus the auxiliary files
-`annotations.tsv.gz`, `baseMean.tsv`, `transformed_weights.tsv`, and
+`annotations.tsv.gz`, `baseMean.tsv`, `insertion_weights.tsv`, and
 (datasets with replicates only) `imputation_statistics.tsv`.
+
+**Sign convention:** upstream reports depletion as **negative** LFC and
+**negative** fitted parameters A/DR (since `29f1aba`, 2026-09-09; release
+regenerated 2026-09-17); more negative means stronger or faster depletion.
+`insertion_weights.tsv` is long-format (one row per insertion × timepoint ×
+gene).
+
+`gene_level/all_coding_genes_with_DIT_HAP_clustering.tsv` is downstream-generated:
+it joins the HD release's fitting results with the selected clustering variant
+from `DIT_HAP_analysis`
+(`results/clustering/HD_DIT_HAP/kmeans_direct9/final_clusters.tsv`).
 
 **To refresh:** `cp -r <upstream>/projects/{project}/release/* data/raw/{dataset}/`.
 

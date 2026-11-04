@@ -157,7 +157,8 @@ def load_insertion_level_stats(config: InsertionLevelConfig) -> InsertionLevelDa
     insertion_annotations = read_file(config.insertion_annotations, index_col=index_col)
     insertion_level_baseMean = read_file(config.insertion_level_baseMean, index_col=index_col).iloc[:, 0].rename("baseMean")
     insertion_level_LFCs = read_file(config.insertion_level_LFCs, index_col=index_col)
-    insertion_level_weights = read_file(config.insertion_level_weights, index_col=index_col)
+    # Long-format upstream weights; exact duplicates come from multi-feature annotations.
+    insertion_level_weights = read_file(config.insertion_level_weights).drop_duplicates()
     insertion_level_fitting_LFCs = read_file(config.insertion_level_fitting_LFCs, index_col=index_col)
     insertion_level_fitting_results = read_file(config.insertion_level_fitting_results, index_col=index_col)
 

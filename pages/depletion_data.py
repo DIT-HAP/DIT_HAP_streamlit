@@ -59,12 +59,12 @@ TIME_POINTS = {
 
 TIME_POINTS_LONG_TIMECOURSE = {
     "YES0": 0,
-    "YES1": 3.723,
-    "YES2": 6.969,
-    "YES3": 10.104,
-    "YES4": 13.554,
-    "YES5": 17.098,
-    "YES6": 20.059
+    "YES1": 2.723,
+    "YES2": 5.969,
+    "YES3": 9.334,
+    "YES4": 12.554,
+    "YES5": 16.098,
+    "YES6": 19.059
 }
 
 TIME_POINTS_HAPLOID = {
