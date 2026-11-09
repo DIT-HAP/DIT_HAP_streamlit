@@ -358,18 +358,18 @@ def main():
                 load_kwargs = {"relationships": {"is_a", "part_of"}, "propagate_counts": True, "load_obsolete": False}
                 enrichment_kwargs = {
                     "alpha": fdr_threshold, "methods": ["fdr_bh"], "propagate_counts": True,
-                    "relationships": {"is_a", "part_of"}, "prt": None,
+                    "relationships": {"is_a", "part_of"}, "log": None,
                 }
                 return ontology_enrichment_pipeline(gene_ontology_data, covered_gene_sysIDs, bg_genes, load_kwargs=load_kwargs, enrichment_kwargs=enrichment_kwargs, format_kwargs=format_kwargs)
 
             def _run_fypo():
                 load_kwargs = {"propagate_counts": True, "load_obsolete": False}
-                enrichment_kwargs = {"alpha": fdr_threshold, "methods": ["fdr_bh"], "propagate_counts": True, "prt": None}
+                enrichment_kwargs = {"alpha": fdr_threshold, "methods": ["fdr_bh"], "propagate_counts": True, "log": None}
                 return ontology_enrichment_pipeline(gene_phenotype_data, covered_gene_sysIDs, bg_genes, load_kwargs=load_kwargs, enrichment_kwargs=enrichment_kwargs, format_kwargs=format_kwargs)
 
             def _run_mondo():
                 load_kwargs = {"propagate_counts": True, "load_obsolete": False}
-                enrichment_kwargs = {"alpha": fdr_threshold, "methods": ["fdr_bh"], "propagate_counts": True, "prt": None}
+                enrichment_kwargs = {"alpha": fdr_threshold, "methods": ["fdr_bh"], "propagate_counts": True, "log": None}
                 return ontology_enrichment_pipeline(disease_ontology_data, covered_gene_sysIDs, bg_genes, load_kwargs=load_kwargs, enrichment_kwargs=enrichment_kwargs, format_kwargs=format_kwargs)
 
             def _run_string():
